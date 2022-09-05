@@ -4,7 +4,6 @@ import 'package:presentation/app/data/app_data.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
 import 'package:presentation/config/theme/app_colors.dart';
-import 'package:presentation/screen/home/home_page.dart';
 
 class StarMovieApp extends StatefulWidget {
   const StarMovieApp({Key? key}) : super(key: key);
