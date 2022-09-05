@@ -10,8 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  domain:
-    path: packages/domain
+
   data:
     path: packages/data
   presentation:
