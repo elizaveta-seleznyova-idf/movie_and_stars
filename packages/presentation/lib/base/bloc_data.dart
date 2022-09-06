@@ -1,25 +1,27 @@
-class BlocData<D> {
+import 'package:presentation/base/base_state.dart';
+
+class BlocData {
   bool isLoading;
-  D? data;
+  BaseState? data;
 
   BlocData(
     this.isLoading,
     this.data,
   );
 
-  factory BlocData.init() => BlocData<D>(
+  factory BlocData.init() => BlocData(
         false,
         null,
       );
 
-  BlocData<D?> copy<D>() => BlocData<D?>(
+  BlocData copy() => BlocData(
         isLoading,
-        data as D,
+        data,
       );
 
   void updateParams(
     bool? isLoading,
-    dynamic data,
+    BaseState? data,
   ) {
     if (isLoading != null) this.isLoading = isLoading;
     if (data != null) this.data = data;
