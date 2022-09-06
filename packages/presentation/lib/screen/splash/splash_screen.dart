@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
+import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/navigation/base_page.dart';
+import 'package:presentation/screen/splash/splash_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -18,11 +21,34 @@ class SplashScreen extends StatefulWidget {
   State createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends BlocScreenState<SplashScreen, SplashBloc> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Some animation will be here'),
+    return StreamBuilder<BlocData>(
+      stream: bloc.dataStream,
+      builder: (context, snapshot) {
+        final data = snapshot.data;
+        return Scaffold(
+          body: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  AppColors.linearGradientFirstColor,
+                  AppColors.linearGradientSecondColor,
+                ],
+              ),
+            ),
+            child: Center(
+              child: SvgPicture.asset(
+                'assets/splash_image.svg',
+                semanticsLabel: 'Splash Image',
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

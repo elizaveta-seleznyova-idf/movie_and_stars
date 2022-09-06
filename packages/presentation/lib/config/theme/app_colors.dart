@@ -7,4 +7,6 @@ class AppColors {
   static const borderTabBar = Color.fromRGBO(44, 63, 91, 1);
   static const selectedBottomNavItem = Color.fromRGBO(71, 207, 255, 1);
   static const unselectedBottomNavItem = Color.fromRGBO(158, 158, 158, 0.5);
+  static const linearGradientFirstColor = Color.fromRGBO(229, 25, 55, 1);
+  static const linearGradientSecondColor = Color.fromRGBO(219, 82, 82, 1);
 }
