@@ -12,14 +12,14 @@ class BlocData<D> {
         null,
       );
 
-  BlocData<D?> copy<D>() => BlocData<D?>(
+  BlocData<D> copy() => BlocData<D>(
         isLoading,
-        data as D,
+        data,
       );
 
   void updateParams(
     bool? isLoading,
-    D data,
+    D? data,
   ) {
     if (isLoading != null) this.isLoading = isLoading;
     if (data != null) this.data = data;
