@@ -1,7 +1,6 @@
 name: domain
 description: A new Flutter package project.
 version: 0.0.1
-
 publish_to: 'none'
 
 environment:
@@ -11,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  get_it: ^7.2.0
 
 dev_dependencies:
   flutter_test:

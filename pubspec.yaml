@@ -1,6 +1,5 @@
 name: movies_and_stars
 description: Cool movie app
-
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -11,8 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  domain:
-    path: packages/domain
+
   data:
     path: packages/data
   presentation:
