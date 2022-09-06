@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         centerTitle: false,
         automaticallyImplyLeading: false,
-        backgroundColor: AppColors.primaryColorDark,
+        backgroundColor: AppColorsDark.primaryColorDark,
         elevation: 0,
         title: const Text(
           'Star Movie',
@@ -65,11 +65,11 @@ class NavigationBar extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         border:
-            Border(top: BorderSide(color: AppColors.borderTabBar, width: 1)),
+            Border(top: BorderSide(color: AppColorsDark.borderTabBar, width: 1)),
       ),
       child: BottomNavigationBar(
-        selectedItemColor: AppColors.selectedBottomNavItem,
-        unselectedItemColor: AppColors.unselectedBottomNavItem,
+        selectedItemColor: AppColorsDark.selectedBottomNavItem,
+        unselectedItemColor: AppColorsDark.unselectedBottomNavItem,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         items: const [
@@ -108,14 +108,14 @@ class HomeTabBar extends StatelessWidget {
             padding: const EdgeInsets.all(4.0),
             decoration: BoxDecoration(
               border: Border.all(
-                color: AppColors.borderTabBar,
+                color: AppColorsDark.borderTabBar,
                 width: 1,
               ),
               borderRadius: BorderRadius.circular(20),
             ),
             child: TabBar(
               indicator: BoxDecoration(
-                color: AppColors.redTabBar,
+                color: AppColorsDark.redTabBar,
                 borderRadius: BorderRadius.circular(16),
               ),
               tabs: <Widget>[

@@ -24,8 +24,8 @@ class _StarMovieAppState extends BlocScreenState<StatefulWidget, AppBloc> {
       themeMode: ThemeMode.dark,
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-        primaryColorDark: AppColors.primaryColorDark,
-        canvasColor: AppColors.canvasColor,
+        primaryColorDark: AppColorsDark.primaryColorDark,
+        canvasColor: AppColorsDark.canvasColor,
       ),
       home: StreamBuilder<BlocData>(
         stream: bloc.dataStream,
