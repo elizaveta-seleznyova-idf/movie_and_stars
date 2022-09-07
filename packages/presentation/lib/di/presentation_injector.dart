@@ -1,3 +1,4 @@
+import 'package:domain/usecase/delay_use_case.dart';
 import 'package:get_it/get_it.dart';
 import 'package:presentation/app/app_bloc.dart';
 import 'package:presentation/navigation/app_navigation.dart';
@@ -13,7 +14,9 @@ void _initViewMapperModule() {}
 
 void _initBlocModule() {
   GetIt.I.registerFactory<SplashBloc>(
-    () => SplashBloc(),
+    () => SplashBloc(
+      GetIt.I.get<DelayUseCase>(),
+    ),
   );
 }
 

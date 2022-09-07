@@ -1,28 +1,31 @@
 import 'dart:async';
+import 'package:domain/usecase/delay_use_case.dart';
 import 'package:presentation/base/bloc.dart';
 import 'package:presentation/screen/home/home_screen.dart';
-import 'package:presentation/screen/splash/splash_data.dart';
 
 abstract class SplashBloc extends Bloc {
-  factory SplashBloc() => SplashBlocImpl();
+  factory SplashBloc(DelayUseCase delayUseCase) => SplashBlocImpl(
+        delayUseCase,
+      );
 }
 
 class SplashBlocImpl extends BlocImpl implements SplashBloc {
-  var _state = SplashData.init();
+  final DelayUseCase _blocDelayUseCase;
+
+  SplashBlocImpl(this._blocDelayUseCase);
 
   @override
   void initState() {
     super.initState();
-    _updateData(data: _state);
-    Future.delayed(
-      Duration(seconds: _state.splashScreenDuration),
-      () => appNavigator.popAndPush(HomeScreen.page(HomeScreenArguments())),
-    );
+    delayed();
   }
 
-  _updateData({SplashData? data}) {
-    handleData(
-      data: data,
+  Future<void> delayed() async {
+    await _blocDelayUseCase();
+    appNavigator.popAndPush(
+      HomeScreen.page(
+        HomeScreenArguments(),
+      ),
     );
   }
 }

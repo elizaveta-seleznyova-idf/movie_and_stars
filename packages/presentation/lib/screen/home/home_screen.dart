@@ -64,8 +64,8 @@ class NavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        border:
-            Border(top: BorderSide(color: AppColorsDark.borderTabBar, width: 1)),
+        border: Border(
+            top: BorderSide(color: AppColorsDark.borderTabBar, width: 1)),
       ),
       child: BottomNavigationBar(
         selectedItemColor: AppColorsDark.selectedBottomNavItem,
@@ -115,7 +115,7 @@ class HomeTabBar extends StatelessWidget {
             ),
             child: TabBar(
               indicator: BoxDecoration(
-                color: AppColorsDark.redTabBar,
+                color: AppColorsDark.tabBarColor,
                 borderRadius: BorderRadius.circular(16),
               ),
               tabs: <Widget>[
