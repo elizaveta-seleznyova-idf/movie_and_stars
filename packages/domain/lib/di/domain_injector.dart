@@ -6,7 +6,7 @@ void initDomainInjector() {
 }
 
 void _initUseCaseModule() {
-  GetIt.I.registerFactory<DelayUseCase>(
-    () => DelayUseCase(),
+  GetIt.I.registerFactory<SplashUseCase>(
+    () => SplashUseCase(),
   );
 }

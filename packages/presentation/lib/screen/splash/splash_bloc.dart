@@ -4,13 +4,13 @@ import 'package:presentation/base/bloc.dart';
 import 'package:presentation/screen/home/home_screen.dart';
 
 abstract class SplashBloc extends Bloc {
-  factory SplashBloc(DelayUseCase delayUseCase) => SplashBlocImpl(
+  factory SplashBloc(SplashUseCase delayUseCase) => SplashBlocImpl(
         delayUseCase,
       );
 }
 
 class SplashBlocImpl extends BlocImpl implements SplashBloc {
-  final DelayUseCase _blocDelayUseCase;
+  final SplashUseCase _blocDelayUseCase;
 
   SplashBlocImpl(this._blocDelayUseCase);
 
