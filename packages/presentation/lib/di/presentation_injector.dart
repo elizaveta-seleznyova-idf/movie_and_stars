@@ -1,6 +1,8 @@
+import 'package:domain/usecase/delay_use_case.dart';
 import 'package:get_it/get_it.dart';
 import 'package:presentation/app/app_bloc.dart';
 import 'package:presentation/navigation/app_navigation.dart';
+import 'package:presentation/screen/splash/splash_bloc.dart';
 
 void initPresentationInjector() {
   _initAppModule();
@@ -10,7 +12,13 @@ void initPresentationInjector() {
 
 void _initViewMapperModule() {}
 
-void _initBlocModule() {}
+void _initBlocModule() {
+  GetIt.I.registerFactory<SplashBloc>(
+    () => SplashBloc(
+      GetIt.I.get<SplashUseCase>(),
+    ),
+  );
+}
 
 void _initAppModule() {
   GetIt.I.registerFactory<AppBloc>(
