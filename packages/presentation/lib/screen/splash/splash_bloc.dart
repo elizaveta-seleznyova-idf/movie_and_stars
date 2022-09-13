@@ -4,7 +4,10 @@ import 'package:presentation/base/bloc.dart';
 import 'package:presentation/screen/home/home_screen.dart';
 
 abstract class SplashBloc extends Bloc {
-  factory SplashBloc(SplashUseCase delayUseCase) => SplashBlocImpl(
+  factory SplashBloc(
+    SplashUseCase delayUseCase,
+  ) =>
+      SplashBlocImpl(
         delayUseCase,
       );
 }
@@ -24,7 +27,8 @@ class SplashBlocImpl extends BlocImpl implements SplashBloc {
     await _blocDelayUseCase();
     appNavigator.popAndPush(
       HomeScreen.page(
-        HomeScreenArguments(),
+        HomeScreenArguments(
+            anticipatedMoviesResponse: [], trendingMoviesResponse: []),
       ),
     );
   }
