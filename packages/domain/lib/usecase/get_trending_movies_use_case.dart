@@ -12,12 +12,30 @@ class GetTrendingMoviesUseCase
   @override
   Future<List<MovieTrendingResponse>> call() async {
     final List<MovieTrendingResponse> jsonMovies = [];
-    final response = await _repository.getHttp(
-      '${C.movieUrl}${C.trendingUrl}',
+    final response = await _repository.getData(
+      apiPath: '${C.movieUrl}${C.trendingUrl}',
     );
-    jsonMovies.addAll(
-      response.body.map((e) => MovieTrendingResponse.fromJson(e)),
-    );
+
+    if (int.parse(response.headers['x-pagination-page-count'][0]) >= 5) {
+      int itemCount = 50;
+      final responseWithItem = await _repository.getData(
+        apiPath: '${C.movieUrl}${C.trendingUrl}',
+        itemCount: itemCount,
+      );
+      jsonMovies.addAll(
+        responseWithItem.body.map((e) => MovieTrendingResponse.fromJson(e)),
+      );
+    } else {
+      final itemCount =
+          int.parse(response.headers['x-pagination-item-count'][0]);
+      final responseWithItem = await _repository.getData(
+        apiPath: '${C.movieUrl}${C.trendingUrl}',
+        itemCount: itemCount,
+      );
+      jsonMovies.addAll(
+        responseWithItem.body.map((e) => MovieTrendingResponse.fromJson(e)),
+      );
+    }
     return jsonMovies;
   }
 }

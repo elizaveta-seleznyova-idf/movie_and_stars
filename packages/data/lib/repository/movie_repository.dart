@@ -10,14 +10,15 @@ class NetworkRepositoryImpl implements NetworkRepository {
   NetworkRepositoryImpl(this._apiService);
 
   @override
-  Future<GetDataResponse> getHttp(String path) async {
-    return _apiService
-        .get(
-      path,
-      //options: Options(headers: headers1),
-      queryParameters: queryParam1,
-    )
-        .then(
+  Future<GetDataResponse> getData(
+      {required String apiPath, int? itemCount}) async {
+    return _apiService.get(
+      apiPath,
+      queryParameters: {
+        'extended': 'full',
+        'limit': itemCount,
+      },
+    ).then(
       (response) {
         return GetDataResponse(
           headers: response.headers.map,
@@ -28,16 +29,4 @@ class NetworkRepositoryImpl implements NetworkRepository {
       },
     );
   }
-
-  Map<String, dynamic> get headers1 => {
-        'Content-Type': 'application/json',
-        'trakt-api-version': '2',
-        'trakt-api-key':
-            ApiKeyData.apiKeyData,
-      };
-
-  Map<String, dynamic> get queryParam1 => {
-        'extended': 'full',
-        // 'limit': '10',
-      };
 }
