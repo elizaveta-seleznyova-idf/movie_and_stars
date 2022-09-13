@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class MovieRating extends StatelessWidget {
-  MovieRating({
+  const MovieRating({
     Key? key,
     required this.rating,
   }) : super(key: key);

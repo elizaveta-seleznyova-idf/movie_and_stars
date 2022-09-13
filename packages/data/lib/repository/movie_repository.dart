@@ -1,6 +1,5 @@
 import 'package:data/service/api_base_service.dart';
 import 'package:data/service/service_payload.dart';
-import 'package:data/utils/api_key_data.dart';
 import 'package:domain/di/data_model.dart';
 import 'package:domain/repository/base_repository.dart';
 
