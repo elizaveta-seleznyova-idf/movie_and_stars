@@ -24,7 +24,7 @@ class _HomeTabBarState extends State<HomeTabBar> {
         });
       },
       indicator: BoxDecoration(
-        color: AppColorsDark.tabBarColor,
+        color: AppColorsDark.primaryColor,
         borderRadius: BorderRadius.circular(16),
       ),
       tabs: <Widget>[

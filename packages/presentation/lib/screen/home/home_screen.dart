@@ -1,3 +1,5 @@
+import 'package:domain/model/movie_anticipated.dart';
+import 'package:domain/model/movie_trending.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
@@ -8,10 +10,11 @@ import 'package:presentation/screen/home/home_bloc.dart';
 import 'package:presentation/screen/home/home_data.dart';
 import 'package:presentation/screen/home/widgets/app_bottom_navigation_bar.dart';
 import 'package:presentation/screen/home/widgets/home_body.dart';
+import 'package:presentation/screen/home/widgets/home_shimmer.dart';
 
 class HomeScreenArguments extends BaseArguments {
-  List<dynamic>? trendingMoviesResponse;
-  List<dynamic>? anticipatedMoviesResponse;
+  List<MovieTrendingResponse>? trendingMoviesResponse;
+  List<MovieAnticipatedResponse>? anticipatedMoviesResponse;
 
   HomeScreenArguments({
     required this.trendingMoviesResponse,
@@ -70,10 +73,12 @@ class _HomeScreenState extends BlocScreenState<HomeScreen, HomeBloc> {
                 ),
               ],
             ),
-            body: HomeBody(
-              blocData: blocData,
-              blocFunctions: bloc,
-            ),
+            body: data.isLoading
+                ? const HomeShimmer()
+                : HomeBody(
+                    blocData: blocData,
+                    blocFunctions: bloc,
+                  ),
             bottomNavigationBar: const AppBottomNavigationBar(),
           );
         } else {

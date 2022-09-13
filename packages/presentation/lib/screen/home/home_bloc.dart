@@ -28,18 +28,30 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
   @override
   void initState() async {
     super.initState();
+    _updateData(data: _stateData, isLoading: true);
     final getTrendingMoviesUseCase = await _getTrendingMoviesUseCase();
     final getAnticipatedMoviesUseCase = await _getAnticipatedMoviesUseCase();
     _stateData = HomeData(
       trendingMovies: getTrendingMoviesUseCase,
       anticipatedMovies: getAnticipatedMoviesUseCase,
     );
-    _updateData(data: _stateData);
+    _updateData(data: _stateData, isLoading: false);
   }
 
-  _updateData({HomeData? data}) {
+  _updateData({HomeData? data, bool? isLoading}) {
     handleData(
       data: data,
+      isLoading: isLoading,
     );
+  }
+
+  @override
+  void initArgs(HomeScreenArguments arguments) {
+    super.initArgs(arguments);
+    _stateData = HomeData(
+      trendingMovies: arguments.trendingMoviesResponse,
+      anticipatedMovies: arguments.anticipatedMoviesResponse,
+    );
+    _updateData();
   }
 }
