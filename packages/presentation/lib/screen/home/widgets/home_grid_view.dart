@@ -32,6 +32,7 @@ class HomeGridView extends StatelessWidget {
         final genres = currentMovie?.movie.genres;
         final int times = currentMovie?.movie.runtime;
         final certifications = currentMovie?.movie.certification;
+        final rating = currentMovie?.movie.rating;
         String getTimeString(int value) {
           final int hour = value ~/ 60;
           final int minutes = value % 60;
@@ -56,7 +57,7 @@ class HomeGridView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            const MovieRating(),
+            MovieRating(rating: rating),
             const SizedBox(height: 7),
             MovieTitle(
               movieTitleText: titles,
