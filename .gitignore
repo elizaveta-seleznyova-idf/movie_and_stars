@@ -3,13 +3,13 @@
 *.log
 *.pyc
 *.swp
+pubspec.lock
 .DS_Store
 .atom/
 .buildlog/
 .history
 .svn/
 migrate_working_dir/
-/packages/data/lib/utils/api_key_data.dart
 
 # IntelliJ related
 *.iml
@@ -25,6 +25,8 @@ migrate_working_dir/
 # Flutter/Dart/Pub related
 **/doc/api/
 **/ios/Flutter/.last_build_id
+ios/Flutter/AppFrameworkInfo.plist
+/ios/Runner.xcodeproj/project.pbxproj
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
@@ -32,7 +34,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-/packages/data/lib/utils/api_key_data.dart
+
 
 # Web related
 lib/generated_plugin_registrant.dart
