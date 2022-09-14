@@ -41,6 +41,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
               size: 35.0,
             ),
           ),
+          const SizedBox(width: 18)
         ],
       ),
       body: const Center(
