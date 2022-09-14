@@ -9,8 +9,10 @@ class NetworkRepositoryImpl implements NetworkRepository {
   NetworkRepositoryImpl(this._apiService);
 
   @override
-  Future<GetDataResponse> getData(
-      {required String apiPath, int? itemCount}) async {
+  Future<GetDataResponse> getData({
+    required String apiPath,
+    int? itemCount,
+  }) async {
     return _apiService.get(
       apiPath,
       queryParameters: {

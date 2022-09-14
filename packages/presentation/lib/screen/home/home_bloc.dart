@@ -26,7 +26,9 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
   HomeData _stateData = HomeData.init();
 
   HomeBlocImpl(
-      this._getTrendingMoviesUseCase, this._getAnticipatedMoviesUseCase);
+    this._getTrendingMoviesUseCase,
+    this._getAnticipatedMoviesUseCase,
+  );
 
   @override
   void initState() async {

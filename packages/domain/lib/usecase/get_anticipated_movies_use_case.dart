@@ -7,27 +7,28 @@ class GetAnticipatedMoviesUseCase
     implements UseCase<Future<List<MovieAnticipatedResponse>>> {
   final NetworkRepository _repository;
 
+
   GetAnticipatedMoviesUseCase(this._repository);
 
   @override
   Future<List<MovieAnticipatedResponse>> call() async {
     final List<MovieAnticipatedResponse> jsonMovies = [];
     final response =
-        await _repository.getData(apiPath: '${C.movieUrl}${C.anticipatedUrl}');
+        await _repository.getData(apiPath: C.anticipatedFullUrl);
 
-    if (int.parse(response.headers['x-pagination-page-count'][0]) >= 5) {
+    if (int.parse(response.headers[C.pagination][0]) >= 5) {
       int itemCount = 50;
       final responseWithItem = await _repository.getData(
-        apiPath: '${C.movieUrl}${C.anticipatedUrl}',
+        apiPath: C.anticipatedFullUrl,
         itemCount: itemCount,
       );
       jsonMovies.addAll(responseWithItem.body
           .map((e) => MovieAnticipatedResponse.fromJson(e)));
     } else {
       final itemCount =
-          int.parse(response.headers['x-pagination-item-count'][0]);
+          int.parse(response.headers[C.pagination][0]);
       final responseWithItem = await _repository.getData(
-        apiPath: '${C.movieUrl}${C.anticipatedUrl}',
+        apiPath: C.anticipatedFullUrl,
         itemCount: itemCount,
       );
       jsonMovies.addAll(responseWithItem.body
