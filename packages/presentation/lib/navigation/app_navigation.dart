@@ -41,12 +41,11 @@ abstract class AppNavigator {
 
   BasePage? currentPage();
 
-  factory AppNavigator() => _AppNavigatorImpl();
 
   ///endregion
 }
 
-class _AppNavigatorImpl implements AppNavigator {
+class AppNavigatorImpl implements AppNavigator {
   ///functions
   Function(BasePage page)? _push;
   Function(BasePage page)? _popOldAndPush;

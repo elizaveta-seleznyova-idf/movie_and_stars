@@ -71,6 +71,7 @@ class _HomeScreenState extends BlocScreenState<HomeScreen, HomeBloc> {
                     size: 35.0,
                   ),
                 ),
+                const SizedBox(width: 18),
               ],
             ),
             body: data.isLoading

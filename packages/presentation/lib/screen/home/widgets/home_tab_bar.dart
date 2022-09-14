@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:presentation/presentation.dart';
+import 'package:presentation/config/theme/app_colors.dart';
 
 class HomeTabBar extends StatefulWidget {
   const HomeTabBar({Key? key}) : super(key: key);

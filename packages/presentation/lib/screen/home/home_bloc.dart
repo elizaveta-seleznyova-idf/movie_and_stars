@@ -3,6 +3,7 @@ import 'package:domain/usecase/get_trending_movies_use_case.dart';
 import 'package:presentation/base/bloc.dart';
 import 'package:presentation/screen/home/home_data.dart';
 import 'package:presentation/screen/home/home_screen.dart';
+import 'package:presentation/screen/movie_details/movie_details_screen.dart';
 
 abstract class HomeBloc extends Bloc<HomeScreenArguments, HomeData> {
   factory HomeBloc(
@@ -13,6 +14,8 @@ abstract class HomeBloc extends Bloc<HomeScreenArguments, HomeData> {
         getTrendingMoviesUseCase,
         getAnticipatedMoviesUseCase,
       );
+
+  void navigateToDetailsPage();
 }
 
 class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
@@ -53,5 +56,14 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
       anticipatedMovies: arguments.anticipatedMoviesResponse,
     );
     _updateData();
+  }
+
+  @override
+  void navigateToDetailsPage() {
+    appNavigator.push(
+      MovieDetailsScreen.page(
+        MovieDetailsScreenArguments(),
+      ),
+    );
   }
 }

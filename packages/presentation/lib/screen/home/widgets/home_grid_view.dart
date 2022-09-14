@@ -4,7 +4,6 @@ import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/screen/home/widgets/movie_content.dart';
 import 'package:presentation/screen/home/widgets/movie_rating.dart';
 import 'package:presentation/screen/home/widgets/movie_title.dart';
-import 'package:presentation/screen/movie_details/movie_details_screen.dart';
 
 import 'package:presentation/utils/image_path.dart';
 
@@ -12,9 +11,11 @@ class HomeGridView extends StatelessWidget {
   const HomeGridView({
     Key? key,
     required this.nowShowingData,
+    required this.blocFunctions,
   }) : super(key: key);
 
   final nowShowingData;
+  final blocFunctions;
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +43,7 @@ class HomeGridView extends StatelessWidget {
 
         return GestureDetector(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const MovieDetailsScreen()),
-            );
+            blocFunctions.navigateToDetailsPage();
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

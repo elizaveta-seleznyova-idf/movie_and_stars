@@ -34,6 +34,6 @@ void _initAppModule() {
     () => AppBloc(),
   );
   GetIt.I.registerSingleton<AppNavigator>(
-    AppNavigator(),
+    AppNavigatorImpl(),
   );
 }

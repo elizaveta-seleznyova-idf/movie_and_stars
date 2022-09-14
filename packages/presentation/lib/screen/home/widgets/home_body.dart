@@ -31,7 +31,7 @@ class _HomeBodyState extends State<HomeBody> {
             margin: const EdgeInsets.only(
               top: 10,
               right: 18,
-              left: 18,
+              left: 17,
               bottom: 24,
             ),
             padding: const EdgeInsets.all(4.0),
@@ -49,9 +49,11 @@ class _HomeBodyState extends State<HomeBody> {
               children: [
                 HomeGridView(
                   nowShowingData: widget.blocData.trendingMovies,
+                  blocFunctions: widget.blocFunctions,
                 ),
                 HomeGridView(
                   nowShowingData: widget.blocData.anticipatedMovies,
+                  blocFunctions: widget.blocFunctions,
                 ),
               ],
             ),

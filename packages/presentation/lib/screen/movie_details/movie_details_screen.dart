@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/navigation/base_arguments.dart';
 import 'package:presentation/navigation/base_page.dart';
 
@@ -28,8 +29,23 @@ class MovieDetailsScreen extends StatefulWidget {
 class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('Some information about movie will be here')),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColorsDark.primaryColorDark,
+        elevation: 0,
+        actions: <Widget>[
+          GestureDetector(
+            onTap: () {},
+            child: const Icon(
+              Icons.shortcut,
+              size: 35.0,
+            ),
+          ),
+        ],
+      ),
+      body: const Center(
+        child: Text('Some information about movie will be here'),
+      ),
     );
   }
 }
