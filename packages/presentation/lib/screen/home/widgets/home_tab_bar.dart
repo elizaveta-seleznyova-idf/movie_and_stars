@@ -9,20 +9,11 @@ class HomeTabBar extends StatefulWidget {
 }
 
 class _HomeTabBarState extends State<HomeTabBar> {
-  int currentIndex = 0;
-  bool isIconActive = false;
-
   @override
   Widget build(BuildContext context) {
     return TabBar(
       splashBorderRadius: BorderRadius.circular(16),
-      onTap: (index) {
-        setState(() {
-          if (index == currentIndex) return;
-          currentIndex = index;
-          isIconActive = !isIconActive;
-        });
-      },
+      onTap: (index) {},
       indicator: BoxDecoration(
         color: AppColorsDark.primaryColor,
         borderRadius: BorderRadius.circular(16),
@@ -31,10 +22,10 @@ class _HomeTabBarState extends State<HomeTabBar> {
         Tab(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              !isIconActive ? const Icon(Icons.play_circle) : const SizedBox(),
-              const SizedBox(width: 6),
-              const Text(
+            children: const <Widget>[
+              Icon(Icons.play_circle),
+              SizedBox(width: 6),
+              Text(
                 'Now Showing',
                 style: TextStyle(fontSize: 14),
               ),
@@ -43,10 +34,9 @@ class _HomeTabBarState extends State<HomeTabBar> {
         ),
         Tab(
           child: Row(
-            children: <Widget>[
-              isIconActive ? const Icon(Icons.play_circle) : const SizedBox(),
-              const SizedBox(width: 6),
-              const Text(
+            children: const <Widget>[
+              SizedBox(width: 6),
+              Text(
                 'Coming soon',
                 style: TextStyle(fontSize: 14),
               ),

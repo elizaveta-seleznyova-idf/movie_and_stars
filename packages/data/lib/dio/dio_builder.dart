@@ -11,7 +11,7 @@ Dio dioBuilder(
     connectTimeout: D.connectTimeout,
     receiveTimeout: D.receiveTimeout,
     sendTimeout: D.sendTimeout,
-    contentType: 'application/json',
+    contentType: D.applicationJson,
   );
 
   final dio = Dio(options);

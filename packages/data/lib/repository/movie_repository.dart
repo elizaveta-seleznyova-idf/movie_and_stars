@@ -1,5 +1,6 @@
 import 'package:data/service/api_base_service.dart';
 import 'package:data/service/service_payload.dart';
+import 'package:data/utils/constants.dart';
 import 'package:domain/di/data_model.dart';
 import 'package:domain/repository/base_repository.dart';
 
@@ -16,8 +17,8 @@ class NetworkRepositoryImpl implements NetworkRepository {
     return _apiService.get(
       apiPath,
       queryParameters: {
-        'extended': 'full',
-        'limit': itemCount,
+        Q.extended: Q.full,
+        Q.limit: itemCount,
       },
     ).then(
       (response) {

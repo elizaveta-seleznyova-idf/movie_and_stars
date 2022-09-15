@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:data/utils/api_key_data.dart';
+import 'package:data/utils/constants.dart';
 import 'package:dio/dio.dart';
 
 class MovieRequestInterceptor extends Interceptor {
@@ -9,7 +10,7 @@ class MovieRequestInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) {
-    options.headers['trakt-api-key'] = ApiKeyData.apiKeyData;
+    options.headers[D.traktApiKey] = ApiKeyData.apiKeyData;
     return super.onRequest(options, handler);
   }
 
