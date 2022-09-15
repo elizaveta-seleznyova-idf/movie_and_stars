@@ -7,8 +7,8 @@ class HomeData {
     required this.anticipatedMovies,
   });
 
-  List<MovieTrendingResponse>? trendingMovies;
-  List<MovieAnticipatedResponse>? anticipatedMovies;
+  List<dynamic>? trendingMovies;
+  List<dynamic>? anticipatedMovies;
 
   factory HomeData.init() => HomeData(
         trendingMovies: [],

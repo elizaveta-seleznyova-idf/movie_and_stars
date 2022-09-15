@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:domain/usecase/delay_use_case.dart';
+import 'package:domain/use_case/delay_use_case.dart';
 import 'package:presentation/base/bloc.dart';
 import 'package:presentation/screen/home/home_screen.dart';
 
@@ -27,8 +27,7 @@ class SplashBlocImpl extends BlocImpl implements SplashBloc {
     await _blocDelayUseCase();
     appNavigator.popAndPush(
       HomeScreen.page(
-        HomeScreenArguments(
-            anticipatedMoviesResponse: [], trendingMoviesResponse: []),
+        HomeScreenArguments(),
       ),
     );
   }

@@ -12,7 +12,8 @@ class MovieRating extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RatingBar(
-      initialRating: rating / 2,
+      ignoreGestures: true,
+      initialRating: rating,
       direction: Axis.horizontal,
       allowHalfRating: true,
       itemCount: 5,

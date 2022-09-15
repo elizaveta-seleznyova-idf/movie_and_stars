@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/config/theme/app_colors.dart';
+import 'package:presentation/screen/home/widgets/shimmer_container.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomeShimmer extends StatelessWidget {
@@ -44,40 +45,24 @@ class HomeShimmer extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      width: 167,
-                      height: 250,
-                      decoration: const BoxDecoration(
-                        color: AppColorsDark.borderTabBar,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
+                    ShimmerContainer(
+                      shimmerHeight: 167,
+                      shimmerWidth: 250,
                     ),
                     const SizedBox(height: 16),
-                    Container(
-                      height: 20,
-                      width: 120,
-                      decoration: const BoxDecoration(
-                        color: AppColorsDark.borderTabBar,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
+                    ShimmerContainer(
+                      shimmerHeight: 20,
+                      shimmerWidth: 120,
                     ),
                     const SizedBox(height: 7),
-                    Container(
-                      height: 15,
-                      width: width / 3,
-                      decoration: const BoxDecoration(
-                        color: AppColorsDark.borderTabBar,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
+                    ShimmerContainer(
+                      shimmerHeight: 15,
+                      shimmerWidth: width / 3,
                     ),
                     const SizedBox(height: 7),
-                    Container(
-                      height: 10,
-                      width: width / 2.5,
-                      decoration: const BoxDecoration(
-                        color: AppColorsDark.borderTabBar,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
+                    ShimmerContainer(
+                      shimmerHeight: 10,
+                      shimmerWidth: width / 2.5,
                     ),
                   ],
                 );

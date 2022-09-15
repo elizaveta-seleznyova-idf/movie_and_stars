@@ -1,6 +1,6 @@
 import 'package:domain/model/movie_trending.dart';
 import 'package:domain/repository/base_repository.dart';
-import 'package:domain/usecase/use_case.dart';
+import 'package:domain/use_case/use_case.dart';
 import 'package:domain/utils/const.dart';
 
 class GetTrendingMoviesUseCase
@@ -26,8 +26,7 @@ class GetTrendingMoviesUseCase
         responseWithItem.body.map((e) => MovieTrendingResponse.fromJson(e)),
       );
     } else {
-      final itemCount =
-          int.parse(response.headers[C.pagination][0]);
+      final itemCount = int.parse(response.headers[C.pagination][0]);
       final responseWithItem = await _repository.getData(
         apiPath: C.trendingFullUrl,
         itemCount: itemCount,

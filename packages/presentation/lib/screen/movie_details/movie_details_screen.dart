@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/navigation/base_arguments.dart';
 import 'package:presentation/navigation/base_page.dart';
+import 'package:presentation/screen/home/widgets/movie_model.dart';
 
 class MovieDetailsScreenArguments extends BaseArguments {
+  final MovieModel movieInfo;
+
   MovieDetailsScreenArguments({
+    required this.movieInfo,
     Function(dynamic value)? result,
   }) : super(result: result);
 }

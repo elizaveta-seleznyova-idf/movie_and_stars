@@ -17,8 +17,8 @@ class HomeScreenArguments extends BaseArguments {
   List<MovieAnticipatedResponse>? anticipatedMoviesResponse;
 
   HomeScreenArguments({
-    required this.trendingMoviesResponse,
-    required this.anticipatedMoviesResponse,
+    this.trendingMoviesResponse,
+    this.anticipatedMoviesResponse,
     Function(dynamic value)? result,
   }) : super(result: result);
 }
@@ -83,8 +83,10 @@ class _HomeScreenState extends BlocScreenState<HomeScreen, HomeBloc> {
             bottomNavigationBar: const AppBottomNavigationBar(),
           );
         } else {
-          return Scaffold(
-            body: Container(),
+          return const Scaffold(
+            body: Center(
+              child: Text('Something went wrong.'),
+            ),
           );
         }
       },

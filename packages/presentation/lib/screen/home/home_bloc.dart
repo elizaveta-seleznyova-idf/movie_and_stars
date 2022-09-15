@@ -1,8 +1,9 @@
-import 'package:domain/usecase/get_anticipated_movies_use_case.dart';
-import 'package:domain/usecase/get_trending_movies_use_case.dart';
+import 'package:domain/use_case/get_anticipated_movies_use_case.dart';
+import 'package:domain/use_case/get_trending_movies_use_case.dart';
 import 'package:presentation/base/bloc.dart';
 import 'package:presentation/screen/home/home_data.dart';
 import 'package:presentation/screen/home/home_screen.dart';
+import 'package:presentation/screen/home/widgets/movie_model.dart';
 import 'package:presentation/screen/movie_details/movie_details_screen.dart';
 
 abstract class HomeBloc extends Bloc<HomeScreenArguments, HomeData> {
@@ -15,7 +16,7 @@ abstract class HomeBloc extends Bloc<HomeScreenArguments, HomeData> {
         getAnticipatedMoviesUseCase,
       );
 
-  void navigateToDetailsPage();
+  void navigateToDetailsPage(MovieModel movie);
 }
 
 class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
@@ -36,9 +37,15 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
     _updateData(data: _stateData, isLoading: true);
     final getTrendingMoviesUseCase = await _getTrendingMoviesUseCase();
     final getAnticipatedMoviesUseCase = await _getAnticipatedMoviesUseCase();
+    final List<MovieModel> trendingMovies = getTrendingMoviesUseCase
+        .map((e) => MovieModel.fromMovie(e.movie))
+        .toList();
+    final List<MovieModel> anticipatedMovies = getAnticipatedMoviesUseCase
+        .map((e) => MovieModel.fromMovie(e.movie))
+        .toList();
     _stateData = HomeData(
-      trendingMovies: getTrendingMoviesUseCase,
-      anticipatedMovies: getAnticipatedMoviesUseCase,
+      trendingMovies: trendingMovies,
+      anticipatedMovies: anticipatedMovies,
     );
     _updateData(data: _stateData, isLoading: false);
   }
@@ -53,18 +60,16 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
   @override
   void initArgs(HomeScreenArguments arguments) {
     super.initArgs(arguments);
-    _stateData = HomeData(
-      trendingMovies: arguments.trendingMoviesResponse,
-      anticipatedMovies: arguments.anticipatedMoviesResponse,
-    );
     _updateData();
   }
 
   @override
-  void navigateToDetailsPage() {
+  void navigateToDetailsPage(MovieModel movie) {
     appNavigator.push(
       MovieDetailsScreen.page(
-        MovieDetailsScreenArguments(),
+        MovieDetailsScreenArguments(
+          movieInfo: movie,
+        ),
       ),
     );
   }

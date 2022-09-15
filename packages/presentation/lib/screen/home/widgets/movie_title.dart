@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class MovieTitle extends StatelessWidget {
-  const MovieTitle({Key? key, required this.movieTitleText}) : super(key: key);
+  const MovieTitle({
+    Key? key,
+    required this.movieTitleText,
+  }) : super(key: key);
 
   final String movieTitleText;
 

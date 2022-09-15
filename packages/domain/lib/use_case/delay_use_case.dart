@@ -1,4 +1,4 @@
-import 'package:domain/usecase/use_case.dart';
+import 'package:domain/use_case/use_case.dart';
 
 class SplashUseCase implements UseCase<Future<void>> {
   final _delaySeconds = 3;

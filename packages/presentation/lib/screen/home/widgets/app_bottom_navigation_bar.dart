@@ -30,8 +30,6 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
         ),
       ),
       child: BottomNavigationBar(
-        selectedItemColor: AppColorsDark.selectedBottomNavItem,
-        unselectedItemColor: AppColorsDark.unselectedColor,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         currentIndex: _selectedIndex,

@@ -48,11 +48,11 @@ class _HomeBodyState extends State<HomeBody> {
             child: TabBarView(
               children: [
                 HomeGridView(
-                  nowShowingData: widget.blocData.trendingMovies,
+                  movieData: widget.blocData.trendingMovies,
                   blocFunctions: widget.blocFunctions,
                 ),
                 HomeGridView(
-                  nowShowingData: widget.blocData.anticipatedMovies,
+                  movieData: widget.blocData.anticipatedMovies,
                   blocFunctions: widget.blocFunctions,
                 ),
               ],

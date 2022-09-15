@@ -4,12 +4,12 @@ import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/utils/image_path.dart';
 
 class MovieContent extends StatelessWidget {
-  const MovieContent(
-      {Key? key,
-      required this.movieGenre,
-      required this.movieTime,
-      required this.certification})
-      : super(key: key);
+  const MovieContent({
+    Key? key,
+    required this.movieGenre,
+    required this.movieTime,
+    required this.certification,
+  }) : super(key: key);
 
   final String movieGenre;
   final String movieTime;
