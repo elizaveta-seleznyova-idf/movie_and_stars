@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 
 class ShimmerContainer extends StatelessWidget {
-  ShimmerContainer({
+  const ShimmerContainer({
     Key? key,
     required this.shimmerHeight,
     required this.shimmerWidth,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppColorsDark {
+abstract class AppColorsDark {
   static const primaryColorDark = Color.fromRGBO(15, 27, 43, 1);
   static const canvasColor = Color.fromRGBO(15, 27, 43, 1);
   static const borderTabBar = Color.fromRGBO(44, 63, 91, 1);

@@ -18,13 +18,14 @@ void _initViewMapperModule() {}
 void _initBlocModule() {
   GetIt.I.registerFactory<SplashBloc>(
     () => SplashBloc(
-      GetIt.I.get<SplashUseCase>(),
+      GetIt.I.get<DelayUseCase>(),
     ),
   );
   GetIt.I.registerFactory<HomeBloc>(
     () => HomeBloc(
       GetIt.I.get<GetTrendingMoviesUseCase>(),
       GetIt.I.get<GetAnticipatedMoviesUseCase>(),
+      GetIt.I.get<DelayUseCase>(),
     ),
   );
 }

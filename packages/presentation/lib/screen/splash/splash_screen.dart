@@ -14,6 +14,7 @@ class SplashScreen extends StatefulWidget {
         key: const ValueKey(_routeName),
         name: _routeName,
         builder: (context) => const SplashScreen(),
+        isButtonNavBarActive: false,
       );
 
   @override

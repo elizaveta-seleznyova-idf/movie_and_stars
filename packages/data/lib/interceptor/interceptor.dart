@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:data/utils/api_key_data.dart';
 import 'package:data/utils/constants.dart';
 import 'package:dio/dio.dart';
@@ -12,18 +10,5 @@ class MovieRequestInterceptor extends Interceptor {
   ) {
     options.headers[D.traktApiKey] = ApiKeyData.apiKeyData;
     return super.onRequest(options, handler);
-  }
-
-  @override
-  void onResponse(
-    Response response,
-    ResponseInterceptorHandler handler,
-  ) {
-    response.headers[HttpHeaders.authorizationHeader]?.forEach(
-      (element) {
-        //logic
-      },
-    );
-    super.onResponse(response, handler);
   }
 }

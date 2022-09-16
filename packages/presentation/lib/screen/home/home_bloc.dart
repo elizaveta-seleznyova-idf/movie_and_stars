@@ -1,3 +1,4 @@
+import 'package:domain/use_case/delay_use_case.dart';
 import 'package:domain/use_case/get_anticipated_movies_use_case.dart';
 import 'package:domain/use_case/get_trending_movies_use_case.dart';
 import 'package:presentation/base/bloc.dart';
@@ -10,33 +11,44 @@ abstract class HomeBloc extends Bloc<HomeScreenArguments, HomeData> {
   factory HomeBloc(
     GetTrendingMoviesUseCase getTrendingMoviesUseCase,
     GetAnticipatedMoviesUseCase getAnticipatedMoviesUseCase,
+    DelayUseCase delayUseCase,
   ) =>
       HomeBlocImpl(
         getTrendingMoviesUseCase,
         getAnticipatedMoviesUseCase,
+        delayUseCase,
       );
 
   void navigateToDetailsPage(MovieModel movie);
+
+  Future<void> refresh();
 }
 
 class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
     implements HomeBloc {
-  final GetTrendingMoviesUseCase _getTrendingMoviesUseCase;
-  final GetAnticipatedMoviesUseCase _getAnticipatedMoviesUseCase;
+  final GetTrendingMoviesUseCase _blocGetTrendingMoviesUseCase;
+  final GetAnticipatedMoviesUseCase _blocGetAnticipatedMoviesUseCase;
+  final DelayUseCase _blocDelayUseCase;
 
   HomeData _stateData = HomeData.init();
 
   HomeBlocImpl(
-    this._getTrendingMoviesUseCase,
-    this._getAnticipatedMoviesUseCase,
+    this._blocGetTrendingMoviesUseCase,
+    this._blocGetAnticipatedMoviesUseCase,
+    this._blocDelayUseCase,
   );
 
   @override
   void initState() async {
     super.initState();
-    _updateData(data: _stateData, isLoading: true);
-    final getTrendingMoviesUseCase = await _getTrendingMoviesUseCase();
-    final getAnticipatedMoviesUseCase = await _getAnticipatedMoviesUseCase();
+    _updateData(
+      data: _stateData,
+      isLoading: true,
+      isBottomNavigationActive: false,
+    );
+    final getTrendingMoviesUseCase = await _blocGetTrendingMoviesUseCase();
+    final getAnticipatedMoviesUseCase =
+        await _blocGetAnticipatedMoviesUseCase();
     final List<MovieModel> trendingMovies = getTrendingMoviesUseCase
         .map((e) => MovieModel.fromMovie(e.movie))
         .toList();
@@ -47,11 +59,17 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
       trendingMovies: trendingMovies,
       anticipatedMovies: anticipatedMovies,
     );
-    _updateData(data: _stateData, isLoading: false);
+    _updateData(
+      data: _stateData,
+      isLoading: false,
+      isBottomNavigationActive: false,
+    );
   }
 
-  _updateData({HomeData? data, bool? isLoading}) {
+  _updateData(
+      {HomeData? data, bool? isLoading, bool? isBottomNavigationActive}) {
     handleData(
+      isBottomNavigationActive: isBottomNavigationActive,
       data: data,
       isLoading: isLoading,
     );
@@ -60,7 +78,9 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
   @override
   void initArgs(HomeScreenArguments arguments) {
     super.initArgs(arguments);
-    _updateData();
+    _updateData(
+      isBottomNavigationActive: true,
+    );
   }
 
   @override
@@ -72,5 +92,10 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
         ),
       ),
     );
+  }
+
+  @override
+  Future<void> refresh() async {
+    await _blocDelayUseCase();
   }
 }

@@ -45,12 +45,12 @@ class HomeShimmer extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ShimmerContainer(
-                      shimmerHeight: 167,
-                      shimmerWidth: 250,
+                    const ShimmerContainer(
+                      shimmerHeight: 250,
+                      shimmerWidth: 167,
                     ),
                     const SizedBox(height: 16),
-                    ShimmerContainer(
+                    const ShimmerContainer(
                       shimmerHeight: 20,
                       shimmerWidth: 120,
                     ),

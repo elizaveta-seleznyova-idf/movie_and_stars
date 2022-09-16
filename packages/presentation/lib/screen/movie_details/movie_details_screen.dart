@@ -24,6 +24,7 @@ class MovieDetailsScreen extends StatefulWidget {
         builder: (context) => const MovieDetailsScreen(),
         showSlideAnim: true,
         arguments: arguments,
+        isButtonNavBarActive: true,
       );
 
   @override

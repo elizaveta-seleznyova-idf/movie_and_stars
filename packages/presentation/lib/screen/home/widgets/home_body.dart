@@ -9,11 +9,11 @@ class HomeBody extends StatefulWidget {
   const HomeBody({
     Key? key,
     required this.blocData,
-    required this.blocFunctions,
+    required this.bloc,
   }) : super(key: key);
 
   final HomeData blocData;
-  final HomeBloc blocFunctions;
+  final HomeBloc bloc;
 
   @override
   State<HomeBody> createState() => _HomeBodyState();
@@ -49,11 +49,11 @@ class _HomeBodyState extends State<HomeBody> {
               children: [
                 HomeGridView(
                   movieData: widget.blocData.trendingMovies,
-                  blocFunctions: widget.blocFunctions,
+                  blocFunctions: widget.bloc,
                 ),
                 HomeGridView(
                   movieData: widget.blocData.anticipatedMovies,
-                  blocFunctions: widget.blocFunctions,
+                  blocFunctions: widget.bloc,
                 ),
               ],
             ),

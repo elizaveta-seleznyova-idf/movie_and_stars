@@ -5,7 +5,7 @@ import 'package:presentation/screen/home/home_screen.dart';
 
 abstract class SplashBloc extends Bloc {
   factory SplashBloc(
-    SplashUseCase delayUseCase,
+    DelayUseCase delayUseCase,
   ) =>
       SplashBlocImpl(
         delayUseCase,
@@ -13,7 +13,7 @@ abstract class SplashBloc extends Bloc {
 }
 
 class SplashBlocImpl extends BlocImpl implements SplashBloc {
-  final SplashUseCase _blocDelayUseCase;
+  final DelayUseCase _blocDelayUseCase;
 
   SplashBlocImpl(this._blocDelayUseCase);
 
@@ -21,6 +21,20 @@ class SplashBlocImpl extends BlocImpl implements SplashBloc {
   void initState() {
     super.initState();
     delayed();
+    _updateData(
+      isLoading: false,
+      isBottomNavigationActive: false,
+    );
+  }
+
+  _updateData({
+    bool? isLoading,
+    bool? isBottomNavigationActive,
+  }) {
+    handleData(
+      isBottomNavigationActive: isBottomNavigationActive,
+      isLoading: isLoading,
+    );
   }
 
   Future<void> delayed() async {

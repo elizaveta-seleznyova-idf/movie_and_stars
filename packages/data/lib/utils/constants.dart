@@ -1,4 +1,4 @@
-class D {
+abstract class D {
   static const sendTimeout = 6000;
   static const receiveTimeout = 6000;
   static const connectTimeout = 6000;
@@ -7,7 +7,7 @@ class D {
   static const applicationJson = 'application/json';
 }
 
-class Q {
+abstract class Q {
   static const extended = 'extended';
   static const full = 'full';
   static const limit = 'limit';

@@ -1,14 +1,13 @@
-import 'package:domain/model/movie_anticipated.dart';
-import 'package:domain/model/movie_trending.dart';
+import 'package:presentation/screen/home/widgets/movie_model.dart';
 
 class HomeData {
   HomeData({
-    required this.trendingMovies,
-    required this.anticipatedMovies,
+    this.trendingMovies,
+    this.anticipatedMovies,
   });
 
-  List<dynamic>? trendingMovies;
-  List<dynamic>? anticipatedMovies;
+  List<MovieModel>? trendingMovies;
+  List<MovieModel>? anticipatedMovies;
 
   factory HomeData.init() => HomeData(
         trendingMovies: [],

@@ -1,4 +1,4 @@
-class C {
+abstract class C {
   static const baseUrl = 'https://api.trakt.tv/';
   static const movieUrl = 'movies/';
   static const trendingUrl = 'trending/';

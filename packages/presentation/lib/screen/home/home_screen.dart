@@ -8,7 +8,6 @@ import 'package:presentation/navigation/base_arguments.dart';
 import 'package:presentation/navigation/base_page.dart';
 import 'package:presentation/screen/home/home_bloc.dart';
 import 'package:presentation/screen/home/home_data.dart';
-import 'package:presentation/screen/home/widgets/app_bottom_navigation_bar.dart';
 import 'package:presentation/screen/home/widgets/home_body.dart';
 import 'package:presentation/screen/home/widgets/home_shimmer.dart';
 
@@ -36,6 +35,7 @@ class HomeScreen extends StatefulWidget {
         builder: (context) => const HomeScreen(),
         showSlideAnim: true,
         arguments: arguments,
+        isButtonNavBarActive: true,
       );
 
   @override
@@ -45,13 +45,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends BlocScreenState<HomeScreen, HomeBloc> {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<BlocData>(
+    return StreamBuilder<BlocData<HomeData?>>(
       stream: bloc.dataStream,
       builder: (context, snapshot) {
         final data = snapshot.data;
-
-        if (data != null) {
-          final HomeData blocData = data.data;
+        final HomeData? blocData = data?.data;
+        if (data != null && blocData != null) {
           return Scaffold(
             appBar: AppBar(
               centerTitle: false,
@@ -78,9 +77,8 @@ class _HomeScreenState extends BlocScreenState<HomeScreen, HomeBloc> {
                 ? const HomeShimmer()
                 : HomeBody(
                     blocData: blocData,
-                    blocFunctions: bloc,
+                    bloc: bloc,
                   ),
-            bottomNavigationBar: const AppBottomNavigationBar(),
           );
         } else {
           return const Scaffold(

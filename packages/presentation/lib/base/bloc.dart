@@ -25,8 +25,12 @@ abstract class BlocImpl<T extends BaseArguments, D> implements Bloc<T, D> {
   Stream<BlocData<D?>> get dataStream => _data.stream;
 
   @protected
-  void handleData({bool? isLoading, D? data}) {
-    _blocData.updateParams(isLoading, data);
+  void handleData({
+    bool? isBottomNavigationActive,
+    bool? isLoading,
+    D? data,
+  }) {
+    _blocData.updateParams(isBottomNavigationActive, isLoading, data);
     _data.add(_blocData.copy());
   }
 

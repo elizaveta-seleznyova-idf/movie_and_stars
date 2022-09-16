@@ -1,15 +1,17 @@
 import 'package:presentation/navigation/base_page.dart';
 import 'package:presentation/screen/splash/splash_screen.dart';
 
-class AppData{
+class AppData {
   final List<BasePage> pages;
+  bool isButtonNavBarActive;
 
-  AppData(
-    this.pages,
-  );
+  AppData({
+    required this.pages,
+    required this.isButtonNavBarActive,
+  });
 
   factory AppData.init() {
     final pages = List<BasePage>.from([SplashScreen.page()]);
-    return AppData(pages);
+    return AppData(pages: pages, isButtonNavBarActive: true);
   }
 }

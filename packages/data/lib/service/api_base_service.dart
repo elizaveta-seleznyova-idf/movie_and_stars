@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 abstract class ApiBaseService<SP extends ServicePayload> {
   Future<Response<R>> get<R>(
     String path, {
-    bool isResponseBytes,
     Map<String, dynamic> queryParameters,
     SP? payload,
     Options options,
@@ -12,7 +11,6 @@ abstract class ApiBaseService<SP extends ServicePayload> {
 
   Future<Response<R>> post<R>(
     String path, {
-    bool isResponseBytes,
     dynamic data,
     Map<String, dynamic> queryParameters,
     SP? payload,
@@ -27,7 +25,6 @@ class ApiServiceImpl implements ApiBaseService<DioServicePayload> {
   @override
   Future<Response<R>> get<R>(
     String path, {
-    bool isResponseBytes = false,
     Map<String, dynamic>? queryParameters,
     DioServicePayload? payload,
     Options? options,
@@ -46,7 +43,6 @@ class ApiServiceImpl implements ApiBaseService<DioServicePayload> {
   @override
   Future<Response<R>> post<R>(
     String path, {
-    bool isResponseBytes = false,
     dynamic data,
     Map<String, dynamic>? queryParameters,
     DioServicePayload? payload,

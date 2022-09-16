@@ -9,8 +9,8 @@ void initDomainInjector() {
 }
 
 void _initUseCaseModule() {
-  GetIt.I.registerFactory<SplashUseCase>(
-    () => SplashUseCase(),
+  GetIt.I.registerFactory<DelayUseCase>(
+    () => DelayUseCase(),
   );
   GetIt.I.registerFactory<GetTrendingMoviesUseCase>(
     () => GetTrendingMoviesUseCase(
