@@ -18,7 +18,10 @@ void _initApiModule() {
     MovieRequestInterceptor(),
   );
   GetIt.I.registerSingleton<Dio>(
-    dioBuilder(C.baseUrl),
+    dioBuilder(baseUrl: C.baseUrl, interceptor: [
+      LogInterceptor(requestBody: true, responseBody: true),
+      MovieRequestInterceptor(),
+    ]),
   );
   GetIt.I.registerSingleton<ApiBaseService<ServicePayload>>(
     ApiServiceImpl(GetIt.I.get()),

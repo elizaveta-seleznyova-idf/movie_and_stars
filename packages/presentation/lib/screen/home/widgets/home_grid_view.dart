@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:presentation/screen/home/home_bloc.dart';
 import 'package:presentation/screen/home/widgets/movie_content.dart';
 import 'package:presentation/screen/home/widgets/movie_image.dart';
+import 'package:presentation/screen/home/widgets/movie_model.dart';
 import 'package:presentation/screen/home/widgets/movie_rating.dart';
 import 'package:presentation/screen/home/widgets/movie_title.dart';
-import 'package:presentation/utils/functions/upper_case_first_letter.dart';
+import 'package:presentation/utils/extensions/extention_list.dart';
 
 class HomeGridView extends StatelessWidget {
   HomeGridView({
@@ -13,7 +14,7 @@ class HomeGridView extends StatelessWidget {
     required this.blocFunctions,
   }) : super(key: key);
 
-  final dynamic movieData;
+  final List<MovieModel> movieData;
   final HomeBloc blocFunctions;
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
@@ -27,7 +28,7 @@ class HomeGridView extends StatelessWidget {
       },
       child: GridView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 18),
-        itemCount: movieData?.length,
+        itemCount: movieData.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio: 167 / 330,
           crossAxisCount: 2,
@@ -51,7 +52,7 @@ class HomeGridView extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 MovieContent(
-                  movieGenre: upperCaseFirstLetter(currentMovie.genres),
+                  movieGenre: currentMovie.genres.upperCaseFirstLetter(),
                   movieTime: currentMovie.time,
                   certification: currentMovie.certifications,
                 ),

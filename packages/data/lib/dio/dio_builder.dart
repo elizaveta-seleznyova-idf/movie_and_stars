@@ -2,8 +2,9 @@ import 'package:data/interceptor/interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:data/utils/constants.dart';
 
-Dio dioBuilder(
-  String baseUrl, {
+Dio dioBuilder({
+  required String baseUrl,
+  required List<Interceptor> interceptor,
   Map<String, dynamic>? headers,
 }) {
   final options = BaseOptions(

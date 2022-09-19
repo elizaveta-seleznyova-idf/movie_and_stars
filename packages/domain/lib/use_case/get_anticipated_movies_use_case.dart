@@ -12,20 +12,18 @@ class GetAnticipatedMoviesUseCase
   @override
   Future<List<MovieAnticipatedResponse>> call() async {
     final List<MovieAnticipatedResponse> jsonMovies = [];
-    final response = await _repository.getData(apiPath: C.anticipatedFullUrl);
-
-    if (int.parse(response.headers[C.pagination][0]) >= 5) {
+    final response = await _repository.getDataAnticipated();
+    final paginationCheck = int.parse(response.headers[C.pagination][0]);
+    if (paginationCheck >= 5) {
       int itemCount = 50;
-      final responseWithItem = await _repository.getData(
-        apiPath: C.anticipatedFullUrl,
+      final responseWithItem = await _repository.getDataAnticipated(
         itemCount: itemCount,
       );
       jsonMovies.addAll(responseWithItem.body
           .map((e) => MovieAnticipatedResponse.fromJson(e)));
     } else {
-      final itemCount = int.parse(response.headers[C.pagination][0]);
-      final responseWithItem = await _repository.getData(
-        apiPath: C.anticipatedFullUrl,
+      final itemCount = paginationCheck;
+      final responseWithItem = await _repository.getDataAnticipated(
         itemCount: itemCount,
       );
       jsonMovies.addAll(responseWithItem.body

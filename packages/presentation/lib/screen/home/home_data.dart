@@ -2,12 +2,12 @@ import 'package:presentation/screen/home/widgets/movie_model.dart';
 
 class HomeData {
   HomeData({
-    this.trendingMovies,
-    this.anticipatedMovies,
+    required this.trendingMovies,
+    required this.anticipatedMovies,
   });
 
-  List<MovieModel>? trendingMovies;
-  List<MovieModel>? anticipatedMovies;
+  List<MovieModel> trendingMovies;
+  List<MovieModel> anticipatedMovies;
 
   factory HomeData.init() => HomeData(
         trendingMovies: [],
@@ -17,5 +17,14 @@ class HomeData {
   HomeData copy() => HomeData(
         trendingMovies: trendingMovies,
         anticipatedMovies: anticipatedMovies,
+      );
+
+  HomeData copyWith({
+    List<MovieModel>? trendingMovies,
+    List<MovieModel>? anticipatedMovies,
+  }) =>
+      HomeData(
+        trendingMovies: trendingMovies ?? this.trendingMovies,
+        anticipatedMovies: anticipatedMovies ?? this.anticipatedMovies,
       );
 }
