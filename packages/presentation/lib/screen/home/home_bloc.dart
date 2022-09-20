@@ -47,8 +47,6 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
   void initState() async {
     super.initState();
     _updateData(data: _stateData);
-    // _fetchTrendingMovies();
-    // _fetchAnticipatedMovies();
   }
 
   _updateData(
