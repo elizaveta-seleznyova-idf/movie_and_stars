@@ -1,4 +1,4 @@
-extension S on int? {
+extension IntExtension on int? {
   String getTimeString() {
     final int hour = (this ?? 0) ~/ 60;
     final int minutes = (this ?? 0) % 60;

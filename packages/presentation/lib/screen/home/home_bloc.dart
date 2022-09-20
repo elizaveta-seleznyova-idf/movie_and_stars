@@ -49,8 +49,11 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
     _updateData(data: _stateData);
   }
 
-  _updateData(
-      {HomeData? data, bool? isLoading, bool? isBottomNavigationActive}) {
+  _updateData({
+    HomeData? data,
+    bool? isLoading,
+    bool? isBottomNavigationActive,
+  }) {
     handleData(
       isBottomNavigationActive: isBottomNavigationActive,
       data: data,
