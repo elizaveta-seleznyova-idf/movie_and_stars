@@ -7,7 +7,6 @@ import 'package:presentation/navigation/base_page.dart';
 import 'package:presentation/screen/home/home_bloc.dart';
 import 'package:presentation/screen/home/home_data.dart';
 import 'package:presentation/screen/home/widgets/home_body.dart';
-import 'package:presentation/screen/home/widgets/home_shimmer.dart';
 
 class HomeScreenArguments extends BaseArguments {
   HomeScreenArguments({
@@ -22,8 +21,7 @@ class HomeScreen extends StatefulWidget {
 
   static const _routeName = '/HomeScreen';
 
-  static BasePage page(HomeScreenArguments arguments) =>
-      BasePage(
+  static BasePage page(HomeScreenArguments arguments) => BasePage(
         key: const ValueKey(_routeName),
         name: _routeName,
         builder: (context) => const HomeScreen(),
@@ -67,12 +65,11 @@ class _HomeScreenState extends BlocScreenState<HomeScreen, HomeBloc> {
                 const SizedBox(width: 18),
               ],
             ),
-            body: data.isLoading
-                ? const HomeShimmer()
-                : HomeBody(
-                    blocData: blocData,
-                    bloc: bloc,
-                  ),
+            body: HomeBody(
+              data: data,
+              blocData: blocData,
+              bloc: bloc,
+            ),
           );
         } else {
           return const Scaffold(

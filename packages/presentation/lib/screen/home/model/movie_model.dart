@@ -3,7 +3,7 @@ class MovieModel {
   final String images;
   final String time;
   final double rating;
-  final List<String> genres;
+  final String genres;
   final String certifications;
 
   MovieModel({

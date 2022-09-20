@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/config/theme/app_colors.dart';
+import 'package:presentation/screen/home/enum/tab_state.dart';
 import 'package:presentation/screen/home/home_bloc.dart';
 import 'package:presentation/screen/home/home_data.dart';
 import 'package:presentation/screen/home/widgets/home_grid_view.dart';
 import 'package:presentation/screen/home/widgets/home_tab_bar.dart';
 
 class HomeBody extends StatefulWidget {
-  const HomeBody({
-    Key? key,
-    required this.blocData,
-    required this.bloc,
-  }) : super(key: key);
+  const HomeBody(
+      {Key? key,
+      required this.blocData,
+      required this.bloc,
+      required this.data})
+      : super(key: key);
 
+  final BlocData<HomeData?> data;
   final HomeData blocData;
   final HomeBloc bloc;
 
@@ -66,12 +70,16 @@ class _HomeBodyState extends State<HomeBody>
             controller: _tabController,
             children: [
               HomeGridView(
+                data: widget.data,
                 movieData: widget.blocData.trendingMovies,
                 bloc: widget.bloc,
+                tabState: TabState.now,
               ),
               HomeGridView(
+                data: widget.data,
                 movieData: widget.blocData.anticipatedMovies,
                 bloc: widget.bloc,
+                tabState: TabState.soon,
               ),
             ],
           ),

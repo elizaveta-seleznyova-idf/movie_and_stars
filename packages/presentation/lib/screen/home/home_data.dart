@@ -1,6 +1,5 @@
-import 'package:presentation/screen/home/widgets/movie_model.dart';
-
-enum TabState { now, soon }
+import 'package:presentation/screen/home/enum/tab_state.dart';
+import 'package:presentation/screen/home/model/movie_model.dart';
 
 class HomeData {
   HomeData({

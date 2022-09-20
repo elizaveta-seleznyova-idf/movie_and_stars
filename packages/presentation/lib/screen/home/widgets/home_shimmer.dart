@@ -18,20 +18,6 @@ class HomeShimmer extends StatelessWidget {
       highlightColor: AppColorsDark.primaryGradientEnd,
       child: Column(
         children: [
-          Container(
-            height: 35,
-            margin: const EdgeInsets.only(
-              top: 10,
-              right: 18,
-              left: 18,
-              bottom: 24,
-            ),
-            padding: const EdgeInsets.all(4.0),
-            decoration: BoxDecoration(
-              color: AppColorsDark.borderTabBar,
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
           Expanded(
             child: GridView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 18),

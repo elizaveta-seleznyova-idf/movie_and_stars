@@ -1,24 +1,23 @@
 import 'dart:async';
+import 'package:domain/enum/movie_type.dart';
 import 'package:domain/use_case/delay_use_case.dart';
-import 'package:domain/use_case/get_anticipated_movies_use_case.dart';
-import 'package:domain/use_case/get_trending_movies_use_case.dart';
+import 'package:domain/use_case/get_movies_use_case.dart';
 import 'package:presentation/base/bloc.dart';
+import 'package:presentation/screen/home/enum/tab_state.dart';
 import 'package:presentation/screen/home/home_data.dart';
 import 'package:presentation/screen/home/home_screen.dart';
 import 'package:presentation/screen/home/mapper/movie_mapper.dart';
-import 'package:presentation/screen/home/widgets/movie_model.dart';
+import 'package:presentation/screen/home/model/movie_model.dart';
 import 'package:presentation/screen/movie_details/movie_details_screen.dart';
 
 abstract class HomeBloc extends Bloc<HomeScreenArguments, HomeData> {
   factory HomeBloc(
-    GetTrendingMoviesUseCase getTrendingMoviesUseCase,
-    GetAnticipatedMoviesUseCase getAnticipatedMoviesUseCase,
+    GetMoviesUseCase getTrendingMoviesUseCase,
     DelayUseCase delayUseCase,
     MapperMovie mapper,
   ) =>
       HomeBlocImpl(
         getTrendingMoviesUseCase,
-        getAnticipatedMoviesUseCase,
         delayUseCase,
         mapper,
       );
@@ -26,12 +25,13 @@ abstract class HomeBloc extends Bloc<HomeScreenArguments, HomeData> {
   void navigateToDetailsPage(MovieModel movie);
 
   Future<void> refresh();
+
+  void tabBarRequest(TabState tabState);
 }
 
 class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
     implements HomeBloc {
-  final GetTrendingMoviesUseCase _blocGetTrendingMoviesUseCase;
-  final GetAnticipatedMoviesUseCase _blocGetAnticipatedMoviesUseCase;
+  final GetMoviesUseCase _blocGetTrendingMoviesUseCase;
   final DelayUseCase _blocDelayUseCase;
   final MapperMovie _mapper;
 
@@ -39,7 +39,6 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
 
   HomeBlocImpl(
     this._blocGetTrendingMoviesUseCase,
-    this._blocGetAnticipatedMoviesUseCase,
     this._blocDelayUseCase,
     this._mapper,
   );
@@ -47,9 +46,9 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
   @override
   void initState() async {
     super.initState();
-    _updateData();
-    _fetchTrendingMovies();
-    _fetchAnticipatedMovies();
+    _updateData(data: _stateData);
+    // _fetchTrendingMovies();
+    // _fetchAnticipatedMovies();
   }
 
   _updateData(
@@ -88,16 +87,26 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
         : _fetchAnticipatedMovies(isLoading: false);
   }
 
+  @override
+  void tabBarRequest(TabState tabState) {
+    if (tabState == TabState.now) {
+      _fetchTrendingMovies();
+    } else if (tabState == TabState.soon) {
+      _fetchAnticipatedMovies();
+    }
+  }
+
   Future<void> _fetchTrendingMovies({bool? isLoading = false}) async {
     _updateData(
-      data: _stateData,
+      //data: _stateData,
       isLoading: true,
       isBottomNavigationActive: false,
     );
     _stateData.copyWith(
       tabState: TabState.now,
     );
-    final listTrendingMovies = await _blocGetTrendingMoviesUseCase();
+    final listTrendingMovies =
+        await _blocGetTrendingMoviesUseCase(MovieType.trending);
     _stateData = _mapper.mapGetListTrendingResponse(
       listTrendingMovies,
       _stateData,
@@ -118,7 +127,8 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
     _stateData.copyWith(
       tabState: TabState.soon,
     );
-    final listAnticipatedMovies = await _blocGetAnticipatedMoviesUseCase();
+    final listAnticipatedMovies =
+        await _blocGetTrendingMoviesUseCase(MovieType.anticipated);
     _stateData = _mapper.mapGetListAnticipatedResponse(
       listAnticipatedMovies,
       _stateData,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/navigation/base_arguments.dart';
 import 'package:presentation/navigation/base_page.dart';
-import 'package:presentation/screen/home/widgets/movie_model.dart';
+import 'package:presentation/screen/home/model/movie_model.dart';
 
 class MovieDetailsScreenArguments extends BaseArguments {
   final MovieModel movieInfo;

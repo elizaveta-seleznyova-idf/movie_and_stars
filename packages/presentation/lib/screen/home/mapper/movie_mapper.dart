@@ -1,18 +1,18 @@
-import 'package:domain/model/movie_anticipated.dart';
-import 'package:domain/model/movie_trending.dart';
+import 'package:domain/model/movie_response.dart';
 import 'package:presentation/screen/home/home_data.dart';
-import 'package:presentation/screen/home/widgets/movie_model.dart';
+import 'package:presentation/screen/home/model/movie_model.dart';
 import 'package:presentation/utils/image_path.dart';
 import 'package:presentation/utils/extensions/extention_int.dart';
+import 'package:presentation/utils/extensions/extention_string.dart';
 
 abstract class MapperMovie {
   HomeData mapGetListTrendingResponse(
-    List<MovieTrendingResponse> listMovies,
+    List<MovieResponse> listMovies,
     HomeData data,
   );
 
   HomeData mapGetListAnticipatedResponse(
-    List<MovieAnticipatedResponse> listMovies,
+    List<MovieResponse> listMovies,
     HomeData data,
   );
 
@@ -22,7 +22,7 @@ abstract class MapperMovie {
 class _MapperImpl implements MapperMovie {
   @override
   HomeData mapGetListTrendingResponse(
-    List<MovieTrendingResponse> listMovies,
+    List<MovieResponse> listMovies,
     HomeData data,
   ) {
     final list = listMovies
@@ -31,7 +31,7 @@ class _MapperImpl implements MapperMovie {
               images: '${ImagesPath.imageUrl}${e.movie.image}',
               time: e.movie.runtime.getTimeString(),
               rating: (e.movie.rating ?? 0) / 2,
-              genres: e.movie.genres ?? [],
+              genres: e.movie.genres?.first.capitalize() ?? '',
               certifications: e.movie.certification ?? '',
             ))
         .toList();
@@ -40,7 +40,7 @@ class _MapperImpl implements MapperMovie {
 
   @override
   HomeData mapGetListAnticipatedResponse(
-    List<MovieAnticipatedResponse> listMovies,
+    List<MovieResponse> listMovies,
     HomeData data,
   ) {
     final list = listMovies
@@ -49,7 +49,7 @@ class _MapperImpl implements MapperMovie {
               images: '${ImagesPath.imageUrl}${e.movie.image}',
               time: e.movie.runtime.getTimeString(),
               rating: (e.movie.rating ?? 0) / 2,
-              genres: e.movie.genres ?? [],
+              genres: e.movie.genres?.first.capitalize() ?? '',
               certifications: e.movie.certification ?? '',
             ))
         .toList();
