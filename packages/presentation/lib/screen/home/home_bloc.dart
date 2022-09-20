@@ -26,8 +26,6 @@ abstract class HomeBloc extends Bloc<HomeScreenArguments, HomeData> {
   void navigateToDetailsPage(MovieModel movie);
 
   Future<void> refresh();
-
-//Future<void> tabBarRequest(TabState tabState);
 }
 
 class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
@@ -89,15 +87,6 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
         ? _fetchTrendingMovies(isLoading: false)
         : _fetchAnticipatedMovies(isLoading: false);
   }
-
-  // @override
-  // Future<void> tabBarRequest(TabState tabState) async {
-  //   if (tabState == TabState.now) {
-  //     _fetchTrendingMovies();
-  //   } else if (tabState == TabState.soon) {
-  //     _fetchAnticipatedMovies();
-  //   }
-  // }
 
   Future<void> _fetchTrendingMovies({bool? isLoading = false}) async {
     _updateData(
