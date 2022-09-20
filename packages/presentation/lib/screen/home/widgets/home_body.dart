@@ -19,47 +19,64 @@ class HomeBody extends StatefulWidget {
   State<HomeBody> createState() => _HomeBodyState();
 }
 
-class _HomeBodyState extends State<HomeBody> {
+class _HomeBodyState extends State<HomeBody>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Column(
-        children: <Widget>[
-          Container(
-            height: 40,
-            margin: const EdgeInsets.only(
-              top: 10,
-              right: 18,
-              left: 17,
-              bottom: 24,
+    return Column(
+      children: <Widget>[
+        Container(
+          height: 40,
+          margin: const EdgeInsets.only(
+            top: 10,
+            right: 18,
+            left: 17,
+            bottom: 24,
+          ),
+          padding: const EdgeInsets.all(4.0),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: AppColorsDark.borderTabBar,
+              width: 1,
             ),
-            padding: const EdgeInsets.all(4.0),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: AppColorsDark.borderTabBar,
-                width: 1,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: HomeTabBar(
+            bloc: widget.bloc,
+            data: widget.blocData,
+            tabController: _tabController,
+          ),
+        ),
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            children: [
+              HomeGridView(
+                movieData: widget.blocData.trendingMovies,
+                bloc: widget.bloc,
               ),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: const HomeTabBar(),
+              HomeGridView(
+                movieData: widget.blocData.anticipatedMovies,
+                bloc: widget.bloc,
+              ),
+            ],
           ),
-          Expanded(
-            child: TabBarView(
-              children: [
-                HomeGridView(
-                  movieData: widget.blocData.trendingMovies,
-                  blocFunctions: widget.bloc,
-                ),
-                HomeGridView(
-                  movieData: widget.blocData.anticipatedMovies,
-                  blocFunctions: widget.bloc,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

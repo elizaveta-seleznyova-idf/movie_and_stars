@@ -13,20 +13,17 @@ class MovieImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: Image.network(
-        image,
-        fit: BoxFit.fill,
-        width: 167,
+    return Image.network(
+      image,
+      fit: BoxFit.fill,
+      width: 167,
+      height: 250,
+      errorBuilder: (context, exception, stackTrace) => SvgPicture.asset(
+        ImagesPath.noImage,
         height: 250,
-        errorBuilder: (context, exception, stackTrace) => SvgPicture.asset(
-          ImagesPath.noImage,
-          height: 250,
-          width: 167,
-          fit: BoxFit.fill,
-          color: AppColorsDark.unselectedColor,
-        ),
+        width: 167,
+        fit: BoxFit.fill,
+        color: AppColorsDark.unselectedColor,
       ),
     );
   }

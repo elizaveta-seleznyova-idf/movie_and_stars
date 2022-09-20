@@ -49,21 +49,22 @@ class HomeShimmer extends StatelessWidget {
                       shimmerHeight: 250,
                       shimmerWidth: 167,
                     ),
-                    const SizedBox(height: 16),
+                    const Spacer(),
                     const ShimmerContainer(
                       shimmerHeight: 20,
                       shimmerWidth: 120,
                     ),
-                    const SizedBox(height: 7),
+                    const Spacer(),
                     ShimmerContainer(
                       shimmerHeight: 15,
                       shimmerWidth: width / 3,
                     ),
-                    const SizedBox(height: 7),
+                    const Spacer(),
                     ShimmerContainer(
                       shimmerHeight: 10,
                       shimmerWidth: width / 2.5,
                     ),
+                    const Spacer(flex: 2),
                   ],
                 );
               },

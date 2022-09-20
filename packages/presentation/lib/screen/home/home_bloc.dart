@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:domain/use_case/delay_use_case.dart';
 import 'package:domain/use_case/get_anticipated_movies_use_case.dart';
 import 'package:domain/use_case/get_trending_movies_use_case.dart';
@@ -25,6 +26,8 @@ abstract class HomeBloc extends Bloc<HomeScreenArguments, HomeData> {
   void navigateToDetailsPage(MovieModel movie);
 
   Future<void> refresh();
+
+//Future<void> tabBarRequest(TabState tabState);
 }
 
 class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
@@ -47,7 +50,8 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
   void initState() async {
     super.initState();
     _updateData();
-    getInitData();
+    _fetchTrendingMovies();
+    _fetchAnticipatedMovies();
   }
 
   _updateData(
@@ -56,30 +60,6 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
       isBottomNavigationActive: isBottomNavigationActive,
       data: data,
       isLoading: isLoading,
-    );
-  }
-
-  getInitData() async {
-    _updateData(
-      data: _stateData,
-      isLoading: true,
-      isBottomNavigationActive: false,
-    );
-    final listTrendingMovies = await _blocGetTrendingMoviesUseCase();
-    _stateData = _mapper.mapGetListTrendingResponse(
-      listTrendingMovies,
-      _stateData,
-    );
-    final listAnticipatedMovies = await _blocGetAnticipatedMoviesUseCase();
-    _stateData = _mapper.mapGetListAnticipatedResponse(
-      listAnticipatedMovies,
-      _stateData,
-    );
-
-    _updateData(
-      data: _stateData,
-      isLoading: false,
-      isBottomNavigationActive: false,
     );
   }
 
@@ -105,5 +85,59 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
   @override
   Future<void> refresh() async {
     await _blocDelayUseCase();
+    return _stateData.tabState == TabState.now
+        ? _fetchTrendingMovies(isLoading: false)
+        : _fetchAnticipatedMovies(isLoading: false);
+  }
+
+  // @override
+  // Future<void> tabBarRequest(TabState tabState) async {
+  //   if (tabState == TabState.now) {
+  //     _fetchTrendingMovies();
+  //   } else if (tabState == TabState.soon) {
+  //     _fetchAnticipatedMovies();
+  //   }
+  // }
+
+  Future<void> _fetchTrendingMovies({bool? isLoading = false}) async {
+    _updateData(
+      data: _stateData,
+      isLoading: true,
+      isBottomNavigationActive: false,
+    );
+    _stateData.copyWith(
+      tabState: TabState.now,
+    );
+    final listTrendingMovies = await _blocGetTrendingMoviesUseCase();
+    _stateData = _mapper.mapGetListTrendingResponse(
+      listTrendingMovies,
+      _stateData,
+    );
+    _updateData(
+      data: _stateData,
+      isLoading: false,
+      isBottomNavigationActive: false,
+    );
+  }
+
+  Future<void> _fetchAnticipatedMovies({bool? isLoading = false}) async {
+    _updateData(
+      data: _stateData,
+      isLoading: true,
+      isBottomNavigationActive: false,
+    );
+    _stateData.copyWith(
+      tabState: TabState.soon,
+    );
+    final listAnticipatedMovies = await _blocGetAnticipatedMoviesUseCase();
+    _stateData = _mapper.mapGetListAnticipatedResponse(
+      listAnticipatedMovies,
+      _stateData,
+    );
+    _updateData(
+      data: _stateData,
+      isLoading: false,
+      isBottomNavigationActive: false,
+    );
   }
 }

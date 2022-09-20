@@ -1,5 +1,3 @@
-import 'package:domain/model/movie_anticipated.dart';
-import 'package:domain/model/movie_trending.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
@@ -12,12 +10,7 @@ import 'package:presentation/screen/home/widgets/home_body.dart';
 import 'package:presentation/screen/home/widgets/home_shimmer.dart';
 
 class HomeScreenArguments extends BaseArguments {
-  List<MovieTrendingResponse>? trendingMoviesResponse;
-  List<MovieAnticipatedResponse>? anticipatedMoviesResponse;
-
   HomeScreenArguments({
-    this.trendingMoviesResponse,
-    this.anticipatedMoviesResponse,
     Function(dynamic value)? result,
   }) : super(result: result);
 }
@@ -29,7 +22,8 @@ class HomeScreen extends StatefulWidget {
 
   static const _routeName = '/HomeScreen';
 
-  static BasePage page(HomeScreenArguments arguments) => BasePage(
+  static BasePage page(HomeScreenArguments arguments) =>
+      BasePage(
         key: const ValueKey(_routeName),
         name: _routeName,
         builder: (context) => const HomeScreen(),
