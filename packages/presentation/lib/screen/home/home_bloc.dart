@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:domain/enum/movie_type.dart';
-import 'package:domain/use_case/delay_use_case.dart';
 import 'package:domain/use_case/get_movies_use_case.dart';
 import 'package:presentation/base/bloc.dart';
 import 'package:presentation/screen/home/enum/tab_state.dart';
@@ -13,12 +12,10 @@ import 'package:presentation/screen/movie_details/movie_details_screen.dart';
 abstract class HomeBloc extends Bloc<HomeScreenArguments, HomeData> {
   factory HomeBloc(
     GetMoviesUseCase getTrendingMoviesUseCase,
-    DelayUseCase delayUseCase,
     MapperMovie mapper,
   ) =>
       HomeBlocImpl(
         getTrendingMoviesUseCase,
-        delayUseCase,
         mapper,
       );
 
@@ -32,14 +29,12 @@ abstract class HomeBloc extends Bloc<HomeScreenArguments, HomeData> {
 class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
     implements HomeBloc {
   final GetMoviesUseCase _blocGetTrendingMoviesUseCase;
-  final DelayUseCase _blocDelayUseCase;
   final MapperMovie _mapper;
 
   HomeData _stateData = HomeData.init();
 
   HomeBlocImpl(
     this._blocGetTrendingMoviesUseCase,
-    this._blocDelayUseCase,
     this._mapper,
   );
 
@@ -82,10 +77,9 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
 
   @override
   Future<void> refresh() async {
-    await _blocDelayUseCase();
     return _stateData.tabState == TabState.now
-        ? _fetchTrendingMovies(isLoading: false)
-        : _fetchAnticipatedMovies(isLoading: false);
+        ? _fetchTrendingMovies()
+        : _fetchAnticipatedMovies();
   }
 
   @override
@@ -97,9 +91,9 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
     }
   }
 
-  Future<void> _fetchTrendingMovies({bool? isLoading = false}) async {
+  Future<void> _fetchTrendingMovies() async {
     _updateData(
-      //data: _stateData,
+      data: _stateData,
       isLoading: true,
       isBottomNavigationActive: false,
     );
@@ -119,7 +113,7 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
     );
   }
 
-  Future<void> _fetchAnticipatedMovies({bool? isLoading = false}) async {
+  Future<void> _fetchAnticipatedMovies() async {
     _updateData(
       data: _stateData,
       isLoading: true,

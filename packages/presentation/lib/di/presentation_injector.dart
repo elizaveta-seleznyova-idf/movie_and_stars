@@ -28,7 +28,6 @@ void _initBlocModule() {
   GetIt.I.registerFactory<HomeBloc>(
     () => HomeBloc(
       GetIt.I.get<GetMoviesUseCase>(),
-      GetIt.I.get<DelayUseCase>(),
       GetIt.I.get<MapperMovie>(),
     ),
   );

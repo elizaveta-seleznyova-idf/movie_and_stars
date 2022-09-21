@@ -1,3 +1,4 @@
+import 'package:domain/di/data_model.dart';
 import 'package:domain/enum/movie_type.dart';
 import 'package:domain/model/movie_response.dart';
 import 'package:domain/repository/base_repository.dart';
@@ -17,6 +18,12 @@ class GetMoviesUseCase
         ? await _repository.getDataTrending()
         : await _repository.getDataAnticipated();
 
+    void addToList(GetDataResponse responseWithItem) {
+      jsonMovies.addAll(
+        responseWithItem.body.map((e) => MovieResponse.fromJson(e)),
+      );
+    }
+
     final paginationCheck = int.parse(response.headers[C.pagination][0]);
     if (paginationCheck >= 5) {
       int itemCount = 50;
@@ -25,15 +32,12 @@ class GetMoviesUseCase
         final responseWithItem = await _repository.getDataTrending(
           itemCount: itemCount,
         );
-        jsonMovies.addAll(
-          responseWithItem.body.map((e) => MovieResponse.fromJson(e)),
-        );
+        addToList(responseWithItem);
       } else if (type == MovieType.anticipated) {
         final responseWithItem = await _repository.getDataAnticipated(
           itemCount: itemCount,
         );
-        jsonMovies.addAll(
-            responseWithItem.body.map((e) => MovieResponse.fromJson(e)));
+        addToList(responseWithItem);
       }
     } else {
       final itemCount = paginationCheck;
@@ -42,17 +46,15 @@ class GetMoviesUseCase
         final responseWithItem = await _repository.getDataTrending(
           itemCount: itemCount,
         );
-        jsonMovies.addAll(
-          responseWithItem.body.map((e) => MovieResponse.fromJson(e)),
-        );
+        addToList(responseWithItem);
       } else if (type == MovieType.anticipated) {
         final responseWithItem = await _repository.getDataAnticipated(
           itemCount: itemCount,
         );
-        jsonMovies.addAll(
-            responseWithItem.body.map((e) => MovieResponse.fromJson(e)));
+        addToList(responseWithItem);
       }
     }
+
     return jsonMovies;
   }
 }
