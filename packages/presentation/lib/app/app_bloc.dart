@@ -98,6 +98,7 @@ class _AppBloc extends BlocImpl implements AppBloc {
   BasePage? _currentPage() => _appData.pages.lastOrNull;
 
   void _updateData() {
+    _appData.isButtonNavBarActive = _currentPage()!.isButtonNavBarActive;
     super.handleData(data: _appData);
   }
 }

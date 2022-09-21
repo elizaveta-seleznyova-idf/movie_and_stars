@@ -2,22 +2,23 @@ class BlocData<D> {
   bool isLoading;
   D? data;
 
-  BlocData(
-    this.isLoading,
-    this.data,
-  );
+  BlocData({
+    required this.isLoading,
+    required this.data,
+  });
 
   factory BlocData.init() => BlocData<D>(
-        false,
-        null,
+        isLoading: false,
+        data: null,
       );
 
   BlocData<D> copy() => BlocData<D>(
-        isLoading,
-        data,
+        isLoading: isLoading,
+        data: data,
       );
 
   void updateParams(
+    bool? isBottomNavigationActive,
     bool? isLoading,
     D? data,
   ) {

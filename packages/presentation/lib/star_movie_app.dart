@@ -4,6 +4,7 @@ import 'package:presentation/app/data/app_data.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
 import 'package:presentation/config/theme/app_colors.dart';
+import 'package:presentation/screen/app_bottom_navigation_bar.dart';
 
 class StarMovieApp extends StatefulWidget {
   const StarMovieApp({Key? key}) : super(key: key);
@@ -32,7 +33,7 @@ class _StarMovieAppState extends BlocScreenState<StatefulWidget, AppBloc> {
         builder: (context, result) {
           final blocData = result.data;
           final appData = blocData?.data;
-          if (appData is AppData) {
+          if (appData is AppData && blocData != null) {
             return Scaffold(
               body: Navigator(
                 onPopPage: (Route<dynamic> route, dynamic result) {
@@ -41,6 +42,9 @@ class _StarMovieAppState extends BlocScreenState<StatefulWidget, AppBloc> {
                 },
                 pages: appData.pages.toList(),
               ),
+              bottomNavigationBar: appData.isButtonNavBarActive
+                  ? const AppBottomNavigationBar()
+                  : const SizedBox(),
             );
           }
           return Container();
