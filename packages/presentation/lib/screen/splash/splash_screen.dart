@@ -4,6 +4,7 @@ import 'package:presentation/base/bloc_screen.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/navigation/base_page.dart';
 import 'package:presentation/screen/splash/splash_bloc.dart';
+import 'package:presentation/utils/image_path.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -38,7 +39,7 @@ class _SplashScreenState extends BlocScreenState<SplashScreen, SplashBloc> {
         ),
         child: Center(
           child: SvgPicture.asset(
-            'assets/splash_image.svg',
+            ImagesPath.splashScreen,
             semanticsLabel: 'Splash Image',
           ),
         ),
