@@ -1,13 +1,13 @@
-import 'package:domain/di/data_model.dart';
 import 'package:domain/enum/movie_type.dart';
+import 'package:domain/model/data_model.dart';
 import 'package:domain/model/movie_response.dart';
-import 'package:domain/repository/base_repository.dart';
+import 'package:domain/repository/general_repository.dart';
 import 'package:domain/use_case/use_case.dart';
 import 'package:domain/utils/const.dart';
 
 class GetMoviesUseCase
     implements UseCaseParams<MovieType, Future<List<MovieResponse>>> {
-  final NetworkRepository _repository;
+  final TRAKTRepository _repository;
 
   GetMoviesUseCase(this._repository);
 

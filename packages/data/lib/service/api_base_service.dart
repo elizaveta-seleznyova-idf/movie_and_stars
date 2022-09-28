@@ -7,6 +7,7 @@ abstract class ApiBaseService<SP extends ServicePayload> {
     Map<String, dynamic> queryParameters,
     SP? payload,
     Options options,
+    bool isTrakt = true,
   });
 
   Future<Response<R>> post<R>(
@@ -14,13 +15,15 @@ abstract class ApiBaseService<SP extends ServicePayload> {
     dynamic data,
     Map<String, dynamic> queryParameters,
     SP? payload,
+    bool isTrakt = true,
   });
 }
 
 class ApiServiceImpl implements ApiBaseService<DioServicePayload> {
-  final Dio _dio;
+  final Dio _dioTRAKT;
+  final Dio _dioTMDB;
 
-  ApiServiceImpl(this._dio);
+  ApiServiceImpl(this._dioTRAKT, this._dioTMDB);
 
   @override
   Future<Response<R>> get<R>(
@@ -28,14 +31,23 @@ class ApiServiceImpl implements ApiBaseService<DioServicePayload> {
     Map<String, dynamic>? queryParameters,
     DioServicePayload? payload,
     Options? options,
+    bool isTrakt = true,
   }) async {
-    final response = _dio.get<R>(
-      path,
-      queryParameters: queryParameters,
-      options: payload?.options,
-      cancelToken: payload?.cancelToken,
-      onReceiveProgress: payload?.onReceiveProgress,
-    );
+    final response = isTrakt
+        ? _dioTRAKT.get<R>(
+            path,
+            queryParameters: queryParameters,
+            options: payload?.options,
+            cancelToken: payload?.cancelToken,
+            onReceiveProgress: payload?.onReceiveProgress,
+          )
+        : _dioTMDB.get<R>(
+            path,
+            queryParameters: queryParameters,
+            options: payload?.options,
+            cancelToken: payload?.cancelToken,
+            onReceiveProgress: payload?.onReceiveProgress,
+          );
 
     return response;
   }
@@ -46,16 +58,27 @@ class ApiServiceImpl implements ApiBaseService<DioServicePayload> {
     dynamic data,
     Map<String, dynamic>? queryParameters,
     DioServicePayload? payload,
+    bool isTrakt = true,
   }) async {
-    final response = _dio.post(
-      path,
-      data: data,
-      queryParameters: queryParameters,
-      options: payload?.options,
-      cancelToken: payload?.cancelToken,
-      onSendProgress: payload?.onSendProgress,
-      onReceiveProgress: payload?.onReceiveProgress,
-    );
+    final response = isTrakt
+        ? _dioTRAKT.post(
+            path,
+            data: data,
+            queryParameters: queryParameters,
+            options: payload?.options,
+            cancelToken: payload?.cancelToken,
+            onSendProgress: payload?.onSendProgress,
+            onReceiveProgress: payload?.onReceiveProgress,
+          )
+        : _dioTMDB.post(
+            path,
+            data: data,
+            queryParameters: queryParameters,
+            options: payload?.options,
+            cancelToken: payload?.cancelToken,
+            onSendProgress: payload?.onSendProgress,
+            onReceiveProgress: payload?.onReceiveProgress,
+          );
 
     return response as Future<Response<R>>;
   }

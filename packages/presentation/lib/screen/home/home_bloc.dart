@@ -1,13 +1,14 @@
 import 'dart:async';
+import 'package:collection/collection.dart';
 import 'package:domain/enum/movie_type.dart';
+import 'package:domain/model/movie_response.dart';
 import 'package:domain/use_case/get_movies_use_case.dart';
 import 'package:presentation/base/bloc.dart';
 import 'package:presentation/screen/home/enum/tab_state.dart';
 import 'package:presentation/screen/home/home_data.dart';
 import 'package:presentation/screen/home/home_screen.dart';
 import 'package:presentation/screen/home/mapper/movie_mapper.dart';
-import 'package:presentation/screen/home/model/movie_model.dart';
-import 'package:presentation/screen/movie_details/movie_details_screen.dart';
+import 'package:presentation/screen/movie_details/details_screen.dart';
 
 abstract class HomeBloc extends Bloc<HomeScreenArguments, HomeData> {
   factory HomeBloc(
@@ -19,7 +20,7 @@ abstract class HomeBloc extends Bloc<HomeScreenArguments, HomeData> {
         mapper,
       );
 
-  void navigateToDetailsPage(MovieModel movie);
+  void navigateToDetailsPage(String movieId);
 
   Future<void> refresh();
 
@@ -32,6 +33,7 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
   final MapperMovie _mapper;
 
   HomeData _stateData = HomeData.init();
+  List<MovieResponse>? _movies;
 
   HomeBlocImpl(
     this._blocGetTrendingMoviesUseCase,
@@ -65,14 +67,18 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
   }
 
   @override
-  void navigateToDetailsPage(MovieModel movie) {
-    appNavigator.push(
-      MovieDetailsScreen.page(
-        MovieDetailsScreenArguments(
-          movieInfo: movie,
+  void navigateToDetailsPage(String movieId) {
+    final movie =
+        _movies?.firstWhereOrNull((e) => e.movie.ids?.slug == movieId)?.movie;
+    if (movie != null) {
+      appNavigator.push(
+        DetailsScreen.page(
+          DetailsScreenArguments(
+            movieInfo: movie,
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   @override
@@ -102,6 +108,7 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
     );
     final listTrendingMovies =
         await _blocGetTrendingMoviesUseCase(MovieType.trending);
+    _movies = listTrendingMovies;
     _stateData = _mapper.mapGetListTrendingResponse(
       listTrendingMovies,
       _stateData,
@@ -124,6 +131,7 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
     );
     final listAnticipatedMovies =
         await _blocGetTrendingMoviesUseCase(MovieType.anticipated);
+    _movies = listAnticipatedMovies;
     _stateData = _mapper.mapGetListAnticipatedResponse(
       listAnticipatedMovies,
       _stateData,

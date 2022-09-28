@@ -1,7 +1,7 @@
 class Movie {
   final String? title;
   final int? year;
-  final String? image;
+  final Ids? ids;
   final String? tagline;
   final String? overview;
   final String? released;
@@ -19,32 +19,35 @@ class Movie {
   final List<String>? genres;
   final String? certification;
 
-  Movie(
-      {this.title,
-      this.year,
-      this.image,
-      this.tagline,
-      this.overview,
-      this.released,
-      this.runtime,
-      this.country,
-      this.trailer,
-      this.homepage,
-      this.status,
-      this.rating,
-      this.votes,
-      this.commentCount,
-      this.updatedAt,
-      this.language,
-      this.availableTranslations,
-      this.genres,
-      this.certification});
+  Movie({
+    this.title,
+    this.year,
+    this.ids,
+    this.tagline,
+    this.overview,
+    this.released,
+    this.runtime,
+    this.country,
+    this.trailer,
+    this.homepage,
+    this.status,
+    this.rating,
+    this.votes,
+    this.commentCount,
+    this.updatedAt,
+    this.language,
+    this.availableTranslations,
+    this.genres,
+    this.certification,
+  });
 
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
       title: json['title'],
       year: json['year'],
-      image: json['ids']['imdb'],
+      ids: json['ids'] == null
+          ? null
+          : Ids.fromJson(json['ids'] as Map<String, dynamic>),
       tagline: json['tagline'],
       overview: json['overview'],
       released: json['released'],
@@ -68,7 +71,9 @@ class Movie {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['title'] = title;
     data['year'] = year;
-    data['image']['imdb'] = image;
+    if (ids != null) {
+      data['ids'] = ids!.toJson();
+    }
     data['tagline'] = tagline;
     data['overview'] = overview;
     data['released'] = released;
@@ -85,6 +90,38 @@ class Movie {
     data['available_translations'] = availableTranslations;
     data['genres'] = genres;
     data['certification'] = certification;
+    return data;
+  }
+}
+
+class Ids {
+  final num? trakt;
+  final String? slug;
+  final String? imdb;
+  final num? tmdb;
+
+  Ids({
+    this.trakt,
+    this.slug,
+    this.imdb,
+    this.tmdb,
+  });
+
+  factory Ids.fromJson(Map<String, dynamic> json) {
+    return Ids(
+      trakt: json['trakt'],
+      slug: json['slug'],
+      imdb: json['imdb'],
+      tmdb: json['tmdb'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['trakt'] = trakt;
+    data['slug'] = slug;
+    data['imdb'] = imdb;
+    data['tmdb'] = tmdb;
     return data;
   }
 }

@@ -61,6 +61,7 @@ class _HomeTabBarState extends State<HomeTabBar> {
         ),
         Tab(
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: const <Widget>[
               SizedBox(width: 6),
               Text(

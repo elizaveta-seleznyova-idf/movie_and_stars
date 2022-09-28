@@ -1,10 +1,12 @@
 import 'package:domain/use_case/delay_use_case.dart';
 import 'package:domain/use_case/get_movies_use_case.dart';
+import 'package:domain/use_case/get_people_use_case.dart';
 import 'package:get_it/get_it.dart';
 import 'package:presentation/app/app_bloc.dart';
 import 'package:presentation/navigation/app_navigation.dart';
 import 'package:presentation/screen/home/home_bloc.dart';
 import 'package:presentation/screen/home/mapper/movie_mapper.dart';
+import 'package:presentation/screen/movie_details/details_bloc.dart';
 import 'package:presentation/screen/splash/splash_bloc.dart';
 
 void initPresentationInjector() {
@@ -29,6 +31,11 @@ void _initBlocModule() {
     () => HomeBloc(
       GetIt.I.get<GetMoviesUseCase>(),
       GetIt.I.get<MapperMovie>(),
+    ),
+  );
+  GetIt.I.registerFactory<DetailsBloc>(
+    () => DetailsBloc(
+      GetIt.I.get<GetPeopleUseCase>(),
     ),
   );
 }

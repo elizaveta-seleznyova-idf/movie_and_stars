@@ -20,8 +20,8 @@ class MovieImage extends StatelessWidget {
       height: 250,
       errorBuilder: (context, exception, stackTrace) => SvgPicture.asset(
         ImagesPath.noImage,
-        height: 250,
         width: 167,
+        height: 250,
         fit: BoxFit.fill,
         color: AppColorsDark.unselectedColor,
       ),

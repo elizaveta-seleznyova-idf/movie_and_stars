@@ -1,6 +1,5 @@
-import 'package:data/interceptor/interceptor.dart';
-import 'package:dio/dio.dart';
 import 'package:data/utils/constants.dart';
+import 'package:dio/dio.dart';
 
 Dio dioBuilder({
   required String baseUrl,
@@ -16,9 +15,6 @@ Dio dioBuilder({
   );
 
   final dio = Dio(options);
-  dio.interceptors.addAll([
-    LogInterceptor(requestBody: true, responseBody: true),
-    MovieRequestInterceptor(),
-  ]);
+  dio.interceptors.addAll(interceptor);
   return dio;
 }

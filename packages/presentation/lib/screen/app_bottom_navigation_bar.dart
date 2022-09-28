@@ -30,6 +30,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
         ),
       ),
       child: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         currentIndex: _selectedIndex,
@@ -42,7 +43,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
             ),
             activeIcon: SvgPicture.asset(
               ImagesPath.homeScreen,
-              color: AppColorsDark.selectedBottomNavItem,
+              color: AppColorsDark.selectedItem,
             ),
             label: 'HomePage',
           ),
@@ -53,7 +54,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
             ),
             activeIcon: SvgPicture.asset(
               ImagesPath.ticketScreen,
-              color: AppColorsDark.selectedBottomNavItem,
+              color: AppColorsDark.selectedItem,
             ),
             label: 'TicketsPage',
           ),
@@ -64,7 +65,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
             ),
             activeIcon: SvgPicture.asset(
               ImagesPath.notificationScreen,
-              color: AppColorsDark.selectedBottomNavItem,
+              color: AppColorsDark.selectedItem,
             ),
             label: 'NotificationPage',
           ),
@@ -75,7 +76,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
             ),
             activeIcon: SvgPicture.asset(
               ImagesPath.profileScreen,
-              color: AppColorsDark.selectedBottomNavItem,
+              color: AppColorsDark.selectedItem,
             ),
             label: 'ProfilePage',
           ),
