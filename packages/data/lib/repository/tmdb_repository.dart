@@ -1,4 +1,4 @@
-import 'package:data/service/api_base_service.dart';
+import 'package:data/service/api_service.dart';
 import 'package:data/service/service_payload.dart';
 import 'package:data/utils/api_key_data.dart';
 import 'package:data/utils/constants.dart';

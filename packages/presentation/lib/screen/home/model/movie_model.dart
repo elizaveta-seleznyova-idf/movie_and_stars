@@ -1,12 +1,4 @@
 class MovieModel {
-  final String titles;
-  final String images;
-  final String movieId;
-  final String time;
-  final double rating;
-  final String genres;
-  final String certifications;
-
   const MovieModel({
     required this.titles,
     required this.images,
@@ -16,4 +8,12 @@ class MovieModel {
     required this.genres,
     required this.certifications,
   });
+
+  final String titles;
+  final String images;
+  final String movieId;
+  final String time;
+  final double rating;
+  final String genres;
+  final String certifications;
 }

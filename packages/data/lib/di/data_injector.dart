@@ -2,11 +2,11 @@ import 'package:data/dio/dio_builder.dart';
 import 'package:data/interceptor/interceptor.dart';
 import 'package:data/repository/trakt_repository.dart';
 import 'package:data/repository/tmdb_repository.dart';
-import 'package:data/service/api_base_service.dart';
+import 'package:data/service/api_service.dart';
 import 'package:data/service/service_payload.dart';
 import 'package:data/utils/constants.dart';
 import 'package:dio/dio.dart';
-import 'package:domain/repository/general_repository.dart';
+import 'package:domain/repository/trakt_repository.dart';
 import 'package:domain/repository/tmdb_repository.dart';
 import 'package:get_it/get_it.dart';
 

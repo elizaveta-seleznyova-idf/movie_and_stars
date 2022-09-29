@@ -1,12 +1,4 @@
 class DetailsModel {
-  final String title;
-  final String overview;
-  final String image;
-  final String runTime;
-  final double rating;
-  final List<String> genres;
-  final String certification;
-
   const DetailsModel({
     required this.title,
     required this.overview,
@@ -16,4 +8,12 @@ class DetailsModel {
     required this.genres,
     required this.certification,
   });
+
+  final String title;
+  final String overview;
+  final String image;
+  final String runTime;
+  final double rating;
+  final List<String> genres;
+  final String certification;
 }

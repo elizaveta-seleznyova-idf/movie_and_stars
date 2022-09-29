@@ -14,12 +14,12 @@ import 'package:presentation/screen/movie_details/widgets/details_shimmer.dart';
 import 'package:presentation/screen/movie_details/widgets/details_tab_bar.dart';
 
 class DetailsScreenArguments extends BaseArguments {
-  final Movie movieInfo;
-
   DetailsScreenArguments({
     required this.movieInfo,
     Function(dynamic value)? result,
   }) : super(result: result);
+
+  final Movie movieInfo;
 }
 
 class DetailsScreen extends StatefulWidget {

@@ -37,7 +37,7 @@ class _DetailsMovieImageState extends State<DetailsMovieImage> {
   Widget build(BuildContext context) {
     return Positioned(
       top: Dimens.size180 - currentPosition,
-      right:Dimens.size0,
+      right: Dimens.size0,
       left: Dimens.size0,
       child: Center(
         child: Image.network(
@@ -45,7 +45,12 @@ class _DetailsMovieImageState extends State<DetailsMovieImage> {
           fit: BoxFit.fill,
           width: Dimens.size167,
           height: Dimens.size250,
-          errorBuilder: (context, exception, stackTrace) => SvgPicture.asset(
+          errorBuilder: (
+            context,
+            exception,
+            stackTrace,
+          ) =>
+              SvgPicture.asset(
             ImagesPath.noImage,
             width: Dimens.size167,
             height: Dimens.size250,

@@ -1,24 +1,4 @@
 class Movie {
-  final String? title;
-  final int? year;
-  final Ids? ids;
-  final String? tagline;
-  final String? overview;
-  final String? released;
-  final int? runtime;
-  final String? country;
-  final String? trailer;
-  final String? homepage;
-  final String? status;
-  final double? rating;
-  final int? votes;
-  final int? commentCount;
-  final String? updatedAt;
-  final String? language;
-  final List<String>? availableTranslations;
-  final List<String>? genres;
-  final String? certification;
-
   const Movie({
     this.title,
     this.year,
@@ -40,6 +20,26 @@ class Movie {
     this.genres,
     this.certification,
   });
+
+  final String? title;
+  final int? year;
+  final Ids? ids;
+  final String? tagline;
+  final String? overview;
+  final String? released;
+  final int? runtime;
+  final String? country;
+  final String? trailer;
+  final String? homepage;
+  final String? status;
+  final double? rating;
+  final int? votes;
+  final int? commentCount;
+  final String? updatedAt;
+  final String? language;
+  final List<String>? availableTranslations;
+  final List<String>? genres;
+  final String? certification;
 
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
@@ -95,17 +95,17 @@ class Movie {
 }
 
 class Ids {
-  final int? trakt;
-  final String? slug;
-  final String? imdb;
-  final int? tmdb;
-
   const Ids({
     this.trakt,
     this.slug,
     this.imdb,
     this.tmdb,
   });
+
+  final int? trakt;
+  final String? slug;
+  final String? imdb;
+  final int? tmdb;
 
   factory Ids.fromJson(Map<String, dynamic> json) {
     return Ids(

@@ -1,9 +1,9 @@
-import 'package:data/service/api_base_service.dart';
+import 'package:data/service/api_service.dart';
 import 'package:data/service/service_payload.dart';
 import 'package:data/utils/constants.dart';
 import 'package:domain/model/data_model.dart';
 import 'package:domain/model/people_response.dart';
-import 'package:domain/repository/general_repository.dart';
+import 'package:domain/repository/trakt_repository.dart';
 
 class TRAKTRepositoryImpl implements TRAKTRepository {
   final ApiService<ServicePayload> _apiService;

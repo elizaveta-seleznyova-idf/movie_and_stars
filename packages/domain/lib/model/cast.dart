@@ -1,13 +1,13 @@
 class Cast {
-  final String? character;
-  final List<String>? characters;
-  final Person? person;
-
   const Cast({
     this.character,
     this.characters,
     this.person,
   });
+
+  final String? character;
+  final List<String>? characters;
+  final Person? person;
 
   factory Cast.fromJson(Map<String, dynamic> json) {
     return Cast(
@@ -33,17 +33,6 @@ class Cast {
 }
 
 class Person {
-  final String? name;
-  final CastIds? ids;
-  final SocialIds? socialIds;
-  final String? biography;
-  final String? birthday;
-  final String? death;
-  final String? birthplace;
-  final String? homepage;
-  final String? knownForDepartment;
-  final String? gender;
-
   const Person({
     this.name,
     this.ids,
@@ -56,6 +45,17 @@ class Person {
     this.knownForDepartment,
     this.gender,
   });
+
+  final String? name;
+  final CastIds? ids;
+  final SocialIds? socialIds;
+  final String? biography;
+  final String? birthday;
+  final String? death;
+  final String? birthplace;
+  final String? homepage;
+  final String? knownForDepartment;
+  final String? gender;
 
   factory Person.fromJson(Map<String, dynamic> json) {
     return Person(
@@ -101,12 +101,6 @@ class Person {
 }
 
 class CastIds {
-  final int? trakt;
-  final String? slug;
-  final String? imdb;
-  final int? tmdb;
-  final int? tvrage;
-
   const CastIds({
     this.trakt,
     this.slug,
@@ -114,6 +108,12 @@ class CastIds {
     this.tmdb,
     this.tvrage,
   });
+
+  final int? trakt;
+  final String? slug;
+  final String? imdb;
+  final int? tmdb;
+  final int? tvrage;
 
   factory CastIds.fromJson(Map<String, dynamic> json) {
     return CastIds(
@@ -137,15 +137,15 @@ class CastIds {
 }
 
 class SocialIds {
-  final String? twitter;
-  final String? facebook;
-  final String? instagram;
-
   const SocialIds({
     this.twitter,
     this.facebook,
     this.instagram,
   });
+
+  final String? twitter;
+  final String? facebook;
+  final String? instagram;
 
   factory SocialIds.fromJson(Map<String, dynamic> json) {
     return SocialIds(

@@ -1,9 +1,9 @@
 import 'package:domain/model/cast.dart';
 
 class PeopleResponse {
-  final List<Cast>? cast;
-
   const PeopleResponse(this.cast);
+
+  final List<Cast>? cast;
 
   factory PeopleResponse.fromJson(Map<String, dynamic> json) {
     return PeopleResponse(

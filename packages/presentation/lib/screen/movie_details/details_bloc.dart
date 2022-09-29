@@ -11,16 +11,15 @@ abstract class DetailsBloc extends Bloc<DetailsScreenArguments, DetailsData> {
 
 class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
     implements DetailsBloc {
-  final GetPeopleUseCase _blocGetCast;
-
   DetailsBlocImpl(
     this._blocGetCast,
   );
 
+  final GetPeopleUseCase _blocGetCast;
   DetailsData _stateData = DetailsData.init();
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
   }
 

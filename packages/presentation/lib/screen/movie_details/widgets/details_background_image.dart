@@ -22,7 +22,12 @@ class DetailsBackGroundImage extends StatelessWidget {
           child: Image.network(
             '${ImagesPath.imageUrl}${movie?.ids?.imdb}',
             fit: BoxFit.cover,
-            errorBuilder: (context, exception, stackTrace) => SvgPicture.asset(
+            errorBuilder: (
+              context,
+              exception,
+              stackTrace,
+            ) =>
+                SvgPicture.asset(
               ImagesPath.noImage,
               fit: BoxFit.cover,
               color: AppColorsDark.unselectedColor,

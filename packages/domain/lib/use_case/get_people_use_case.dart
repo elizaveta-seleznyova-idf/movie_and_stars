@@ -2,17 +2,20 @@ import 'package:domain/model/cast.dart';
 import 'package:domain/model/people_and_images_model.dart';
 import 'package:domain/model/people_response.dart';
 import 'package:domain/model/tmdb_response.dart';
-import 'package:domain/repository/general_repository.dart';
 import 'package:domain/repository/tmdb_repository.dart';
+import 'package:domain/repository/trakt_repository.dart';
 import 'package:domain/use_case/use_case.dart';
 import 'package:domain/utils/const.dart';
 
 class GetPeopleUseCase
     extends UseCaseParams<String, Future<List<PeopleAndImagesModel>>> {
+  GetPeopleUseCase(
+    this._generalRepository,
+    this._tMDBRepository,
+  );
+
   final TRAKTRepository _generalRepository;
   final TMDBRepository _tMDBRepository;
-
-  GetPeopleUseCase(this._generalRepository, this._tMDBRepository);
 
   Future<List<TMDBResponse>> getCastImages(List<Cast> cast) async {
     return Future.wait(

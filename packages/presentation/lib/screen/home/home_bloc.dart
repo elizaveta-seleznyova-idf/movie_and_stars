@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:collection/collection.dart';
 import 'package:domain/enum/movie_type.dart';
 import 'package:domain/model/movie_response.dart';
@@ -29,16 +30,16 @@ abstract class HomeBloc extends Bloc<HomeScreenArguments, HomeData> {
 
 class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
     implements HomeBloc {
+  HomeBlocImpl(
+    this._blocGetTrendingMoviesUseCase,
+    this._mapper,
+  );
+
   final GetMoviesUseCase _blocGetTrendingMoviesUseCase;
   final MapperMovie _mapper;
 
   HomeData _stateData = HomeData.init();
   List<MovieResponse>? _movies;
-
-  HomeBlocImpl(
-    this._blocGetTrendingMoviesUseCase,
-    this._mapper,
-  );
 
   @override
   void initState() async {

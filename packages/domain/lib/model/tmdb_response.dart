@@ -1,11 +1,11 @@
 class TMDBResponse {
-  final int? id;
-  final List<Profiles>? profiles;
-
   const TMDBResponse({
     required this.id,
     required this.profiles,
   });
+
+  final int? id;
+  final List<Profiles>? profiles;
 
   factory TMDBResponse.fromJson(Map<String, dynamic> json) {
     final profiles = json['profiles'] as List<dynamic>?;
@@ -26,14 +26,6 @@ class TMDBResponse {
 }
 
 class Profiles {
-  final double aspectRatio;
-  final int height;
-  final dynamic iso6391;
-  final String filePath;
-  final double voteAverage;
-  final int voteCount;
-  final int width;
-
   const Profiles({
     required this.aspectRatio,
     required this.height,
@@ -43,6 +35,14 @@ class Profiles {
     required this.voteCount,
     required this.width,
   });
+
+  final double aspectRatio;
+  final int height;
+  final dynamic iso6391;
+  final String filePath;
+  final double voteAverage;
+  final int voteCount;
+  final int width;
 
   factory Profiles.fromJson(Map<String, dynamic> json) {
     return Profiles(

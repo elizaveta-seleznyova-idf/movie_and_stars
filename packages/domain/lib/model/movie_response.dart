@@ -1,15 +1,15 @@
 import 'package:domain/model/movie.dart';
 
 class MovieResponse {
-  final int? watchers;
-  final int? listCount;
-  final Movie movie;
-
   const MovieResponse(
     this.watchers,
     this.listCount,
     this.movie,
   );
+
+  final int? watchers;
+  final int? listCount;
+  final Movie movie;
 
   factory MovieResponse.fromJson(Map<String, dynamic> json) {
     return MovieResponse(

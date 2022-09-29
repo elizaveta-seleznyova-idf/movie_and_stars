@@ -1,4 +1,4 @@
-import 'package:domain/repository/general_repository.dart';
+import 'package:domain/repository/trakt_repository.dart';
 import 'package:domain/repository/tmdb_repository.dart';
 import 'package:domain/use_case/delay_use_case.dart';
 import 'package:domain/use_case/get_movies_use_case.dart';
