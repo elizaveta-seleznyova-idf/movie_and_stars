@@ -37,6 +37,12 @@ class AppTextStyles {
     fontSize: Dimens.size14,
     fontWeight: FontWeight.w400,
   );
+  static const TextStyle sfProRegularSelected14px = TextStyle(
+    color: AppColorsDark.selectedItem,
+    fontFamily: _textFontFamily,
+    fontSize: Dimens.size14,
+    fontWeight: FontWeight.w400,
+  );
 
   static const TextStyle sfProMedium14px = TextStyle(
     fontFamily: _textFontFamily,

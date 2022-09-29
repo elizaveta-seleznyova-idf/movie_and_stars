@@ -1,5 +1,6 @@
 import 'package:domain/model/movie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/text_style/text_style.dart';
@@ -34,8 +35,8 @@ class DetailsViewWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const Text(
-            'Synopsis',
+          Text(
+            AppLocalizations.of(context)!.synopsis,
             style: AppTextStyles.sfProMedium18px,
           ),
           const SizedBox(height: Dimens.size16),
@@ -49,15 +50,15 @@ class DetailsViewWidget extends StatelessWidget {
           const SizedBox(height: Dimens.size20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
+            children: [
               Text(
-                'Cast & Crew',
+                AppLocalizations.of(context)!.castAndCrew,
                 textAlign: TextAlign.left,
                 style: AppTextStyles.sfProMedium18px,
               ),
               Text(
-                'View All',
-                style: AppTextStyles.sfProMedium18px,
+                AppLocalizations.of(context)!.viewAll,
+                style: AppTextStyles.sfProRegularSelected14px,
               ),
             ],
           ),

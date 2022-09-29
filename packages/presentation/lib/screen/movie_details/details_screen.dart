@@ -12,6 +12,7 @@ import 'package:presentation/screen/movie_details/widgets/details_body.dart';
 import 'package:presentation/screen/movie_details/widgets/details_movie_image.dart';
 import 'package:presentation/screen/movie_details/widgets/details_shimmer.dart';
 import 'package:presentation/screen/movie_details/widgets/details_tab_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetailsScreenArguments extends BaseArguments {
   DetailsScreenArguments({
@@ -124,8 +125,8 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                   ),
                 );
         } else {
-          return const Center(
-            child: Text('Check your network connection!'),
+          return Center(
+            child: Text(AppLocalizations.of(context)!.checkYourInternet),
           );
         }
       },

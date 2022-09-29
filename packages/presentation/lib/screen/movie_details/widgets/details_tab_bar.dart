@@ -1,5 +1,6 @@
 import 'package:domain/model/movie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/text_style/text_style.dart';
@@ -57,9 +58,9 @@ class _DetailsTabBarState extends State<DetailsTabBar>
           height: Dimens.size250,
           color: AppColorsDark.selectedItem,
           child: Column(
-            children: const <Widget>[
+            children: <Widget>[
               Center(
-                child: Text('Reviews'),
+                child: Text(AppLocalizations.of(context)!.reviews),
               )
             ],
           ),
@@ -67,15 +68,15 @@ class _DetailsTabBarState extends State<DetailsTabBar>
       case 2:
         return SizedBox(
           child: Column(
-            children: const <Widget>[
+            children: <Widget>[
               Center(
-                child: Text('ShowTime'),
+                child: Text(AppLocalizations.of(context)!.showtime),
               )
             ],
           ),
         );
     }
-    return const Center(child: Text('WrongText'));
+    return Center(child: Text(AppLocalizations.of(context)!.error));
   }
 
   @override
@@ -115,9 +116,9 @@ class _DetailsTabBarState extends State<DetailsTabBar>
               Tab(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const <Widget>[
+                  children: <Widget>[
                     Text(
-                      'Detail',
+                      AppLocalizations.of(context)!.details,
                       style: AppTextStyles.sfProMedium14px,
                     ),
                   ],
@@ -126,9 +127,9 @@ class _DetailsTabBarState extends State<DetailsTabBar>
               Tab(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const <Widget>[
+                  children: <Widget>[
                     Text(
-                      'Reviews',
+                      AppLocalizations.of(context)!.reviews,
                       style: AppTextStyles.sfProMedium14px,
                     ),
                   ],
@@ -137,9 +138,9 @@ class _DetailsTabBarState extends State<DetailsTabBar>
               Tab(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const <Widget>[
+                  children: <Widget>[
                     Text(
-                      'Showtime',
+                      AppLocalizations.of(context)!.showtime,
                       style: AppTextStyles.sfProMedium14px,
                     ),
                   ],
