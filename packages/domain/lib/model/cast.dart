@@ -3,7 +3,7 @@ class Cast {
   final List<String>? characters;
   final Person? person;
 
-  Cast({
+  const Cast({
     this.character,
     this.characters,
     this.person,
@@ -44,7 +44,7 @@ class Person {
   final String? knownForDepartment;
   final String? gender;
 
-  Person({
+  const Person({
     this.name,
     this.ids,
     this.socialIds,
@@ -107,7 +107,7 @@ class CastIds {
   final int? tmdb;
   final int? tvrage;
 
-  CastIds({
+  const CastIds({
     this.trakt,
     this.slug,
     this.imdb,
@@ -141,7 +141,7 @@ class SocialIds {
   final String? facebook;
   final String? instagram;
 
-  SocialIds({
+  const SocialIds({
     this.twitter,
     this.facebook,
     this.instagram,

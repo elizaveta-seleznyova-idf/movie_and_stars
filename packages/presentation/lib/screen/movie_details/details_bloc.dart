@@ -4,10 +4,7 @@ import 'package:presentation/screen/movie_details/details_data.dart';
 import 'package:presentation/screen/movie_details/details_screen.dart';
 
 abstract class DetailsBloc extends Bloc<DetailsScreenArguments, DetailsData> {
-  factory DetailsBloc(
-    GetPeopleUseCase getPeopleUseCase,
-  ) =>
-      DetailsBlocImpl(
+  factory DetailsBloc(GetPeopleUseCase getPeopleUseCase) => DetailsBlocImpl(
         getPeopleUseCase,
       );
 }
@@ -23,7 +20,7 @@ class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
   DetailsData _stateData = DetailsData.init();
 
   @override
-  void initState() async {
+  void initState(){
     super.initState();
   }
 

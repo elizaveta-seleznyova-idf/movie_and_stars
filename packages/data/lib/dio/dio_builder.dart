@@ -8,10 +8,10 @@ Dio dioBuilder({
 }) {
   final options = BaseOptions(
     baseUrl: baseUrl,
-    connectTimeout: D.connectTimeout,
-    receiveTimeout: D.receiveTimeout,
-    sendTimeout: D.sendTimeout,
-    contentType: D.applicationJson,
+    connectTimeout: DioConstants.connectTimeout,
+    receiveTimeout: DioConstants.receiveTimeout,
+    sendTimeout: DioConstants.sendTimeout,
+    contentType: DioConstants.applicationJson,
   );
 
   final dio = Dio(options);

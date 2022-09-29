@@ -23,7 +23,7 @@ class DetailsScreenArguments extends BaseArguments {
 }
 
 class DetailsScreen extends StatefulWidget {
-  const DetailsScreen({Key? key}) : super(key: key);
+  const DetailsScreen({super.key});
 
   static const _routeName = '/MovieDetailsScreen';
 
@@ -73,7 +73,7 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                         controller: scrollController,
                         slivers: [
                           SliverAppBar(
-                            elevation: 0,
+                            elevation: Dimens.size0,
                             backgroundColor: Colors.transparent,
                             stretch: true,
                             pinned: true,

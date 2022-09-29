@@ -15,7 +15,7 @@ class GetPeopleUseCase
   GetPeopleUseCase(this._generalRepository, this._tMDBRepository);
 
   Future<List<TMDBResponse>> getCastImages(List<Cast> cast) async {
-    return await Future.wait(
+    return Future.wait(
       cast.map(
         (e) => _tMDBRepository.getCastImage(tMDBId: e.person?.ids?.tmdb),
       ),
@@ -47,7 +47,7 @@ class GetPeopleUseCase
         return PeopleAndImagesModel(
           characters: people.characters?.first,
           person: people.person?.name,
-          image: '${C.tMDBImageUrl}'
+          image: '${UrlConstants.tMDBImageUrl}'
               '${e.profiles?.first.filePath}',
         );
       },

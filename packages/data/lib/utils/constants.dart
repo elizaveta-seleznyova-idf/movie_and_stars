@@ -1,4 +1,4 @@
-abstract class D {
+abstract class DioConstants {
   static const sendTimeout = 6000;
   static const receiveTimeout = 6000;
   static const connectTimeout = 6000;
@@ -11,7 +11,7 @@ abstract class D {
   static const tmdbInterceptor = 'TMDBInterceptor';
 }
 
-abstract class Q {
+abstract class QueryParametersConstants {
   static const extended = 'extended';
   static const full = 'full';
   static const limit = 'limit';
@@ -19,7 +19,7 @@ abstract class Q {
   static const apiKey = 'api_key';
 }
 
-abstract class C {
+abstract class UrlConstants {
   static const baseUrl = 'https://api.trakt.tv/';
   static const tMDBUrl = 'https://api.themoviedb.org/3/';
   static const movieUrl = 'movies/';
@@ -29,10 +29,10 @@ abstract class C {
   static const peopleUrl = '/people';
   static const personUrl = '/person';
   static const imagesUrl = '/images';
-  static const trendingFullUrl = C.movieUrl + C.trendingUrl;
-  static const anticipatedFullUrl = C.movieUrl + C.anticipatedUrl;
-  static const summaryFullUrl = C.movieUrl + C.summaryUrl;
-  static const peopleFullUrl = C.movieUrl + C.peopleUrl;
+  static const trendingFullUrl = UrlConstants.movieUrl + UrlConstants.trendingUrl;
+  static const anticipatedFullUrl = UrlConstants.movieUrl + UrlConstants.anticipatedUrl;
+  static const summaryFullUrl = UrlConstants.movieUrl + UrlConstants.summaryUrl;
+  static const peopleFullUrl = UrlConstants.movieUrl + UrlConstants.peopleUrl;
 
   static const pagination = 'x-pagination-page-count';
 }

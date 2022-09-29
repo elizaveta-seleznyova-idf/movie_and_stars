@@ -18,11 +18,11 @@ void initDataInjector() {
 void _initApiModule() {
   GetIt.I.registerSingleton<Interceptor>(
     RequestInterceptorTRAKT(),
-    instanceName: D.traktInterceptor,
+    instanceName: DioConstants.traktInterceptor,
   );
   GetIt.I.registerSingleton<Interceptor>(
     RequestInterceptorTMDB(),
-    instanceName: D.tmdbInterceptor,
+    instanceName: DioConstants.tmdbInterceptor,
   );
   GetIt.I.registerSingleton<Dio>(
     dioBuilder(
@@ -31,11 +31,11 @@ void _initApiModule() {
           requestBody: true,
           responseBody: true,
         ),
-        GetIt.instance.get(instanceName: D.traktInterceptor),
+        GetIt.instance.get(instanceName: DioConstants.traktInterceptor),
       ],
-      baseUrl: C.baseUrl,
+      baseUrl: UrlConstants.baseUrl,
     ),
-    instanceName: D.traktDio,
+    instanceName: DioConstants.traktDio,
   );
   GetIt.I.registerSingleton<Dio>(
     dioBuilder(
@@ -44,26 +44,26 @@ void _initApiModule() {
           requestBody: true,
           responseBody: true,
         ),
-        GetIt.instance.get(instanceName: D.tmdbInterceptor),
+        GetIt.instance.get(instanceName: DioConstants.tmdbInterceptor),
       ],
-      baseUrl: C.tMDBUrl,
+      baseUrl: UrlConstants.tMDBUrl,
     ),
-    instanceName: D.tmdbDio,
+    instanceName: DioConstants.tmdbDio,
   );
-  GetIt.I.registerSingleton<ApiBaseService<ServicePayload>>(
+  GetIt.I.registerSingleton<ApiService<ServicePayload>>(
     ApiServiceImpl(
-      GetIt.I.get(instanceName: D.traktDio),
-      GetIt.I.get(instanceName: D.tmdbDio),
+      GetIt.I.get(instanceName: DioConstants.traktDio),
+      GetIt.I.get(instanceName: DioConstants.tmdbDio),
     ),
   );
 }
 
 void _initRepositoryModule() {
   GetIt.I.registerSingleton<TRAKTRepository>(
-    TRAKTRepositoryImpl(GetIt.I.get<ApiBaseService>()),
+    TRAKTRepositoryImpl(GetIt.I.get<ApiService>()),
   );
 
   GetIt.I.registerSingleton<TMDBRepository>(
-    TMDBRepositoryImpl(GetIt.I.get<ApiBaseService>()),
+    TMDBRepositoryImpl(GetIt.I.get<ApiService>()),
   );
 }

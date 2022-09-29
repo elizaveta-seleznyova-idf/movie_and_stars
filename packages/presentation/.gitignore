@@ -28,3 +28,4 @@ migrate_working_dir/
 .dart_tool/
 .packages
 build/
+/packages/presentation/lib/utils/hidden_api_key.dart

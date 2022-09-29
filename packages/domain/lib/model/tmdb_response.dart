@@ -1,8 +1,8 @@
 class TMDBResponse {
-  int? id;
-  List<Profiles>? profiles;
+  final int? id;
+  final List<Profiles>? profiles;
 
-  TMDBResponse({
+  const TMDBResponse({
     required this.id,
     required this.profiles,
   });
@@ -26,15 +26,15 @@ class TMDBResponse {
 }
 
 class Profiles {
-  double aspectRatio;
-  int height;
-  dynamic iso6391;
-  String filePath;
-  double voteAverage;
-  int voteCount;
-  int width;
+  final double aspectRatio;
+  final int height;
+  final dynamic iso6391;
+  final String filePath;
+  final double voteAverage;
+  final int voteCount;
+  final int width;
 
-  Profiles({
+  const Profiles({
     required this.aspectRatio,
     required this.height,
     required this.iso6391,

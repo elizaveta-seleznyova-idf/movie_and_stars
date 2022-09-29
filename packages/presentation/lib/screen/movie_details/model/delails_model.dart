@@ -7,7 +7,7 @@ class DetailsModel {
   final List<String> genres;
   final String certification;
 
-  DetailsModel({
+  const DetailsModel({
     required this.title,
     required this.overview,
     required this.image,

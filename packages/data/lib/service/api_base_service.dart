@@ -1,7 +1,7 @@
 import 'package:data/service/service_payload.dart';
 import 'package:dio/dio.dart';
 
-abstract class ApiBaseService<SP extends ServicePayload> {
+abstract class ApiService<SP extends ServicePayload> {
   Future<Response<R>> get<R>(
     String path, {
     Map<String, dynamic> queryParameters,
@@ -19,11 +19,11 @@ abstract class ApiBaseService<SP extends ServicePayload> {
   });
 }
 
-class ApiServiceImpl implements ApiBaseService<DioServicePayload> {
+class ApiServiceImpl implements ApiService<DioServicePayload> {
   final Dio _dioTRAKT;
   final Dio _dioTMDB;
 
-  ApiServiceImpl(this._dioTRAKT, this._dioTMDB);
+  const ApiServiceImpl(this._dioTRAKT, this._dioTMDB);
 
   @override
   Future<Response<R>> get<R>(

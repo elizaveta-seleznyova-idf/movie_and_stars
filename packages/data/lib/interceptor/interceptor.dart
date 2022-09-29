@@ -8,7 +8,7 @@ class RequestInterceptorTRAKT extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) {
-    options.headers[D.traktApiKey] = ApiKeyData.apiKeyData;
+    options.headers[DioConstants.traktApiKey] = ApiKeyData.apiKeyData;
     return super.onRequest(options, handler);
   }
 }
@@ -19,7 +19,7 @@ class RequestInterceptorTMDB extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) {
-    options.queryParameters.addAll({Q.apiKey: ApiKeyData.apiKeyTMDB});
+    options.queryParameters.addAll({QueryParametersConstants.apiKey: ApiKeyData.apiKeyTMDB});
     return super.onRequest(options, handler);
   }
 }

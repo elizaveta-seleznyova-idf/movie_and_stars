@@ -5,7 +5,7 @@ import 'package:presentation/screen/home/widgets/shimmer_container.dart';
 import 'package:shimmer/shimmer.dart';
 
 class DetailsShimmer extends StatelessWidget {
-  const DetailsShimmer({Key? key}) : super(key: key);
+  const DetailsShimmer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class DetailsShimmer extends StatelessWidget {
             ),
             const ShimmerContainer(
               shimmerHeight: Dimens.size150,
-              shimmerWidth: 180,
+              shimmerWidth: Dimens.size180,
             ),
             const SizedBox(
               height: Dimens.size32,

@@ -8,7 +8,7 @@ import 'package:presentation/screen/movie_details/details_data.dart';
 import 'package:presentation/utils/extensions/extention_int.dart';
 import 'package:presentation/utils/extensions/extention_list.dart';
 
-class DetailsBody extends StatefulWidget {
+class DetailsBody extends StatelessWidget {
   const DetailsBody({
     Key? key,
     required this.data,
@@ -21,13 +21,8 @@ class DetailsBody extends StatefulWidget {
   final DetailsBloc bloc;
 
   @override
-  State<DetailsBody> createState() => _DetailsBodyState();
-}
-
-class _DetailsBodyState extends State<DetailsBody> {
-  @override
   Widget build(BuildContext context) {
-    final movieInformation = widget.blocData.detailsAboutMovie;
+    final movieInformation = blocData.detailsAboutMovie;
     final title = movieInformation?.title ?? '';
     final time = movieInformation?.runtime.getTimeString();
     final timeAndCertification = '$time | ${movieInformation?.certification}';

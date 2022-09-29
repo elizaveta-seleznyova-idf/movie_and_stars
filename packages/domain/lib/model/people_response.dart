@@ -3,7 +3,7 @@ import 'package:domain/model/cast.dart';
 class PeopleResponse {
   final List<Cast>? cast;
 
-  PeopleResponse(this.cast);
+  const PeopleResponse(this.cast);
 
   factory PeopleResponse.fromJson(Map<String, dynamic> json) {
     return PeopleResponse(

@@ -62,7 +62,7 @@ class DetailsViewWidget extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 280,
+            height: Dimens.size280,
             child: MovieListActors(
               blocData: blocData,
             ),

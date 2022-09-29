@@ -54,7 +54,7 @@ class _DetailsTabBarState extends State<DetailsTabBar>
         );
       case 1:
         return Container(
-          height: 1000,
+          height: Dimens.size250,
           color: AppColorsDark.selectedItem,
           child: Column(
             children: const <Widget>[
@@ -100,7 +100,7 @@ class _DetailsTabBarState extends State<DetailsTabBar>
           decoration: BoxDecoration(
             border: Border.all(
               color: AppColorsDark.borderTabBar,
-              width: 1,
+              width: Dimens.size1,
             ),
             borderRadius: BorderRadius.circular(Dimens.size20),
           ),

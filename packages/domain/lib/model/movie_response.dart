@@ -5,7 +5,11 @@ class MovieResponse {
   final int? listCount;
   final Movie movie;
 
-  MovieResponse(this.watchers, this.listCount, this.movie,);
+  const MovieResponse(
+    this.watchers,
+    this.listCount,
+    this.movie,
+  );
 
   factory MovieResponse.fromJson(Map<String, dynamic> json) {
     return MovieResponse(
@@ -15,8 +19,7 @@ class MovieResponse {
     );
   }
 
-  Map<String, dynamic> toJson(MovieResponse instance) =>
-      <String, dynamic>{
+  Map<String, dynamic> toJson(MovieResponse instance) => <String, dynamic>{
         'watchers': instance.watchers,
         'listCount': instance.listCount,
         'movie': instance.movie.toJson(),

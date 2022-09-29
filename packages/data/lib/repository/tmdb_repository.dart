@@ -6,15 +6,15 @@ import 'package:domain/model/tmdb_response.dart';
 import 'package:domain/repository/tmdb_repository.dart';
 
 class TMDBRepositoryImpl implements TMDBRepository {
-  final ApiBaseService<ServicePayload> _apiService;
+  final ApiService<ServicePayload> _apiService;
 
-  TMDBRepositoryImpl(this._apiService);
+  const TMDBRepositoryImpl(this._apiService);
 
   @override
   Future<TMDBResponse> getCastImage({required int? tMDBId}) async {
     final response = await _apiService.get(
-      '${C.personUrl}/$tMDBId${C.imagesUrl}',
-      queryParameters: {Q.apiKey: ApiKeyData.apiKeyTMDB},
+      '${UrlConstants.personUrl}/$tMDBId${UrlConstants.imagesUrl}',
+      queryParameters: {QueryParametersConstants.apiKey: ApiKeyData.apiKeyTMDB},
       isTrakt: false,
     );
     return TMDBResponse.fromJson(response.data);

@@ -19,7 +19,7 @@ class Movie {
   final List<String>? genres;
   final String? certification;
 
-  Movie({
+  const Movie({
     this.title,
     this.year,
     this.ids,
@@ -95,12 +95,12 @@ class Movie {
 }
 
 class Ids {
-  final num? trakt;
+  final int? trakt;
   final String? slug;
   final String? imdb;
-  final num? tmdb;
+  final int? tmdb;
 
-  Ids({
+  const Ids({
     this.trakt,
     this.slug,
     this.imdb,

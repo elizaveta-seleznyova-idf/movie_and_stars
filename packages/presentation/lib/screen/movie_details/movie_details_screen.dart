@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/navigation/base_arguments.dart';
 import 'package:presentation/navigation/base_page.dart';
@@ -14,7 +15,7 @@ class MovieDetailsScreenArguments extends BaseArguments {
 }
 
 class MovieDetailsScreen extends StatefulWidget {
-  const MovieDetailsScreen({Key? key}) : super(key: key);
+  const MovieDetailsScreen({super.key});
 
   static const _routeName = '/MovieDetailsScreen';
 
@@ -37,16 +38,16 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColorsDark.primaryColorDark,
-        elevation: 0,
+        elevation: Dimens.size0,
         actions: <Widget>[
           GestureDetector(
             onTap: () {},
             child: const Icon(
               Icons.shortcut,
-              size: 35.0,
+              size: Dimens.size35,
             ),
           ),
-          const SizedBox(width: 18)
+          const SizedBox(width: Dimens.size18)
         ],
       ),
       body: const Center(

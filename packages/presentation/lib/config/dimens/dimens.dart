@@ -2,6 +2,8 @@ class Dimens {
   Dimens._();
 
   ///size
+  static const double size0 = 0;
+  static const double size1 = 1;
   static const double size2 = 2;
   static const double size3 = 3;
   static const double size4 = 4;
@@ -38,6 +40,10 @@ class Dimens {
   static const double size100 = 100;
   static const double size115 = 115;
   static const double size150 = 150;
+  static const double size167 = 167;
+  static const double size180 = 180;
   static const double size200 = 200;
   static const double size262 = 262;
+  static const double size250 = 250;
+  static const double size280 = 280;
 }

@@ -5,19 +5,19 @@ import 'package:domain/di/data_model.dart';
 import 'package:domain/repository/base_repository.dart';
 
 class NetworkRepositoryImpl implements NetworkRepository {
-  final ApiBaseService<ServicePayload> _apiService;
+  final ApiService<ServicePayload> _apiService;
 
-  NetworkRepositoryImpl(this._apiService);
+  const NetworkRepositoryImpl(this._apiService);
 
   @override
   Future<GetDataResponse> getDataTrending({
     int? itemCount,
   }) async {
     return _apiService.get(
-      C.trendingFullUrl,
+      UrlConstants.trendingFullUrl,
       queryParameters: {
-        Q.extended: Q.full,
-        Q.limit: itemCount,
+        QueryParametersConstants.extended: QueryParametersConstants.full,
+        QueryParametersConstants.limit: itemCount,
       },
     ).then(
       (response) {
@@ -36,10 +36,10 @@ class NetworkRepositoryImpl implements NetworkRepository {
     int? itemCount,
   }) async {
     return _apiService.get(
-      C.anticipatedFullUrl,
+      UrlConstants.anticipatedFullUrl,
       queryParameters: {
-        Q.extended: Q.full,
-        Q.limit: itemCount,
+        QueryParametersConstants.extended: QueryParametersConstants.full,
+        QueryParametersConstants.limit: itemCount,
       },
     ).then(
       (response) {

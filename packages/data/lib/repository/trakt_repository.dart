@@ -6,18 +6,18 @@ import 'package:domain/model/people_response.dart';
 import 'package:domain/repository/general_repository.dart';
 
 class TRAKTRepositoryImpl implements TRAKTRepository {
-  final ApiBaseService<ServicePayload> _apiService;
+  final ApiService<ServicePayload> _apiService;
 
-  TRAKTRepositoryImpl(this._apiService);
+  const TRAKTRepositoryImpl(this._apiService);
 
   @override
   Future<GetDataResponse> getDataTrending({int? itemCount}) async {
     return _apiService
         .get(
-      C.trendingFullUrl,
+      UrlConstants.trendingFullUrl,
       queryParameters: {
-        Q.extended: Q.full,
-        Q.limit: itemCount,
+        QueryParametersConstants.extended: QueryParametersConstants.full,
+        QueryParametersConstants.limit: itemCount,
       },
       isTrakt: true,
     )
@@ -37,10 +37,10 @@ class TRAKTRepositoryImpl implements TRAKTRepository {
   Future<GetDataResponse> getDataAnticipated({int? itemCount}) async {
     return _apiService
         .get(
-      C.anticipatedFullUrl,
+      UrlConstants.anticipatedFullUrl,
       queryParameters: {
-        Q.extended: Q.full,
-        Q.limit: itemCount,
+        QueryParametersConstants.extended: QueryParametersConstants.full,
+        QueryParametersConstants.limit: itemCount,
       },
       isTrakt: true,
     )
@@ -61,9 +61,9 @@ class TRAKTRepositoryImpl implements TRAKTRepository {
     String? movieId,
   }) async {
     final response = await _apiService.get(
-      '${C.movieUrl}${movieId!}${C.peopleUrl}',
+      '${UrlConstants.movieUrl}${movieId!}${UrlConstants.peopleUrl}',
       queryParameters: {
-        Q.extended: Q.full,
+        QueryParametersConstants.extended: QueryParametersConstants.full,
       },
       isTrakt: true,
     );

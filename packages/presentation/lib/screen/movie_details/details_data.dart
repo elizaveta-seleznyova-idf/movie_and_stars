@@ -2,7 +2,7 @@ import 'package:domain/model/movie.dart';
 import 'package:domain/model/people_and_images_model.dart';
 
 class DetailsData {
-  DetailsData({
+  const DetailsData({
     required this.detailsAboutMovie,
     required this.detailsAboutPeople,
   });
@@ -10,7 +10,7 @@ class DetailsData {
   final Movie? detailsAboutMovie;
   final List<PeopleAndImagesModel>? detailsAboutPeople;
 
-  factory DetailsData.init() => DetailsData(
+  factory DetailsData.init() => const DetailsData(
         detailsAboutMovie: null,
         detailsAboutPeople: [],
       );

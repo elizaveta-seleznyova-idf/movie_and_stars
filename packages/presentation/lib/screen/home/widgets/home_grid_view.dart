@@ -61,8 +61,7 @@ class _HomeGridViewState extends State<HomeGridView> {
                   padding: const EdgeInsets.only(bottom: 20),
                   child: InkWell(
                     onTap: () {
-                      widget.bloc.navigateToDetailsPage(
-                          currentMovie.movieId); //slug string 'movie name'
+                      widget.bloc.navigateToDetailsPage(currentMovie.movieId);
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

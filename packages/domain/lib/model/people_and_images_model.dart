@@ -3,7 +3,7 @@ class PeopleAndImagesModel {
   final String? person;
   final String? image;
 
-  PeopleAndImagesModel({
+  const PeopleAndImagesModel({
     required this.characters,
     required this.person,
     required this.image,

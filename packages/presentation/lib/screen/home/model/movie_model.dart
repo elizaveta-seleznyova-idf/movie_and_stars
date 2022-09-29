@@ -7,7 +7,7 @@ class MovieModel {
   final String genres;
   final String certifications;
 
-  MovieModel({
+  const MovieModel({
     required this.titles,
     required this.images,
     required this.movieId,

@@ -4,9 +4,7 @@ import 'package:presentation/screen/home/widgets/shimmer_container.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomeShimmer extends StatelessWidget {
-  const HomeShimmer({
-    Key? key,
-  }) : super(key: key);
+  const HomeShimmer({super.key}) ;
 
   @override
   Widget build(BuildContext context) {

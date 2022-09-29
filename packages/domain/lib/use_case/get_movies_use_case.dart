@@ -9,7 +9,7 @@ class GetMoviesUseCase
     implements UseCaseParams<MovieType, Future<List<MovieResponse>>> {
   final TRAKTRepository _repository;
 
-  GetMoviesUseCase(this._repository);
+  const GetMoviesUseCase(this._repository);
 
   @override
   Future<List<MovieResponse>> call(MovieType type) async {
@@ -24,7 +24,7 @@ class GetMoviesUseCase
       );
     }
 
-    final paginationCheck = int.parse(response.headers[C.pagination][0]);
+    final paginationCheck = int.parse(response.headers[UrlConstants.pagination][0]);
     if (paginationCheck >= 5) {
       int itemCount = 50;
 
