@@ -6,9 +6,9 @@ import 'package:presentation/utils/image_path.dart';
 
 class DetailsBackGroundImage extends StatelessWidget {
   const DetailsBackGroundImage({
-    Key? key,
     required this.movie,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Movie? movie;
 

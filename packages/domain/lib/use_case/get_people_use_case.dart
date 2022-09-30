@@ -10,17 +10,17 @@ import 'package:domain/utils/const.dart';
 class GetPeopleUseCase
     extends UseCaseParams<String, Future<List<PeopleAndImagesModel>>> {
   GetPeopleUseCase(
-    this._generalRepository,
-    this._tMDBRepository,
+    this._traktRepository,
+    this._tmdbRepository,
   );
 
-  final TRAKTRepository _generalRepository;
-  final TMDBRepository _tMDBRepository;
+  final TRAKTRepository _traktRepository;
+  final TMDBRepository _tmdbRepository;
 
   Future<List<TMDBResponse>> getCastImages(List<Cast> cast) async {
     return Future.wait(
       cast.map(
-        (e) => _tMDBRepository.getCastImage(tMDBId: e.person?.ids?.tmdb),
+        (e) => _tmdbRepository.getCastImage(tMDBId: e.person?.ids?.tmdb),
       ),
     );
   }
@@ -30,7 +30,7 @@ class GetPeopleUseCase
     const maxCastLength = 4;
 
     final PeopleResponse response =
-        await _generalRepository.getCast(movieId: params);
+        await _traktRepository.getCast(movieId: params);
     final List<Cast> responseCast = response.cast ?? [];
     final castLength = responseCast.length >= maxCastLength
         ? maxCastLength

@@ -11,12 +11,12 @@ import 'package:presentation/screen/movie_details/widgets/details_view_widget.da
 
 class DetailsTabBar extends StatefulWidget {
   const DetailsTabBar({
-    Key? key,
     required this.data,
     required this.movie,
     required this.blocData,
     required this.bloc,
-  }) : super(key: key);
+    super.key,
+  });
 
   final BlocData<DetailsData?> data;
   final Movie? movie;

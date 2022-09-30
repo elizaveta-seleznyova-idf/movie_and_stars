@@ -10,11 +10,11 @@ import 'package:presentation/utils/extensions/extention_list.dart';
 
 class DetailsBody extends StatelessWidget {
   const DetailsBody({
-    Key? key,
     required this.data,
     required this.blocData,
     required this.bloc,
-  }) : super(key: key);
+    super.key,
+  });
 
   final BlocData<DetailsData?> data;
   final DetailsData blocData;

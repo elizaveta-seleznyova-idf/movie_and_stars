@@ -23,7 +23,10 @@ class ApiServiceImpl implements ApiService<DioServicePayload> {
   final Dio _dioTRAKT;
   final Dio _dioTMDB;
 
-  const ApiServiceImpl(this._dioTRAKT, this._dioTMDB);
+  const ApiServiceImpl(
+    this._dioTRAKT,
+    this._dioTMDB,
+  );
 
   @override
   Future<Response<R>> get<R>(

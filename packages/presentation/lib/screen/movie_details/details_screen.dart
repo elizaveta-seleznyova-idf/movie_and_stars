@@ -1,5 +1,6 @@
 import 'package:domain/model/movie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
 import 'package:presentation/config/dimens/dimens.dart';
@@ -12,13 +13,12 @@ import 'package:presentation/screen/movie_details/widgets/details_body.dart';
 import 'package:presentation/screen/movie_details/widgets/details_movie_image.dart';
 import 'package:presentation/screen/movie_details/widgets/details_shimmer.dart';
 import 'package:presentation/screen/movie_details/widgets/details_tab_bar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetailsScreenArguments extends BaseArguments {
   DetailsScreenArguments({
     required this.movieInfo,
-    Function(dynamic value)? result,
-  }) : super(result: result);
+    super.result,
+  });
 
   final Movie movieInfo;
 }

@@ -7,10 +7,10 @@ import 'package:presentation/utils/image_path.dart';
 
 class DetailsMovieImage extends StatefulWidget {
   const DetailsMovieImage({
-    Key? key,
     required this.image,
     required this.controller,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Movie? image;
   final ScrollController controller;

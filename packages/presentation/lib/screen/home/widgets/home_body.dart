@@ -9,11 +9,11 @@ import 'package:presentation/screen/home/widgets/home_tab_bar.dart';
 
 class HomeBody extends StatefulWidget {
   const HomeBody({
-    Key? key,
     required this.blocData,
     required this.bloc,
     required this.data,
-  }) : super(key: key);
+    super.key,
+  });
 
   final BlocData<HomeData?> data;
   final HomeData blocData;
