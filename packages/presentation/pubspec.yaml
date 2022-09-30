@@ -18,6 +18,7 @@ dependencies:
   shimmer: ^2.0.0
   flutter_rating_bar: ^4.0.1
   intl: ^0.17.0
+  intl_utils: ^2.7.0
 
 
 dev_dependencies:
@@ -29,3 +30,8 @@ flutter:
   generate: true
 flutter_intl:
   enabled: true
+  class_name: SM
+  main_locale: en
+  arb_dir: packages/presentation/lib/l10n
+  output_dir: packages/presentation/lib/lib/generated_localization
+  use_deferred_loading: false
