@@ -31,7 +31,7 @@ class _DetailsTabBarState extends State<DetailsTabBar>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
   int _currentIndex = 0;
-  final int _tabControllerLength = 3;
+  static const int _tabControllerLength = 3;
 
   @override
   void initState() {
