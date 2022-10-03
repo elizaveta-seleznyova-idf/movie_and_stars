@@ -41,7 +41,9 @@ class MovieListActors extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  // TODO made logic
+                },
                 icon: SvgPicture.asset(
                   ImagesPath.treeDotsImage,
                   color: AppColorsDark.unselectedColor,

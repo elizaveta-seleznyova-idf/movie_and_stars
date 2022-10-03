@@ -30,22 +30,23 @@ class DetailsTabBar extends StatefulWidget {
 class _DetailsTabBarState extends State<DetailsTabBar>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
-  int currentIndex = 0;
+  int _currentIndex = 0;
+  final int _tabControllerLength = 3;
 
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 3, vsync: this);
+    tabController = TabController(length: _tabControllerLength, vsync: this);
 
     tabController.addListener(() {
       setState(() {
-        currentIndex = tabController.index;
+        _currentIndex = tabController.index;
       });
     });
   }
 
   Widget buildContent() {
-    switch (currentIndex) {
+    switch (_currentIndex) {
       case 0:
         return DetailsViewWidget(
           data: widget.data,

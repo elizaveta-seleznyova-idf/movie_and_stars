@@ -1,13 +1,14 @@
 import 'package:data/dio/dio_builder.dart';
 import 'package:data/interceptor/interceptor.dart';
-import 'package:data/repository/trakt_repository.dart';
 import 'package:data/repository/tmdb_repository.dart';
-import 'package:data/service/api_service.dart';
+import 'package:data/repository/trakt_repository.dart';
 import 'package:data/service/service_payload.dart';
+import 'package:data/service/tmdb_api_service.dart';
+import 'package:data/service/trakt_api_service.dart';
 import 'package:data/utils/constants.dart';
 import 'package:dio/dio.dart';
-import 'package:domain/repository/trakt_repository.dart';
 import 'package:domain/repository/tmdb_repository.dart';
+import 'package:domain/repository/trakt_repository.dart';
 import 'package:get_it/get_it.dart';
 
 void initDataInjector() {
@@ -50,9 +51,14 @@ void _initApiModule() {
     ),
     instanceName: DioConstants.tmdbDio,
   );
-  GetIt.I.registerSingleton<ApiService<ServicePayload>>(
-    ApiServiceImpl(
+  GetIt.I.registerSingleton<TraktApiService<ServicePayload>>(
+    TraktApiServiceImpl(
       GetIt.I.get(instanceName: DioConstants.traktDio),
+    ),
+  );
+
+  GetIt.I.registerSingleton<TmdbApiService<ServicePayload>>(
+    TmdbApiServiceImpl(
       GetIt.I.get(instanceName: DioConstants.tmdbDio),
     ),
   );
@@ -60,10 +66,10 @@ void _initApiModule() {
 
 void _initRepositoryModule() {
   GetIt.I.registerSingleton<TRAKTRepository>(
-    TRAKTRepositoryImpl(GetIt.I.get<ApiService>()),
+    TRAKTRepositoryImpl(GetIt.I.get<TraktApiService>()),
   );
 
   GetIt.I.registerSingleton<TMDBRepository>(
-    TMDBRepositoryImpl(GetIt.I.get<ApiService>()),
+    TMDBRepositoryImpl(GetIt.I.get<TmdbApiService>()),
   );
 }

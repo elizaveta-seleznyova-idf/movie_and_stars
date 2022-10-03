@@ -14,6 +14,6 @@ class DetailsModel {
   final String image;
   final String runTime;
   final double rating;
-  final List<String> genres;
+  final String genres;
   final String certification;
 }

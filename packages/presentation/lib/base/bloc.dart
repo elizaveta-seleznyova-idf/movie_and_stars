@@ -12,6 +12,8 @@ abstract class Bloc<T extends BaseArguments, D> {
   void initState();
 
   void initArgs(T args);
+
+  void dispose();
 }
 
 abstract class BlocImpl<T extends BaseArguments, D> implements Bloc<T, D> {
@@ -39,4 +41,7 @@ abstract class BlocImpl<T extends BaseArguments, D> implements Bloc<T, D> {
 
   @override
   void initArgs(T arguments) {}
+
+  @override
+  void dispose() {}
 }

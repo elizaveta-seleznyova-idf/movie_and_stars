@@ -49,6 +49,116 @@ class SM {
   static SM? maybeOf(BuildContext context) {
     return Localizations.of<SM>(context, SM);
   }
+
+  /// `Star Movie`
+  String get homeTitle {
+    return Intl.message(
+      'Star Movie',
+      name: 'homeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Details`
+  String get details {
+    return Intl.message(
+      'Details',
+      name: 'details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reviews`
+  String get reviews {
+    return Intl.message(
+      'Reviews',
+      name: 'reviews',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Showtime`
+  String get showtime {
+    return Intl.message(
+      'Showtime',
+      name: 'showtime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error`
+  String get error {
+    return Intl.message(
+      'Error',
+      name: 'error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Synopsis`
+  String get synopsis {
+    return Intl.message(
+      'Synopsis',
+      name: 'synopsis',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `... Show more`
+  String get showMore {
+    return Intl.message(
+      '... Show more',
+      name: 'showMore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show less`
+  String get showLess {
+    return Intl.message(
+      'Show less',
+      name: 'showLess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cast & Crew`
+  String get castAndCrew {
+    return Intl.message(
+      'Cast & Crew',
+      name: 'castAndCrew',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View All`
+  String get viewAll {
+    return Intl.message(
+      'View All',
+      name: 'viewAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check your Internet connection`
+  String get checkYourInternet {
+    return Intl.message(
+      'Check your Internet connection',
+      name: 'checkYourInternet',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<SM> {
@@ -57,6 +167,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<SM> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'be'),
     ];
   }
 

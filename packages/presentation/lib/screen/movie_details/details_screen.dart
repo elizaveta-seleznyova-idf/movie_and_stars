@@ -42,20 +42,6 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
-  late ScrollController scrollController;
-
-  @override
-  void initState() {
-    super.initState();
-    scrollController = ScrollController();
-  }
-
-  @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<BlocData<DetailsData?>>(
@@ -64,6 +50,7 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
         final data = snapshot.data;
         final DetailsData? blocData = data?.data;
         final movie = blocData?.detailsAboutMovie;
+        final details = blocData?.aboutMovie;
         if (data != null && blocData != null) {
           return data.isLoading
               ? const DetailsShimmer()
@@ -71,7 +58,7 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                   body: Stack(
                     children: [
                       CustomScrollView(
-                        controller: scrollController,
+                        controller: bloc.scrollController,
                         slivers: [
                           SliverAppBar(
                             elevation: Dimens.size0,
@@ -80,7 +67,9 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                             pinned: true,
                             actions: <Widget>[
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  //TODO need to add some logic for share
+                                },
                                 child: const Icon(
                                   Icons.shortcut,
                                   size: Dimens.size36,
@@ -91,7 +80,7 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                             expandedHeight: Dimens.size262,
                             flexibleSpace: FlexibleSpaceBar(
                               background: DetailsBackGroundImage(
-                                movie: movie,
+                                movie: details,
                               ),
                             ),
                           ),
@@ -99,7 +88,6 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                             delegate: SliverChildListDelegate(
                               [
                                 DetailsBody(
-                                  data: data,
                                   blocData: blocData,
                                   bloc: bloc,
                                 ),
@@ -119,7 +107,7 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                       ),
                       DetailsMovieImage(
                         image: movie,
-                        controller: scrollController,
+                        controller: bloc.scrollController,
                       ),
                     ],
                   ),

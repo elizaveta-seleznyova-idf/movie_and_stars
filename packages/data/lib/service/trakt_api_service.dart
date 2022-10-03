@@ -1,13 +1,12 @@
 import 'package:data/service/service_payload.dart';
 import 'package:dio/dio.dart';
 
-abstract class ApiService<SP extends ServicePayload> {
+abstract class TraktApiService<SP extends ServicePayload> {
   Future<Response<R>> get<R>(
     String path, {
     Map<String, dynamic> queryParameters,
     SP? payload,
     Options options,
-    bool isTrakt = true,
   });
 
   Future<Response<R>> post<R>(
@@ -15,17 +14,14 @@ abstract class ApiService<SP extends ServicePayload> {
     dynamic data,
     Map<String, dynamic> queryParameters,
     SP? payload,
-    bool isTrakt = true,
   });
 }
 
-class ApiServiceImpl implements ApiService<DioServicePayload> {
+class TraktApiServiceImpl implements TraktApiService<DioServicePayload> {
   final Dio _dioTRAKT;
-  final Dio _dioTMDB;
 
-  const ApiServiceImpl(
+  const TraktApiServiceImpl(
     this._dioTRAKT,
-    this._dioTMDB,
   );
 
   @override
@@ -34,17 +30,8 @@ class ApiServiceImpl implements ApiService<DioServicePayload> {
     Map<String, dynamic>? queryParameters,
     DioServicePayload? payload,
     Options? options,
-    bool isTrakt = true,
   }) async {
-    final response = isTrakt
-        ? _dioTRAKT.get<R>(
-            path,
-            queryParameters: queryParameters,
-            options: payload?.options,
-            cancelToken: payload?.cancelToken,
-            onReceiveProgress: payload?.onReceiveProgress,
-          )
-        : _dioTMDB.get<R>(
+    final response = _dioTRAKT.get<R>(
             path,
             queryParameters: queryParameters,
             options: payload?.options,
@@ -61,19 +48,8 @@ class ApiServiceImpl implements ApiService<DioServicePayload> {
     dynamic data,
     Map<String, dynamic>? queryParameters,
     DioServicePayload? payload,
-    bool isTrakt = true,
   }) async {
-    final response = isTrakt
-        ? _dioTRAKT.post(
-            path,
-            data: data,
-            queryParameters: queryParameters,
-            options: payload?.options,
-            cancelToken: payload?.cancelToken,
-            onSendProgress: payload?.onSendProgress,
-            onReceiveProgress: payload?.onReceiveProgress,
-          )
-        : _dioTMDB.post(
+    final response = _dioTRAKT.post(
             path,
             data: data,
             queryParameters: queryParameters,

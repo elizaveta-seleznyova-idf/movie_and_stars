@@ -28,7 +28,7 @@ class _MapperImpl implements MapperMovie {
     final list = listMovies
         .map((e) => MovieModel(
               titles: e.movie.title ?? '',
-              images: '${ImagesPath.imageUrl}${e.movie.ids?.imdb!}',
+              images: '${ImagesPath.imageUrl}${e.movie.ids?.imdb}',
               movieId: e.movie.ids?.slug ?? '',
               time: e.movie.runtime.getTimeString(),
               rating: (e.movie.rating ?? 0) / 2,

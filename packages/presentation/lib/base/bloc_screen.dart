@@ -15,6 +15,12 @@ abstract class BlocScreenState<SW extends StatefulWidget, B extends Bloc>
     _getArgs();
   }
 
+  @override
+  void dispose() {
+    bloc.dispose();
+    super.dispose();
+  }
+
   void _getArgs() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final settings = ModalRoute.of(context)?.settings;

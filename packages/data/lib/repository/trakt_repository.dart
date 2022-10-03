@@ -1,4 +1,4 @@
-import 'package:data/service/api_service.dart';
+import 'package:data/service/trakt_api_service.dart';
 import 'package:data/service/service_payload.dart';
 import 'package:data/utils/constants.dart';
 import 'package:domain/model/data_model.dart';
@@ -6,7 +6,7 @@ import 'package:domain/model/people_response.dart';
 import 'package:domain/repository/trakt_repository.dart';
 
 class TRAKTRepositoryImpl implements TRAKTRepository {
-  final ApiService<ServicePayload> _apiService;
+  final TraktApiService<ServicePayload> _apiService;
 
   const TRAKTRepositoryImpl(this._apiService);
 
@@ -19,7 +19,6 @@ class TRAKTRepositoryImpl implements TRAKTRepository {
         QueryParametersConstants.extended: QueryParametersConstants.full,
         QueryParametersConstants.limit: itemCount,
       },
-      isTrakt: true,
     )
         .then(
       (response) {
@@ -42,7 +41,6 @@ class TRAKTRepositoryImpl implements TRAKTRepository {
         QueryParametersConstants.extended: QueryParametersConstants.full,
         QueryParametersConstants.limit: itemCount,
       },
-      isTrakt: true,
     )
         .then(
       (response) {
@@ -61,11 +59,10 @@ class TRAKTRepositoryImpl implements TRAKTRepository {
     String? movieId,
   }) async {
     final response = await _apiService.get(
-      '${UrlConstants.movieUrl}${movieId!}${UrlConstants.peopleUrl}',
+      '${UrlConstants.movieUrl}$movieId${UrlConstants.peopleUrl}',
       queryParameters: {
         QueryParametersConstants.extended: QueryParametersConstants.full,
       },
-      isTrakt: true,
     );
     return PeopleResponse.fromJson(response.data);
   }

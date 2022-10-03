@@ -1,3 +1,4 @@
+import 'package:domain/mappers/people_mapper.dart';
 import 'package:domain/model/cast.dart';
 import 'package:domain/model/people_and_images_model.dart';
 import 'package:domain/model/people_response.dart';
@@ -5,17 +6,18 @@ import 'package:domain/model/tmdb_response.dart';
 import 'package:domain/repository/tmdb_repository.dart';
 import 'package:domain/repository/trakt_repository.dart';
 import 'package:domain/use_case/use_case.dart';
-import 'package:domain/utils/const.dart';
 
 class GetPeopleUseCase
     extends UseCaseParams<String, Future<List<PeopleAndImagesModel>>> {
   GetPeopleUseCase(
     this._traktRepository,
     this._tmdbRepository,
+    this._peopleMapper,
   );
 
   final TRAKTRepository _traktRepository;
   final TMDBRepository _tmdbRepository;
+  final PeopleMapper _peopleMapper;
 
   Future<List<TMDBResponse>> getCastImages(List<Cast> cast) async {
     return Future.wait(
@@ -26,7 +28,7 @@ class GetPeopleUseCase
   }
 
   @override
-  Future<List<PeopleAndImagesModel>> call(String? params) async {
+  Future<List<PeopleAndImagesModel>> call(String params) async {
     const maxCastLength = 4;
 
     final PeopleResponse response =
@@ -40,20 +42,9 @@ class GetPeopleUseCase
 
     final List<TMDBResponse> imageTMDBList = await getCastImages(finiteCast);
 
-    return imageTMDBList.map(
-      (e) {
-        final Cast people = responseCast.firstWhere(
-          (element) {
-            return element.person?.ids?.tmdb == e.id;
-          },
-        );
-        return PeopleAndImagesModel(
-          characters: people.characters?.first,
-          person: people.person?.name,
-          image: '${UrlConstants.tMDBImageUrl}'
-              '${e.profiles?.first.filePath}',
-        );
-      },
-    ).toList();
+    return _peopleMapper(
+      responseCast,
+      imageTMDBList,
+    );
   }
 }
