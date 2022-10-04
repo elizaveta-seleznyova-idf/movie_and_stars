@@ -1,10 +1,11 @@
-import 'package:data/service/tmdb_api_service.dart';
+import 'package:data/service/api_service.dart';
+import 'package:data/service/service_payload.dart';
 import 'package:data/utils/constants.dart';
 import 'package:domain/model/tmdb_response.dart';
 import 'package:domain/repository/tmdb_repository.dart';
 
 class TmdbRepositoryImpl implements TmdbRepository {
-  final TmdbApiService _apiService;
+  final ApiService<DioServicePayload> _apiService;
 
   const TmdbRepositoryImpl(this._apiService);
 

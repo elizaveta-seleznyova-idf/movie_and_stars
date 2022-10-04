@@ -2,8 +2,7 @@ import 'package:data/dio/dio_builder.dart';
 import 'package:data/interceptor/interceptor.dart';
 import 'package:data/repository/tmdb_repository.dart';
 import 'package:data/repository/trakt_repository.dart';
-import 'package:data/service/tmdb_api_service.dart';
-import 'package:data/service/trakt_api_service.dart';
+import 'package:data/service/service_payload.dart';
 import 'package:data/utils/constants.dart';
 import 'package:data/utils/secrets/secret.dart';
 import 'package:data/utils/secrets/secret_loader.dart';
@@ -12,6 +11,8 @@ import 'package:domain/repository/tmdb_repository.dart';
 import 'package:domain/repository/trakt_repository.dart';
 import 'package:domain/utils/const.dart';
 import 'package:get_it/get_it.dart';
+
+import '../service/api_service.dart';
 
 const keysPath = 'secrets.json';
 
@@ -71,25 +72,31 @@ void _initApiModule() {
     ),
     instanceName: DioConstants.tmdbDio,
   );
-  GetIt.I.registerSingleton<TraktApiService>(
-    TraktApiService(
+  GetIt.I.registerSingleton<ApiServiceImpl>(
+    ApiServiceImpl(
       GetIt.I.get(instanceName: DioConstants.traktDio),
     ),
+    instanceName: "traktService",
   );
 
-  GetIt.I.registerSingleton<TmdbApiService>(
-    TmdbApiService(
+  GetIt.I.registerSingleton<ApiService<DioServicePayload>>(
+    ApiServiceImpl(
       GetIt.I.get(instanceName: DioConstants.tmdbDio),
     ),
+    instanceName: "tmdbService",
   );
 }
 
 void _initRepositoryModule() {
   GetIt.I.registerLazySingleton<TraktRepository>(
-    () => TraktRepositoryImpl(GetIt.I.get<TraktApiService>()),
+    () => TraktRepositoryImpl(
+      GetIt.I.get<ApiService<DioServicePayload>>(instanceName: "traktService"),
+    ),
   );
 
   GetIt.I.registerLazySingleton<TmdbRepository>(
-    () => TmdbRepositoryImpl(GetIt.I.get<TmdbApiService>()),
+    () => TmdbRepositoryImpl(
+      GetIt.I.get<ApiService<DioServicePayload>>(instanceName: "tmdbService"),
+    ),
   );
 }
