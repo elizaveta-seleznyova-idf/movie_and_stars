@@ -7,6 +7,8 @@ abstract class DioConstants {
   static const applicationJson = 'application/json';
   static const traktDio = 'TRAKT';
   static const tmdbDio = 'TMDB';
+  static const traktSetvice = 'traktService';
+  static const tmdbSetvice = 'tmdbService';
   static const traktInterceptor = 'TRAKTInterceptor';
   static const tmdbInterceptor = 'TMDBInterceptor';
 }
