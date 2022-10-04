@@ -1,5 +1,5 @@
-class TMDBResponse {
-  const TMDBResponse({
+class TmdbResponse {
+  const TmdbResponse({
     required this.id,
     required this.profiles,
   });
@@ -7,9 +7,9 @@ class TMDBResponse {
   final int? id;
   final List<Profiles>? profiles;
 
-  factory TMDBResponse.fromJson(Map<String, dynamic> json) {
+  factory TmdbResponse.fromJson(Map<String, dynamic> json) {
     final profiles = json['profiles'] as List<dynamic>?;
-    return TMDBResponse(
+    return TmdbResponse(
       id: json['id'],
       profiles: profiles?.map((e) => Profiles.fromJson(e)).toList(),
     );

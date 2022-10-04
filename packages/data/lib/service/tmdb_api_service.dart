@@ -1,36 +1,21 @@
+import 'package:data/service/api_service.dart';
 import 'package:data/service/service_payload.dart';
 import 'package:dio/dio.dart';
 
-abstract class TmdbApiService<SP extends ServicePayload> {
-  Future<Response<R>> get<R>(
-      String path, {
-        Map<String, dynamic> queryParameters,
-        SP? payload,
-        Options options,
-      });
-
-  Future<Response<R>> post<R>(
-      String path, {
-        dynamic data,
-        Map<String, dynamic> queryParameters,
-        SP? payload,
-      });
-}
-
-class TmdbApiServiceImpl implements TmdbApiService<DioServicePayload> {
+class TmdbApiService implements ApiService<DioServicePayload> {
   final Dio _dioTMDB;
 
-  const TmdbApiServiceImpl(
-      this._dioTMDB,
-      );
+  const TmdbApiService(
+    this._dioTMDB,
+  );
 
   @override
   Future<Response<R>> get<R>(
-      String path, {
-        Map<String, dynamic>? queryParameters,
-        DioServicePayload? payload,
-        Options? options,
-      }) async {
+    String path, {
+    Map<String, dynamic>? queryParameters,
+    DioServicePayload? payload,
+    Options? options,
+  }) async {
     final response = _dioTMDB.get<R>(
       path,
       queryParameters: queryParameters,
@@ -44,11 +29,11 @@ class TmdbApiServiceImpl implements TmdbApiService<DioServicePayload> {
 
   @override
   Future<Response<R>> post<R>(
-      String path, {
-        dynamic data,
-        Map<String, dynamic>? queryParameters,
-        DioServicePayload? payload,
-      }) async {
+    String path, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    DioServicePayload? payload,
+  }) async {
     final response = _dioTMDB.post(
       path,
       data: data,

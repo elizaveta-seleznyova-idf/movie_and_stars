@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 
 Dio dioBuilder({
   required String baseUrl,
-  required List<Interceptor> interceptor,
+  required List<Interceptor> interceptors,
   Map<String, dynamic>? headers,
 }) {
   final options = BaseOptions(
@@ -15,6 +15,6 @@ Dio dioBuilder({
   );
 
   final dio = Dio(options);
-  dio.interceptors.addAll(interceptor);
+  dio.interceptors.addAll(interceptors);
   return dio;
 }

@@ -1,9 +1,9 @@
+import 'package:domain/mappers/movie_to_image.dart';
 import 'package:domain/model/movie_response.dart';
 import 'package:presentation/screen/home/home_data.dart';
 import 'package:presentation/screen/home/model/movie_model.dart';
 import 'package:presentation/utils/extensions/extention_int.dart';
 import 'package:presentation/utils/extensions/extention_string.dart';
-import 'package:presentation/utils/image_path.dart';
 
 abstract class MapperMovie {
   HomeData mapGetListTrendingResponse(
@@ -16,10 +16,14 @@ abstract class MapperMovie {
     HomeData data,
   );
 
-  factory MapperMovie() => _MapperImpl();
+  factory MapperMovie(MovieToImage movieToImage) => _MapperImpl(movieToImage);
 }
 
 class _MapperImpl implements MapperMovie {
+  _MapperImpl(this.movieToImage);
+
+  final MovieToImage movieToImage;
+
   @override
   HomeData mapGetListTrendingResponse(
     List<MovieResponse> listMovies,
@@ -28,7 +32,7 @@ class _MapperImpl implements MapperMovie {
     final list = listMovies
         .map((e) => MovieModel(
               titles: e.movie.title ?? '',
-              images: '${ImagesPath.imageUrl}${e.movie.ids?.imdb}',
+              images: movieToImage(e.movie.ids?.imdb ?? ''),
               movieId: e.movie.ids?.slug ?? '',
               time: e.movie.runtime.getTimeString(),
               rating: (e.movie.rating ?? 0) / 2,
@@ -47,7 +51,7 @@ class _MapperImpl implements MapperMovie {
     final list = listMovies
         .map((e) => MovieModel(
               titles: e.movie.title ?? '',
-              images: '${ImagesPath.imageUrl}${e.movie.ids?.imdb}',
+              images: movieToImage(e.movie.ids?.imdb ?? ''),
               movieId: e.movie.ids?.slug ?? '',
               time: e.movie.runtime.getTimeString(),
               rating: (e.movie.rating ?? 0) / 2,

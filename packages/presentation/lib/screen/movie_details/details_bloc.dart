@@ -33,18 +33,11 @@ class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
   @override
   ScrollController get scrollController => _scrollController;
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  _updateData({
-    bool? isBottomNavigationActive,
+  void _updateData({
     bool? isLoading,
     DetailsData? data,
   }) {
     handleData(
-      isBottomNavigationActive: isBottomNavigationActive,
       data: _stateData,
       isLoading: isLoading,
     );

@@ -1,14 +1,18 @@
-import 'package:data/utils/api_key_data.dart';
 import 'package:data/utils/constants.dart';
+import 'package:data/utils/secrets/secret.dart';
 import 'package:dio/dio.dart';
 
-class RequestInterceptorTRAKT extends Interceptor {
+class TraktRequestInterceptor extends Interceptor {
+  final SecretStore apiKeyStore;
+
+  TraktRequestInterceptor({required this.apiKeyStore});
+
   @override
   void onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) {
-    options.headers[DioConstants.traktApiKey] = ApiKeyData.apiKeyData;
+    options.headers[DioConstants.traktApiKey] = apiKeyStore.traktApiKey;
     return super.onRequest(
       options,
       handler,
@@ -16,14 +20,18 @@ class RequestInterceptorTRAKT extends Interceptor {
   }
 }
 
-class RequestInterceptorTMDB extends Interceptor {
+class TmdbRequestInterceptor extends Interceptor {
+  final SecretStore apiKeyStore;
+
+  TmdbRequestInterceptor({required this.apiKeyStore});
+
   @override
   void onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) {
     options.queryParameters.addAll({
-      QueryParametersConstants.apiKey: ApiKeyData.apiKeyTMDB,
+      QueryParametersConstants.apiKey: apiKeyStore.tmdbApiKey,
     });
     return super.onRequest(
       options,

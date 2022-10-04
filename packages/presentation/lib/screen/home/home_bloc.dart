@@ -132,6 +132,7 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
     );
     final listAnticipatedMovies =
         await _blocGetTrendingMoviesUseCase(MovieType.anticipated);
+    _movies = listAnticipatedMovies;
     _stateData = _mapper.mapGetListAnticipatedResponse(
       listAnticipatedMovies,
       _stateData,

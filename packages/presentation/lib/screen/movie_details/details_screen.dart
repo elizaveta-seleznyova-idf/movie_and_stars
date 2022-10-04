@@ -106,7 +106,7 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                         ],
                       ),
                       DetailsMovieImage(
-                        image: movie,
+                        image: details?.image,
                         controller: bloc.scrollController,
                       ),
                     ],

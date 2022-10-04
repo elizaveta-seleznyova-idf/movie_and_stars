@@ -2,37 +2,60 @@ import 'package:data/dio/dio_builder.dart';
 import 'package:data/interceptor/interceptor.dart';
 import 'package:data/repository/tmdb_repository.dart';
 import 'package:data/repository/trakt_repository.dart';
-import 'package:data/service/service_payload.dart';
 import 'package:data/service/tmdb_api_service.dart';
 import 'package:data/service/trakt_api_service.dart';
 import 'package:data/utils/constants.dart';
+import 'package:data/utils/secrets/secret.dart';
+import 'package:data/utils/secrets/secret_loader.dart';
 import 'package:dio/dio.dart';
 import 'package:domain/repository/tmdb_repository.dart';
 import 'package:domain/repository/trakt_repository.dart';
+import 'package:domain/utils/const.dart';
 import 'package:get_it/get_it.dart';
 
-void initDataInjector() {
+const keysPath = 'secrets.json';
+
+Future<void> initDataInjector() async {
+  _initApiKeyStore(await keys());
   _initApiModule();
   _initRepositoryModule();
 }
 
-void _initApiModule() {
-  GetIt.I.registerSingleton<Interceptor>(
-    RequestInterceptorTRAKT(),
-    instanceName: DioConstants.traktInterceptor,
+Future<Map<String, dynamic>> keys() async {
+  const keyStoreLoader = SecretLoader(path: keysPath);
+  return keyStoreLoader.load();
+}
+
+void _initApiKeyStore(Map<String, dynamic> secretApiKeys) {
+  GetIt.I.registerLazySingleton<SecretStore>(() => SecretStore(secretApiKeys));
+  GetIt.I.registerFactory<String>(
+    () => GetIt.I.get<SecretStore>().omdbApiKey,
+    instanceName: ApiKeyNameConstant.omdbApiKey,
   );
-  GetIt.I.registerSingleton<Interceptor>(
-    RequestInterceptorTMDB(),
-    instanceName: DioConstants.tmdbInterceptor,
+}
+
+void _initApiModule() {
+  GetIt.I.registerFactory<TraktRequestInterceptor>(
+    () => TraktRequestInterceptor(
+      apiKeyStore: GetIt.I.get(),
+    ),
+  );
+  GetIt.I.registerFactory<TmdbRequestInterceptor>(
+    () => TmdbRequestInterceptor(
+      apiKeyStore: GetIt.I.get(),
+    ),
+  );
+  GetIt.I.registerSingleton<LogInterceptor>(
+    LogInterceptor(
+      requestBody: true,
+      responseBody: true,
+    ),
   );
   GetIt.I.registerSingleton<Dio>(
     dioBuilder(
-      interceptor: [
-        LogInterceptor(
-          requestBody: true,
-          responseBody: true,
-        ),
-        GetIt.instance.get(instanceName: DioConstants.traktInterceptor),
+      interceptors: [
+        GetIt.I.get<LogInterceptor>(),
+        GetIt.I.get<TraktRequestInterceptor>(),
       ],
       baseUrl: UrlConstants.baseUrl,
     ),
@@ -40,36 +63,33 @@ void _initApiModule() {
   );
   GetIt.I.registerSingleton<Dio>(
     dioBuilder(
-      interceptor: [
-        LogInterceptor(
-          requestBody: true,
-          responseBody: true,
-        ),
-        GetIt.instance.get(instanceName: DioConstants.tmdbInterceptor),
+      interceptors: [
+        GetIt.I.get<LogInterceptor>(),
+        GetIt.I.get<TmdbRequestInterceptor>(),
       ],
       baseUrl: UrlConstants.tMDBUrl,
     ),
     instanceName: DioConstants.tmdbDio,
   );
-  GetIt.I.registerSingleton<TraktApiService<ServicePayload>>(
-    TraktApiServiceImpl(
+  GetIt.I.registerSingleton<TraktApiService>(
+    TraktApiService(
       GetIt.I.get(instanceName: DioConstants.traktDio),
     ),
   );
 
-  GetIt.I.registerSingleton<TmdbApiService<ServicePayload>>(
-    TmdbApiServiceImpl(
+  GetIt.I.registerSingleton<TmdbApiService>(
+    TmdbApiService(
       GetIt.I.get(instanceName: DioConstants.tmdbDio),
     ),
   );
 }
 
 void _initRepositoryModule() {
-  GetIt.I.registerSingleton<TRAKTRepository>(
-    TRAKTRepositoryImpl(GetIt.I.get<TraktApiService>()),
+  GetIt.I.registerLazySingleton<TraktRepository>(
+    () => TraktRepositoryImpl(GetIt.I.get<TraktApiService>()),
   );
 
-  GetIt.I.registerSingleton<TMDBRepository>(
-    TMDBRepositoryImpl(GetIt.I.get<TmdbApiService>()),
+  GetIt.I.registerLazySingleton<TmdbRepository>(
+    () => TmdbRepositoryImpl(GetIt.I.get<TmdbApiService>()),
   );
 }
