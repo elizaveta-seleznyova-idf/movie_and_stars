@@ -1,15 +1,15 @@
-import 'package:domain/di/data_model.dart';
 import 'package:domain/enum/movie_type.dart';
+import 'package:domain/model/data_model.dart';
 import 'package:domain/model/movie_response.dart';
-import 'package:domain/repository/base_repository.dart';
+import 'package:domain/repository/trakt_repository.dart';
 import 'package:domain/use_case/use_case.dart';
 import 'package:domain/utils/const.dart';
 
 class GetMoviesUseCase
     implements UseCaseParams<MovieType, Future<List<MovieResponse>>> {
-  final NetworkRepository _repository;
+  const GetMoviesUseCase(this._repository);
 
-  GetMoviesUseCase(this._repository);
+  final TraktRepository _repository;
 
   @override
   Future<List<MovieResponse>> call(MovieType type) async {
@@ -24,7 +24,8 @@ class GetMoviesUseCase
       );
     }
 
-    final paginationCheck = int.parse(response.headers[C.pagination][0]);
+    final paginationCheck =
+        int.parse(response.headers[UrlConstantsDomain.pagination][0]);
     if (paginationCheck >= 5) {
       int itemCount = 50;
 

@@ -5,9 +5,11 @@ class MovieRating extends StatelessWidget {
   const MovieRating({
     Key? key,
     required this.rating,
+    required this.starsSize,
   }) : super(key: key);
 
   final double rating;
+  final double starsSize;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class MovieRating extends StatelessWidget {
       direction: Axis.horizontal,
       allowHalfRating: true,
       itemCount: 5,
-      itemSize: 17,
+      itemSize: starsSize,
       ratingWidget: RatingWidget(
         full: const Icon(
           Icons.star,

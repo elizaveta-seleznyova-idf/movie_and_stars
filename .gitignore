@@ -32,7 +32,9 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-/packages/data/lib/utils/api_key_data.dart
+/packages/presentation/lib/generated/
+/packages/presentation/lib/generated_localization/
+
 
 # Web related
 lib/generated_plugin_registrant.dart
@@ -47,3 +49,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+secrets.json

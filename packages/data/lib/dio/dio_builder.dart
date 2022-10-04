@@ -1,24 +1,20 @@
-import 'package:data/interceptor/interceptor.dart';
-import 'package:dio/dio.dart';
 import 'package:data/utils/constants.dart';
+import 'package:dio/dio.dart';
 
 Dio dioBuilder({
   required String baseUrl,
-  required List<Interceptor> interceptor,
+  required List<Interceptor> interceptors,
   Map<String, dynamic>? headers,
 }) {
   final options = BaseOptions(
     baseUrl: baseUrl,
-    connectTimeout: D.connectTimeout,
-    receiveTimeout: D.receiveTimeout,
-    sendTimeout: D.sendTimeout,
-    contentType: D.applicationJson,
+    connectTimeout: DioConstants.connectTimeout,
+    receiveTimeout: DioConstants.receiveTimeout,
+    sendTimeout: DioConstants.sendTimeout,
+    contentType: DioConstants.applicationJson,
   );
 
   final dio = Dio(options);
-  dio.interceptors.addAll([
-    LogInterceptor(requestBody: true, responseBody: true),
-    MovieRequestInterceptor(),
-  ]);
+  dio.interceptors.addAll(interceptors);
   return dio;
 }

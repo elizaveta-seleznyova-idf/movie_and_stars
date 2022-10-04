@@ -8,7 +8,7 @@ class DioServicePayload implements ServicePayload {
   final ProgressCallback? onReceiveProgress;
   final ProgressCallback? onSendProgress;
 
-  DioServicePayload(
+  const DioServicePayload(
     this.options,
     this.cancelToken,
     this.onReceiveProgress,

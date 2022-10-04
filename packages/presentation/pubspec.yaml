@@ -1,5 +1,5 @@
 name: presentation
-description: A new Flutter package project.
+description: presentation layer to movies_and_stars project.
 version: 0.0.1
 publish_to: 'none'
 
@@ -10,11 +10,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   domain:
     path: ../domain
   flutter_svg: ^1.1.4
   shimmer: ^2.0.0
   flutter_rating_bar: ^4.0.1
+  intl: ^0.17.0
+  intl_utils: ^2.7.0
 
 
 dev_dependencies:
@@ -23,3 +27,11 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
+  generate: true
+flutter_intl:
+  enabled: true
+  class_name: SM
+  main_locale: en
+  arb_dir: lib/l10n
+  output_dir: lib/generated_localization
+  use_deferred_loading: false

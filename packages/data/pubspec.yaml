@@ -1,5 +1,5 @@
 name: data
-description: A new Flutter package project.
+description: data layer to movies_and_stars project.
 version: 0.0.1
 publish_to: 'none'
 

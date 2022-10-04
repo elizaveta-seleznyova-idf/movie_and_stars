@@ -5,6 +5,7 @@ import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/screen/app_bottom_navigation_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StarMovieApp extends StatefulWidget {
   const StarMovieApp({Key? key}) : super(key: key);
@@ -28,6 +29,8 @@ class _StarMovieAppState extends BlocScreenState<StatefulWidget, AppBloc> {
         primaryColorDark: AppColorsDark.primaryColorDark,
         canvasColor: AppColorsDark.canvasColor,
       ),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       home: StreamBuilder<BlocData>(
         stream: bloc.dataStream,
         builder: (context, result) {

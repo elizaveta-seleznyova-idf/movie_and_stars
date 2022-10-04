@@ -27,4 +27,17 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/
+    - assets/images/
+    - secrets.json
+  fonts:
+    - family: SF Pro Text
+      fonts:
+        - asset: assets/fonts/SF-Pro-Text/SF-Pro-Text-Regular.otf
+        - asset: assets/fonts/SF-Pro-Text/SF-Pro-Text-Medium.otf
+          weight: 500
+        - asset: assets/fonts/SF-Pro-Text/SF-Pro-Text-Semi-Bold.otf
+          weight: 600
+        - asset: assets/fonts/SF-Pro-Text/SF-Pro-Text-Bold.otf
+          weight: 700
+
+  generate: true

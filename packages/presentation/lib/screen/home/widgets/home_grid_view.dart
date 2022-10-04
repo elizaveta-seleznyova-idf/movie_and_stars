@@ -3,10 +3,10 @@ import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/screen/home/enum/tab_state.dart';
 import 'package:presentation/screen/home/home_bloc.dart';
 import 'package:presentation/screen/home/home_data.dart';
+import 'package:presentation/screen/home/model/movie_model.dart';
 import 'package:presentation/screen/home/widgets/home_shimmer.dart';
 import 'package:presentation/screen/home/widgets/movie_content.dart';
 import 'package:presentation/screen/home/widgets/movie_image.dart';
-import 'package:presentation/screen/home/model/movie_model.dart';
 import 'package:presentation/screen/home/widgets/movie_rating.dart';
 import 'package:presentation/screen/home/widgets/movie_title.dart';
 
@@ -34,6 +34,7 @@ class _HomeGridViewState extends State<HomeGridView> {
 
   @override
   void initState() {
+    super.initState();
     widget.bloc.tabBarRequest(widget.tabState);
   }
 
@@ -60,14 +61,17 @@ class _HomeGridViewState extends State<HomeGridView> {
                   padding: const EdgeInsets.only(bottom: 20),
                   child: InkWell(
                     onTap: () {
-                      widget.bloc.navigateToDetailsPage(currentMovie);
+                      widget.bloc.navigateToDetailsPage(currentMovie.movieId);
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         MovieImage(image: currentMovie.images),
                         const Spacer(),
-                        MovieRating(rating: currentMovie.rating),
+                        MovieRating(
+                          rating: currentMovie.rating,
+                          starsSize: 17,
+                        ),
                         const Spacer(),
                         MovieTitle(
                           movieTitleText: currentMovie.titles,

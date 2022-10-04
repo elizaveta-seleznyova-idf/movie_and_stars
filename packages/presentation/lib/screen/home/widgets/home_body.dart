@@ -8,12 +8,12 @@ import 'package:presentation/screen/home/widgets/home_grid_view.dart';
 import 'package:presentation/screen/home/widgets/home_tab_bar.dart';
 
 class HomeBody extends StatefulWidget {
-  const HomeBody(
-      {Key? key,
-      required this.blocData,
-      required this.bloc,
-      required this.data})
-      : super(key: key);
+  const HomeBody({
+    required this.blocData,
+    required this.bloc,
+    required this.data,
+    super.key,
+  });
 
   final BlocData<HomeData?> data;
   final HomeData blocData;
@@ -34,7 +34,7 @@ class _HomeBodyState extends State<HomeBody>
   }
 
   @override
-  dispose() {
+  void dispose() {
     _tabController.dispose();
     super.dispose();
   }

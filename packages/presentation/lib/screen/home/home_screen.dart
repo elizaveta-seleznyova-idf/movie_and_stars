@@ -15,9 +15,7 @@ class HomeScreenArguments extends BaseArguments {
 }
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({
-    Key? key,
-  }) : super(key: key);
+  const HomeScreen({super.key}) ;
 
   static const _routeName = '/HomeScreen';
 

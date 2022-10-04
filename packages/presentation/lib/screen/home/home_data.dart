@@ -2,7 +2,7 @@ import 'package:presentation/screen/home/enum/tab_state.dart';
 import 'package:presentation/screen/home/model/movie_model.dart';
 
 class HomeData {
-  HomeData({
+  const HomeData({
     required this.tabState,
     required this.trendingMovies,
     required this.anticipatedMovies,
@@ -12,7 +12,7 @@ class HomeData {
   final List<MovieModel> trendingMovies;
   final List<MovieModel> anticipatedMovies;
 
-  factory HomeData.init() => HomeData(
+  factory HomeData.init() => const HomeData(
         trendingMovies: [],
         anticipatedMovies: [],
         tabState: TabState.now,
