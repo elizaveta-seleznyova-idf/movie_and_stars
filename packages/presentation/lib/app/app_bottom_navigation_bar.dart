@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:presentation/app/app_bloc.dart';
+import 'package:presentation/base/bloc_screen.dart';
+import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/utils/image_path.dart';
 
 class AppBottomNavigationBar extends StatefulWidget {
-  const AppBottomNavigationBar({
-    Key? key,
-  }) : super(key: key);
+  const AppBottomNavigationBar({super.key});
 
   @override
   State<AppBottomNavigationBar> createState() => _AppBottomNavigationBarState();
 }
 
-class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
-  int _selectedIndex = 0;
+class _AppBottomNavigationBarState
+    extends BlocScreenState<AppBottomNavigationBar, AppBloc> {
+  int selectedIndex = 0;
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      selectedIndex = index;
     });
   }
 
@@ -26,15 +28,21 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
     return Container(
       decoration: const BoxDecoration(
         border: Border(
-          top: BorderSide(color: AppColorsDark.borderTabBar, width: 1),
+          top: BorderSide(
+            color: AppColorsDark.borderTabBar,
+            width: Dimens.size1,
+          ),
         ),
       ),
       child: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+        currentIndex: selectedIndex,
+        onTap: (index) {
+          _onItemTapped;
+          bloc.onItemTapped(index);
+        },
         items: [
           BottomNavigationBarItem(
             icon: SvgPicture.asset(

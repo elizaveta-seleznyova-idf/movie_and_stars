@@ -1,5 +1,6 @@
 import 'package:data/dio/dio_builder.dart';
 import 'package:data/interceptor/interceptor.dart';
+import 'package:data/repository/preference_local_repository.dart';
 import 'package:data/repository/tmdb_repository.dart';
 import 'package:data/repository/trakt_repository.dart';
 import 'package:data/service/api_service.dart';
@@ -8,10 +9,12 @@ import 'package:data/utils/constants.dart';
 import 'package:data/utils/secrets/secret.dart';
 import 'package:data/utils/secrets/secret_loader.dart';
 import 'package:dio/dio.dart';
+import 'package:domain/repository/preference_local_repository.dart';
 import 'package:domain/repository/tmdb_repository.dart';
 import 'package:domain/repository/trakt_repository.dart';
 import 'package:domain/utils/const.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const keysPath = 'secrets.json';
 
@@ -19,6 +22,7 @@ Future<void> initDataInjector() async {
   _initApiKeyStore(await keys());
   _initApiModule();
   _initRepositoryModule();
+  await _initLocalModule();
 }
 
 Future<Map<String, dynamic>> keys() async {
@@ -101,5 +105,12 @@ void _initRepositoryModule() {
         instanceName: DioConstants.tmdbSetvice,
       ),
     ),
+  );
+}
+
+Future<void> _initLocalModule() async {
+  GetIt.I.registerSingleton(await SharedPreferences.getInstance());
+  GetIt.I.registerLazySingleton<PreferencesLocalRepository>(
+    () => PreferencesLocalRepositoryImpl(sharedPreferences: GetIt.I.get()),
   );
 }

@@ -7,4 +7,8 @@ abstract class ImagesPath {
   static const ellipseImage = 'assets/images/ellipse.svg';
   static const noImage = 'assets/images/no_image_available.svg';
   static const treeDotsImage = 'assets/images/tree_dots.svg';
+  static const facebookImage = 'assets/images/facebook.svg';
+  static const googleImage = 'assets/images/google.svg';
+  static const profileImage = 'assets/images/profile.svg';
+  static const lockImage = 'assets/images/lock.svg';
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/app/app_bloc.dart';
-import 'package:presentation/app/data/app_data.dart';
+import 'package:presentation/app/app_data.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
 import 'package:presentation/config/theme/app_colors.dart';
-import 'package:presentation/screen/app_bottom_navigation_bar.dart';
+import 'package:presentation/app/app_bottom_navigation_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StarMovieApp extends StatefulWidget {
