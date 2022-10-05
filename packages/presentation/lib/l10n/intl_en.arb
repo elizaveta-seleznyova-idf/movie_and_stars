@@ -13,5 +13,6 @@
    "checkYourInternet": "Check your Internet connection",
    "profile" : "Profile",
    "userName" : "USER NAME",
-   "password": "PASSWORD"
+   "password": "PASSWORD",
+   "login": "Login"
 }

@@ -148,7 +148,7 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                         ),
                       ),
                       child: Text(
-                        'Login',
+                        AppLocalizations.of(context)!.login,
                         style: AppTextStyles.sfProRegularUnselected16px,
                       ),
                     ),

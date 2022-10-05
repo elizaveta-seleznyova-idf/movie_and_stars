@@ -5,8 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-const _usersCollection = 'movies_and_stars';
-
 class AuthRepositoryImpl implements AuthRepository {
   const AuthRepositoryImpl(
     this.firebaseAuth,
@@ -17,6 +15,7 @@ class AuthRepositoryImpl implements AuthRepository {
   final FirebaseAuth firebaseAuth;
   final FirebaseFirestore firebaseFirestore;
   final FacebookAuth facebookAuth;
+  static const _usersCollection = 'movies_and_stars';
 
   @override
   Future<List<UserEmailPass>> fetchUsers() async {

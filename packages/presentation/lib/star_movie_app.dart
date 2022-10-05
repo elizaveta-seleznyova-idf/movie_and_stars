@@ -48,6 +48,7 @@ class _StarMovieAppState extends BlocScreenState<StatefulWidget, AppBloc> {
               bottomNavigationBar: appData.isButtonNavBarActive
                   ? AppBottomNavigationBar(
                       bloc: bloc,
+                blocData: appData,
                     )
                   : const SizedBox(),
             );

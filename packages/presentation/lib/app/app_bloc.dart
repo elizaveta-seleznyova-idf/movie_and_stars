@@ -16,6 +16,7 @@ abstract class AppBloc extends Bloc {
 
 class _AppBloc extends BlocImpl implements AppBloc {
   final _appData = AppData.init();
+  int selectedIndex = 0;
 
   @override
   void initState() {
@@ -108,7 +109,9 @@ class _AppBloc extends BlocImpl implements AppBloc {
 
   @override
   void onItemTapped(int index) {
-    //selectedIndex = index;
+    selectedIndex = index;
+    _appData.currentPageIndex = selectedIndex;
+    _updateData();
     switch (index) {
       case 0:
         appNavigator.popAllAndPush(HomeScreen.page(HomeScreenArguments()));
@@ -117,5 +120,6 @@ class _AppBloc extends BlocImpl implements AppBloc {
         appNavigator.popAllAndPush(LoginScreen.page(LoginScreenArguments()));
         break;
     }
+
   }
 }

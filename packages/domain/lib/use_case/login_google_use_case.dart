@@ -16,7 +16,9 @@ class LoginGoogleUseCase implements UseCase<Future<bool>> {
   @override
   Future<bool> call() async {
     final UserEmailPass? user = await _authRepository.loginWithGoogle();
-    if (user == null) return false;
+    if (user == null) {
+      return false;
+    }
     final List<UserEmailPass> users = await _authRepository.fetchUsers();
     final isAbleToLogin = users.any(
       (element) =>

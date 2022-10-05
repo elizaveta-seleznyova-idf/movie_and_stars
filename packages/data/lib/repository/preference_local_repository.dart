@@ -2,13 +2,13 @@ import 'package:domain/model/user_email_pass.dart';
 import 'package:domain/repository/preference_local_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const _loginKey = 'loggedUserEmail';
-const _passwordKey = 'loggedUserPassword';
-
 class PreferencesLocalRepositoryImpl implements PreferencesLocalRepository {
+  const PreferencesLocalRepositoryImpl({required this.sharedPreferences});
+
   final SharedPreferences sharedPreferences;
 
-  const PreferencesLocalRepositoryImpl({required this.sharedPreferences});
+  static const _loginKey = 'loggedUserEmail';
+  static const _passwordKey = 'loggedUserPassword';
 
   @override
   Future<void> saveLoggedUser(UserEmailPass user) async {

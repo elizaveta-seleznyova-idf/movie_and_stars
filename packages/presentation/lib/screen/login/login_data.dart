@@ -1,7 +1,7 @@
 class LoginData {
-  final String errorMessage;
-
   const LoginData({required this.errorMessage});
+
+  final String errorMessage;
 
   LoginData copyWith({
     String? errorMessage,
@@ -12,6 +12,6 @@ class LoginData {
   }
 
   factory LoginData.init() => const LoginData(
-    errorMessage: '',
-  );
+        errorMessage: '',
+      );
 }
