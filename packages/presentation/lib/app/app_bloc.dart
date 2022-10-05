@@ -1,5 +1,5 @@
-import 'package:flutter/widgets.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/widgets.dart';
 import 'package:presentation/app/app_data.dart';
 import 'package:presentation/base/bloc.dart';
 import 'package:presentation/navigation/base_page.dart';
@@ -10,6 +10,7 @@ abstract class AppBloc extends Bloc {
   factory AppBloc() => _AppBloc();
 
   void handleRemoveRouteSettings(RouteSettings value);
+
   void onItemTapped(int index);
 }
 
@@ -110,10 +111,11 @@ class _AppBloc extends BlocImpl implements AppBloc {
     //selectedIndex = index;
     switch (index) {
       case 0:
-        _popAndPush(HomeScreen.page(HomeScreenArguments()));
+        appNavigator.popAllAndPush(HomeScreen.page(HomeScreenArguments()));
         break;
       case 3:
-        _popAndPush(LoginScreen.page(LoginScreenArguments()));
+        appNavigator.popAllAndPush(LoginScreen.page(LoginScreenArguments()));
+        break;
     }
   }
 }

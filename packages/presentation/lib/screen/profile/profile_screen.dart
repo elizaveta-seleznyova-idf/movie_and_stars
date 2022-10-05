@@ -9,7 +9,6 @@ class ProfileScreenArguments extends BaseArguments {
   ProfileScreenArguments({
     Function(dynamic value)? result,
   }) : super(result: result);
-
 }
 
 class ProfileScreen extends StatefulWidget {
@@ -33,8 +32,10 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends BlocScreenState<LoginScreen, ProfileBloc> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('You are logged!'),
+    return const Scaffold(
+      body: Center(
+        child: Text('You are logged!'),
+      ),
     );
   }
 }

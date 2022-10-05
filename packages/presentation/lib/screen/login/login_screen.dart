@@ -77,6 +77,7 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                   ),
                   const SizedBox(height: Dimens.size8),
                   TextField(
+                    controller: bloc.textLoginController,
                     cursorColor: Colors.white,
                     style: const TextStyle(color: AppColorsDark.secondaryColor),
                     decoration: InputDecoration(
@@ -100,6 +101,7 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                   ),
                   const SizedBox(height: Dimens.size8),
                   TextField(
+                    controller: bloc.textPasswordController,
                     obscureText: true,
                     autocorrect: false,
                     enableSuggestions: false,
@@ -124,14 +126,14 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                     width: width,
                     height: Dimens.size48,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: bloc.auth,
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
                           AppColorsDark.primaryColor,
                         ),
                       ),
                       child: Text(
-                        AppLocalizations.of(context)!.checkYourInternet,
+                        'Login',
                         style: AppTextStyles.sfProRegularUnselected16px,
                       ),
                     ),
@@ -144,7 +146,9 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                         width: Dimens.size44,
                         height: Dimens.size44,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            bloc.authFacebook();
+                          },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
                               AppColorsDark.facebookColor,
@@ -171,7 +175,9 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                         width: Dimens.size44,
                         height: Dimens.size44,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            bloc.authGoogle();
+                          },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
                               AppColorsDark.googleColor,

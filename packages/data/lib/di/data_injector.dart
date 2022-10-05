@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data/dio/dio_builder.dart';
 import 'package:data/interceptor/interceptor.dart';
+import 'package:data/repository/auth_repository.dart';
 import 'package:data/repository/preference_local_repository.dart';
 import 'package:data/repository/tmdb_repository.dart';
 import 'package:data/repository/trakt_repository.dart';
@@ -9,10 +11,13 @@ import 'package:data/utils/constants.dart';
 import 'package:data/utils/secrets/secret.dart';
 import 'package:data/utils/secrets/secret_loader.dart';
 import 'package:dio/dio.dart';
+import 'package:domain/repository/auth_repository.dart';
 import 'package:domain/repository/preference_local_repository.dart';
 import 'package:domain/repository/tmdb_repository.dart';
 import 'package:domain/repository/trakt_repository.dart';
 import 'package:domain/utils/const.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -104,6 +109,14 @@ void _initRepositoryModule() {
       GetIt.I.get<ApiService<DioServicePayload>>(
         instanceName: DioConstants.tmdbSetvice,
       ),
+    ),
+  );
+
+  GetIt.I.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(
+      firebaseAuth: FirebaseAuth.instance,
+      firebaseFirestore: FirebaseFirestore.instance,
+      facebookAuth: FacebookAuth.instance,
     ),
   );
 }

@@ -6,9 +6,9 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initAppInjector();
-  runApp(const StarMovieApp());
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await initAppInjector();
+  runApp(const StarMovieApp());
 }

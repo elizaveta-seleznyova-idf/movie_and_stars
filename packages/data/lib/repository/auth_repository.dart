@@ -5,18 +5,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-const _usersCollection = 'StarMovie_users';
+const _usersCollection = 'movies_and_stars';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final FirebaseAuth firebaseAuth;
-  final FirebaseFirestore firebaseFirestore;
-  final FacebookAuth facebookAuth;
-
   const AuthRepositoryImpl({
     required this.firebaseAuth,
     required this.firebaseFirestore,
     required this.facebookAuth,
   });
+
+  final FirebaseAuth firebaseAuth;
+  final FirebaseFirestore firebaseFirestore;
+  final FacebookAuth facebookAuth;
 
   @override
   Future<List<UserEmailPass>> fetchUsers() async {
@@ -31,7 +31,7 @@ class AuthRepositoryImpl implements AuthRepository {
     final user = await facebookAuth.getUserData();
 
     final OAuthCredential facebookAuthCredential =
-    FacebookAuthProvider.credential(loginResult.accessToken?.token ?? '');
+        FacebookAuthProvider.credential(loginResult.accessToken?.token ?? '');
 
     firebaseAuth.signInWithCredential(facebookAuthCredential);
     return UserEmailPass(
@@ -43,11 +43,11 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<UserEmailPass?> loginWithGoogle() async {
     final GoogleSignInAccount? googleUser =
-    await GoogleSignIn(scopes: <String>["email"]).signIn();
+        await GoogleSignIn(scopes: <String>["email"]).signIn();
 
     if (googleUser == null) return null;
     final GoogleSignInAuthentication googleAuth =
-    await googleUser.authentication;
+        await googleUser.authentication;
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
