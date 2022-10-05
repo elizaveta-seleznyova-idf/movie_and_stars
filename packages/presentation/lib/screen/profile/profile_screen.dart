@@ -19,7 +19,7 @@ class ProfileScreen extends StatefulWidget {
   static BasePage page(ProfileScreenArguments arguments) => BasePage(
         key: const ValueKey(_routeName),
         name: _routeName,
-        builder: (context) => const LoginScreen(),
+        builder: (context) => const ProfileScreen(),
         showSlideAnim: true,
         arguments: arguments,
         isButtonNavBarActive: true,
@@ -29,7 +29,7 @@ class ProfileScreen extends StatefulWidget {
   State createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends BlocScreenState<LoginScreen, ProfileBloc> {
+class _ProfileScreenState extends BlocScreenState<ProfileScreen, ProfileBloc> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(

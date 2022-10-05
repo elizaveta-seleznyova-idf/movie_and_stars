@@ -114,9 +114,9 @@ void _initRepositoryModule() {
 
   GetIt.I.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(
-      firebaseAuth: FirebaseAuth.instance,
-      firebaseFirestore: FirebaseFirestore.instance,
-      facebookAuth: FacebookAuth.instance,
+      FirebaseAuth.instance,
+      FirebaseFirestore.instance,
+      FacebookAuth.instance,
     ),
   );
 }

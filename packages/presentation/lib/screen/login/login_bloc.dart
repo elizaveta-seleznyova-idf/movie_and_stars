@@ -96,20 +96,20 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
       return;
     }
     _updateData(data: _stateData, isLoading: true);
-   // analytics.logWithEmailAndPassClick();
+    analytics.logWithEmailAndPassClick();
     final UserEmailPass user = UserEmailPass(login, password);
     _tryLogin(await loginWithEmailAndPass(user));
   }
 
   @override
   Future<void> authFacebook() async {
-  //  analytics.logOnFacebookAuthClick();
+    analytics.logOnFacebookAuthClick();
     _tryLogin(await loginFaceBookUseCase());
   }
 
   @override
   Future<void> authGoogle() async {
-   // analytics.logOnGoogleAuthClick();
+    analytics.logOnGoogleAuthClick();
     _tryLogin(await loginGoogleUseCase());
   }
 

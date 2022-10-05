@@ -15,6 +15,7 @@ import 'package:presentation/screen/home/mapper/movie_mapper.dart';
 import 'package:presentation/screen/login/login_bloc.dart';
 import 'package:presentation/screen/movie_details/details_bloc.dart';
 import 'package:presentation/screen/movie_details/mapper/details_mapper.dart';
+import 'package:presentation/screen/profile/profile_bloc.dart';
 import 'package:presentation/screen/splash/splash_bloc.dart';
 
 void initPresentationInjector() {
@@ -59,6 +60,9 @@ void _initBlocModule() {
       GetIt.I.get<LoginFaceBookUseCase>(),
       GetIt.I.get<Analytics>(),
     ),
+  );
+  GetIt.I.registerFactory<ProfileBloc>(
+    () => ProfileBloc(),
   );
 }
 

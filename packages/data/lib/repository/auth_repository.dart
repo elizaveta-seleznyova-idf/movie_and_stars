@@ -8,11 +8,11 @@ import 'package:google_sign_in/google_sign_in.dart';
 const _usersCollection = 'movies_and_stars';
 
 class AuthRepositoryImpl implements AuthRepository {
-  const AuthRepositoryImpl({
-    required this.firebaseAuth,
-    required this.firebaseFirestore,
-    required this.facebookAuth,
-  });
+  const AuthRepositoryImpl(
+    this.firebaseAuth,
+    this.firebaseFirestore,
+    this.facebookAuth,
+  );
 
   final FirebaseAuth firebaseAuth;
   final FirebaseFirestore firebaseFirestore;

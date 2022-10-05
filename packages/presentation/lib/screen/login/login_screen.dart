@@ -46,6 +46,7 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
       builder: (_, snapshot) {
         return Scaffold(
           appBar: AppBar(
+            backgroundColor: AppColorsDark.primaryColorDark,
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(Dimens.size1),
               child: Container(
@@ -88,9 +89,16 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                         fit: BoxFit.none,
                       ),
                       filled: true,
-                      fillColor: AppColorsDark.selectedItem,
+                      fillColor: AppColorsDark.secondaryColor,
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: Dimens.size10,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(Dimens.size4),
+                        borderSide: const BorderSide(
+                          width: Dimens.size0,
+                          style: BorderStyle.none,
+                        ),
                       ),
                     ),
                   ),
@@ -115,9 +123,16 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                         fit: BoxFit.none,
                       ),
                       filled: true,
-                      fillColor: AppColorsDark.selectedItem,
+                      fillColor: AppColorsDark.secondaryColor,
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: Dimens.size10,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(Dimens.size4),
+                        borderSide: const BorderSide(
+                          width: Dimens.size0,
+                          style: BorderStyle.none,
+                        ),
                       ),
                     ),
                   ),
@@ -146,9 +161,7 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                         width: Dimens.size44,
                         height: Dimens.size44,
                         child: ElevatedButton(
-                          onPressed: () {
-                            bloc.authFacebook();
-                          },
+                          onPressed: bloc.authFacebook,
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
                               AppColorsDark.facebookColor,
@@ -175,9 +188,7 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                         width: Dimens.size44,
                         height: Dimens.size44,
                         child: ElevatedButton(
-                          onPressed: () {
-                            bloc.authGoogle();
-                          },
+                          onPressed: bloc.authGoogle,
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
                               AppColorsDark.googleColor,
