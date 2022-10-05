@@ -44,7 +44,7 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
     this.analytics,
   );
 
-  LoginData _stateData = LoginData.init();
+  final LoginData _stateData = LoginData.init();
 
   final LoginEmailAndPassUseCase loginWithEmailAndPass;
   final LoginGoogleUseCase loginGoogleUseCase;

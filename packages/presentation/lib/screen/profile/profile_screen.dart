@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:presentation/base/bloc_screen.dart';
 import 'package:presentation/navigation/base_arguments.dart';
 import 'package:presentation/navigation/base_page.dart';
-import 'package:presentation/screen/login/login_screen.dart';
 import 'package:presentation/screen/profile/profile_bloc.dart';
 
 class ProfileScreenArguments extends BaseArguments {

@@ -10,7 +10,7 @@ class _ProfileBloc extends BlocImpl<BaseArguments, ProfileData>
     implements ProfileBloc {
   _ProfileBloc();
 
-  ProfileData _stateData = ProfileData.init();
+  final ProfileData _stateData = ProfileData.init();
 
   @override
   void initState() async {
