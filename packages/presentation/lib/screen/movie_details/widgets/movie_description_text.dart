@@ -6,10 +6,10 @@ import 'package:presentation/config/text_style/text_style.dart';
 
 class MovieDescriptionText extends StatefulWidget {
   const MovieDescriptionText({
-    Key? key,
     required this.text,
     required this.trimLines,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String text;
   final int trimLines;

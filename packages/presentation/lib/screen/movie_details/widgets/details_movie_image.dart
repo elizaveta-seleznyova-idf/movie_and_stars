@@ -1,4 +1,3 @@
-import 'package:domain/model/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:presentation/config/dimens/dimens.dart';
@@ -7,12 +6,12 @@ import 'package:presentation/utils/image_path.dart';
 
 class DetailsMovieImage extends StatefulWidget {
   const DetailsMovieImage({
-    Key? key,
     required this.image,
     required this.controller,
-  }) : super(key: key);
+    super.key,
+  });
 
-  final Movie? image;
+  final String? image;
   final ScrollController controller;
 
   @override
@@ -41,7 +40,7 @@ class _DetailsMovieImageState extends State<DetailsMovieImage> {
       left: Dimens.size0,
       child: Center(
         child: Image.network(
-          '${ImagesPath.imageUrl}${widget.image?.ids?.imdb}',
+          '${widget.image}',
           fit: BoxFit.fill,
           width: Dimens.size167,
           height: Dimens.size250,

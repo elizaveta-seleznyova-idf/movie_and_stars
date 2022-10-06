@@ -11,12 +11,12 @@ import 'package:presentation/screen/movie_details/widgets/details_view_widget.da
 
 class DetailsTabBar extends StatefulWidget {
   const DetailsTabBar({
-    Key? key,
     required this.data,
     required this.movie,
     required this.blocData,
     required this.bloc,
-  }) : super(key: key);
+    super.key,
+  });
 
   final BlocData<DetailsData?> data;
   final Movie? movie;
@@ -30,22 +30,23 @@ class DetailsTabBar extends StatefulWidget {
 class _DetailsTabBarState extends State<DetailsTabBar>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
-  int currentIndex = 0;
+  int _currentIndex = 0;
+  static const int _tabControllerLength = 3;
 
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 3, vsync: this);
+    tabController = TabController(length: _tabControllerLength, vsync: this);
 
     tabController.addListener(() {
       setState(() {
-        currentIndex = tabController.index;
+        _currentIndex = tabController.index;
       });
     });
   }
 
   Widget buildContent() {
-    switch (currentIndex) {
+    switch (_currentIndex) {
       case 0:
         return DetailsViewWidget(
           data: widget.data,

@@ -1,5 +1,6 @@
 import 'package:domain/model/movie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
 import 'package:presentation/config/dimens/dimens.dart';
@@ -12,13 +13,12 @@ import 'package:presentation/screen/movie_details/widgets/details_body.dart';
 import 'package:presentation/screen/movie_details/widgets/details_movie_image.dart';
 import 'package:presentation/screen/movie_details/widgets/details_shimmer.dart';
 import 'package:presentation/screen/movie_details/widgets/details_tab_bar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetailsScreenArguments extends BaseArguments {
   DetailsScreenArguments({
     required this.movieInfo,
-    Function(dynamic value)? result,
-  }) : super(result: result);
+    super.result,
+  });
 
   final Movie movieInfo;
 }
@@ -42,20 +42,6 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
-  late ScrollController scrollController;
-
-  @override
-  void initState() {
-    super.initState();
-    scrollController = ScrollController();
-  }
-
-  @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<BlocData<DetailsData?>>(
@@ -64,6 +50,7 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
         final data = snapshot.data;
         final DetailsData? blocData = data?.data;
         final movie = blocData?.detailsAboutMovie;
+        final details = blocData?.aboutMovie;
         if (data != null && blocData != null) {
           return data.isLoading
               ? const DetailsShimmer()
@@ -71,7 +58,7 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                   body: Stack(
                     children: [
                       CustomScrollView(
-                        controller: scrollController,
+                        controller: bloc.scrollController,
                         slivers: [
                           SliverAppBar(
                             elevation: Dimens.size0,
@@ -80,7 +67,9 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                             pinned: true,
                             actions: <Widget>[
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  //TODO need to add some logic for share
+                                },
                                 child: const Icon(
                                   Icons.shortcut,
                                   size: Dimens.size36,
@@ -91,7 +80,7 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                             expandedHeight: Dimens.size262,
                             flexibleSpace: FlexibleSpaceBar(
                               background: DetailsBackGroundImage(
-                                movie: movie,
+                                movie: details,
                               ),
                             ),
                           ),
@@ -99,7 +88,6 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                             delegate: SliverChildListDelegate(
                               [
                                 DetailsBody(
-                                  data: data,
                                   blocData: blocData,
                                   bloc: bloc,
                                 ),
@@ -118,8 +106,8 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                         ],
                       ),
                       DetailsMovieImage(
-                        image: movie,
-                        controller: scrollController,
+                        image: details?.image,
+                        controller: bloc.scrollController,
                       ),
                     ],
                   ),

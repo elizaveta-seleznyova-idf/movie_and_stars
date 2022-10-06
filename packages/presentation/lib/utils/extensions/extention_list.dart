@@ -1,10 +1,4 @@
-import 'package:presentation/utils/extensions/extention_string.dart';
-
-extension ListExtention on List {
-  String capitalizeListFirstOfEach() {
-    return join(", ").split(" ").map((str) => str.capitalize).join(", ");
-  }
-
+extension ListExtention on List<String> {
   String capitalizeFirstOfEach() {
     final capitalizedWords = map((word) {
       if (word.trim().isNotEmpty) {

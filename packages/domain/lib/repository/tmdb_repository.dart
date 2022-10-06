@@ -1,5 +1,5 @@
 import 'package:domain/model/tmdb_response.dart';
 
-abstract class TMDBRepository {
-  Future<TMDBResponse> getCastImage({required int? tMDBId});
+abstract class TmdbRepository {
+  Future<TmdbResponse> getCastImage({required int tMDBId});
 }

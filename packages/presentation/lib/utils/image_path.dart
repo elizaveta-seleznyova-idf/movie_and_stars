@@ -1,5 +1,3 @@
-import 'package:presentation/utils/hidden_api_key.dart';
-
 abstract class ImagesPath {
   static const splashScreen = 'assets/images/splash_image.svg';
   static const homeScreen = 'assets/images/home_image.svg';
@@ -9,7 +7,4 @@ abstract class ImagesPath {
   static const ellipseImage = 'assets/images/ellipse.svg';
   static const noImage = 'assets/images/no_image_available.svg';
   static const treeDotsImage = 'assets/images/tree_dots.svg';
-
-  static const imageUrl =
-      'http://img.omdbapi.com/?apikey=${HiddenApiKey.hiddenApiKey}=';
 }

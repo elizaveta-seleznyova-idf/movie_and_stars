@@ -11,12 +11,12 @@ import 'package:presentation/screen/movie_details/widgets/movie_list_actors.dart
 
 class DetailsViewWidget extends StatelessWidget {
   const DetailsViewWidget({
-    Key? key,
     required this.movie,
     required this.blocData,
     required this.bloc,
     required this.data,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Movie? movie;
   final DetailsData blocData;

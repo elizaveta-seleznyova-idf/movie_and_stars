@@ -8,9 +8,9 @@ import 'package:presentation/utils/image_path.dart';
 
 class MovieListActors extends StatelessWidget {
   const MovieListActors({
-    Key? key,
     required this.blocData,
-  }) : super(key: key);
+    super.key,
+  });
   final DetailsData blocData;
 
   @override
@@ -41,7 +41,9 @@ class MovieListActors extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  // TODO made logic
+                },
                 icon: SvgPicture.asset(
                   ImagesPath.treeDotsImage,
                   color: AppColorsDark.unselectedColor,

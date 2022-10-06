@@ -33,28 +33,28 @@ class DetailsShimmer extends StatelessWidget {
               shimmerWidth: Dimens.size262,
             ),
             const SizedBox(
-              height: Dimens.size16,
+              height: Dimens.size16
             ),
             const ShimmerContainer(
               shimmerHeight: Dimens.size18,
               shimmerWidth: Dimens.size87,
             ),
             const SizedBox(
-              height: Dimens.size9,
+              height: Dimens.size9
             ),
             const ShimmerContainer(
               shimmerHeight: Dimens.size18,
               shimmerWidth: Dimens.size150,
             ),
             const SizedBox(
-              height: Dimens.size29,
+              height: Dimens.size29
             ),
             const ShimmerContainer(
               shimmerHeight: Dimens.size20,
               shimmerWidth: Dimens.size200,
             ),
             const SizedBox(
-              height: Dimens.size40,
+              height: Dimens.size40
             ),
             Padding(
               padding: const EdgeInsets.only(
@@ -68,7 +68,7 @@ class DetailsShimmer extends StatelessWidget {
                     shimmerWidth: width,
                   ),
                   const SizedBox(
-                    height: Dimens.size35,
+                    height: Dimens.size35
                   ),
                   const Align(
                     alignment: Alignment.bottomLeft,

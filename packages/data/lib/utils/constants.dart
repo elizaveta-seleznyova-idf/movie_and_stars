@@ -7,6 +7,8 @@ abstract class DioConstants {
   static const applicationJson = 'application/json';
   static const traktDio = 'TRAKT';
   static const tmdbDio = 'TMDB';
+  static const traktSetvice = 'traktService';
+  static const tmdbSetvice = 'tmdbService';
   static const traktInterceptor = 'TRAKTInterceptor';
   static const tmdbInterceptor = 'TMDBInterceptor';
 }
@@ -29,10 +31,24 @@ abstract class UrlConstants {
   static const peopleUrl = '/people';
   static const personUrl = '/person';
   static const imagesUrl = '/images';
-  static const trendingFullUrl = UrlConstants.movieUrl + UrlConstants.trendingUrl;
-  static const anticipatedFullUrl = UrlConstants.movieUrl + UrlConstants.anticipatedUrl;
+  static const trendingFullUrl =
+      UrlConstants.movieUrl + UrlConstants.trendingUrl;
+  static const anticipatedFullUrl =
+      UrlConstants.movieUrl + UrlConstants.anticipatedUrl;
   static const summaryFullUrl = UrlConstants.movieUrl + UrlConstants.summaryUrl;
   static const peopleFullUrl = UrlConstants.movieUrl + UrlConstants.peopleUrl;
 
   static const pagination = 'x-pagination-page-count';
+
+  static String constantUrlCast({
+    required String? movieId,
+  }) {
+    return '${UrlConstants.movieUrl}$movieId${UrlConstants.peopleUrl}';
+  }
+
+  static String constantUrlImageOfPeople({
+    required int? tMDBId,
+  }) {
+    return '${UrlConstants.personUrl}/$tMDBId${UrlConstants.imagesUrl}';
+  }
 }

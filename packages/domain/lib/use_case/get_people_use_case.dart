@@ -8,52 +8,42 @@ import 'package:domain/use_case/use_case.dart';
 import 'package:domain/utils/const.dart';
 
 class GetPeopleUseCase
-    extends UseCaseParams<String, Future<List<PeopleAndImagesModel>>> {
+    extends UseCaseParams<String?, Future<List<PeopleAndImagesModel>>> {
   GetPeopleUseCase(
-    this._generalRepository,
-    this._tMDBRepository,
+    this._traktRepository,
+    this._tmdbRepository,
   );
 
-  final TRAKTRepository _generalRepository;
-  final TMDBRepository _tMDBRepository;
-
-  Future<List<TMDBResponse>> getCastImages(List<Cast> cast) async {
-    return Future.wait(
-      cast.map(
-        (e) => _tMDBRepository.getCastImage(tMDBId: e.person?.ids?.tmdb),
-      ),
-    );
-  }
+  final TraktRepository _traktRepository;
+  final TmdbRepository _tmdbRepository;
 
   @override
   Future<List<PeopleAndImagesModel>> call(String? params) async {
-    const maxCastLength = 4;
-
     final PeopleResponse response =
-        await _generalRepository.getCast(movieId: params);
-    final List<Cast> responseCast = response.cast ?? [];
-    final castLength = responseCast.length >= maxCastLength
-        ? maxCastLength
-        : responseCast.length;
+        await _traktRepository.getCast(movieId: params);
+    final List<Cast>? responseCast = response.cast;
 
-    final finiteCast = responseCast.take(castLength).toList();
+    final List<Future<PeopleAndImagesModel>>? castAndImagesFutureList =
+        responseCast?.map((e) async {
+      final TmdbResponse filePath =
+          await _tmdbRepository.getCastImage(tMDBId: e.person?.ids?.tmdb ?? 0);
 
-    final List<TMDBResponse> imageTMDBList = await getCastImages(finiteCast);
+      final String? url = filePath.profiles?.isNotEmpty == true
+          ? UrlConstantsDomain.getCastImagePath(
+              filePath.profiles![0].filePath.toString(),
+            )
+          : null;
 
-    return imageTMDBList.map(
-      (e) {
-        final Cast people = responseCast.firstWhere(
-          (element) {
-            return element.person?.ids?.tmdb == e.id;
-          },
-        );
-        return PeopleAndImagesModel(
-          characters: people.characters?.first,
-          person: people.person?.name,
-          image: '${UrlConstants.tMDBImageUrl}'
-              '${e.profiles?.first.filePath}',
-        );
-      },
-    ).toList();
+      return PeopleAndImagesModel(
+        characters: e.character,
+        person: e.person?.name,
+        image: url,
+      );
+    }).toList();
+
+    final List<PeopleAndImagesModel> peopleAndImagesList =
+        await Future.wait(castAndImagesFutureList ?? []);
+
+    return peopleAndImagesList;
   }
 }
