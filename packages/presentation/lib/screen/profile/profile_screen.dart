@@ -6,8 +6,8 @@ import 'package:presentation/screen/profile/profile_bloc.dart';
 
 class ProfileScreenArguments extends BaseArguments {
   ProfileScreenArguments({
-    Function(dynamic value)? result,
-  }) : super(result: result);
+    super.result,
+  });
 }
 
 class ProfileScreen extends StatefulWidget {

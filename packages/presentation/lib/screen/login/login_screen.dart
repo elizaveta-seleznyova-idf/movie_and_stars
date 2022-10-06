@@ -13,9 +13,7 @@ import 'package:presentation/screen/login/login_data.dart';
 import 'package:presentation/utils/image_path.dart';
 
 class LoginScreenArguments extends BaseArguments {
-  LoginScreenArguments({
-    Function(dynamic value)? result,
-  }) : super(result: result);
+  LoginScreenArguments({super.result});
 }
 
 class LoginScreen extends StatefulWidget {

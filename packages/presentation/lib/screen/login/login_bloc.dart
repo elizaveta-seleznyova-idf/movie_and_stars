@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:presentation/analytics/analytics.dart';
 import 'package:presentation/base/bloc.dart';
 import 'package:presentation/navigation/base_arguments.dart';
+import 'package:presentation/screen/login/validation.dart';
 import 'package:presentation/screen/profile/profile_screen.dart';
 
 import 'login_data.dart';
@@ -44,7 +45,7 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
     this.analytics,
   );
 
-  final LoginData _stateData = LoginData.init();
+  LoginData _stateData = LoginData.init();
 
   final LoginEmailAndPassUseCase loginWithEmailAndPass;
   final LoginGoogleUseCase loginGoogleUseCase;
@@ -53,9 +54,6 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
 
   final _loginController = TextEditingController();
   final _passwordController = TextEditingController();
-
-  bool _isValid(String login, String password) =>
-      login.isNotEmpty && password.isNotEmpty;
 
   @override
   TextEditingController get textLoginController => _loginController;
@@ -88,7 +86,7 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
       data: _stateData,
       isLoading: false,
     );
-    if (!_isValid(login, password)) {
+    if (Validation(login, password).isValid()) {
       _updateData(
         data:
             _stateData.copyWith(errorMessage: 'Fill in your login or password'),
@@ -99,6 +97,7 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
     analytics.logWithEmailAndPassClick();
     final UserEmailPass user = UserEmailPass(login, password);
     _tryLogin(await loginWithEmailAndPass(user));
+    _updateData(data: _stateData, isLoading: false);
   }
 
   @override
