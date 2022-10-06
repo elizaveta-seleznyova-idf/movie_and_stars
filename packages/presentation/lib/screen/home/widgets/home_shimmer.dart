@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/screen/home/widgets/shimmer_container.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomeShimmer extends StatelessWidget {
-  const HomeShimmer({super.key}) ;
+  const HomeShimmer({super.key});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final width = size.width;
+    int itemCountLength = 6;
+    int crossAxisCountSize = 2;
+    int flexSize = 2;
 
     return Shimmer.fromColors(
       baseColor: AppColorsDark.primaryColor,
@@ -18,37 +22,37 @@ class HomeShimmer extends StatelessWidget {
         children: [
           Expanded(
             child: GridView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
-              itemCount: 6,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 167 / 330,
-                crossAxisCount: 2,
-                crossAxisSpacing: 2.0,
+              padding: const EdgeInsets.symmetric(horizontal: Dimens.size18),
+              itemCount: itemCountLength,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: Dimens.size167 / Dimens.size320,
+                crossAxisCount: crossAxisCountSize,
+                crossAxisSpacing: Dimens.size2,
               ),
               itemBuilder: (BuildContext context, int index) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const ShimmerContainer(
-                      shimmerHeight: 250,
-                      shimmerWidth: 167,
+                      shimmerHeight: Dimens.size250,
+                      shimmerWidth: Dimens.size167,
                     ),
                     const Spacer(),
                     const ShimmerContainer(
-                      shimmerHeight: 20,
-                      shimmerWidth: 120,
+                      shimmerHeight: Dimens.size20,
+                      shimmerWidth: Dimens.size120,
                     ),
                     const Spacer(),
                     ShimmerContainer(
-                      shimmerHeight: 15,
-                      shimmerWidth: width / 3,
+                      shimmerHeight: Dimens.size15,
+                      shimmerWidth: width / Dimens.size3,
                     ),
                     const Spacer(),
                     ShimmerContainer(
-                      shimmerHeight: 10,
-                      shimmerWidth: width / 2.5,
+                      shimmerHeight: Dimens.size10,
+                      shimmerWidth: width / Dimens.size2,
                     ),
-                    const Spacer(flex: 2),
+                    Spacer(flex: flexSize),
                   ],
                 );
               },

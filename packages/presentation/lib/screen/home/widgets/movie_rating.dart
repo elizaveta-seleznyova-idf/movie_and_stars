@@ -1,40 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:presentation/config/dimens/dimens.dart';
+import 'package:presentation/config/theme/app_colors.dart';
 
 class MovieRating extends StatelessWidget {
   const MovieRating({
-    Key? key,
     required this.rating,
     required this.starsSize,
-  }) : super(key: key);
+    super.key,
+  });
 
   final double rating;
   final double starsSize;
 
   @override
   Widget build(BuildContext context) {
+    int itemCountSize = 5;
     return RatingBar(
       ignoreGestures: true,
       initialRating: rating,
       direction: Axis.horizontal,
       allowHalfRating: true,
-      itemCount: 5,
+      itemCount: itemCountSize,
       itemSize: starsSize,
       ratingWidget: RatingWidget(
         full: const Icon(
           Icons.star,
-          color: Colors.yellow,
+          color: AppColorsDark.starColor,
         ),
         half: const Icon(
           Icons.star_half,
-          color: Colors.yellow,
+          color: AppColorsDark.starColor,
         ),
         empty: const Icon(
           Icons.star_border,
-          color: Colors.yellow,
+          color: AppColorsDark.starColor,
         ),
       ),
-      itemPadding: const EdgeInsets.only(right: 1.0),
+      itemPadding: const EdgeInsets.only(right: Dimens.size1),
       onRatingUpdate: (rating) {},
     );
   }

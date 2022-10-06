@@ -5,11 +5,17 @@ import 'package:presentation/config/theme/app_colors.dart';
 class AppTextStyles {
   AppTextStyles._();
 
-  static const String _textFontFamily ='SF Pro Text';
+  static const String _textFontFamily = 'SF Pro Text';
 
   static const TextStyle sfProRegular30px = TextStyle(
     fontFamily: _textFontFamily,
     fontSize: Dimens.size30,
+  );
+
+  static const TextStyle sfProSemiBold24px = TextStyle(
+    fontFamily: _textFontFamily,
+    fontSize: Dimens.size24,
+    fontWeight: FontWeight.w600,
   );
 
   static const TextStyle sfProMedium18px = TextStyle(
@@ -18,10 +24,10 @@ class AppTextStyles {
     fontWeight: FontWeight.w500,
   );
 
-  static const TextStyle sfProSemiBold24px = TextStyle(
+  static const TextStyle sfProMedium16px = TextStyle(
     fontFamily: _textFontFamily,
-    fontSize: Dimens.size24,
-    fontWeight: FontWeight.w600,
+    fontSize: Dimens.size16,
+    fontWeight: FontWeight.w500,
   );
 
   static const TextStyle sfProRegularUnselected16px = TextStyle(

@@ -4,9 +4,7 @@ import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/utils/image_path.dart';
 
 class AppBottomNavigationBar extends StatefulWidget {
-  const AppBottomNavigationBar({
-    Key? key,
-  }) : super(key: key);
+  const AppBottomNavigationBar({super.key});
 
   @override
   State<AppBottomNavigationBar> createState() => _AppBottomNavigationBarState();

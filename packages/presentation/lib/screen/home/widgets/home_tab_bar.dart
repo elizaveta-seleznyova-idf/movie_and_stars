@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:presentation/config/dimens/dimens.dart';
+import 'package:presentation/config/text_style/text_style.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/screen/home/home_bloc.dart';
 import 'package:presentation/screen/home/home_data.dart';
 
 class HomeTabBar extends StatefulWidget {
   const HomeTabBar({
-    Key? key,
     required this.bloc,
     required this.data,
     required this.tabController,
-  }) : super(key: key);
+    super.key,
+  });
 
   final HomeBloc bloc;
   final HomeData data;
@@ -40,10 +43,10 @@ class _HomeTabBarState extends State<HomeTabBar> {
   Widget build(BuildContext context) {
     return TabBar(
       controller: widget.tabController,
-      splashBorderRadius: BorderRadius.circular(16),
+      splashBorderRadius: BorderRadius.circular(Dimens.size16),
       indicator: BoxDecoration(
         color: AppColorsDark.primaryColor,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(Dimens.size16),
       ),
       tabs: <Widget>[
         Tab(
@@ -51,10 +54,10 @@ class _HomeTabBarState extends State<HomeTabBar> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               !isIconActive ? const Icon(Icons.play_circle) : const SizedBox(),
-              const SizedBox(width: 6),
-              const Text(
-                'Now Showing',
-                style: TextStyle(fontSize: 14),
+              const SizedBox(width: Dimens.size6),
+              Text(
+                AppLocalizations.of(context)!.nowShowing,
+                style: AppTextStyles.sfProMedium14px,
               ),
             ],
           ),
@@ -62,11 +65,11 @@ class _HomeTabBarState extends State<HomeTabBar> {
         Tab(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
-              SizedBox(width: 6),
+            children: <Widget>[
+              const SizedBox(width: Dimens.size6),
               Text(
-                'Coming soon',
-                style: TextStyle(fontSize: 14),
+                AppLocalizations.of(context)!.comingSoon,
+                style: AppTextStyles.sfProMedium14px,
               ),
             ],
           ),
