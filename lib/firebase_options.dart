@@ -26,10 +26,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -58,5 +55,16 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1024824851119',
     projectId: 'moviesandstars2022',
     storageBucket: 'moviesandstars2022.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyDzVGLCbFwfhgvIG_BQrSxV6IWb81wsE_U',
+    appId: '1:1024824851119:ios:c3d465fe1c471c817bb25a',
+    messagingSenderId: '1024824851119',
+    projectId: 'moviesandstars2022',
+    storageBucket: 'moviesandstars2022.appspot.com',
+    androidClientId: '1024824851119-5slutrrq7aur4fee4kv9a8vovmjeh9ij.apps.googleusercontent.com',
+    iosClientId: '1024824851119-74l2ncuit810l3smv463e0fl29sauaob.apps.googleusercontent.com',
+    iosBundleId: 'com.example.moviesAndStars',
   );
 }
