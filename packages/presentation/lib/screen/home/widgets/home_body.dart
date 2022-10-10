@@ -27,7 +27,7 @@ class HomeBody extends StatefulWidget {
 class _HomeBodyState extends State<HomeBody>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  int tabControllerLength = 2;
+  static const int tabControllerLength = 2;
 
   @override
   void initState() {

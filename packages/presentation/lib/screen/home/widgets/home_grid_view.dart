@@ -32,7 +32,7 @@ class HomeGridView extends StatefulWidget {
 class _HomeGridViewState extends State<HomeGridView> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
-  int crossAxisCountSize = 2;
+  static const int crossAxisCountSize = 2;
 
   @override
   void initState() {

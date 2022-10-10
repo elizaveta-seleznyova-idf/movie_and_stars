@@ -7,13 +7,14 @@ import 'package:shimmer/shimmer.dart';
 class HomeShimmer extends StatelessWidget {
   const HomeShimmer({super.key});
 
+  static const int itemCountLength = 6;
+  static const int crossAxisCountSize = 2;
+  static const int flexSize = 2;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final width = size.width;
-    int itemCountLength = 6;
-    int crossAxisCountSize = 2;
-    int flexSize = 2;
 
     return Shimmer.fromColors(
       baseColor: AppColorsDark.primaryColor,

@@ -12,10 +12,10 @@ class MovieRating extends StatelessWidget {
 
   final double rating;
   final double starsSize;
+  static const int itemCountSize = 5;
 
   @override
   Widget build(BuildContext context) {
-    int itemCountSize = 5;
     return RatingBar(
       ignoreGestures: true,
       initialRating: rating,

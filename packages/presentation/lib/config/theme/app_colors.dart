@@ -10,5 +10,5 @@ abstract class AppColorsDark {
   static const unselectedColor = Color.fromRGBO(255, 255, 255, 0.5);
   static const primaryColor = Color.fromRGBO(229, 25, 55, 1);
   static const primaryGradientEnd = Color.fromRGBO(219, 82, 82, 1);
-  static const starColor = Colors.yellow;
+  static const starColor = Color.fromRGBO(255, 192, 69, 1);
 }
