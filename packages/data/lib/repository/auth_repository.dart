@@ -15,11 +15,11 @@ class AuthRepositoryImpl implements AuthRepository {
   final FirebaseAuth firebaseAuth;
   final FirebaseFirestore firebaseFirestore;
   final FacebookAuth facebookAuth;
-  static const _usersCollection = 'movies_and_stars';
+  static const _firebaseCollection = 'movies_and_stars';
 
   @override
-  Future<bool> userExistenceCheck(UserEmailPass user) async {
-    final usersCollection = firebaseFirestore.collection(_usersCollection);
+  Future<bool> isUserExist(UserEmailPass user) async {
+    final usersCollection = firebaseFirestore.collection(_firebaseCollection);
     final userCheck = await usersCollection
         .where('login', isEqualTo: user.login)
         .where('password', isEqualTo: user.password)
