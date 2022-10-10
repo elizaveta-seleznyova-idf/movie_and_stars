@@ -3,6 +3,8 @@ import 'package:domain/repository/auth_repository.dart';
 import 'package:domain/repository/preference_local_repository.dart';
 import 'package:domain/repository/tmdb_repository.dart';
 import 'package:domain/repository/trakt_repository.dart';
+import 'package:domain/services/analytics_service.dart';
+import 'package:domain/use_case/analytics_use_case.dart';
 import 'package:domain/use_case/delay_use_case.dart';
 import 'package:domain/use_case/get_movies_use_case.dart';
 import 'package:domain/use_case/get_people_use_case.dart';
@@ -48,6 +50,11 @@ void _initUseCaseModule() {
     () => LoginEmailAndPassUseCase(
       GetIt.I.get<AuthRepository>(),
       GetIt.I.get<PreferencesLocalRepository>(),
+    ),
+  );
+  GetIt.instance.registerFactory<AnalyticsUseCase>(
+        () => AnalyticsUseCase(
+      GetIt.instance.get<AnalyticsService>(),
     ),
   );
 }

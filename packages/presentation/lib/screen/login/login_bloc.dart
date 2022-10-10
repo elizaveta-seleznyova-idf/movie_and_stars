@@ -1,9 +1,9 @@
 import 'package:domain/model/user_email_pass.dart';
+import 'package:domain/use_case/analytics_use_case.dart';
 import 'package:domain/use_case/login_email_and_password_use_case.dart';
 import 'package:domain/use_case/login_facebook_use_case.dart';
 import 'package:domain/use_case/login_google_use_case.dart';
 import 'package:flutter/material.dart';
-import 'package:presentation/analytics/analytics.dart';
 import 'package:presentation/base/bloc.dart';
 import 'package:presentation/navigation/base_arguments.dart';
 import 'package:presentation/screen/login/validation.dart';
@@ -16,13 +16,13 @@ abstract class LoginBloc extends Bloc<BaseArguments, LoginData> {
     LoginEmailAndPassUseCase loginWithEmailAndPass,
     LoginGoogleUseCase loginGoogleUseCase,
     LoginFaceBookUseCase loginFaceBookUseCase,
-    Analytics firebaseAnalytics,
+      AnalyticsUseCase analyticsUseCase,
   ) =>
       _LoginBloc(
         loginWithEmailAndPass,
         loginGoogleUseCase,
         loginFaceBookUseCase,
-        firebaseAnalytics,
+        analyticsUseCase,
       );
 
   TextEditingController get textLoginController;
@@ -50,7 +50,7 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
   final LoginEmailAndPassUseCase loginWithEmailAndPass;
   final LoginGoogleUseCase loginGoogleUseCase;
   final LoginFaceBookUseCase loginFaceBookUseCase;
-  final Analytics analytics;
+  final AnalyticsUseCase analytics;
 
   final _loginController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -94,7 +94,7 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
       return;
     }
     _updateData(data: _stateData, isLoading: true);
-    analytics.logWithEmailAndPassClick();
+    analytics('on_login_click');
     final UserEmailPass user = UserEmailPass(login, password);
     _tryLogin(await loginWithEmailAndPass(user));
     _updateData(data: _stateData, isLoading: false);
@@ -102,13 +102,13 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
 
   @override
   Future<void> authFacebook() async {
-    analytics.logOnFacebookAuthClick();
+    analytics('on_facebook_click');
     _tryLogin(await loginFaceBookUseCase());
   }
 
   @override
   Future<void> authGoogle() async {
-    analytics.logOnGoogleAuthClick();
+    analytics('on_google_click');
     _tryLogin(await loginGoogleUseCase());
   }
 

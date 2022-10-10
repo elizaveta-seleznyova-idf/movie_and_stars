@@ -15,11 +15,7 @@ class LoginEmailAndPassUseCase
 
   @override
   Future<bool> call(UserEmailPass user) async {
-    final List<UserEmailPass> users = await _authRepository.fetchUsers();
-    final isAbleToLogin = users.any(
-      (element) =>
-          element.login == user.login && element.password == user.password,
-    );
+    final isAbleToLogin = await _authRepository.userExistenceCheck(user);
     if (isAbleToLogin) await _preferences.saveLoggedUser(user);
     return isAbleToLogin;
   }

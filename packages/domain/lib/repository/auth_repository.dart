@@ -1,7 +1,7 @@
 import 'package:domain/model/user_email_pass.dart';
 
 abstract class AuthRepository {
-  Future<List<UserEmailPass>> fetchUsers();
+  Future<bool> userExistenceCheck(UserEmailPass user);
 
   Future<UserEmailPass?> loginWithGoogle();
 

@@ -10,6 +10,8 @@ import 'package:presentation/navigation/base_arguments.dart';
 import 'package:presentation/navigation/base_page.dart';
 import 'package:presentation/screen/login/login_bloc.dart';
 import 'package:presentation/screen/login/login_data.dart';
+import 'package:presentation/screen/login/widgets/login_password_textfield.dart';
+import 'package:presentation/screen/login/widgets/login_registration_button.dart';
 import 'package:presentation/utils/image_path.dart';
 
 class LoginScreenArguments extends BaseArguments {
@@ -78,7 +80,9 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                   TextField(
                     controller: bloc.textLoginController,
                     cursorColor: Colors.white,
-                    style: const TextStyle(color: AppColorsDark.secondaryColor),
+                    style: const TextStyle(
+                      color: AppColorsDark.unselectedColor,
+                    ),
                     decoration: InputDecoration(
                       prefixIcon: SvgPicture.asset(
                         ImagesPath.profileImage,
@@ -100,41 +104,14 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: Dimens.size20),
+                  const SizedBox(height: Dimens.size16),
                   Text(
                     AppLocalizations.of(context)!.password,
                     style: AppTextStyles.sfProMediumUnselected12px,
                   ),
                   const SizedBox(height: Dimens.size8),
-                  TextField(
-                    controller: bloc.textPasswordController,
-                    obscureText: true,
-                    autocorrect: false,
-                    enableSuggestions: false,
-                    cursorColor: Colors.white,
-                    style: const TextStyle(color: AppColorsDark.secondaryColor),
-                    decoration: InputDecoration(
-                      prefixIcon: SvgPicture.asset(
-                        ImagesPath.lockImage,
-                        width: Dimens.size18,
-                        height: Dimens.size18,
-                        fit: BoxFit.none,
-                      ),
-                      filled: true,
-                      fillColor: AppColorsDark.secondaryColor,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: Dimens.size10,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(Dimens.size4),
-                        borderSide: const BorderSide(
-                          width: Dimens.size0,
-                          style: BorderStyle.none,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: Dimens.size20),
+                  LoginPasswordTextField(bloc: bloc),
+                  const SizedBox(height: Dimens.size32),
                   SizedBox(
                     width: width,
                     height: Dimens.size48,
@@ -155,58 +132,16 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        width: Dimens.size44,
-                        height: Dimens.size44,
-                        child: ElevatedButton(
-                          onPressed: bloc.authFacebook,
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              AppColorsDark.facebookColor,
-                            ),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                  Dimens.size44,
-                                ),
-                              ),
-                            ),
-                          ),
-                          child: SvgPicture.asset(
-                            ImagesPath.facebookImage,
-                            width: Dimens.size18,
-                            height: Dimens.size18,
-                            fit: BoxFit.none,
-                          ),
-                        ),
+                      LoginRegistrationButton(
+                        blocFunction: bloc.authFacebook,
+                        buttonImage: ImagesPath.facebookImage,
+                        buttonColor: AppColorsDark.facebookColor,
                       ),
                       const SizedBox(width: Dimens.size24),
-                      SizedBox(
-                        width: Dimens.size44,
-                        height: Dimens.size44,
-                        child: ElevatedButton(
-                          onPressed: bloc.authGoogle,
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              AppColorsDark.googleColor,
-                            ),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                  Dimens.size44,
-                                ),
-                              ),
-                            ),
-                          ),
-                          child: SvgPicture.asset(
-                            ImagesPath.googleImage,
-                            width: Dimens.size44,
-                            height: Dimens.size44,
-                            fit: BoxFit.none,
-                          ),
-                        ),
+                      LoginRegistrationButton(
+                        blocFunction: bloc.authGoogle,
+                        buttonImage: ImagesPath.googleImage,
+                        buttonColor: AppColorsDark.googleColor,
                       ),
                     ],
                   ),

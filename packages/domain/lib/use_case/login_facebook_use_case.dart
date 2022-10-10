@@ -16,11 +16,7 @@ class LoginFaceBookUseCase implements UseCase<Future<bool>> {
   Future<bool> call() async {
     final UserEmailPass? user = await _authRepository.loginWithFaceBook();
     if (user == null) {return false;}
-    final List<UserEmailPass> users = await _authRepository.fetchUsers();
-    final isAbleToLogin = users.any(
-      (element) =>
-          element.login == user.login && element.password == user.password,
-    );
+    final isAbleToLogin = await _authRepository.userExistenceCheck(user);
     if (isAbleToLogin) await _preferences.saveLoggedUser(user);
     return isAbleToLogin;
   }

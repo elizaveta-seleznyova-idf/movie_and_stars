@@ -1,11 +1,11 @@
 class Validation {
+  Validation(
+    this.login,
+    this.password,
+  );
+
   final String login;
   final String password;
-
-  Validation(
-      this.login,
-      this.password,
-      );
 
   bool isValid() => login.isEmpty && password.isEmpty;
 }
