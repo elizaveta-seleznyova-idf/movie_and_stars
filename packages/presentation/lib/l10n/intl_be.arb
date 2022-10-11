@@ -1,14 +1,21 @@
 {
-   "@@locale": "be",
-   "homeTitle": "Зорка Фільм",
-   "details": "Дэталі",
-   "reviews": "Водгук",
-   "showtime": "Час прагляду",
-   "error": "Памылка",
-   "synopsis": "Кароткі агляд",
-   "showMore": "... Паглядзець больш",
-   "showLess": "Паказаць менш",
-   "castAndCrew": "Акцёры & здымачы",
-   "viewAll": "Даведацца больш",
-   "checkYourInternet": "Праверце сваё падключэнне да Інтэрнэту"
+  "@@locale": "be",
+  "homeTitle": "Зорка Фільм",
+  "details": "Дэталі",
+  "reviews": "Водгук",
+  "showtime": "Час прагляду",
+  "error": "Памылка",
+  "synopsis": "Кароткі агляд",
+  "showMore": "... Паглядзець больш",
+  "showLess": "Паказаць менш",
+  "castAndCrew": "Акцёры & здымачы",
+  "viewAll": "Даведацца больш",
+  "checkYourInternet": "Праверце сваё падключэнне да Інтэрнэту",
+  "share": "Глядзі, які я знайшол фільм! \\n\\n https://www.themoviedb.org/movie/{movieId}?language=ru",
+  "@share": {
+    "type": "int",
+    "placeholders": {
+      "movieId": {}
+    }
+  }
 }

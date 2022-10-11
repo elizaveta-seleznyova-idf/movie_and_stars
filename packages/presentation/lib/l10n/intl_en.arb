@@ -10,5 +10,12 @@
    "showLess": "Show less",
    "castAndCrew": "Cast & Crew",
    "viewAll": "View All",
-   "checkYourInternet": "Check your Internet connection"
+   "checkYourInternet": "Check your Internet connection",
+   "share": "\"share\": \"Look, what movie I found! \\n\\nhttps://www.themoviedb.org/movie/{movieId}?language=en\"",
+   "@share": {
+      "type": "int",
+      "placeholders": {
+         "movieId": {}
+      }
+   }
 }
