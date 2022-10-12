@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:presentation/config/text_style/text_style.dart';
 
 class MovieTitle extends StatelessWidget {
   const MovieTitle({
-    Key? key,
     required this.movieTitleText,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String movieTitleText;
 
@@ -12,9 +13,7 @@ class MovieTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       movieTitleText,
-      style: const TextStyle(
-        fontSize: 16,
-      ),
+      style: AppTextStyles.sfProMedium16px,
     );
   }
 }

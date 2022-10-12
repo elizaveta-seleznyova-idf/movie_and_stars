@@ -1,6 +1,8 @@
 {
    "@@locale": "en",
    "homeTitle": "Star Movie",
+   "nowShowing": "Now Showing",
+   "comingSoon": "Coming Soon",
    "details": "Details",
    "reviews": "Reviews",
    "showtime": "Showtime",

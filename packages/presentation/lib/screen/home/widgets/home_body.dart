@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/base/bloc_data.dart';
+import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/screen/home/enum/tab_state.dart';
 import 'package:presentation/screen/home/home_bloc.dart';
@@ -26,11 +27,15 @@ class HomeBody extends StatefulWidget {
 class _HomeBodyState extends State<HomeBody>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  static const int tabControllerLength = 2;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(
+      length: tabControllerLength,
+      vsync: this,
+    );
   }
 
   @override
@@ -44,20 +49,20 @@ class _HomeBodyState extends State<HomeBody>
     return Column(
       children: <Widget>[
         Container(
-          height: 40,
+          height: Dimens.size40,
           margin: const EdgeInsets.only(
-            top: 10,
-            right: 18,
-            left: 17,
-            bottom: 24,
+            top: Dimens.size10,
+            right: Dimens.size18,
+            left: Dimens.size17,
+            bottom: Dimens.size24,
           ),
-          padding: const EdgeInsets.all(4.0),
+          padding: const EdgeInsets.all(Dimens.size4),
           decoration: BoxDecoration(
             border: Border.all(
               color: AppColorsDark.borderTabBar,
-              width: 1,
+              width: Dimens.size1,
             ),
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(Dimens.size20),
           ),
           child: HomeTabBar(
             bloc: widget.bloc,

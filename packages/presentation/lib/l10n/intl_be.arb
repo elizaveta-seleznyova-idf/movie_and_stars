@@ -1,6 +1,8 @@
 {
    "@@locale": "be",
    "homeTitle": "Зорка Фільм",
+   "nowShowing": "Зараз ў прагляду",
+   "comingSoon": "Хутка будзе",
    "details": "Дэталі",
    "reviews": "Водгук",
    "showtime": "Час прагляду",
