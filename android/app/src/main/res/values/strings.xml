@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">movies_and_stars</string>
+    <string name="facebook_app_id">3295496017387708</string>
+    <string name="fb_login_protocol_scheme">fb3295496017387708</string>
+    <string name="facebook_client_token">f5be1d4cac59b988743eec42b097a303</string>
+</resources>

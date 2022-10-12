@@ -11,6 +11,10 @@
   "castAndCrew": "Акцёры & здымачы",
   "viewAll": "Даведацца больш",
   "checkYourInternet": "Праверце сваё падключэнне да Інтэрнэту",
+  "profile": "Профіль",
+  "userName": "ІМЯ КАРЫСТАЛЬНІКА",
+  "password": "ПАРОЛЬ",
+  "login": "Увайсці"
   "share": "Глядзі, які я знайшоў фільм! \\n\\n https://www.themoviedb.org/movie/{movieId}?language=ru",
   "@share": {
     "type": "int",

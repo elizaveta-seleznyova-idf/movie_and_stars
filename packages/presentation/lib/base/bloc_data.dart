@@ -1,11 +1,11 @@
 class BlocData<D> {
-  bool isLoading;
-  D? data;
-
   BlocData({
     required this.isLoading,
     required this.data,
   });
+
+  bool isLoading;
+  D? data;
 
   factory BlocData.init() => BlocData<D>(
         isLoading: false,

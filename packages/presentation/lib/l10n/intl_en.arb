@@ -11,6 +11,10 @@
    "castAndCrew": "Cast & Crew",
    "viewAll": "View All",
    "checkYourInternet": "Check your Internet connection",
+   "profile" : "Profile",
+   "userName" : "USER NAME",
+   "password": "PASSWORD",
+   "login": "Login"
    "share": "\"share\": \"Look, what movie I found! \\n\\nhttps://www.themoviedb.org/movie/{movieId}?language=en\"",
    "@share": {
       "type": "int",

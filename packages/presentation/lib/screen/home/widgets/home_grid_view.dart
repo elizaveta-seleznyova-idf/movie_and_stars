@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/base/bloc_data.dart';
-import 'package:presentation/screen/home/enum/tab_state.dart';
+import 'package:presentation/enum%20/tab_state.dart';
 import 'package:presentation/screen/home/home_bloc.dart';
 import 'package:presentation/screen/home/home_data.dart';
 import 'package:presentation/screen/home/model/movie_model.dart';

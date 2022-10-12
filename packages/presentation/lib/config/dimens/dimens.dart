@@ -35,6 +35,7 @@ class Dimens {
   static const double size46 = 46;
   static const double size48 = 48;
   static const double size50 = 50;
+  static const double size54 = 54;
   static const double size80 = 80;
   static const double size87 = 87;
   static const double size100 = 100;

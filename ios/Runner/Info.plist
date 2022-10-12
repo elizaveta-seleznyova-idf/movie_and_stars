@@ -2,6 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>fb3295496017387708</string>
+      </array>
+      </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>3295496017387708</string>
+    <key>FacebookClientToken</key>
+    <string>f5be1d4cac59b988743eec42b097a303</string>
+    <key>FacebookDisplayName</key>
+    <string>movies_and_stars</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -45,5 +60,22 @@
 	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>LSApplicationCategoryType</key>
+	<string>
+&lt;key&gt;CFBundleURLTypes&lt;/key&gt;
+&lt;array&gt;
+  &lt;dict&gt;
+  &lt;key&gt;CFBundleURLSchemes&lt;/key&gt;
+  &lt;array&gt;
+    &lt;string&gt;fbAPP-ID&lt;/string&gt;
+  &lt;/array&gt;
+  &lt;/dict&gt;
+&lt;/array&gt;
+&lt;key&gt;FacebookAppID&lt;/key&gt;
+&lt;string&gt;APP-ID&lt;/string&gt;
+&lt;key&gt;FacebookClientToken&lt;/key&gt;
+&lt;string&gt;CLIENT-TOKEN&lt;/string&gt;
+&lt;key&gt;FacebookDisplayName&lt;/key&gt;
+&lt;string&gt;APP-NAME&lt;/string&gt;</string>
 </dict>
 </plist>
