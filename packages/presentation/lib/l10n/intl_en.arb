@@ -15,7 +15,7 @@
    "userName" : "USER NAME",
    "password": "PASSWORD",
    "login": "Login",
-   "share": "\"share\": \"Look, what movie I found! \\n\\nhttps://www.themoviedb.org/movie/{movieId}?language=en\"",
+   "share": "Look, what movie I found! \n https://www.themoviedb.org/movie/{movieId}?language=en",
    "@share": {
       "type": "int",
       "placeholders": {

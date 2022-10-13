@@ -15,7 +15,7 @@
   "userName": "ІМЯ КАРЫСТАЛЬНІКА",
   "password": "ПАРОЛЬ",
   "login": "Увайсці",
-  "share": "Глядзі, які я знайшоў фільм! \\n\\n https://www.themoviedb.org/movie/{movieId}?language=ru",
+  "share": "Глядзі, які я знайшоў фільм! \n https://www.themoviedb.org/movie/{movieId}?language=ru",
   "@share": {
     "type": "int",
     "placeholders": {
