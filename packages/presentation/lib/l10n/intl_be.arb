@@ -14,7 +14,7 @@
   "profile": "Профіль",
   "userName": "ІМЯ КАРЫСТАЛЬНІКА",
   "password": "ПАРОЛЬ",
-  "login": "Увайсці"
+  "login": "Увайсці",
   "share": "Глядзі, які я знайшоў фільм! \\n\\n https://www.themoviedb.org/movie/{movieId}?language=ru",
   "@share": {
     "type": "int",

@@ -9,7 +9,7 @@ import 'package:data/service/analytics_service.dart';
 import 'package:data/service/api_service.dart';
 import 'package:data/service/service_payload.dart';
 import 'package:data/utils/constants.dart';
-import 'package:data/utils/secrets/secret.dart';
+import 'package:data/utils/secrets/secret_store.dart';
 import 'package:data/utils/secrets/secret_loader.dart';
 import 'package:dio/dio.dart';
 import 'package:domain/repository/auth_repository.dart';
@@ -24,8 +24,6 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const keysPath = 'secrets.json';
-
 Future<void> initDataInjector() async {
   _initApiKeyStore(await keys());
   _initApiModule();
@@ -35,6 +33,7 @@ Future<void> initDataInjector() async {
 }
 
 Future<Map<String, dynamic>> keys() async {
+  const keysPath = 'secrets.json';
   const keyStoreLoader = SecretLoader(path: keysPath);
   return keyStoreLoader.load();
 }

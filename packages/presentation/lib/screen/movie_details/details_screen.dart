@@ -68,9 +68,9 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                             actions: <Widget>[
                               GestureDetector(
                                 onTap: () {
-                                  final message = movie?.ids?.tmdb ?? 0;
+                                  final movieIdTmdb = movie?.ids?.tmdb ?? 0;
                                   bloc.shareMovieMessage(
-                                    movieId: message,
+                                    movieId: movieIdTmdb,
                                     context: context,
                                   );
                                 },

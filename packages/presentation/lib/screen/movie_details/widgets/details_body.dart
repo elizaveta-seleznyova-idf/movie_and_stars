@@ -18,7 +18,7 @@ class DetailsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final movieInformation = blocData.aboutMovie;
-
+    const double rating = Dimens.size5;
     if (movieInformation == null) {
       return const SizedBox();
     } else {
@@ -52,7 +52,7 @@ class DetailsBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                '${movieInformation.rating} / 5',
+                '${movieInformation.rating} / $rating',
                 style: AppTextStyles.sfProRegular30px,
               ),
               const SizedBox(
