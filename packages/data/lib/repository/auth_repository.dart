@@ -28,7 +28,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<UserEmailPass?> loginWithFaceBook() async {
+  Future<UserEmailPass> loginWithFaceBook() async {
     final LoginResult loginResult = await facebookAuth
         .login(permissions: ['email', 'public_profile', 'user_birthday']);
     final user = await facebookAuth.getUserData();
@@ -44,21 +44,20 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<UserEmailPass?> loginWithGoogle() async {
+  Future<UserEmailPass> loginWithGoogle() async {
     final GoogleSignInAccount? googleUser =
         await GoogleSignIn(scopes: <String>["email"]).signIn();
 
-    if (googleUser == null) return null;
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
     final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
     );
     firebaseAuth.signInWithCredential(credential);
     return UserEmailPass(
-      googleUser.email,
-      googleUser.id,
+      googleUser?.email ?? '',
+      googleUser?.id ?? '',
     );
   }
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
+import 'package:presentation/config/dimens/dimens.dart';
+import 'package:presentation/config/text_style/text_style.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/navigation/base_arguments.dart';
 import 'package:presentation/navigation/base_page.dart';
@@ -15,7 +18,7 @@ class HomeScreenArguments extends BaseArguments {
 }
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key}) ;
+  const HomeScreen({super.key});
 
   static const _routeName = '/HomeScreen';
 
@@ -45,22 +48,20 @@ class _HomeScreenState extends BlocScreenState<HomeScreen, HomeBloc> {
             appBar: AppBar(
               centerTitle: false,
               backgroundColor: AppColorsDark.primaryColorDark,
-              elevation: 0,
-              title: const Text(
-                'Star Movie',
-                style: TextStyle(
-                  fontSize: 24,
-                ),
+              elevation: Dimens.size0,
+              title: Text(
+                AppLocalizations.of(context)!.homeTitle,
+                style: AppTextStyles.sfProSemiBold24px,
               ),
               actions: <Widget>[
                 GestureDetector(
                   onTap: () {},
                   child: const Icon(
                     Icons.search,
-                    size: 35.0,
+                    size: Dimens.size35,
                   ),
                 ),
-                const SizedBox(width: 18),
+                const SizedBox(width: Dimens.size18),
               ],
             ),
             body: HomeBody(
@@ -70,9 +71,9 @@ class _HomeScreenState extends BlocScreenState<HomeScreen, HomeBloc> {
             ),
           );
         } else {
-          return const Scaffold(
+          return Scaffold(
             body: Center(
-              child: Text('Something went wrong.'),
+              child: Text(AppLocalizations.of(context)!.error),
             ),
           );
         }

@@ -20,7 +20,7 @@ class LoginRegistrationButton extends StatelessWidget {
       width: Dimens.size54,
       height: Dimens.size54,
       child: ElevatedButton(
-        onPressed: () => blocFunction,
+        onPressed: blocFunction,
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(
             buttonColor,

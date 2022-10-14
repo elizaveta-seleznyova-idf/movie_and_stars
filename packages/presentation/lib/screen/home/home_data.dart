@@ -1,4 +1,4 @@
-import 'package:presentation/enum%20/tab_state.dart';
+import 'package:presentation/enum/tab_state.dart';
 import 'package:presentation/screen/home/model/movie_model.dart';
 
 class HomeData {

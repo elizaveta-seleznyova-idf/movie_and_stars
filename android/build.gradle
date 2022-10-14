@@ -6,9 +6,11 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.0'
-        classpath 'com.google.gms:google-services:4.3.13'
+        classpath 'com.android.tools.build:gradle:7.1.2'
+        classpath 'com.google.gms:google-services:4.3.10'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'org.apache.groovy:groovy-all:4.0.5'
+        classpath 'org.apache.groovy:groovy-json:4.0.5'
     }
 }
 
