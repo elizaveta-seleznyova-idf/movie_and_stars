@@ -24,8 +24,6 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const keysPath = 'secrets.json';
-
 Future<void> initDataInjector() async {
   _initApiKeyStore(await keys());
   _initApiModule();
@@ -35,6 +33,7 @@ Future<void> initDataInjector() async {
 }
 
 Future<Map<String, dynamic>> keys() async {
+  const keysPath = 'secrets.json';
   const keyStoreLoader = SecretLoader(path: keysPath);
   return keyStoreLoader.load();
 }
