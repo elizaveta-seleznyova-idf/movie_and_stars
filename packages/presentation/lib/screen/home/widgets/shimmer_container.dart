@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 
 class ShimmerContainer extends StatelessWidget {
   const ShimmerContainer({
-    Key? key,
     required this.shimmerHeight,
     required this.shimmerWidth,
-  }) : super(key: key);
+    super.key,
+  });
 
   final double shimmerHeight;
   final double shimmerWidth;
@@ -19,7 +20,7 @@ class ShimmerContainer extends StatelessWidget {
       decoration: const BoxDecoration(
         color: AppColorsDark.borderTabBar,
         borderRadius: BorderRadius.all(
-          Radius.circular(10),
+          Radius.circular(Dimens.size10),
         ),
       ),
     );

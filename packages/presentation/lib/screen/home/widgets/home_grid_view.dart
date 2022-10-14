@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/base/bloc_data.dart';
+import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/enum/tab_state.dart';
 import 'package:presentation/screen/home/home_bloc.dart';
 import 'package:presentation/screen/home/home_data.dart';
@@ -12,12 +13,12 @@ import 'package:presentation/screen/home/widgets/movie_title.dart';
 
 class HomeGridView extends StatefulWidget {
   const HomeGridView({
-    Key? key,
     required this.movieData,
     required this.bloc,
     required this.tabState,
     required this.data,
-  }) : super(key: key);
+    super.key,
+  });
 
   final List<MovieModel> movieData;
   final HomeBloc bloc;
@@ -31,6 +32,7 @@ class HomeGridView extends StatefulWidget {
 class _HomeGridViewState extends State<HomeGridView> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
+  static const int crossAxisCountSize = 2;
 
   @override
   void initState() {
@@ -48,17 +50,17 @@ class _HomeGridViewState extends State<HomeGridView> {
       child: widget.data.isLoading
           ? const HomeShimmer()
           : GridView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 18),
+              padding: const EdgeInsets.symmetric(horizontal: Dimens.size18),
               itemCount: widget.movieData.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 167 / 320,
-                crossAxisCount: 2,
-                crossAxisSpacing: 2.0,
+                childAspectRatio: Dimens.size167 / Dimens.size320,
+                crossAxisCount: crossAxisCountSize,
+                crossAxisSpacing: Dimens.size2,
               ),
               itemBuilder: (BuildContext context, int index) {
                 final currentMovie = widget.movieData[index];
                 return Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
+                  padding: const EdgeInsets.only(bottom: Dimens.size20),
                   child: InkWell(
                     onTap: () {
                       widget.bloc.navigateToDetailsPage(currentMovie.movieId);
@@ -70,7 +72,7 @@ class _HomeGridViewState extends State<HomeGridView> {
                         const Spacer(),
                         MovieRating(
                           rating: currentMovie.rating,
-                          starsSize: 17,
+                          starsSize: Dimens.size17,
                         ),
                         const Spacer(),
                         MovieTitle(

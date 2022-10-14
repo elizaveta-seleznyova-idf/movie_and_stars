@@ -1,5 +1,6 @@
 import 'package:domain/mappers/movie_to_image.dart';
 import 'package:domain/model/movie_response.dart';
+import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/screen/home/home_data.dart';
 import 'package:presentation/screen/home/model/movie_model.dart';
 import 'package:presentation/utils/extensions/extention_int.dart';
@@ -35,7 +36,7 @@ class _MapperImpl implements MapperMovie {
               images: movieToImage(e.movie.ids?.imdb ?? ''),
               movieId: e.movie.ids?.slug ?? '',
               time: e.movie.runtime.getTimeString(),
-              rating: (e.movie.rating ?? 0) / 2,
+              rating: (e.movie.rating ?? Dimens.size0) / Dimens.size2,
               genres: e.movie.genres?.first.capitalize() ?? '',
               certifications: e.movie.certification ?? '',
             ))
@@ -54,7 +55,7 @@ class _MapperImpl implements MapperMovie {
               images: movieToImage(e.movie.ids?.imdb ?? ''),
               movieId: e.movie.ids?.slug ?? '',
               time: e.movie.runtime.getTimeString(),
-              rating: (e.movie.rating ?? 0) / 2,
+              rating: (e.movie.rating ?? Dimens.size0) / Dimens.size2,
               genres: e.movie.genres?.first.capitalize() ?? '',
               certifications: e.movie.certification ?? '',
             ))

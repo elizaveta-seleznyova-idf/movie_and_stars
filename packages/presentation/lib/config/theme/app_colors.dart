@@ -13,4 +13,5 @@ abstract class AppColorsDark {
   static const primaryGradientEnd = Color.fromRGBO(219, 82, 82, 1);
   static const facebookColor = Color.fromRGBO(59, 90, 154, 1);
   static const googleColor = Color.fromRGBO(203, 62, 45, 1);
+  static const starColor = Color.fromRGBO(255, 192, 69, 1);
 }

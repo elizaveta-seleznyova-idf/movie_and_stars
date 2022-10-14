@@ -13,6 +13,7 @@ class Dimens {
   static const double size10 = 10;
   static const double size12 = 12;
   static const double size14 = 14;
+  static const double size15 = 15;
   static const double size16 = 16;
   static const double size17 = 17;
   static const double size18 = 18;
@@ -40,6 +41,7 @@ class Dimens {
   static const double size87 = 87;
   static const double size100 = 100;
   static const double size115 = 115;
+  static const double size120 = 120;
   static const double size150 = 150;
   static const double size167 = 167;
   static const double size180 = 180;
@@ -47,4 +49,5 @@ class Dimens {
   static const double size262 = 262;
   static const double size250 = 250;
   static const double size280 = 280;
+  static const double size320 = 320;
 }

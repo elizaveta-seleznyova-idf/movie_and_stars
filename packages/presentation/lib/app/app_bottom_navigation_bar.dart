@@ -7,12 +7,11 @@ import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/utils/image_path.dart';
 
 class AppBottomNavigationBar extends StatefulWidget {
-
   const AppBottomNavigationBar({
     required this.bloc,
     required this.blocData,
     super.key,
-      });
+  });
 
   final AppBloc bloc;
   final AppData blocData;
@@ -22,7 +21,6 @@ class AppBottomNavigationBar extends StatefulWidget {
 }
 
 class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
