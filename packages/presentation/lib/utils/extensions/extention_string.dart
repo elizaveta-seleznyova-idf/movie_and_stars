@@ -3,3 +3,9 @@ extension StrignExtension on String {
     return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
   }
 }
+
+extension StringOrEmpty on String? {
+  String orEmpty() {
+    return this ?? '';
+  }
+}

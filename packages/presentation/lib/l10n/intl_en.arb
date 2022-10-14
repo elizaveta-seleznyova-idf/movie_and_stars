@@ -12,5 +12,9 @@
    "showLess": "Show less",
    "castAndCrew": "Cast & Crew",
    "viewAll": "View All",
-   "checkYourInternet": "Check your Internet connection"
+   "checkYourInternet": "Check your Internet connection",
+   "profile" : "Profile",
+   "userName" : "USER NAME",
+   "password": "PASSWORD",
+   "login": "Login"
 }

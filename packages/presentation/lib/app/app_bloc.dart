@@ -1,17 +1,23 @@
-import 'package:flutter/widgets.dart';
 import 'package:collection/collection.dart';
-import 'package:presentation/app/data/app_data.dart';
+import 'package:flutter/widgets.dart';
+import 'package:presentation/app/app_data.dart';
+import 'package:presentation/enum/bottom_navigation_page_type.dart';
 import 'package:presentation/base/bloc.dart';
 import 'package:presentation/navigation/base_page.dart';
+import 'package:presentation/screen/home/home_screen.dart';
+import 'package:presentation/screen/login/login_screen.dart';
 
 abstract class AppBloc extends Bloc {
   factory AppBloc() => _AppBloc();
 
   void handleRemoveRouteSettings(RouteSettings value);
+
+  void onItemTapped(int index);
 }
 
 class _AppBloc extends BlocImpl implements AppBloc {
   final _appData = AppData.init();
+  int selectedIndex = 0;
 
   @override
   void initState() {
@@ -53,7 +59,7 @@ class _AppBloc extends BlocImpl implements AppBloc {
 
   void _popOldAndPush(BasePage page) {
     final oldIndex = _appData.pages.indexWhere(
-      (element) => element.name == page.name,
+          (element) => element.name == page.name,
     );
     if (oldIndex != -1) {
       _appData.pages.removeAt(oldIndex);
@@ -100,5 +106,23 @@ class _AppBloc extends BlocImpl implements AppBloc {
   void _updateData() {
     _appData.isButtonNavBarActive = _currentPage()!.isButtonNavBarActive;
     super.handleData(data: _appData);
+  }
+
+  @override
+  void onItemTapped(int index) {
+    selectedIndex = index;
+    _appData.currentPageIndex = selectedIndex;
+    _updateData();
+    final indexValue = BottomNavigationPageType.values[index];
+
+    switch (indexValue) {
+      case BottomNavigationPageType.home:
+        _popAllAndPush(HomeScreen.page(HomeScreenArguments()));
+        break;
+      case BottomNavigationPageType.profile:
+        _popAllAndPush(LoginScreen.page(LoginScreenArguments()));
+        break;
+
+    }
   }
 }

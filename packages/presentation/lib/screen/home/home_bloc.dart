@@ -5,7 +5,7 @@ import 'package:domain/enum/movie_type.dart';
 import 'package:domain/model/movie_response.dart';
 import 'package:domain/use_case/get_movies_use_case.dart';
 import 'package:presentation/base/bloc.dart';
-import 'package:presentation/screen/home/enum/tab_state.dart';
+import 'package:presentation/enum/tab_state.dart';
 import 'package:presentation/screen/home/home_data.dart';
 import 'package:presentation/screen/home/home_screen.dart';
 import 'package:presentation/screen/home/mapper/movie_mapper.dart';

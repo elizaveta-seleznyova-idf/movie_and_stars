@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';
-import 'package:presentation/screen/home/enum/tab_state.dart';
+import 'package:presentation/enum/tab_state.dart';
 import 'package:presentation/screen/home/home_bloc.dart';
 import 'package:presentation/screen/home/home_data.dart';
 import 'package:presentation/screen/home/model/movie_model.dart';
@@ -52,7 +52,7 @@ class _HomeGridViewState extends State<HomeGridView> {
           : GridView.builder(
               padding: const EdgeInsets.symmetric(horizontal: Dimens.size18),
               itemCount: widget.movieData.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 childAspectRatio: Dimens.size167 / Dimens.size320,
                 crossAxisCount: crossAxisCountSize,
                 crossAxisSpacing: Dimens.size2,

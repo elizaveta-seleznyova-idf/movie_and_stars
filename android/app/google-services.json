@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1024824851119",
+    "project_id": "moviesandstars2022",
+    "storage_bucket": "moviesandstars2022.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1024824851119:android:c5b75099ffa5437c7bb25a",
+        "android_client_info": {
+          "package_name": "com.example.movies_and_stars"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1024824851119-5slutrrq7aur4fee4kv9a8vovmjeh9ij.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.movies_and_stars",
+            "certificate_hash": "a4737861123eaa8ee5bdb1fc9009290d2cc13eac"
+          }
+        },
+        {
+          "client_id": "1024824851119-1i7622det8j3fu92o3o51bdd07u2n549.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBB8S-LCKQq8arl6F4gSc5nwSWJYorIi0E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1024824851119-1i7622det8j3fu92o3o51bdd07u2n549.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1024824851119-74l2ncuit810l3smv463e0fl29sauaob.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.moviesAndStars"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

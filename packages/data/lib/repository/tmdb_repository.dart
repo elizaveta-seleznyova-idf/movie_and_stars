@@ -5,9 +5,9 @@ import 'package:domain/model/tmdb_response.dart';
 import 'package:domain/repository/tmdb_repository.dart';
 
 class TmdbRepositoryImpl implements TmdbRepository {
-  final ApiService<DioServicePayload> _apiService;
-
   const TmdbRepositoryImpl(this._apiService);
+
+  final ApiService<DioServicePayload> _apiService;
 
   @override
   Future<TmdbResponse> getCastImage({required int? tMDBId}) async {

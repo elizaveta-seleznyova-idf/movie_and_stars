@@ -1,3 +1,5 @@
+import groovy.json.JsonSlurper
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -21,7 +23,14 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def VersionsMap = new JsonSlurper().parse(file("../../secrets.json"))
+
+def facebookAppId = VersionsMap["facebook_app_id"]
+def fbLoginProtocolScheme = VersionsMap["fb_login_protocol_scheme"]
+def facebookClientToken = VersionsMap["facebook_client_token"]
+
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
@@ -49,8 +58,12 @@ android {
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
+        multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        resValue("string", "facebook_app_id", facebookAppId)
+        resValue("string", "fb_login_protocol_scheme", fbLoginProtocolScheme)
+        resValue("string", "facebook_client_token", facebookClientToken)
     }
 
     buildTypes {
@@ -68,4 +81,6 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "com.facebook.android:facebook-login:15.0.1"
+    implementation 'com.android.support:multidex:1.0.3'
 }
