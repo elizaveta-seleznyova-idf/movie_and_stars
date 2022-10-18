@@ -1,10 +1,10 @@
 import 'package:domain/model/movie.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/text_style/text_style.dart';
 import 'package:presentation/config/theme/app_colors.dart';
+import 'package:presentation/generated_localization/l10n.dart';
 import 'package:presentation/screen/movie_details/details_bloc.dart';
 import 'package:presentation/screen/movie_details/details_data.dart';
 import 'package:presentation/screen/movie_details/widgets/details_view_widget.dart';
@@ -61,7 +61,7 @@ class _DetailsTabBarState extends State<DetailsTabBar>
           child: Column(
             children: <Widget>[
               Center(
-                child: Text(AppLocalizations.of(context)!.reviews),
+                child: Text(SM.current.reviews),
               )
             ],
           ),
@@ -71,13 +71,13 @@ class _DetailsTabBarState extends State<DetailsTabBar>
           child: Column(
             children: <Widget>[
               Center(
-                child: Text(AppLocalizations.of(context)!.showtime),
+                child: Text(SM.current.showtime),
               )
             ],
           ),
         );
     }
-    return Center(child: Text(AppLocalizations.of(context)!.error));
+    return Center(child: Text(SM.current.error));
   }
 
   @override
@@ -119,7 +119,7 @@ class _DetailsTabBarState extends State<DetailsTabBar>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      AppLocalizations.of(context)!.details,
+                      SM.current.details,
                       style: AppTextStyles.sfProMedium14px,
                     ),
                   ],
@@ -130,7 +130,7 @@ class _DetailsTabBarState extends State<DetailsTabBar>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      AppLocalizations.of(context)!.reviews,
+                      SM.current.reviews,
                       style: AppTextStyles.sfProMedium14px,
                     ),
                   ],
@@ -141,7 +141,7 @@ class _DetailsTabBarState extends State<DetailsTabBar>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      AppLocalizations.of(context)!.showtime,
+                      SM.current.showtime,
                       style: AppTextStyles.sfProMedium14px,
                     ),
                   ],

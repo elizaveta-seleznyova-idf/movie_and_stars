@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:presentation/app/app_bloc.dart';
 import 'package:presentation/app/app_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';

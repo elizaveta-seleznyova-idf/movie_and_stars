@@ -4,13 +4,13 @@ import 'package:presentation/config/dimens/dimens.dart';
 
 class LoginRegistrationButton extends StatelessWidget {
   const LoginRegistrationButton({
-    required this.blocFunction,
+    required this.onPressed,
     required this.buttonImage,
     required this.buttonColor,
     super.key,
   });
 
-  final blocFunction;
+  final onPressed;
   final String buttonImage;
   final Color buttonColor;
 
@@ -20,7 +20,7 @@ class LoginRegistrationButton extends StatelessWidget {
       width: Dimens.size54,
       height: Dimens.size54,
       child: ElevatedButton(
-        onPressed: blocFunction,
+        onPressed: onPressed,
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(
             buttonColor,

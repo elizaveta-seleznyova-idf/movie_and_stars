@@ -18,7 +18,7 @@ class DetailsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final movieInformation = blocData.aboutMovie;
-    const double rating = Dimens.size5;
+    const double rating = 5;
     if (movieInformation == null) {
       return const SizedBox();
     } else {

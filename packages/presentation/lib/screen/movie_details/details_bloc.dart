@@ -1,7 +1,7 @@
 import 'package:domain/use_case/get_people_use_case.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:presentation/base/bloc.dart';
+import 'package:presentation/generated_localization/l10n.dart';
 import 'package:presentation/screen/movie_details/details_data.dart';
 import 'package:presentation/screen/movie_details/details_screen.dart';
 import 'package:presentation/screen/movie_details/mapper/details_mapper.dart';
@@ -20,7 +20,6 @@ abstract class DetailsBloc extends Bloc<DetailsScreenArguments, DetailsData> {
   ScrollController get scrollController;
 
   void shareMovieMessage({
-    required BuildContext context,
     required int movieId,
   });
 }
@@ -84,10 +83,9 @@ class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
 
   @override
   void shareMovieMessage({
-    required BuildContext context,
     required int movieId,
   }) {
-    final messageBloc = AppLocalizations.of(context)!.share(movieId);
+    final messageBloc = SM.current.share(movieId);
     SharePlugin.shareMethod(messageBloc);
   }
 }
