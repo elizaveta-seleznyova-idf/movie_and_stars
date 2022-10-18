@@ -113,7 +113,7 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
     } else if (loginValidation == ValidationErrorType.minLengthErrorType) {
       return SM.current.loginFieldInvalid;
     } else {
-      return SM.current.loginFieldRequired;
+      null;
     }
   }
 
@@ -124,7 +124,7 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
     } else if (passwordValidation == ValidationErrorType.regexErrorType) {
       return SM.current.passwordFieldInvalid;
     } else {
-      return SM.current.passwordFieldRequired;
+      null;
     }
   }
 
@@ -166,8 +166,8 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
     if (result.loginError == null && result.passwordError == null) {
       _tryLogin(true);
     } else {
-      validateLogin();
-      validatePassword();
+      loginValidation = result.loginError;
+      passwordValidation = result.passwordError;
       _loginScreenFormKey.currentState?.validate();
     }
 

@@ -71,7 +71,7 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
               padding: const EdgeInsets.symmetric(horizontal: Dimens.size26),
               child: Form(
                 key: bloc.loginScreenFormKey,
-               // autovalidateMode: AutovalidateMode.onUserInteraction,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,

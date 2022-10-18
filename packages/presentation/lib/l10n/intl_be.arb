@@ -18,7 +18,6 @@
   "password": "ПАРОЛЬ",
   "login": "Увайсці",
   "loginFieldRequired": "Патрабуецца ўваход",
-
   "loginFieldInvalid": "Поле для ўваходу павінна быць не менш за 8 сімвалаў",
   "passwordFieldRequired": "Патрабуецца пароль",
   "passwordFieldInvalid": "Няправільны пароль",
