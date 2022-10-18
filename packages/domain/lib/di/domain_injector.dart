@@ -11,6 +11,7 @@ import 'package:domain/use_case/get_people_use_case.dart';
 import 'package:domain/use_case/login_email_and_password_use_case.dart';
 import 'package:domain/use_case/login_facebook_use_case.dart';
 import 'package:domain/use_case/login_google_use_case.dart';
+import 'package:domain/use_case/validation_use_case.dart';
 import 'package:domain/utils/const.dart';
 import 'package:get_it/get_it.dart';
 
@@ -50,11 +51,15 @@ void _initUseCaseModule() {
     () => LoginEmailAndPassUseCase(
       GetIt.I.get<AuthRepository>(),
       GetIt.I.get<PreferencesLocalRepository>(),
+      GetIt.I.get<ValidationUseCase>(),
     ),
   );
-  GetIt.instance.registerFactory<AnalyticsUseCase>(
-        () => AnalyticsUseCase(
-      GetIt.instance.get<AnalyticsService>(),
+  GetIt.I.registerFactory<ValidationUseCase>(
+    () => ValidationUseCase(),
+  );
+  GetIt.I.registerFactory<AnalyticsUseCase>(
+    () => AnalyticsUseCase(
+      GetIt.I.get<AnalyticsService>(),
     ),
   );
 }

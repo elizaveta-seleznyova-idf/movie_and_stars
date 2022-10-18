@@ -11,4 +11,9 @@ class UserEmailPass {
         json['login'] as String,
         json['password'] as String,
       );
+
+  Map<String, dynamic> toJson(UserEmailPass instance) => <String, dynamic>{
+    'login': instance.login,
+    'password': instance.password,
+  };
 }

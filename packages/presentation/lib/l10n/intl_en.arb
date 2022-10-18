@@ -17,6 +17,10 @@
   "userName": "USER NAME",
   "password": "PASSWORD",
   "login": "Login",
+  "loginFieldRequired": "Login is required",
+  "loginFieldInvalid": "Login field should be at least 8 symbols",
+  "passwordFieldRequired": "Password is required",
+  "passwordFieldInvalid": "Invalid password",
   "share": "Look, what movie I found! \n https://www.themoviedb.org/movie/{movieId}?language=en",
   "@share": {
     "type": "int",

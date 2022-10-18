@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:presentation/app/app_bloc.dart';
 import 'package:presentation/app/app_bottom_navigation_bar.dart';
 import 'package:presentation/app/app_data.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
 import 'package:presentation/config/theme/app_colors.dart';
+import 'package:presentation/generated_localization/l10n.dart';
 
 class StarMovieApp extends StatefulWidget {
-  const StarMovieApp({Key? key}) : super(key: key);
+  const StarMovieApp({super.key});
 
   @override
   State<StatefulWidget> createState() => _StarMovieAppState();
@@ -29,8 +30,13 @@ class _StarMovieAppState extends BlocScreenState<StatefulWidget, AppBloc> {
         primaryColorDark: AppColorsDark.primaryColorDark,
         canvasColor: AppColorsDark.canvasColor,
       ),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: const [
+        SM.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: SM.delegate.supportedLocales,
       home: StreamBuilder<BlocData>(
         stream: bloc.dataStream,
         builder: (context, result) {

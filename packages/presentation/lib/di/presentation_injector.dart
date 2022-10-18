@@ -1,11 +1,12 @@
 import 'package:domain/mappers/movie_to_image.dart';
+import 'package:domain/use_case/analytics_use_case.dart';
 import 'package:domain/use_case/delay_use_case.dart';
 import 'package:domain/use_case/get_movies_use_case.dart';
 import 'package:domain/use_case/get_people_use_case.dart';
 import 'package:domain/use_case/login_email_and_password_use_case.dart';
 import 'package:domain/use_case/login_facebook_use_case.dart';
 import 'package:domain/use_case/login_google_use_case.dart';
-import 'package:domain/use_case/analytics_use_case.dart';
+import 'package:domain/use_case/validation_use_case.dart';
 import 'package:get_it/get_it.dart';
 import 'package:presentation/app/app_bloc.dart';
 import 'package:presentation/navigation/app_navigation.dart';
@@ -16,7 +17,6 @@ import 'package:presentation/screen/movie_details/details_bloc.dart';
 import 'package:presentation/screen/movie_details/mapper/details_mapper.dart';
 import 'package:presentation/screen/profile/profile_bloc.dart';
 import 'package:presentation/screen/splash/splash_bloc.dart';
-
 
 void initPresentationInjector() {
   _initAppModule();
@@ -58,6 +58,7 @@ void _initBlocModule() {
       GetIt.I.get<LoginEmailAndPassUseCase>(),
       GetIt.I.get<LoginGoogleUseCase>(),
       GetIt.I.get<LoginFaceBookUseCase>(),
+      GetIt.I.get<ValidationUseCase>(),
       GetIt.I.get<AnalyticsUseCase>(),
     ),
   );

@@ -17,6 +17,11 @@
   "userName": "ІМЯ КАРЫСТАЛЬНІКА",
   "password": "ПАРОЛЬ",
   "login": "Увайсці",
+  "loginFieldRequired": "Патрабуецца ўваход",
+
+  "loginFieldInvalid": "Поле для ўваходу павінна быць не менш за 8 сімвалаў",
+  "passwordFieldRequired": "Патрабуецца пароль",
+  "passwordFieldInvalid": "Няправільны пароль",
   "share": "Глядзі, які я знайшоў фільм! \n https://www.themoviedb.org/movie/{movieId}?language=ru",
   "@share": {
     "type": "int",

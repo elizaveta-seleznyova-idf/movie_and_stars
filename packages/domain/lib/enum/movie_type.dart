@@ -1,1 +1,1 @@
-enum MovieType { trending, anticipated }
+enum MovieType { trending, anticipated, }

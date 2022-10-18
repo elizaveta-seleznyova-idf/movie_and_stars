@@ -5,24 +5,28 @@ import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/screen/login/login_bloc.dart';
 import 'package:presentation/utils/image_path.dart';
 
-class LoginPasswordTextField extends StatefulWidget {
-  const LoginPasswordTextField({
+class LoginPasswordTextFormField extends StatefulWidget {
+  const LoginPasswordTextFormField({
     required this.bloc,
+    required this.validator,
     super.key,
   });
 
   final LoginBloc bloc;
+  final Function validator;
 
   @override
-  State<LoginPasswordTextField> createState() => _LoginPasswordTextFieldState();
+  State<LoginPasswordTextFormField> createState() =>
+      _LoginPasswordTextFormFieldState();
 }
 
-class _LoginPasswordTextFieldState extends State<LoginPasswordTextField> {
+class _LoginPasswordTextFormFieldState
+    extends State<LoginPasswordTextFormField> {
   bool _passwordVisible = false;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: widget.bloc.textPasswordController,
       obscureText: !_passwordVisible,
       autocorrect: false,
@@ -31,6 +35,9 @@ class _LoginPasswordTextFieldState extends State<LoginPasswordTextField> {
       style: const TextStyle(
         color: AppColorsDark.unselectedColor,
       ),
+      validator: (_) {
+        widget.validator;
+      },
       decoration: InputDecoration(
         prefixIcon: SvgPicture.asset(
           ImagesPath.lockImage,

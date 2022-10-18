@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/text_style/text_style.dart';
 import 'package:presentation/config/theme/app_colors.dart';
+import 'package:presentation/generated_localization/l10n.dart';
 import 'package:presentation/navigation/base_arguments.dart';
 import 'package:presentation/navigation/base_page.dart';
 import 'package:presentation/screen/login/login_bloc.dart';
 import 'package:presentation/screen/login/login_data.dart';
-import 'package:presentation/screen/login/widgets/login_password_textfield.dart';
 import 'package:presentation/screen/login/widgets/login_registration_button.dart';
 import 'package:presentation/utils/image_path.dart';
 
@@ -37,6 +36,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
+  bool _passwordVisible = false;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -60,7 +61,7 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                 left: Dimens.size12,
               ),
               child: Text(
-                AppLocalizations.of(context)!.profile,
+                SM.current.profile,
                 style: AppTextStyles.sfProSemiBold24px,
               ),
             ),
@@ -68,84 +69,153 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
           body: Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: Dimens.size26),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.userName,
-                    style: AppTextStyles.sfProMediumUnselected12px,
-                  ),
-                  const SizedBox(height: Dimens.size8),
-                  TextField(
-                    controller: bloc.textLoginController,
-                    cursorColor: Colors.white,
-                    style: const TextStyle(
-                      color: AppColorsDark.unselectedColor,
+              child: Form(
+                key: bloc.loginScreenFormKey,
+               // autovalidateMode: AutovalidateMode.onUserInteraction,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      SM.current.userName,
+                      style: AppTextStyles.sfProMediumUnselected12px,
                     ),
-                    decoration: InputDecoration(
-                      prefixIcon: SvgPicture.asset(
-                        ImagesPath.profileImage,
-                        width: Dimens.size18,
-                        height: Dimens.size18,
-                        fit: BoxFit.none,
+                    const SizedBox(height: Dimens.size8),
+                    TextFormField(
+                      controller: bloc.textLoginController,
+                      cursorColor: Colors.white,
+                      style: const TextStyle(
+                        color: AppColorsDark.unselectedColor,
                       ),
-                      filled: true,
-                      fillColor: AppColorsDark.secondaryColor,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: Dimens.size10,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(Dimens.size4),
-                        borderSide: const BorderSide(
-                          width: Dimens.size0,
-                          style: BorderStyle.none,
+                      onChanged: (loginText) {
+                        bloc.onChangedLogin(loginText);
+                      },
+                      validator: (_) => bloc.validateLogin(),
+                      decoration: InputDecoration(
+                        prefixIcon: SvgPicture.asset(
+                          ImagesPath.profileImage,
+                          width: Dimens.size18,
+                          height: Dimens.size18,
+                          fit: BoxFit.none,
+                        ),
+                        filled: true,
+                        fillColor: AppColorsDark.secondaryColor,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: Dimens.size10,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(Dimens.size4),
+                          borderSide: const BorderSide(
+                            width: Dimens.size0,
+                            style: BorderStyle.none,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: Dimens.size16),
-                  Text(
-                    AppLocalizations.of(context)!.password,
-                    style: AppTextStyles.sfProMediumUnselected12px,
-                  ),
-                  const SizedBox(height: Dimens.size8),
-                  LoginPasswordTextField(bloc: bloc),
-                  const SizedBox(height: Dimens.size32),
-                  SizedBox(
-                    width: width,
-                    height: Dimens.size48,
-                    child: ElevatedButton(
-                      onPressed: bloc.auth,
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                          AppColorsDark.primaryColor,
+                    const SizedBox(height: Dimens.size16),
+                    Text(
+                      SM.current.password,
+                      style: AppTextStyles.sfProMediumUnselected12px,
+                    ),
+                    const SizedBox(height: Dimens.size8),
+                    TextFormField(
+                      controller: bloc.textPasswordController,
+                      obscureText: !_passwordVisible,
+                      autocorrect: false,
+                      enableSuggestions: false,
+                      cursorColor: Colors.white,
+                      style: const TextStyle(
+                        color: AppColorsDark.unselectedColor,
+                      ),
+                      onChanged: (passwordText) {
+                        bloc.onChangedPassword(passwordText);
+                      },
+                      validator: (_) => bloc.validatePassword(),
+                      decoration: InputDecoration(
+                        prefixIcon: SvgPicture.asset(
+                          ImagesPath.lockImage,
+                          width: Dimens.size18,
+                          height: Dimens.size18,
+                          fit: BoxFit.none,
+                        ),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _passwordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Theme.of(context).primaryColorDark,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _passwordVisible = !_passwordVisible;
+                            });
+                          },
+                        ),
+                        filled: true,
+                        fillColor: AppColorsDark.secondaryColor,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: Dimens.size10,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(Dimens.size4),
+                          borderSide: const BorderSide(
+                            width: Dimens.size0,
+                            style: BorderStyle.none,
+                          ),
                         ),
                       ),
-                      child: Text(
-                        AppLocalizations.of(context)!.login,
-                        style: AppTextStyles.sfProRegularUnselected16px,
+                    ),
+                    // LoginPasswordTextFormField(
+                    //     bloc: bloc,
+                    //     validator: () {
+                    //       if (bloc.passwordValidation ==
+                    //           ValidationErrorType.requiredErrorType) {
+                    //         return AppLocalizations.of(context)!
+                    //             .passwordFieldRequired;
+                    //       } else if (bloc.passwordValidation ==
+                    //           ValidationErrorType.regexErrorType) {
+                    //         return AppLocalizations.of(context)!
+                    //             .passwordFieldInvalid;
+                    //       } else {
+                    //         return null;
+                    //       }
+                    //     }),
+                    const SizedBox(height: Dimens.size32),
+                    SizedBox(
+                      width: width,
+                      height: Dimens.size48,
+                      child: ElevatedButton(
+                        onPressed: bloc.login,
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                            AppColorsDark.primaryColor,
+                          ),
+                        ),
+                        child: Text(
+                          SM.current.login,
+                          style: AppTextStyles.sfProRegularUnselected16px,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: Dimens.size50),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      LoginRegistrationButton(
-                        blocFunction: bloc.authFacebook,
-                        buttonImage: ImagesPath.facebookImage,
-                        buttonColor: AppColorsDark.facebookColor,
-                      ),
-                      const SizedBox(width: Dimens.size24),
-                      LoginRegistrationButton(
-                        blocFunction: bloc.authGoogle,
-                        buttonImage: ImagesPath.googleImage,
-                        buttonColor: AppColorsDark.googleColor,
-                      ),
-                    ],
-                  ),
-                ],
+                    const SizedBox(height: Dimens.size50),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        LoginRegistrationButton(
+                          blocFunction: bloc.logFacebook,
+                          buttonImage: ImagesPath.facebookImage,
+                          buttonColor: AppColorsDark.facebookColor,
+                        ),
+                        const SizedBox(width: Dimens.size24),
+                        LoginRegistrationButton(
+                          blocFunction: bloc.logGoogle,
+                          buttonImage: ImagesPath.googleImage,
+                          buttonColor: AppColorsDark.googleColor,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
