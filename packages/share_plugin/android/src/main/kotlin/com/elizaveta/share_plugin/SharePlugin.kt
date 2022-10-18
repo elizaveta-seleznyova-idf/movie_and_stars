@@ -25,8 +25,9 @@ class SharePlugin : FlutterPlugin, MethodCallHandler {
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
        if (call.method == "shareMethod") {
             val message = call.argument("message") as String?
-           if (message != null) {
-               shareMethod(message)
+           val name = call.argument("name") as String?
+           if (message != null && name != null) {
+               shareMethod(message, name)
            }
             result.success(null)
         } else {
@@ -38,13 +39,13 @@ class SharePlugin : FlutterPlugin, MethodCallHandler {
         channel.setMethodCallHandler(null)
     }
 
-    private fun shareMethod(message: String) {
+    private fun shareMethod(message: String, name: String) {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, message)
             type = "text/plain"
         }
-        val sharingIntent = Intent.createChooser(sendIntent, "Movie Sharing")
+        val sharingIntent = Intent.createChooser(sendIntent, name)
         sharingIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
         context?.startActivity(sharingIntent)
     }
