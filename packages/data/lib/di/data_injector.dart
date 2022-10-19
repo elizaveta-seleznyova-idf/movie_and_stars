@@ -28,7 +28,6 @@ Future<void> initDataInjector() async {
   _initApiKeyStore(await keys());
   _initApiModule();
   _initRepositoryModule();
-  _initFirebaseAnalytics();
   await _initLocalModule();
 }
 
@@ -96,9 +95,16 @@ void _initApiModule() {
     ),
     instanceName: DioConstants.tmdbSetvice,
   );
+  GetIt.I.registerSingleton<FirebaseAnalytics>(FirebaseAnalytics.instance);
 }
 
 void _initRepositoryModule() {
+  GetIt.I.registerSingleton<AnalyticsService>(
+    AnalyticsServiceImpl(
+      GetIt.I.get<FirebaseAnalytics>(),
+    ),
+  );
+
   GetIt.I.registerLazySingleton<TraktRepository>(
     () => TraktRepositoryImpl(
       GetIt.I.get<ApiService<DioServicePayload>>(
@@ -128,11 +134,5 @@ Future<void> _initLocalModule() async {
   GetIt.I.registerSingleton(await SharedPreferences.getInstance());
   GetIt.I.registerLazySingleton<PreferencesLocalRepository>(
     () => PreferencesLocalRepositoryImpl(sharedPreferences: GetIt.I.get()),
-  );
-}
-
-void _initFirebaseAnalytics() {
-  GetIt.instance.registerSingleton<AnalyticsService>(
-    AnalyticsServiceImpl(FirebaseAnalytics.instance),
   );
 }

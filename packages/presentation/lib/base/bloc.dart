@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:domain/use_case/log_analytics_event_use_case.dart';
+import 'package:domain/use_case/log_analytics_screen_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:presentation/base/bloc_data.dart';
@@ -22,6 +24,8 @@ abstract class BlocImpl<T extends BaseArguments, D> implements Bloc<T, D> {
 
   @protected
   final appNavigator = GetIt.I.get<AppNavigator>();
+  @protected
+  final logAnalyticsEventUseCase = GetIt.I.get<LogAnalyticsEventUseCase>();
 
   @override
   Stream<BlocData<D?>> get dataStream => _data.stream;
@@ -43,5 +47,7 @@ abstract class BlocImpl<T extends BaseArguments, D> implements Bloc<T, D> {
   void initArgs(T arguments) {}
 
   @override
-  void dispose() {}
+  void dispose() {
+    _data.close();
+  }
 }

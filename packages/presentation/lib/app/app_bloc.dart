@@ -1,4 +1,6 @@
 import 'package:collection/collection.dart';
+import 'package:domain/use_case/log_analytics_event_use_case.dart';
+import 'package:domain/use_case/log_analytics_screen_use_case.dart';
 import 'package:flutter/widgets.dart';
 import 'package:presentation/app/app_data.dart';
 import 'package:presentation/base/bloc.dart';
@@ -6,9 +8,17 @@ import 'package:presentation/enum/bottom_navigation_page_type.dart';
 import 'package:presentation/navigation/base_page.dart';
 import 'package:presentation/screen/home/home_screen.dart';
 import 'package:presentation/screen/login/login_screen.dart';
+import 'package:presentation/utils/analytics_constants.dart';
 
 abstract class AppBloc extends Bloc {
-  factory AppBloc() => _AppBloc();
+  factory AppBloc(
+    LogAnalyticsEventUseCase logAnalyticsEventUseCase,
+    LogAnalyticsScreenUseCase logAnalyticsScreenUseCase,
+  ) =>
+      _AppBloc(
+        logAnalyticsEventUseCase,
+        logAnalyticsScreenUseCase,
+      );
 
   void handleRemoveRouteSettings(RouteSettings value);
 
@@ -16,6 +26,13 @@ abstract class AppBloc extends Bloc {
 }
 
 class _AppBloc extends BlocImpl implements AppBloc {
+  _AppBloc(
+    this._logAnalyticsEvent,
+    this._logAnalyticsScreen,
+  );
+
+  final LogAnalyticsEventUseCase _logAnalyticsEvent;
+  final LogAnalyticsScreenUseCase _logAnalyticsScreen;
   final _appData = AppData.init();
   int selectedIndex = 0;
 
@@ -105,6 +122,9 @@ class _AppBloc extends BlocImpl implements AppBloc {
 
   void _updateData() {
     _appData.isButtonNavBarActive = _currentPage()!.isButtonNavBarActive;
+    if (_currentPage() != null) {
+      _logAnalyticsScreen(_currentPage()!.name ?? '');
+    }
     super.handleData(data: _appData);
   }
 
@@ -117,9 +137,11 @@ class _AppBloc extends BlocImpl implements AppBloc {
 
     switch (indexValue) {
       case BottomNavigationPageType.home:
+        _logAnalyticsEvent(AnalyticsEventConstants.eventHomeNavBar);
         _popAllAndPush(HomeScreen.page(HomeScreenArguments()));
         break;
       case BottomNavigationPageType.profile:
+        _logAnalyticsEvent(AnalyticsEventConstants.eventProfileNavBar);
         _popAllAndPush(LoginScreen.page(LoginScreenArguments()));
         break;
     }
