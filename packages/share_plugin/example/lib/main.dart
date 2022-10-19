@@ -13,7 +13,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _helloMessage = 'Hello';
+  final String _helloMessage = 'Hello';
+  final String _nameMethod = 'Sharing Example';
 
   @override
   void initState() {
@@ -34,7 +35,7 @@ class _MyAppState extends State<MyApp> {
               const Text('Press button to say hello',),
               TextButton(
                 onPressed: () {
-                  SharePlugin.shareMethod(_helloMessage);
+                  SharePlugin.shareMethod(_helloMessage, _nameMethod);
                 },
                 child: Text('Say $_helloMessage'),
               ),

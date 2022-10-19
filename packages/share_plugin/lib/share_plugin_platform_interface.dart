@@ -16,7 +16,7 @@ abstract class SharePluginPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<void> shareMethod(String message) async {
+  Future<void> shareMethod(String message, String name) async {
     throw UnimplementedError('shareMethod() has not been implemented.');
   }
 }

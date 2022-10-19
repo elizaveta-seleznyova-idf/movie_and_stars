@@ -202,13 +202,13 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         LoginRegistrationButton(
-                          blocFunction: bloc.logFacebook,
+                          onPressed: bloc.logFacebook,
                           buttonImage: ImagesPath.facebookImage,
                           buttonColor: AppColorsDark.facebookColor,
                         ),
                         const SizedBox(width: Dimens.size24),
                         LoginRegistrationButton(
-                          blocFunction: bloc.logGoogle,
+                          onPressed: bloc.logGoogle,
                           buttonImage: ImagesPath.googleImage,
                           buttonColor: AppColorsDark.googleColor,
                         ),

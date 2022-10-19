@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/text_style/text_style.dart';
 import 'package:presentation/config/theme/app_colors.dart';
+import 'package:presentation/generated_localization/l10n.dart';
 import 'package:presentation/navigation/base_arguments.dart';
 import 'package:presentation/navigation/base_page.dart';
 import 'package:presentation/screen/home/home_bloc.dart';
@@ -50,7 +50,7 @@ class _HomeScreenState extends BlocScreenState<HomeScreen, HomeBloc> {
               backgroundColor: AppColorsDark.primaryColorDark,
               elevation: Dimens.size0,
               title: Text(
-                AppLocalizations.of(context)!.homeTitle,
+                SM.current.homeTitle,
                 style: AppTextStyles.sfProSemiBold24px,
               ),
               actions: <Widget>[
@@ -73,7 +73,7 @@ class _HomeScreenState extends BlocScreenState<HomeScreen, HomeBloc> {
         } else {
           return Scaffold(
             body: Center(
-              child: Text(AppLocalizations.of(context)!.error),
+              child: Text(SM.current.error),
             ),
           );
         }

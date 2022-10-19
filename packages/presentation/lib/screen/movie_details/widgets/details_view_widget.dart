@@ -1,9 +1,9 @@
 import 'package:domain/model/movie.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/text_style/text_style.dart';
+import 'package:presentation/generated_localization/l10n.dart';
 import 'package:presentation/screen/movie_details/details_bloc.dart';
 import 'package:presentation/screen/movie_details/details_data.dart';
 import 'package:presentation/screen/movie_details/widgets/movie_description_text.dart';
@@ -26,6 +26,7 @@ class DetailsViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final synopsis = movie?.overview;
+    const int trimLinesCount = 4;
     return Padding(
       padding: const EdgeInsets.only(
         left: Dimens.size18,
@@ -36,7 +37,7 @@ class DetailsViewWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            AppLocalizations.of(context)!.synopsis,
+            SM.current.synopsis,
             style: AppTextStyles.sfProMedium18px,
           ),
           const SizedBox(height: Dimens.size16),
@@ -44,7 +45,7 @@ class DetailsViewWidget extends StatelessWidget {
             height: Dimens.size115,
             child: MovieDescriptionText(
               text: '$synopsis',
-              trimLines: 4,
+              trimLines: trimLinesCount,
             ),
           ),
           const SizedBox(height: Dimens.size20),
@@ -52,12 +53,12 @@ class DetailsViewWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                AppLocalizations.of(context)!.castAndCrew,
+                SM.current.castAndCrew,
                 textAlign: TextAlign.left,
                 style: AppTextStyles.sfProMedium18px,
               ),
               Text(
-                AppLocalizations.of(context)!.viewAll,
+                SM.current.viewAll,
                 style: AppTextStyles.sfProRegularSelected14px,
               ),
             ],

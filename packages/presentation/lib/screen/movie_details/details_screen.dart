@@ -1,9 +1,9 @@
 import 'package:domain/model/movie.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
 import 'package:presentation/config/dimens/dimens.dart';
+import 'package:presentation/generated_localization/l10n.dart';
 import 'package:presentation/navigation/base_arguments.dart';
 import 'package:presentation/navigation/base_page.dart';
 import 'package:presentation/screen/movie_details/details_bloc.dart';
@@ -71,7 +71,6 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                                   final movieIdTmdb = movie?.ids?.tmdb ?? 0;
                                   bloc.shareMovieMessage(
                                     movieId: movieIdTmdb,
-                                    context: context,
                                   );
                                 },
                                 child: const Icon(
@@ -118,7 +117,7 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                 );
         } else {
           return Center(
-            child: Text(AppLocalizations.of(context)!.checkYourInternet),
+            child: Text(SM.current.checkYourInternet),
           );
         }
       },

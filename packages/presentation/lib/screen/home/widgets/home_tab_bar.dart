@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/text_style/text_style.dart';
 import 'package:presentation/config/theme/app_colors.dart';
+import 'package:presentation/generated_localization/l10n.dart';
 import 'package:presentation/screen/home/home_bloc.dart';
 import 'package:presentation/screen/home/home_data.dart';
 
@@ -56,7 +56,7 @@ class _HomeTabBarState extends State<HomeTabBar> {
               !isIconActive ? const Icon(Icons.play_circle) : const SizedBox(),
               const SizedBox(width: Dimens.size6),
               Text(
-                AppLocalizations.of(context)!.nowShowing,
+                SM.current.nowShowing,
                 style: AppTextStyles.sfProMedium14px,
               ),
             ],
@@ -68,7 +68,7 @@ class _HomeTabBarState extends State<HomeTabBar> {
             children: <Widget>[
               const SizedBox(width: Dimens.size6),
               Text(
-                AppLocalizations.of(context)!.comingSoon,
+                SM.current.comingSoon,
                 style: AppTextStyles.sfProMedium14px,
               ),
             ],

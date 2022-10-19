@@ -56,7 +56,7 @@ class _ProfileScreenState extends BlocScreenState<ProfileScreen, ProfileBloc> {
           ),
         ),
       ),
-      body: Center(
+      body: const Center(
         child: Text('You are logged!'),
       ),
     );
