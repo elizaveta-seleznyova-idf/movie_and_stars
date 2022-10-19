@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:presentation/config/text_style/text_style.dart';
+import 'package:presentation/generated_localization/l10n.dart';
 
 class MovieDescriptionText extends StatefulWidget {
   const MovieDescriptionText({
@@ -28,9 +28,7 @@ class _MovieDescriptionTextState extends State<MovieDescriptionText> {
   @override
   Widget build(BuildContext context) {
     TextSpan link = TextSpan(
-        text: _readMore
-            ? AppLocalizations.of(context)!.showMore
-            : AppLocalizations.of(context)!.showLess,
+        text: _readMore ? SM.current.showMore : SM.current.showLess,
         style: AppTextStyles.sfProRegularSelected14px,
         recognizer: TapGestureRecognizer()..onTap = _onTapLink);
     Widget result = LayoutBuilder(

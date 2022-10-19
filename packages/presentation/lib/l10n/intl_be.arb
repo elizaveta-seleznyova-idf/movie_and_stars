@@ -1,20 +1,27 @@
 {
-   "@@locale": "be",
-   "homeTitle": "Зорка Фільм",
-   "nowShowing": "Зараз ў прагляду",
-   "comingSoon": "Хутка будзе",
-   "details": "Дэталі",
-   "reviews": "Водгук",
-   "showtime": "Час прагляду",
-   "error": "Памылка",
-   "synopsis": "Кароткі агляд",
-   "showMore": "... Паглядзець больш",
-   "showLess": "Паказаць менш",
-   "castAndCrew": "Акцёры & здымачы",
-   "viewAll": "Даведацца больш",
-   "checkYourInternet": "Праверце сваё падключэнне да Інтэрнэту",
-   "profile" : "Профіль",
-   "userName" : "ІМЯ КАРЫСТАЛЬНІКА",
-   "password": "ПАРОЛЬ",
-   "login": "Увайсці"
+  "@@locale": "be",
+  "homeTitle": "Зорка Фільм",
+  "nowShowing": "Зараз ў прагляду",
+  "comingSoon": "Хутка будзе",
+  "details": "Дэталі",
+  "reviews": "Водгук",
+  "showtime": "Час прагляду",
+  "error": "Памылка",
+  "synopsis": "Кароткі агляд",
+  "showMore": "... Паглядзець больш",
+  "showLess": "Паказаць менш",
+  "castAndCrew": "Акцёры & здымачы",
+  "viewAll": "Даведацца больш",
+  "checkYourInternet": "Праверце сваё падключэнне да Інтэрнэту",
+  "profile": "Профіль",
+  "userName": "ІМЯ КАРЫСТАЛЬНІКА",
+  "password": "ПАРОЛЬ",
+  "login": "Увайсці",
+  "share": "Глядзі, які я знайшоў фільм! \n https://www.themoviedb.org/movie/{movieId}?language=ru",
+  "@share": {
+    "type": "int",
+    "placeholders": {
+      "movieId": {}
+    }
+  }
 }

@@ -1,5 +1,5 @@
 import 'package:data/utils/constants.dart';
-import 'package:data/utils/secrets/secret.dart';
+import 'package:data/utils/secrets/secret_store.dart';
 import 'package:dio/dio.dart';
 
 class TraktRequestInterceptor extends Interceptor {

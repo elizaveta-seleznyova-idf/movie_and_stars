@@ -30,7 +30,7 @@ class _MapperImpl implements MapperDetails {
       image: movieToImage(detailsAboutMovies.ids?.imdb ?? ''),
       runTime: detailsAboutMovies.runtime?.getTimeString() ?? '',
       rating:
-          double.parse((detailsAboutMovies.rating ?? 0 / 2).toStringAsFixed(1)),
+          double.parse(((detailsAboutMovies.rating ?? 0)/2).toStringAsFixed(1)),
       genres: detailsAboutMovies.genres?.capitalizeFirstOfEach() ?? '',
       certification: detailsAboutMovies.certification ?? '',
     );

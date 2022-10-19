@@ -25,7 +25,7 @@ class HomeShimmer extends StatelessWidget {
             child: GridView.builder(
               padding: const EdgeInsets.symmetric(horizontal: Dimens.size18),
               itemCount: itemCountLength,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 childAspectRatio: Dimens.size167 / Dimens.size320,
                 crossAxisCount: crossAxisCountSize,
                 crossAxisSpacing: Dimens.size2,
@@ -53,7 +53,7 @@ class HomeShimmer extends StatelessWidget {
                       shimmerHeight: Dimens.size10,
                       shimmerWidth: width / Dimens.size2,
                     ),
-                    Spacer(flex: flexSize),
+                    const Spacer(flex: flexSize),
                   ],
                 );
               },

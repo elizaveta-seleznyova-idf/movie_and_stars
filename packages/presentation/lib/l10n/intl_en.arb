@@ -1,20 +1,27 @@
 {
-   "@@locale": "en",
-   "homeTitle": "Star Movie",
-   "nowShowing": "Now Showing",
-   "comingSoon": "Coming Soon",
-   "details": "Details",
-   "reviews": "Reviews",
-   "showtime": "Showtime",
-   "error": "Error",
-   "synopsis": "Synopsis",
-   "showMore": "... Show more",
-   "showLess": "Show less",
-   "castAndCrew": "Cast & Crew",
-   "viewAll": "View All",
-   "checkYourInternet": "Check your Internet connection",
-   "profile" : "Profile",
-   "userName" : "USER NAME",
-   "password": "PASSWORD",
-   "login": "Login"
+  "@@locale": "en",
+  "homeTitle": "Star Movie",
+  "nowShowing": "Now Showing",
+  "comingSoon": "Coming Soon",
+  "details": "Details",
+  "reviews": "Reviews",
+  "showtime": "Showtime",
+  "error": "Error",
+  "synopsis": "Synopsis",
+  "showMore": "... Show more",
+  "showLess": "Show less",
+  "castAndCrew": "Cast & Crew",
+  "viewAll": "View All",
+  "checkYourInternet": "Check your Internet connection",
+  "profile": "Profile",
+  "userName": "USER NAME",
+  "password": "PASSWORD",
+  "login": "Login",
+  "share": "Look, what movie I found! \n https://www.themoviedb.org/movie/{movieId}?language=en",
+  "@share": {
+    "type": "int",
+    "placeholders": {
+      "movieId": {}
+    }
+  }
 }

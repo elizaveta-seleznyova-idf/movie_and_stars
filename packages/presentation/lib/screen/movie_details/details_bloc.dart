@@ -1,9 +1,11 @@
 import 'package:domain/use_case/get_people_use_case.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:presentation/base/bloc.dart';
+import 'package:presentation/generated_localization/l10n.dart';
 import 'package:presentation/screen/movie_details/details_data.dart';
 import 'package:presentation/screen/movie_details/details_screen.dart';
 import 'package:presentation/screen/movie_details/mapper/details_mapper.dart';
+import 'package:share_plugin/share_plugin.dart';
 
 abstract class DetailsBloc extends Bloc<DetailsScreenArguments, DetailsData> {
   factory DetailsBloc(
@@ -16,6 +18,10 @@ abstract class DetailsBloc extends Bloc<DetailsScreenArguments, DetailsData> {
       );
 
   ScrollController get scrollController;
+
+  void shareMovieMessage({
+    required int movieId,
+  });
 }
 
 class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
@@ -73,5 +79,14 @@ class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
   void dispose() {
     scrollController.dispose();
     super.dispose();
+  }
+
+  @override
+  void shareMovieMessage({
+    required int movieId,
+  }) {
+    final messageBloc = SM.current.share(movieId);
+    const String name = "Movie Sharing";
+    SharePlugin.shareMethod(messageBloc, name,);
   }
 }
