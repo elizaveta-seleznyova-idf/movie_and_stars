@@ -113,7 +113,7 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
     } else if (loginValidation == ValidationErrorType.minLengthErrorType) {
       return SM.current.loginFieldInvalid;
     } else {
-      null;
+      return null;
     }
   }
 
@@ -124,7 +124,7 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
     } else if (passwordValidation == ValidationErrorType.regexErrorType) {
       return SM.current.passwordFieldInvalid;
     } else {
-      null;
+      return null;
     }
   }
 
@@ -198,8 +198,14 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
       print('CANT LOGIN');
     }
     _updateData(
-      data: _stateData.copyWith(errorMessage: 'Fail while logging'),
       isLoading: false,
     );
+  }
+
+  @override
+  void dispose() {
+    _loginController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 }

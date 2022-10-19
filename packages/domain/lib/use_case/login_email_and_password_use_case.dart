@@ -8,9 +8,11 @@ import 'package:domain/use_case/validation_use_case.dart';
 
 class LoginEmailAndPassUseCase
     implements UseCaseParams<UserEmailPass, Future<LoginAndPasswordErrors>> {
-  const LoginEmailAndPassUseCase(this._authRepository,
-      this._preferences,
-      this._validationUseCase,);
+  const LoginEmailAndPassUseCase(
+    this._authRepository,
+    this._preferences,
+    this._validationUseCase,
+  );
 
   final AuthRepository _authRepository;
   final PreferencesLocalRepository _preferences;
