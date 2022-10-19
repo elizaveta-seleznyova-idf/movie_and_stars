@@ -165,21 +165,6 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                         ),
                       ),
                     ),
-                    // LoginPasswordTextFormField(
-                    //     bloc: bloc,
-                    //     validator: () {
-                    //       if (bloc.passwordValidation ==
-                    //           ValidationErrorType.requiredErrorType) {
-                    //         return AppLocalizations.of(context)!
-                    //             .passwordFieldRequired;
-                    //       } else if (bloc.passwordValidation ==
-                    //           ValidationErrorType.regexErrorType) {
-                    //         return AppLocalizations.of(context)!
-                    //             .passwordFieldInvalid;
-                    //       } else {
-                    //         return null;
-                    //       }
-                    //     }),
                     const SizedBox(height: Dimens.size32),
                     SizedBox(
                       width: width,
