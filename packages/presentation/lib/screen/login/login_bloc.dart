@@ -12,7 +12,6 @@ import 'package:presentation/navigation/base_arguments.dart';
 import 'package:presentation/screen/login/login_data.dart';
 import 'package:presentation/screen/profile/profile_screen.dart';
 import 'package:presentation/utils/analytics_constants.dart';
-import 'package:presentation/utils/error_message.dart';
 
 abstract class LoginBloc extends Bloc<BaseArguments, LoginData> {
   factory LoginBloc(
@@ -125,7 +124,6 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
   void onChangedLogin(String changeLogin) {
     _loginScreenFormKey.currentState?.validate();
     _loginText = changeLogin;
-
     _loginValidation = null;
   }
 
@@ -133,7 +131,7 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
   void onChangedPassword(String changeLogin) {
     _loginScreenFormKey.currentState?.validate();
     _passwordText = changeLogin;
-    passwordValidation = null;
+    _passwordValidation = null;
   }
 
   @override
@@ -193,7 +191,6 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
       return;
     }
     _updateData(
-      data: _stateData.copyWith(errorMessage: ErrorMessage.fail_while_loggin),
       isLoading: false,
     );
   }

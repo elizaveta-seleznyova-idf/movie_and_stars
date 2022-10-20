@@ -80,11 +80,6 @@ void _initUseCaseModule() {
       ],
     );
   });
-  GetIt.I.registerFactory<AnalyticsUseCase>(
-    () => AnalyticsUseCase(
-      GetIt.I.get<AnalyticsService>(),
-    ),
-  );
 }
 
 void _initApiModule() {
