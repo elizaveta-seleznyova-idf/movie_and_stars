@@ -46,6 +46,10 @@ void _initApiKeyStore(Map<String, dynamic> secretApiKeys) {
 }
 
 void _initApiModule() {
+  GetIt.I.registerSingleton<FirebaseAnalytics>(FirebaseAnalytics.instance);
+  GetIt.I.registerSingleton<FirebaseFirestore>(FirebaseFirestore.instance);
+  GetIt.I.registerSingleton<FirebaseAuth>(FirebaseAuth.instance);
+  GetIt.I.registerSingleton<FacebookAuth>(FacebookAuth.instance);
   GetIt.I.registerFactory<TraktRequestInterceptor>(
     () => TraktRequestInterceptor(
       apiKeyStore: GetIt.I.get(),
@@ -95,12 +99,11 @@ void _initApiModule() {
     ),
     instanceName: DioConstants.tmdbSetvice,
   );
-  GetIt.I.registerSingleton<FirebaseAnalytics>(FirebaseAnalytics.instance);
 }
 
 void _initRepositoryModule() {
-  GetIt.I.registerSingleton<AnalyticsService>(
-    AnalyticsServiceImpl(
+  GetIt.I.registerLazySingleton<AnalyticsService>(
+    () => AnalyticsServiceImpl(
       GetIt.I.get<FirebaseAnalytics>(),
     ),
   );
@@ -123,9 +126,9 @@ void _initRepositoryModule() {
 
   GetIt.I.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(
-      FirebaseAuth.instance,
-      FirebaseFirestore.instance,
-      FacebookAuth.instance,
+      GetIt.I.get<FirebaseAuth>(),
+      GetIt.I.get<FirebaseFirestore>(),
+      GetIt.I.get<FacebookAuth>(),
     ),
   );
 }
