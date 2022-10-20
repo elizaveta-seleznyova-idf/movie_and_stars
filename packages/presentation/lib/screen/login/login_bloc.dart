@@ -35,13 +35,9 @@ abstract class LoginBloc extends Bloc<BaseArguments, LoginData> {
 
   GlobalKey get loginScreenFormKey;
 
-  ValidationErrorType? get loginValidation;
+  String? validateLogin(String? textLogin);
 
-  ValidationErrorType? get passwordValidation;
-
-  String? validateLogin();
-
-  String? validatePassword();
+  String? validatePassword(String? textPassword);
 
   void onChangedLogin(String changeLogin);
 
@@ -72,9 +68,9 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
   final ValidationUseCase validationUseCase;
   final AnalyticsUseCase analytics;
 
-  final _loginController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _loginScreenFormKey = GlobalKey<FormState>();
+  final TextEditingController _loginController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final GlobalKey<FormState> _loginScreenFormKey = GlobalKey<FormState>();
 
   @override
   TextEditingController get textLoginController => _loginController;
@@ -85,10 +81,10 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
   @override
   GlobalKey get loginScreenFormKey => _loginScreenFormKey;
 
-  @override
-  ValidationErrorType? loginValidation;
-  @override
-  ValidationErrorType? passwordValidation;
+  ValidationErrorType? _loginValidation;
+  ValidationErrorType? _passwordValidation;
+  String _loginText = '';
+  String _passwordText = '';
 
   @override
   void initState() async {
@@ -107,10 +103,10 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
   }
 
   @override
-  String? validateLogin() {
-    if (loginValidation == ValidationErrorType.requiredErrorType) {
+  String? validateLogin(String? textLogin) {
+    if (_loginValidation == ValidationErrorType.requiredErrorType) {
       return SM.current.loginFieldRequired;
-    } else if (loginValidation == ValidationErrorType.minLengthErrorType) {
+    } else if (_loginValidation == ValidationErrorType.minLengthErrorType) {
       return SM.current.loginFieldInvalid;
     } else {
       return null;
@@ -118,10 +114,10 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
   }
 
   @override
-  String? validatePassword() {
-    if (passwordValidation == ValidationErrorType.requiredErrorType) {
+  String? validatePassword(String? textPassword) {
+    if (_passwordValidation == ValidationErrorType.requiredErrorType) {
       return SM.current.passwordFieldRequired;
-    } else if (passwordValidation == ValidationErrorType.regexErrorType) {
+    } else if (_passwordValidation == ValidationErrorType.regexErrorType) {
       return SM.current.passwordFieldInvalid;
     } else {
       return null;
@@ -131,22 +127,23 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
   @override
   void onChangedLogin(String changeLogin) {
     _loginScreenFormKey.currentState?.validate();
-    loginValidation = null;
+    _loginText = changeLogin;
+
+    _loginValidation = null;
     _updateData();
   }
 
   @override
   void onChangedPassword(String changeLogin) {
     _loginScreenFormKey.currentState?.validate();
-    passwordValidation = null;
+    _passwordText = changeLogin;
+
+    _passwordValidation = null;
     _updateData();
   }
 
   @override
   Future<void> login() async {
-    final login = _loginController.text;
-    final password = _passwordController.text;
-
     _updateData(
       data: _stateData,
       isLoading: false,
@@ -154,20 +151,20 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
     _updateData(data: _stateData, isLoading: true);
     analytics('on_login_click');
     final UserEmailPass user = UserEmailPass(
-      login,
-      password,
+      _loginText,
+      _passwordText,
     );
     final LoginAndPasswordErrors? loginAndPasswordErrors =
         validationUseCase(user);
-    loginValidation = loginAndPasswordErrors?.loginError;
-    passwordValidation = loginAndPasswordErrors?.passwordError;
+    _loginValidation = loginAndPasswordErrors?.loginError;
+    _passwordValidation = loginAndPasswordErrors?.passwordError;
 
     final result = await loginWithEmailAndPass(user);
     if (result.loginError == null && result.passwordError == null) {
       _tryLogin(true);
     } else {
-      loginValidation = result.loginError;
-      passwordValidation = result.passwordError;
+      _loginValidation = result.loginError;
+      _passwordValidation = result.passwordError;
       _loginScreenFormKey.currentState?.validate();
     }
 
@@ -194,8 +191,6 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
         ),
       );
       return;
-    } else {
-      print('CANT LOGIN');
     }
     _updateData(
       isLoading: false,

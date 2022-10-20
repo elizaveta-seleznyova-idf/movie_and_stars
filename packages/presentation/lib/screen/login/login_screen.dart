@@ -11,6 +11,7 @@ import 'package:presentation/navigation/base_page.dart';
 import 'package:presentation/screen/login/login_bloc.dart';
 import 'package:presentation/screen/login/login_data.dart';
 import 'package:presentation/screen/login/widgets/login_registration_button.dart';
+import 'package:presentation/screen/login/widgets/login_text_field.dart';
 import 'package:presentation/utils/image_path.dart';
 
 class LoginScreenArguments extends BaseArguments {
@@ -36,8 +37,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
-  bool _passwordVisible = false;
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -81,90 +80,110 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                       style: AppTextStyles.sfProMediumUnselected12px,
                     ),
                     const SizedBox(height: Dimens.size8),
-                    TextFormField(
+                    LoginTextField(
                       controller: bloc.textLoginController,
-                      cursorColor: Colors.white,
-                      style: const TextStyle(
-                        color: AppColorsDark.unselectedColor,
+                      onChanged: bloc.onChangedLogin,
+                      validator: bloc.validateLogin,
+                      prefixIcon: SvgPicture.asset(
+                        ImagesPath.profileImage,
+                        width: Dimens.size18,
+                        height: Dimens.size18,
+                        fit: BoxFit.none,
                       ),
-                      onChanged: (loginText) {
-                        bloc.onChangedLogin(loginText);
-                      },
-                      validator: (_) => bloc.validateLogin(),
-                      decoration: InputDecoration(
-                        prefixIcon: SvgPicture.asset(
-                          ImagesPath.profileImage,
-                          width: Dimens.size18,
-                          height: Dimens.size18,
-                          fit: BoxFit.none,
-                        ),
-                        filled: true,
-                        fillColor: AppColorsDark.secondaryColor,
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: Dimens.size10,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(Dimens.size4),
-                          borderSide: const BorderSide(
-                            width: Dimens.size0,
-                            style: BorderStyle.none,
-                          ),
-                        ),
-                      ),
+                      isSuffixIcon: false,
                     ),
+                    // TextFormField(
+                    //   controller: bloc.textLoginController,
+                    //   cursorColor: Colors.white,
+                    //   style: const TextStyle(
+                    //     color: AppColorsDark.unselectedColor,
+                    //   ),
+                    //   onChanged: bloc.onChangedLogin,
+                    //   validator: (_) => bloc.validateLogin(),
+                    //   decoration: InputDecoration(
+                    //     prefixIcon: SvgPicture.asset(
+                    //       ImagesPath.profileImage,
+                    //       width: Dimens.size18,
+                    //       height: Dimens.size18,
+                    //       fit: BoxFit.none,
+                    //     ),
+                    //     filled: true,
+                    //     fillColor: AppColorsDark.secondaryColor,
+                    //     contentPadding: const EdgeInsets.symmetric(
+                    //       horizontal: Dimens.size10,
+                    //     ),
+                    //     border: OutlineInputBorder(
+                    //       borderRadius: BorderRadius.circular(Dimens.size4),
+                    //       borderSide: const BorderSide(
+                    //         width: Dimens.size0,
+                    //         style: BorderStyle.none,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     const SizedBox(height: Dimens.size16),
                     Text(
                       SM.current.password,
                       style: AppTextStyles.sfProMediumUnselected12px,
                     ),
                     const SizedBox(height: Dimens.size8),
-                    TextFormField(
+                    LoginTextField(
                       controller: bloc.textPasswordController,
-                      obscureText: !_passwordVisible,
-                      autocorrect: false,
-                      enableSuggestions: false,
-                      cursorColor: Colors.white,
-                      style: const TextStyle(
-                        color: AppColorsDark.unselectedColor,
+                      onChanged: bloc.onChangedPassword,
+                      validator: bloc.validatePassword,
+                      prefixIcon: SvgPicture.asset(
+                        ImagesPath.lockImage,
+                        width: Dimens.size18,
+                        height: Dimens.size18,
+                        fit: BoxFit.none,
                       ),
-                      onChanged: (passwordText) {
-                        bloc.onChangedPassword(passwordText);
-                      },
-                      validator: (_) => bloc.validatePassword(),
-                      decoration: InputDecoration(
-                        prefixIcon: SvgPicture.asset(
-                          ImagesPath.lockImage,
-                          width: Dimens.size18,
-                          height: Dimens.size18,
-                          fit: BoxFit.none,
-                        ),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            _passwordVisible
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: Theme.of(context).primaryColorDark,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _passwordVisible = !_passwordVisible;
-                            });
-                          },
-                        ),
-                        filled: true,
-                        fillColor: AppColorsDark.secondaryColor,
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: Dimens.size10,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(Dimens.size4),
-                          borderSide: const BorderSide(
-                            width: Dimens.size0,
-                            style: BorderStyle.none,
-                          ),
-                        ),
-                      ),
+                      isSuffixIcon: true,
                     ),
+                    // TextFormField(
+                    //   controller: bloc.textPasswordController,
+                    //   obscureText: !_passwordVisible,
+                    //   autocorrect: false,
+                    //   enableSuggestions: false,
+                    //   cursorColor: Colors.white,
+                    //   style: const TextStyle(
+                    //     color: AppColorsDark.unselectedColor,
+                    //   ),
+                    //   onChanged: bloc.onChangedPassword,
+                    //   validator: (_) => bloc.validatePassword(),
+                    //   decoration: InputDecoration(
+                    //     prefixIcon: SvgPicture.asset(
+                    //       ImagesPath.lockImage,
+                    //       width: Dimens.size18,
+                    //       height: Dimens.size18,
+                    //       fit: BoxFit.none,
+                    //     ),
+                    //     suffixIcon: IconButton(
+                    //       icon: Icon(
+                    //         _passwordVisible
+                    //             ? Icons.visibility
+                    //             : Icons.visibility_off,
+                    //         color: Theme.of(context).primaryColorDark,
+                    //       ),
+                    //       onPressed: () {
+                    //         setState(() {
+                    //           _passwordVisible = !_passwordVisible;
+                    //         });
+                    //       },
+                    //     ),
+                    //     filled: true,
+                    //     fillColor: AppColorsDark.secondaryColor,
+                    //     contentPadding: const EdgeInsets.symmetric(
+                    //       horizontal: Dimens.size10,
+                    //     ),
+                    //     border: OutlineInputBorder(
+                    //       borderRadius: BorderRadius.circular(Dimens.size4),
+                    //       borderSide: const BorderSide(
+                    //         width: Dimens.size0,
+                    //         style: BorderStyle.none,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     const SizedBox(height: Dimens.size32),
                     SizedBox(
                       width: width,
