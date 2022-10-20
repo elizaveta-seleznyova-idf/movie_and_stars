@@ -128,18 +128,14 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
   void onChangedLogin(String changeLogin) {
     _loginScreenFormKey.currentState?.validate();
     _loginText = changeLogin;
-
     _loginValidation = null;
-    _updateData();
   }
 
   @override
   void onChangedPassword(String changeLogin) {
     _loginScreenFormKey.currentState?.validate();
     _passwordText = changeLogin;
-
     _passwordValidation = null;
-    _updateData();
   }
 
   @override
