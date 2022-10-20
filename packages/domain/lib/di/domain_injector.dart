@@ -1,4 +1,5 @@
 import 'package:domain/mappers/movie_to_image.dart';
+import 'package:domain/model/validation.dart';
 import 'package:domain/repository/auth_repository.dart';
 import 'package:domain/repository/preference_local_repository.dart';
 import 'package:domain/repository/tmdb_repository.dart';
@@ -65,8 +66,24 @@ void _initUseCaseModule() {
       GetIt.I.get<ValidationUseCase>(),
     ),
   );
-  GetIt.I.registerFactory<ValidationUseCase>(
-    () => ValidationUseCase(),
+  GetIt.I.registerFactory<ValidationUseCase>(() {
+    const String regexParameters = r'^\w{7,}$';
+    const int minLengthLogin = 8;
+    return ValidationUseCase(
+      loginValidators: [
+        RequiredFieldValidation(),
+        MinLengthValidation(minLength: minLengthLogin),
+      ],
+      passwordValidators: [
+        RequiredFieldValidation(),
+        RegexValidation(regex: regexParameters),
+      ],
+    );
+  });
+  GetIt.I.registerFactory<AnalyticsUseCase>(
+    () => AnalyticsUseCase(
+      GetIt.I.get<AnalyticsService>(),
+    ),
   );
 }
 

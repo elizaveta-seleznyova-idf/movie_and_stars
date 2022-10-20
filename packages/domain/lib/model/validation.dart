@@ -31,7 +31,7 @@ class MinLengthValidation extends Validation {
 class RegexValidation extends Validation {
   RegexValidation({required this.regex});
 
-  String regex;
+  final String regex;
 
   @override
   bool isValid(Object validate) {

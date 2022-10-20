@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:domain/enum/error_type.dart';
 import 'package:domain/model/login_and_password_errors_model.dart';
 import 'package:domain/model/user_email_pass.dart';
@@ -6,17 +7,13 @@ import 'package:domain/use_case/use_case.dart';
 
 class ValidationUseCase
     extends UseCaseParams<UserEmailPass, LoginAndPasswordErrors> {
-  static const String _regexParameters = r'^\w{7,}$';
-  static const int _minLengthLogin = 8;
+  ValidationUseCase({
+    required this.loginValidators,
+    required this.passwordValidators,
+  });
 
-  final List _loginValidators = [
-    RequiredFieldValidation(),
-    MinLengthValidation(minLength: _minLengthLogin),
-  ];
-  final List _passwordValidators = [
-    RequiredFieldValidation(),
-    RegexValidation(regex: _regexParameters),
-  ];
+  final List<Validation> loginValidators;
+  final List<Validation> passwordValidators;
 
   ValidationErrorType? getEnumByValidator(Validation? validator) {
     if (validator is RequiredFieldValidation) {
@@ -33,13 +30,11 @@ class ValidationUseCase
 
   @override
   LoginAndPasswordErrors call(UserEmailPass params) {
-    final Validation? loginFailed = _loginValidators.firstWhere(
+    final Validation? loginFailed = loginValidators.firstWhereOrNull(
       (element) => !element.isValid(params.login),
-      orElse: () => null,
     );
-    final Validation? passwordFailed = _passwordValidators.firstWhere(
+    final Validation? passwordFailed = passwordValidators.firstWhereOrNull(
       (element) => !element.isValid(params.password),
-      orElse: () => null,
     );
 
     final ValidationErrorType? loginInvalidType =
