@@ -1,5 +1,5 @@
 import 'package:domain/enum/error_type.dart';
-import 'package:domain/model/login_and_password_errors_model.dart';
+import 'package:domain/model/login_and_password_errors.dart';
 import 'package:domain/model/user_email_pass.dart';
 import 'package:domain/use_case/analytics_use_case.dart';
 import 'package:domain/use_case/login_email_and_password_use_case.dart';
@@ -108,6 +108,8 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
       return SM.current.loginFieldRequired;
     } else if (_loginValidation == ValidationErrorType.minLengthErrorType) {
       return SM.current.loginFieldInvalid;
+    } else if (_loginValidation == ValidationErrorType.userNotExist) {
+      return SM.current.loginFieldRequired;
     } else {
       return null;
     }
@@ -119,6 +121,8 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
       return SM.current.passwordFieldRequired;
     } else if (_passwordValidation == ValidationErrorType.regexErrorType) {
       return SM.current.passwordFieldInvalid;
+    } else if (_passwordValidation == ValidationErrorType.userNotExist) {
+      return SM.current.loginFieldRequired;
     } else {
       return null;
     }
@@ -126,16 +130,16 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
 
   @override
   void onChangedLogin(String changeLogin) {
-    _loginScreenFormKey.currentState?.validate();
     _loginText = changeLogin;
     _loginValidation = null;
+    _loginScreenFormKey.currentState?.validate();
   }
 
   @override
   void onChangedPassword(String changeLogin) {
-    _loginScreenFormKey.currentState?.validate();
     _passwordText = changeLogin;
     _passwordValidation = null;
+    _loginScreenFormKey.currentState?.validate();
   }
 
   @override
@@ -150,47 +154,47 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
       _loginText,
       _passwordText,
     );
-    final LoginAndPasswordErrors? loginAndPasswordErrors =
-        validationUseCase(user);
-    _loginValidation = loginAndPasswordErrors?.loginError;
-    _passwordValidation = loginAndPasswordErrors?.passwordError;
 
-    final result = await loginWithEmailAndPass(user);
-    if (result.loginError == null && result.passwordError == null) {
-      _tryLogin(true);
-    } else {
-      _loginValidation = result.loginError;
-      _passwordValidation = result.passwordError;
+    try {
+      validationUseCase(user);
+      await loginWithEmailAndPass(user);
+      _pushToProfile();
+    } on LoginAndPasswordErrors catch (e) {
+      _loginValidation = e.loginError;
+      _passwordValidation = e.passwordError;
       _loginScreenFormKey.currentState?.validate();
+      _updateData(data: _stateData, isLoading: false);
     }
-
-    _updateData(data: _stateData, isLoading: false);
   }
 
   @override
   Future<void> logFacebook() async {
     analytics('on_facebook_click');
-    _tryLogin(await loginFaceBookUseCase());
+    try {
+      await loginFaceBookUseCase();
+      _pushToProfile();
+    } on LoginAndPasswordErrors catch (e)  {
+    _loginValidation = e.loginError;
+    _passwordValidation = e.passwordError;
+    _loginScreenFormKey.currentState?.validate();
+    }
   }
 
   @override
   Future<void> logGoogle() async {
     analytics('on_google_click');
-    _tryLogin(await loginGoogleUseCase());
+    try {
+      await loginGoogleUseCase();
+      _pushToProfile();
+    } on LoginAndPasswordErrors catch (e)  {
+      _loginValidation = e.loginError;
+      _passwordValidation = e.passwordError;
+      _loginScreenFormKey.currentState?.validate();
+    }
   }
 
-  void _tryLogin(bool isAbleToLogin) {
-    if (isAbleToLogin) {
-      appNavigator.push(
-        ProfileScreen.page(
-          ProfileScreenArguments(),
-        ),
-      );
-      return;
-    }
-    _updateData(
-      isLoading: false,
-    );
+  void _pushToProfile() {
+    appNavigator.push(ProfileScreen.page(ProfileScreenArguments()));
   }
 
   @override
