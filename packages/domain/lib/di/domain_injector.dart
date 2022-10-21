@@ -44,12 +44,12 @@ void _initUseCaseModule() {
     ),
   );
   GetIt.I.registerFactory<LogAnalyticsEventUseCase>(
-        () => LogAnalyticsEventUseCase(
+    () => LogAnalyticsEventUseCase(
       GetIt.I.get<AnalyticsService>(),
     ),
   );
   GetIt.I.registerFactory<LogAnalyticsScreenUseCase>(
-        () => LogAnalyticsScreenUseCase(
+    () => LogAnalyticsScreenUseCase(
       GetIt.I.get<AnalyticsService>(),
     ),
   );
