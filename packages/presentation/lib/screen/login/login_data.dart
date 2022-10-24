@@ -1,17 +1,29 @@
 class LoginData {
-  const LoginData({required this.errorMessage});
+  LoginData(
+      {this.validateLogin,
+      this.validatePassword,
+      required this.loginText,
+      required this.passwordText});
 
-  final String errorMessage;
+  final String? validateLogin;
+  final String? validatePassword;
+  String loginText = '';
+  String passwordText = '';
 
   LoginData copyWith({
-    String? errorMessage,
+    String? validateLogin,
+    String? validatePassword,
   }) {
     return LoginData(
-      errorMessage: errorMessage ?? this.errorMessage,
+      validateLogin: validateLogin ?? this.validateLogin,
+      validatePassword: validatePassword ?? this.validatePassword,
+      loginText: '',
+      passwordText: '',
     );
   }
 
-  factory LoginData.init() => const LoginData(
-        errorMessage: '',
+  factory LoginData.init() => LoginData(
+        loginText: '',
+        passwordText: '',
       );
 }

@@ -6,6 +6,7 @@ import 'package:domain/use_case/get_people_use_case.dart';
 import 'package:domain/use_case/login_email_and_password_use_case.dart';
 import 'package:domain/use_case/login_facebook_use_case.dart';
 import 'package:domain/use_case/login_google_use_case.dart';
+import 'package:domain/use_case/validation_use_case.dart';
 import 'package:get_it/get_it.dart';
 import 'package:presentation/app/app_bloc.dart';
 import 'package:presentation/navigation/app_navigation.dart';
@@ -57,6 +58,7 @@ void _initBlocModule() {
       GetIt.I.get<LoginEmailAndPassUseCase>(),
       GetIt.I.get<LoginGoogleUseCase>(),
       GetIt.I.get<LoginFaceBookUseCase>(),
+      GetIt.I.get<ValidationUseCase>(),
       GetIt.I.get<AnalyticsUseCase>(),
     ),
   );
