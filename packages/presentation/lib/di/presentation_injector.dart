@@ -40,9 +40,7 @@ void _initViewMapperModule() {
 
 void _initBlocModule() {
   GetIt.I.registerFactory<SplashBloc>(
-    () => SplashBloc(
-      GetIt.I.get<DelayUseCase>(),
-    ),
+    () => SplashBloc(GetIt.I.get<DelayUseCase>()),
   );
   GetIt.I.registerFactory<HomeBloc>(
     () => HomeBloc(

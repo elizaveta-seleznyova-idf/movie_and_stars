@@ -11,6 +11,7 @@ import 'package:presentation/generated_localization/l10n.dart';
 import 'package:presentation/navigation/base_arguments.dart';
 import 'package:presentation/screen/login/login_data.dart';
 import 'package:presentation/screen/profile/profile_screen.dart';
+
 import 'package:presentation/utils/analytics_constants.dart';
 
 abstract class LoginBloc extends Bloc<BaseArguments, LoginData> {
@@ -79,8 +80,6 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
 
   ValidationErrorType? _loginValidation;
   ValidationErrorType? _passwordValidation;
-  String _loginText = '';
-  String _passwordText = '';
 
   @override
   void initState() async {
@@ -104,6 +103,8 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
       return SM.current.loginFieldRequired;
     } else if (_loginValidation == ValidationErrorType.minLengthErrorType) {
       return SM.current.loginFieldInvalid;
+    } else if (_loginValidation == ValidationErrorType.userNotExist) {
+      return SM.current.loginFieldRequired;
     } else {
       return null;
     }
@@ -115,6 +116,8 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
       return SM.current.passwordFieldRequired;
     } else if (_passwordValidation == ValidationErrorType.regexErrorType) {
       return SM.current.passwordFieldInvalid;
+    } else if (_passwordValidation == ValidationErrorType.userNotExist) {
+      return SM.current.loginFieldRequired;
     } else {
       return null;
     }
@@ -122,16 +125,16 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
 
   @override
   void onChangedLogin(String changeLogin) {
-    _loginScreenFormKey.currentState?.validate();
-    _loginText = changeLogin;
+    _stateData.loginText = changeLogin;
     _loginValidation = null;
+    _loginScreenFormKey.currentState?.validate();
   }
 
   @override
   void onChangedPassword(String changeLogin) {
-    _loginScreenFormKey.currentState?.validate();
-    _passwordText = changeLogin;
+    _stateData.passwordText = changeLogin;
     _passwordValidation = null;
+    _loginScreenFormKey.currentState?.validate();
   }
 
   @override
@@ -145,24 +148,19 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
       AnalyticsEventConstants.eventLoginLogPassword,
     );
     final UserEmailPass user = UserEmailPass(
-      _loginText,
-      _passwordText,
+      _stateData.loginText,
+      _stateData.passwordText,
     );
-    final LoginAndPasswordErrors? loginAndPasswordErrors =
-        validationUseCase(user);
-    _loginValidation = loginAndPasswordErrors?.loginError;
-    _passwordValidation = loginAndPasswordErrors?.passwordError;
-
-    final result = await loginWithEmailAndPass(user);
-    if (result.loginError == null && result.passwordError == null) {
-      _tryLogin(true);
-    } else {
-      _loginValidation = result.loginError;
-      _passwordValidation = result.passwordError;
+    try {
+      validationUseCase(user);
+      await loginWithEmailAndPass(user);
+      _pushToProfile();
+    } on LoginAndPasswordErrors catch (e) {
+      _loginValidation = e.loginError;
+      _passwordValidation = e.passwordError;
       _loginScreenFormKey.currentState?.validate();
+      _updateData(data: _stateData, isLoading: false);
     }
-
-    _updateData(data: _stateData, isLoading: false);
   }
 
   @override
@@ -170,7 +168,14 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
     await logAnalyticsEventUseCase(
       AnalyticsEventConstants.eventLoginLogFacebook,
     );
-    _tryLogin(await loginFaceBookUseCase());
+    try {
+      await loginFaceBookUseCase();
+      _pushToProfile();
+    } on LoginAndPasswordErrors catch (e) {
+      _loginValidation = e.loginError;
+      _passwordValidation = e.passwordError;
+      _loginScreenFormKey.currentState?.validate();
+    }
   }
 
   @override
@@ -178,21 +183,18 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
     await logAnalyticsEventUseCase(
       AnalyticsEventConstants.eventLoginLogGoogle,
     );
-    _tryLogin(await loginGoogleUseCase());
+    try {
+      await loginGoogleUseCase();
+      _pushToProfile();
+    } on LoginAndPasswordErrors catch (e) {
+      _loginValidation = e.loginError;
+      _passwordValidation = e.passwordError;
+      _loginScreenFormKey.currentState?.validate();
+    }
   }
 
-  void _tryLogin(bool isAbleToLogin) {
-    if (isAbleToLogin) {
-      appNavigator.push(
-        ProfileScreen.page(
-          ProfileScreenArguments(),
-        ),
-      );
-      return;
-    }
-    _updateData(
-      isLoading: false,
-    );
+  void _pushToProfile() {
+    appNavigator.push(ProfileScreen.page(ProfileScreenArguments()));
   }
 
   @override

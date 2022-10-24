@@ -1,4 +1,5 @@
 import 'package:domain/mappers/movie_to_image.dart';
+import 'package:domain/mappers/validation_mapper.dart';
 import 'package:domain/model/validation.dart';
 import 'package:domain/repository/auth_repository.dart';
 import 'package:domain/repository/preference_local_repository.dart';
@@ -63,9 +64,9 @@ void _initUseCaseModule() {
     () => LoginEmailAndPassUseCase(
       GetIt.I.get<AuthRepository>(),
       GetIt.I.get<PreferencesLocalRepository>(),
-      GetIt.I.get<ValidationUseCase>(),
     ),
   );
+  GetIt.I.registerFactory<ValidationMapper>(() => ValidationMapper());
   GetIt.I.registerFactory<ValidationUseCase>(() {
     const String regexParameters = r'^\w{7,}$';
     const int minLengthLogin = 8;
@@ -78,6 +79,7 @@ void _initUseCaseModule() {
         RequiredFieldValidation(),
         RegexValidation(regex: regexParameters),
       ],
+      validationMapper: GetIt.I.get<ValidationMapper>(),
     );
   });
 }
