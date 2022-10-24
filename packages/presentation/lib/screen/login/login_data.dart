@@ -1,11 +1,14 @@
 class LoginData {
-  const LoginData({
-    this.validateLogin,
-    this.validatePassword,
-  });
+  LoginData(
+      {this.validateLogin,
+      this.validatePassword,
+      required this.loginText,
+      required this.passwordText});
 
   final String? validateLogin;
   final String? validatePassword;
+  String loginText = '';
+  String passwordText = '';
 
   LoginData copyWith({
     String? validateLogin,
@@ -14,8 +17,13 @@ class LoginData {
     return LoginData(
       validateLogin: validateLogin ?? this.validateLogin,
       validatePassword: validatePassword ?? this.validatePassword,
+      loginText: '',
+      passwordText: '',
     );
   }
 
-  factory LoginData.init() => const LoginData();
+  factory LoginData.init() => LoginData(
+        loginText: '',
+        passwordText: '',
+      );
 }

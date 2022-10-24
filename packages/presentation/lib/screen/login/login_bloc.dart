@@ -83,8 +83,6 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
 
   ValidationErrorType? _loginValidation;
   ValidationErrorType? _passwordValidation;
-  String _loginText = '';
-  String _passwordText = '';
 
   @override
   void initState() async {
@@ -130,14 +128,14 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
 
   @override
   void onChangedLogin(String changeLogin) {
-    _loginText = changeLogin;
+    _stateData.loginText = changeLogin;
     _loginValidation = null;
     _loginScreenFormKey.currentState?.validate();
   }
 
   @override
   void onChangedPassword(String changeLogin) {
-    _passwordText = changeLogin;
+    _stateData.passwordText = changeLogin;
     _passwordValidation = null;
     _loginScreenFormKey.currentState?.validate();
   }
@@ -151,8 +149,8 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
     _updateData(data: _stateData, isLoading: true);
     analytics('on_login_click');
     final UserEmailPass user = UserEmailPass(
-      _loginText,
-      _passwordText,
+      _stateData.loginText,
+      _stateData.passwordText,
     );
 
     try {
@@ -173,10 +171,10 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
     try {
       await loginFaceBookUseCase();
       _pushToProfile();
-    } on LoginAndPasswordErrors catch (e)  {
-    _loginValidation = e.loginError;
-    _passwordValidation = e.passwordError;
-    _loginScreenFormKey.currentState?.validate();
+    } on LoginAndPasswordErrors catch (e) {
+      _loginValidation = e.loginError;
+      _passwordValidation = e.passwordError;
+      _loginScreenFormKey.currentState?.validate();
     }
   }
 
@@ -186,7 +184,7 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
     try {
       await loginGoogleUseCase();
       _pushToProfile();
-    } on LoginAndPasswordErrors catch (e)  {
+    } on LoginAndPasswordErrors catch (e) {
       _loginValidation = e.loginError;
       _passwordValidation = e.passwordError;
       _loginScreenFormKey.currentState?.validate();
