@@ -1,9 +1,10 @@
 class LoginData {
-  LoginData(
-      {this.validateLogin,
-      this.validatePassword,
-      required this.loginText,
-      required this.passwordText});
+  LoginData({
+    this.validateLogin,
+    this.validatePassword,
+    required this.loginText,
+    required this.passwordText,
+  });
 
   final String? validateLogin;
   final String? validatePassword;

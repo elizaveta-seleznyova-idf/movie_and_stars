@@ -1,7 +1,6 @@
 import 'package:domain/enum/error_type.dart';
-import 'package:domain/model/login_and_password_errors.dart';
+import 'package:domain/model/login_and_password_errors_model.dart';
 import 'package:domain/model/user_email_pass.dart';
-import 'package:domain/use_case/analytics_use_case.dart';
 import 'package:domain/use_case/login_email_and_password_use_case.dart';
 import 'package:domain/use_case/login_facebook_use_case.dart';
 import 'package:domain/use_case/login_google_use_case.dart';
@@ -13,20 +12,20 @@ import 'package:presentation/navigation/base_arguments.dart';
 import 'package:presentation/screen/login/login_data.dart';
 import 'package:presentation/screen/profile/profile_screen.dart';
 
+import 'package:presentation/utils/analytics_constants.dart';
+
 abstract class LoginBloc extends Bloc<BaseArguments, LoginData> {
   factory LoginBloc(
     LoginEmailAndPassUseCase loginWithEmailAndPass,
     LoginGoogleUseCase loginGoogleUseCase,
     LoginFaceBookUseCase loginFaceBookUseCase,
     ValidationUseCase validationUseCase,
-    AnalyticsUseCase analyticsUseCase,
   ) =>
       _LoginBloc(
         loginWithEmailAndPass,
         loginGoogleUseCase,
         loginFaceBookUseCase,
         validationUseCase,
-        analyticsUseCase,
       );
 
   TextEditingController get textLoginController;
@@ -57,7 +56,6 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
     this.loginGoogleUseCase,
     this.loginFaceBookUseCase,
     this.validationUseCase,
-    this.analytics,
   );
 
   LoginData _stateData = LoginData.init();
@@ -66,7 +64,6 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
   final LoginGoogleUseCase loginGoogleUseCase;
   final LoginFaceBookUseCase loginFaceBookUseCase;
   final ValidationUseCase validationUseCase;
-  final AnalyticsUseCase analytics;
 
   final TextEditingController _loginController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -147,12 +144,13 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
       isLoading: false,
     );
     _updateData(data: _stateData, isLoading: true);
-    analytics('on_login_click');
+    await logAnalyticsEventUseCase(
+      AnalyticsEventConstants.eventLoginLogPassword,
+    );
     final UserEmailPass user = UserEmailPass(
       _stateData.loginText,
       _stateData.passwordText,
     );
-
     try {
       validationUseCase(user);
       await loginWithEmailAndPass(user);
@@ -167,7 +165,9 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
 
   @override
   Future<void> logFacebook() async {
-    analytics('on_facebook_click');
+    await logAnalyticsEventUseCase(
+      AnalyticsEventConstants.eventLoginLogFacebook,
+    );
     try {
       await loginFaceBookUseCase();
       _pushToProfile();
@@ -180,7 +180,9 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
 
   @override
   Future<void> logGoogle() async {
-    analytics('on_google_click');
+    await logAnalyticsEventUseCase(
+      AnalyticsEventConstants.eventLoginLogGoogle,
+    );
     try {
       await loginGoogleUseCase();
       _pushToProfile();

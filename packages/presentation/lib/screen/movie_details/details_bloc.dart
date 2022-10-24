@@ -87,6 +87,9 @@ class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
   }) {
     final messageBloc = SM.current.share(movieId);
     const String name = "Movie Sharing";
-    SharePlugin.shareMethod(messageBloc, name,);
+    SharePlugin.shareMethod(
+      messageBloc,
+      name,
+    );
   }
 }

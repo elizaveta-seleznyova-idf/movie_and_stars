@@ -1,8 +1,9 @@
 import 'package:domain/mappers/movie_to_image.dart';
-import 'package:domain/use_case/analytics_use_case.dart';
 import 'package:domain/use_case/delay_use_case.dart';
 import 'package:domain/use_case/get_movies_use_case.dart';
 import 'package:domain/use_case/get_people_use_case.dart';
+import 'package:domain/use_case/log_analytics_event_use_case.dart';
+import 'package:domain/use_case/log_analytics_screen_use_case.dart';
 import 'package:domain/use_case/login_email_and_password_use_case.dart';
 import 'package:domain/use_case/login_facebook_use_case.dart';
 import 'package:domain/use_case/login_google_use_case.dart';
@@ -59,7 +60,6 @@ void _initBlocModule() {
       GetIt.I.get<LoginGoogleUseCase>(),
       GetIt.I.get<LoginFaceBookUseCase>(),
       GetIt.I.get<ValidationUseCase>(),
-      GetIt.I.get<AnalyticsUseCase>(),
     ),
   );
   GetIt.I.registerFactory<ProfileBloc>(
@@ -68,6 +68,11 @@ void _initBlocModule() {
 }
 
 void _initAppModule() {
-  GetIt.I.registerFactory<AppBloc>(() => AppBloc());
+  GetIt.I.registerFactory<AppBloc>(
+    () => AppBloc(
+      GetIt.I.get<LogAnalyticsEventUseCase>(),
+      GetIt.I.get<LogAnalyticsScreenUseCase>(),
+    ),
+  );
   GetIt.I.registerSingleton<AppNavigator>(AppNavigatorImpl());
 }
