@@ -7,6 +7,7 @@ import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/generated_localization/l10n.dart';
 import 'package:presentation/screen/movie_details/details_bloc.dart';
 import 'package:presentation/screen/movie_details/details_data.dart';
+import 'package:presentation/screen/movie_details/widgets/details_reviews_widget.dart';
 import 'package:presentation/screen/movie_details/widgets/details_view_widget.dart';
 
 class DetailsTabBar extends StatefulWidget {
@@ -55,15 +56,10 @@ class _DetailsTabBarState extends State<DetailsTabBar>
           blocData: widget.blocData,
         );
       case 1:
-        return Container(
-          height: Dimens.size250,
-          color: AppColorsDark.selectedItem,
-          child: Column(
-            children: <Widget>[
-              Center(
-                child: Text(SM.current.reviews),
-              )
-            ],
+        return SizedBox(
+          child: DetailsReviewsWidget(
+            data: widget.data,
+            blocData: widget.blocData,
           ),
         );
       case 2:
@@ -96,7 +92,6 @@ class _DetailsTabBarState extends State<DetailsTabBar>
             top: Dimens.size40,
             right: Dimens.size18,
             left: Dimens.size17,
-            bottom: Dimens.size32,
           ),
           padding: const EdgeInsets.all(Dimens.size3),
           decoration: BoxDecoration(

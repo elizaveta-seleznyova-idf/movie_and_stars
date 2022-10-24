@@ -31,24 +31,23 @@ abstract class UrlConstants {
   static const peopleUrl = '/people';
   static const personUrl = '/person';
   static const imagesUrl = '/images';
-  static const trendingFullUrl =
-      UrlConstants.movieUrl + UrlConstants.trendingUrl;
-  static const anticipatedFullUrl =
-      UrlConstants.movieUrl + UrlConstants.anticipatedUrl;
-  static const summaryFullUrl = UrlConstants.movieUrl + UrlConstants.summaryUrl;
-  static const peopleFullUrl = UrlConstants.movieUrl + UrlConstants.peopleUrl;
+  static const commentsUrl = '/comments';
+  static const trendingFullUrl = movieUrl + trendingUrl;
+  static const anticipatedFullUrl = movieUrl + anticipatedUrl;
+  static const summaryFullUrl = movieUrl + summaryUrl;
+  static const peopleFullUrl = movieUrl + peopleUrl;
 
   static const pagination = 'x-pagination-page-count';
 
-  static String constantUrlCast({
-    required String? movieId,
-  }) {
-    return '${UrlConstants.movieUrl}$movieId${UrlConstants.peopleUrl}';
+  static String constantUrlCast({required String? movieId}) {
+    return '$movieUrl$movieId$peopleUrl';
   }
 
-  static String constantUrlImageOfPeople({
-    required int? tMDBId,
-  }) {
-    return '${UrlConstants.personUrl}/$tMDBId${UrlConstants.imagesUrl}';
+  static String constantUrlImageOfPeople({required int? tMDBId}) {
+    return '$personUrl/$tMDBId$imagesUrl';
+  }
+
+  static String constantURlComments({required String? movieId}) {
+    return '$movieUrl$movieId$commentsUrl';
   }
 }

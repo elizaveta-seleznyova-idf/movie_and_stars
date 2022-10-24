@@ -6,6 +6,7 @@ import 'package:domain/repository/trakt_repository.dart';
 import 'package:domain/services/analytics_service.dart';
 import 'package:domain/use_case/analytics_use_case.dart';
 import 'package:domain/use_case/delay_use_case.dart';
+import 'package:domain/use_case/get_comments_use_case.dart';
 import 'package:domain/use_case/get_movies_use_case.dart';
 import 'package:domain/use_case/get_people_use_case.dart';
 import 'package:domain/use_case/login_email_and_password_use_case.dart';
@@ -34,6 +35,11 @@ void _initUseCaseModule() {
       GetIt.I.get<TmdbRepository>(),
     ),
   );
+  GetIt.I.registerFactory<GetCommentsUseCase>(
+    () => GetCommentsUseCase(
+      GetIt.I.get<TraktRepository>(),
+    ),
+  );
   GetIt.I.registerFactory<LoginFaceBookUseCase>(
     () => LoginFaceBookUseCase(
       GetIt.I.get<AuthRepository>(),
@@ -53,7 +59,7 @@ void _initUseCaseModule() {
     ),
   );
   GetIt.instance.registerFactory<AnalyticsUseCase>(
-        () => AnalyticsUseCase(
+    () => AnalyticsUseCase(
       GetIt.instance.get<AnalyticsService>(),
     ),
   );

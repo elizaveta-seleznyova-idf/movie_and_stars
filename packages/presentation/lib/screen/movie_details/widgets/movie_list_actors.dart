@@ -17,6 +17,7 @@ class MovieListActors extends StatelessWidget {
   Widget build(BuildContext context) {
     final cast = blocData.detailsAboutPeople;
     return ListView.builder(
+      padding: const EdgeInsets.only(top: Dimens.size23),
       physics: const NeverScrollableScrollPhysics(),
       itemCount: cast?.length,
       itemBuilder: (BuildContext context, int index) {

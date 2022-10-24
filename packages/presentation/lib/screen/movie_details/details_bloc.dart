@@ -1,3 +1,4 @@
+import 'package:domain/use_case/get_comments_use_case.dart';
 import 'package:domain/use_case/get_people_use_case.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:presentation/base/bloc.dart';
@@ -10,10 +11,12 @@ import 'package:share_plugin/share_plugin.dart';
 abstract class DetailsBloc extends Bloc<DetailsScreenArguments, DetailsData> {
   factory DetailsBloc(
     GetPeopleUseCase getPeopleUseCase,
+    GetCommentsUseCase getCommentsUseCase,
     MapperDetails detailsMapper,
   ) =>
       DetailsBlocImpl(
         getPeopleUseCase,
+        getCommentsUseCase,
         detailsMapper,
       );
 
@@ -28,10 +31,12 @@ class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
     implements DetailsBloc {
   DetailsBlocImpl(
     this._blocGetCast,
+    this._blocGetComments,
     this._detailsMapper,
   );
 
   final GetPeopleUseCase _blocGetCast;
+  final GetCommentsUseCase _blocGetComments;
   final MapperDetails _detailsMapper;
   DetailsData _stateData = DetailsData.init();
   final ScrollController _scrollController = ScrollController();
@@ -56,16 +61,23 @@ class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
       isLoading: true,
     );
     final movieId = arguments.movieInfo.ids?.slug;
+
     if (movieId != null) {
       final listPerson = await _blocGetCast(movieId);
+      final listComments = await _blocGetComments(movieId);
       final movieInformation = _detailsMapper.detailsAboutMovies(
         arguments.movieInfo,
+        _stateData,
+      );
+      final commentsInformation = _detailsMapper.commentsAboutMovie(
+        listComments,
         _stateData,
       );
 
       _stateData = _stateData.copyWith(
         detailsAboutMovie: arguments.movieInfo,
         detailsAboutPeople: listPerson,
+        movieComments: commentsInformation.movieComments,
         aboutMovie: movieInformation,
       );
       _updateData(
@@ -87,6 +99,9 @@ class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
   }) {
     final messageBloc = SM.current.share(movieId);
     const String name = "Movie Sharing";
-    SharePlugin.shareMethod(messageBloc, name,);
+    SharePlugin.shareMethod(
+      messageBloc,
+      name,
+    );
   }
 }

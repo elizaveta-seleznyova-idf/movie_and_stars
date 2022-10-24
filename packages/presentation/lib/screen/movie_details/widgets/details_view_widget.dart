@@ -36,6 +36,7 @@ class DetailsViewWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          const SizedBox(height: Dimens.size32),
           Text(
             SM.current.synopsis,
             style: AppTextStyles.sfProMedium18px,
