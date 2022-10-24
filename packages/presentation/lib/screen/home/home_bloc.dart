@@ -10,6 +10,7 @@ import 'package:presentation/screen/home/home_data.dart';
 import 'package:presentation/screen/home/home_screen.dart';
 import 'package:presentation/screen/home/mapper/movie_mapper.dart';
 import 'package:presentation/screen/movie_details/details_screen.dart';
+import 'package:presentation/utils/analytics_constants.dart';
 
 abstract class HomeBloc extends Bloc<HomeScreenArguments, HomeData> {
   factory HomeBloc(
@@ -68,7 +69,9 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
   }
 
   @override
-  void navigateToDetailsPage(String movieId) {
+  void navigateToDetailsPage(String movieId) async {
+    await logAnalyticsEventUseCase(
+        AnalyticsEventConstants.eventHomePushToDetails);
     final movie =
         _movies?.firstWhereOrNull((e) => e.movie.ids?.slug == movieId)?.movie;
     if (movie != null) {
@@ -99,6 +102,8 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
   }
 
   Future<void> _fetchTrendingMovies() async {
+    await logAnalyticsEventUseCase(
+        AnalyticsEventConstants.eventHomeTabBarTrending);
     _updateData(
       data: _stateData,
       isLoading: true,
@@ -122,6 +127,8 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
   }
 
   Future<void> _fetchAnticipatedMovies() async {
+    await logAnalyticsEventUseCase(
+        AnalyticsEventConstants.eventHomeTabBarAnticipated);
     _updateData(
       data: _stateData,
       isLoading: true,

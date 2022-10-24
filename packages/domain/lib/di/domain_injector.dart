@@ -1,17 +1,21 @@
 import 'package:domain/mappers/movie_to_image.dart';
+import 'package:domain/mappers/validation_mapper.dart';
+import 'package:domain/model/validation.dart';
 import 'package:domain/repository/auth_repository.dart';
 import 'package:domain/repository/preference_local_repository.dart';
 import 'package:domain/repository/tmdb_repository.dart';
 import 'package:domain/repository/trakt_repository.dart';
 import 'package:domain/services/analytics_service.dart';
-import 'package:domain/use_case/analytics_use_case.dart';
 import 'package:domain/use_case/delay_use_case.dart';
 import 'package:domain/use_case/get_comments_use_case.dart';
 import 'package:domain/use_case/get_movies_use_case.dart';
 import 'package:domain/use_case/get_people_use_case.dart';
+import 'package:domain/use_case/log_analytics_event_use_case.dart';
+import 'package:domain/use_case/log_analytics_screen_use_case.dart';
 import 'package:domain/use_case/login_email_and_password_use_case.dart';
 import 'package:domain/use_case/login_facebook_use_case.dart';
 import 'package:domain/use_case/login_google_use_case.dart';
+import 'package:domain/use_case/validation_use_case.dart';
 import 'package:domain/utils/const.dart';
 import 'package:get_it/get_it.dart';
 
@@ -46,6 +50,16 @@ void _initUseCaseModule() {
       GetIt.I.get<PreferencesLocalRepository>(),
     ),
   );
+  GetIt.I.registerFactory<LogAnalyticsEventUseCase>(
+    () => LogAnalyticsEventUseCase(
+      GetIt.I.get<AnalyticsService>(),
+    ),
+  );
+  GetIt.I.registerFactory<LogAnalyticsScreenUseCase>(
+    () => LogAnalyticsScreenUseCase(
+      GetIt.I.get<AnalyticsService>(),
+    ),
+  );
   GetIt.I.registerFactory<LoginGoogleUseCase>(
     () => LoginGoogleUseCase(
       GetIt.I.get<AuthRepository>(),
@@ -58,11 +72,22 @@ void _initUseCaseModule() {
       GetIt.I.get<PreferencesLocalRepository>(),
     ),
   );
-  GetIt.instance.registerFactory<AnalyticsUseCase>(
-    () => AnalyticsUseCase(
-      GetIt.instance.get<AnalyticsService>(),
-    ),
-  );
+  GetIt.I.registerFactory<ValidationMapper>(() => ValidationMapper());
+  GetIt.I.registerFactory<ValidationUseCase>(() {
+    const String regexParameters = r'^\w{7,}$';
+    const int minLengthLogin = 8;
+    return ValidationUseCase(
+      loginValidators: [
+        RequiredFieldValidation(),
+        MinLengthValidation(minLength: minLengthLogin),
+      ],
+      passwordValidators: [
+        RequiredFieldValidation(),
+        RegexValidation(regex: regexParameters),
+      ],
+      validationMapper: GetIt.I.get<ValidationMapper>(),
+    );
+  });
 }
 
 void _initApiModule() {

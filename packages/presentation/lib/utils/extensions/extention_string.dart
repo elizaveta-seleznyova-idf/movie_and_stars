@@ -13,9 +13,3 @@ extension StrignExtension on String {
     return outputDate;
   }
 }
-
-extension StringOrEmpty on String? {
-  String orEmpty() {
-    return this ?? '';
-  }
-}

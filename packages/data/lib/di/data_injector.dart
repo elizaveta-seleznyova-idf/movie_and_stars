@@ -28,7 +28,6 @@ Future<void> initDataInjector() async {
   _initApiKeyStore(await keys());
   _initApiModule();
   _initRepositoryModule();
-  _initFirebaseAnalytics();
   await _initLocalModule();
 }
 
@@ -47,6 +46,10 @@ void _initApiKeyStore(Map<String, dynamic> secretApiKeys) {
 }
 
 void _initApiModule() {
+  GetIt.I.registerSingleton<FirebaseAnalytics>(FirebaseAnalytics.instance);
+  GetIt.I.registerSingleton<FirebaseFirestore>(FirebaseFirestore.instance);
+  GetIt.I.registerSingleton<FirebaseAuth>(FirebaseAuth.instance);
+  GetIt.I.registerSingleton<FacebookAuth>(FacebookAuth.instance);
   GetIt.I.registerFactory<TraktRequestInterceptor>(
     () => TraktRequestInterceptor(
       apiKeyStore: GetIt.I.get(),
@@ -99,6 +102,12 @@ void _initApiModule() {
 }
 
 void _initRepositoryModule() {
+  GetIt.I.registerLazySingleton<AnalyticsService>(
+    () => AnalyticsServiceImpl(
+      GetIt.I.get<FirebaseAnalytics>(),
+    ),
+  );
+
   GetIt.I.registerLazySingleton<TraktRepository>(
     () => TraktRepositoryImpl(
       GetIt.I.get<ApiService<DioServicePayload>>(
@@ -117,9 +126,9 @@ void _initRepositoryModule() {
 
   GetIt.I.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(
-      FirebaseAuth.instance,
-      FirebaseFirestore.instance,
-      FacebookAuth.instance,
+      GetIt.I.get<FirebaseAuth>(),
+      GetIt.I.get<FirebaseFirestore>(),
+      GetIt.I.get<FacebookAuth>(),
     ),
   );
 }
@@ -128,11 +137,5 @@ Future<void> _initLocalModule() async {
   GetIt.I.registerSingleton(await SharedPreferences.getInstance());
   GetIt.I.registerLazySingleton<PreferencesLocalRepository>(
     () => PreferencesLocalRepositoryImpl(sharedPreferences: GetIt.I.get()),
-  );
-}
-
-void _initFirebaseAnalytics() {
-  GetIt.instance.registerSingleton<AnalyticsService>(
-    AnalyticsServiceImpl(FirebaseAnalytics.instance),
   );
 }
