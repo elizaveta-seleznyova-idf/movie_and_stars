@@ -53,7 +53,7 @@ class _MapperImpl implements MapperDetails {
     final list = commentsAboutMovie
         .map((e) => CommentsModel(
               comment: e.comment ?? '',
-              dateComment: e.dateComment?.convertData() ?? '',
+              dateComment: e.dateComment?.convertDateToMonthDayYear() ?? '',
               rating: double.parse(((e.rating ?? 0) / 2).toStringAsFixed(1)),
               userName: e.user?.userName ?? '',
               userImage: e.user?.userImage?.avatar?.full ?? '',

@@ -7,9 +7,9 @@ class CommentsModel {
     required this.userImage,
   });
 
-  final String? comment;
-  final String? dateComment;
-  final double? rating;
-  final String? userName;
-  final String? userImage;
+  final String comment;
+  final String dateComment;
+  final double rating;
+  final String userName;
+  final String userImage;
 }

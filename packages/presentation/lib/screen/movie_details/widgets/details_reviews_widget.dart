@@ -45,7 +45,7 @@ class DetailsReviewsWidget extends StatelessWidget {
                         shape: BoxShape.circle,
                       ),
                       child: Image.network(
-                        currentComment.userImage ?? '',
+                        currentComment.userImage,
                         fit: BoxFit.fill,
                         errorBuilder: (context, exception, stackTrace) =>
                             SvgPicture.asset(
@@ -63,12 +63,12 @@ class DetailsReviewsWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '${currentComment.userName}',
+                            currentComment.userName,
                             textAlign: TextAlign.left,
                             style: AppTextStyles.sfProMedium14px,
                           ),
                           Text(
-                            '${currentComment.dateComment}',
+                            currentComment.dateComment,
                             textAlign: TextAlign.left,
                             style: AppTextStyles.sfProMediumUnselected12px,
                           ),
@@ -96,11 +96,11 @@ class DetailsReviewsWidget extends StatelessWidget {
                     textDirection: TextDirection.ltr,
                     children: [
                       MovieRating(
-                        rating: currentComment.rating ?? 0.0,
+                        rating: currentComment.rating,
                         starsSize: Dimens.size20,
                       ),
                       const SizedBox(height: Dimens.size9),
-                      Text('${currentComment.comment}'),
+                      Text(currentComment.comment),
                     ],
                   ),
                 )

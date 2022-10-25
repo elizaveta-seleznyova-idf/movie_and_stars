@@ -5,7 +5,7 @@ extension StrignExtension on String {
     return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
   }
 
-  String convertData() {
+  String convertDateToMonthDayYear() {
     DateTime parseDate = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(this);
     var inputDate = DateTime.parse(parseDate.toString());
     var outputFormat = DateFormat('MMMM dd, yyyy');

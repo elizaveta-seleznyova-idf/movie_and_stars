@@ -9,7 +9,6 @@ class GetCommentsUseCase
   final TraktRepository _traktRepository;
 
   @override
-  Future<List<Comments>> call(String? params) {
-    return _traktRepository.getComments(movieId: params);
-  }
+  Future<List<Comments>> call(String? params) =>
+      _traktRepository.getComments(movieId: params);
 }
