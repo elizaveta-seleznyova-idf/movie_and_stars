@@ -11,7 +11,9 @@ class MovieListActors extends StatelessWidget {
     required this.blocData,
     super.key,
   });
+
   final DetailsData blocData;
+  static const int _listLength = 4;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class MovieListActors extends StatelessWidget {
     return ListView.builder(
       padding: const EdgeInsets.only(top: Dimens.size23),
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: cast?.length,
+      itemCount: _listLength,
       itemBuilder: (BuildContext context, int index) {
         final currentCast = cast?[index];
         return Padding(

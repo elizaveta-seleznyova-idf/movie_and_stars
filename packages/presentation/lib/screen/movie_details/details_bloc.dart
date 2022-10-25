@@ -30,13 +30,13 @@ abstract class DetailsBloc extends Bloc<DetailsScreenArguments, DetailsData> {
 class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
     implements DetailsBloc {
   DetailsBlocImpl(
-    this._blocGetCast,
-    this._blocGetComments,
+    this._getCastUseCase,
+    this._getCommentsUseCase,
     this._detailsMapper,
   );
 
-  final GetPeopleUseCase _blocGetCast;
-  final GetCommentsUseCase _blocGetComments;
+  final GetPeopleUseCase _getCastUseCase;
+  final GetCommentsUseCase _getCommentsUseCase;
   final MapperDetails _detailsMapper;
   DetailsData _stateData = DetailsData.init();
   final ScrollController _scrollController = ScrollController();
@@ -63,8 +63,8 @@ class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
     final movieId = arguments.movieInfo.ids?.slug;
 
     if (movieId != null) {
-      final listPerson = await _blocGetCast(movieId);
-      final listComments = await _blocGetComments(movieId);
+      final listPerson = await _getCastUseCase(movieId);
+      final listComments = await _getCommentsUseCase(movieId);
       final movieInformation = _detailsMapper.detailsAboutMovies(
         arguments.movieInfo,
         _stateData,

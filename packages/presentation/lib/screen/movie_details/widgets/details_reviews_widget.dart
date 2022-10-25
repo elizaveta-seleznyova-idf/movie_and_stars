@@ -33,24 +33,21 @@ class DetailsReviewsWidget extends StatelessWidget {
             ),
             child: Column(
               children: [
-                const SizedBox(
-                  height: Dimens.size20,
-                ),
+                const SizedBox(height: Dimens.size20),
                 Row(
                   children: [
-                    Container(
+                    SizedBox(
                       width: Dimens.size40,
                       height: Dimens.size40,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                      ),
-                      child: Image.network(
-                        currentComment.userImage,
-                        fit: BoxFit.fill,
-                        errorBuilder: (context, exception, stackTrace) =>
-                            SvgPicture.asset(
-                          ImagesPath.noUserImage,
+                      child: ClipOval(
+                        child: Image.network(
+                          currentComment.userImage,
                           fit: BoxFit.fill,
+                          errorBuilder: (context, exception, stackTrace) =>
+                              SvgPicture.asset(
+                            ImagesPath.noUserImage,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
                     ),
@@ -93,7 +90,6 @@ class DetailsReviewsWidget extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    textDirection: TextDirection.ltr,
                     children: [
                       MovieRating(
                         rating: currentComment.rating,

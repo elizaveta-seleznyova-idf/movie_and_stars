@@ -32,10 +32,10 @@ abstract class UrlConstants {
   static const personUrl = '/person';
   static const imagesUrl = '/images';
   static const commentsUrl = '/comments';
-  static const trendingFullUrl = movieUrl + trendingUrl;
-  static const anticipatedFullUrl = movieUrl + anticipatedUrl;
-  static const summaryFullUrl = movieUrl + summaryUrl;
-  static const peopleFullUrl = movieUrl + peopleUrl;
+  static const trendingFullUrl = '$movieUrl$trendingUrl';
+  static const anticipatedFullUrl = '$movieUrl$anticipatedUrl';
+  static const summaryFullUrl = '$movieUrl$summaryUrl';
+  static const peopleFullUrl = '$movieUrl$peopleUrl';
 
   static const pagination = 'x-pagination-page-count';
 
