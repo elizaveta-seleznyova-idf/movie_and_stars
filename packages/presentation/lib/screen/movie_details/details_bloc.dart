@@ -2,6 +2,7 @@ import 'package:domain/use_case/get_comments_use_case.dart';
 import 'package:domain/use_case/get_people_use_case.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:presentation/base/bloc.dart';
+import 'package:presentation/enum/details_tab_state.dart';
 import 'package:presentation/generated_localization/l10n.dart';
 import 'package:presentation/screen/movie_details/details_data.dart';
 import 'package:presentation/screen/movie_details/details_screen.dart';
@@ -22,9 +23,9 @@ abstract class DetailsBloc extends Bloc<DetailsScreenArguments, DetailsData> {
 
   ScrollController get scrollController;
 
-  void shareMovieMessage({
-    required int movieId,
-  });
+  void changeTabState(DetailsTabState tabState);
+
+  void shareMovieMessage({required int movieId});
 }
 
 class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
@@ -55,35 +56,55 @@ class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
   }
 
   @override
-  void initArgs(DetailsScreenArguments arguments) async {
+  void initArgs(DetailsScreenArguments arguments) {
     super.initArgs(arguments);
-    _updateData(
-      isLoading: true,
-    );
-    final movieId = arguments.movieInfo.ids?.slug;
+    _updateData(isLoading: true);
+    _stateData = _stateData.copyWith(detailsScreenArguments: arguments);
+    _updateData(isLoading: false);
+  }
 
-    if (movieId != null) {
-      final listPerson = await _getCastUseCase(movieId);
-      final listComments = await _getCommentsUseCase(movieId);
-      final movieInformation = _detailsMapper.detailsAboutMovies(
-        arguments.movieInfo,
-        _stateData,
-      );
-      final commentsInformation = _detailsMapper.commentsAboutMovie(
-        listComments,
-        _stateData,
-      );
+  @override
+  void changeTabState(DetailsTabState tabState) {
+    _stateData = _stateData.copyWith(tabState: tabState);
+    _getDetailsInformation();
+  }
 
-      _stateData = _stateData.copyWith(
-        detailsAboutMovie: arguments.movieInfo,
-        detailsAboutPeople: listPerson,
-        movieComments: commentsInformation.movieComments,
-        aboutMovie: movieInformation,
-      );
-      _updateData(
-        isLoading: false,
-        data: _stateData,
-      );
+  void _getDetailsInformation() async {
+    final movieId = _stateData.detailsScreenArguments?.movieInfo.ids?.slug;
+    _updateData(isLoading: true);
+    if (_stateData.detailsScreenArguments != null && movieId != null) {
+      if (_stateData.tabState == DetailsTabState.details) {
+        final listPerson = await _getCastUseCase(movieId);
+
+        final movieInformation = _detailsMapper.detailsAboutMovies(
+          _stateData.detailsScreenArguments!.movieInfo,
+          _stateData,
+        );
+        _stateData = _stateData.copyWith(
+          detailsAboutMovie: _stateData.detailsScreenArguments?.movieInfo,
+          detailsAboutPeople: listPerson,
+          aboutMovie: movieInformation,
+        );
+        _updateData(
+          isLoading: false,
+          data: _stateData,
+        );
+      } else if (_stateData.tabState == DetailsTabState.reviews) {
+        _updateData(isLoading: true);
+        final listComments = await _getCommentsUseCase(movieId);
+        final commentsInformation = _detailsMapper.commentsAboutMovie(
+          listComments,
+          _stateData,
+        );
+        _stateData = _stateData.copyWith(
+          detailsAboutMovie: _stateData.detailsScreenArguments?.movieInfo,
+          movieComments: commentsInformation.movieComments,
+        );
+        _updateData(
+          isLoading: false,
+          data: _stateData,
+        );
+      }
     }
   }
 
@@ -94,9 +115,7 @@ class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
   }
 
   @override
-  void shareMovieMessage({
-    required int movieId,
-  }) {
+  void shareMovieMessage({required int movieId}) {
     final messageBloc = SM.current.share(movieId);
     const String name = "Movie Sharing";
     SharePlugin.shareMethod(

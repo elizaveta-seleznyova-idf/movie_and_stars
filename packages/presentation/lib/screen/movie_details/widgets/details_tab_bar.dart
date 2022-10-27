@@ -4,6 +4,7 @@ import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/text_style/text_style.dart';
 import 'package:presentation/config/theme/app_colors.dart';
+import 'package:presentation/enum/details_tab_state.dart';
 import 'package:presentation/generated_localization/l10n.dart';
 import 'package:presentation/screen/movie_details/details_bloc.dart';
 import 'package:presentation/screen/movie_details/details_data.dart';
@@ -54,12 +55,15 @@ class _DetailsTabBarState extends State<DetailsTabBar>
           movie: widget.movie,
           bloc: widget.bloc,
           blocData: widget.blocData,
+          tabState: DetailsTabState.details,
         );
       case 1:
         return SizedBox(
           child: DetailsReviewsWidget(
             data: widget.data,
+            bloc: widget.bloc,
             blocData: widget.blocData,
+            tabState: DetailsTabState.reviews,
           ),
         );
       case 2:

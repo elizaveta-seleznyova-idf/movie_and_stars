@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';
-import 'package:presentation/enum/tab_state.dart';
+import 'package:presentation/enum/home_tab_state.dart';
 import 'package:presentation/screen/home/home_bloc.dart';
 import 'package:presentation/screen/home/home_data.dart';
 import 'package:presentation/screen/home/model/movie_model.dart';
@@ -22,7 +22,7 @@ class HomeGridView extends StatefulWidget {
 
   final List<MovieModel> movieData;
   final HomeBloc bloc;
-  final TabState tabState;
+  final HomeTabState tabState;
   final BlocData<HomeData?> data;
 
   @override

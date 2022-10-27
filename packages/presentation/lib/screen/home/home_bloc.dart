@@ -5,7 +5,7 @@ import 'package:domain/enum/movie_type.dart';
 import 'package:domain/model/movie_response.dart';
 import 'package:domain/use_case/get_movies_use_case.dart';
 import 'package:presentation/base/bloc.dart';
-import 'package:presentation/enum/tab_state.dart';
+import 'package:presentation/enum/home_tab_state.dart';
 import 'package:presentation/screen/home/home_data.dart';
 import 'package:presentation/screen/home/home_screen.dart';
 import 'package:presentation/screen/home/mapper/movie_mapper.dart';
@@ -26,7 +26,7 @@ abstract class HomeBloc extends Bloc<HomeScreenArguments, HomeData> {
 
   Future<void> refresh();
 
-  void tabBarRequest(TabState tabState);
+  void tabBarRequest(HomeTabState tabState);
 }
 
 class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
@@ -87,16 +87,16 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
 
   @override
   Future<void> refresh() async {
-    return _stateData.tabState == TabState.now
+    return _stateData.tabState == HomeTabState.now
         ? _fetchTrendingMovies()
         : _fetchAnticipatedMovies();
   }
 
   @override
-  void tabBarRequest(TabState tabState) {
-    if (tabState == TabState.now) {
+  void tabBarRequest(HomeTabState tabState) {
+    if (tabState == HomeTabState.now) {
       _fetchTrendingMovies();
-    } else if (tabState == TabState.soon) {
+    } else if (tabState == HomeTabState.soon) {
       _fetchAnticipatedMovies();
     }
   }
@@ -110,7 +110,7 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
       isBottomNavigationActive: false,
     );
     _stateData.copyWith(
-      tabState: TabState.now,
+      tabState: HomeTabState.now,
     );
     final listTrendingMovies =
         await _blocGetTrendingMoviesUseCase(MovieType.trending);
@@ -135,7 +135,7 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
       isBottomNavigationActive: false,
     );
     _stateData.copyWith(
-      tabState: TabState.soon,
+      tabState: HomeTabState.soon,
     );
     final listAnticipatedMovies =
         await _blocGetTrendingMoviesUseCase(MovieType.anticipated);

@@ -4,8 +4,8 @@ import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/screen/home/widgets/shimmer_container.dart';
 import 'package:shimmer/shimmer.dart';
 
-class DetailsShimmer extends StatelessWidget {
-  const DetailsShimmer({super.key});
+class DetailsScreenShimmer extends StatelessWidget {
+  const DetailsScreenShimmer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,30 +32,22 @@ class DetailsShimmer extends StatelessWidget {
               shimmerHeight: Dimens.size18,
               shimmerWidth: Dimens.size262,
             ),
-            const SizedBox(
-              height: Dimens.size16
-            ),
+            const SizedBox(height: Dimens.size16),
             const ShimmerContainer(
               shimmerHeight: Dimens.size18,
               shimmerWidth: Dimens.size87,
             ),
-            const SizedBox(
-              height: Dimens.size9
-            ),
+            const SizedBox(height: Dimens.size9),
             const ShimmerContainer(
               shimmerHeight: Dimens.size18,
               shimmerWidth: Dimens.size150,
             ),
-            const SizedBox(
-              height: Dimens.size29
-            ),
+            const SizedBox(height: Dimens.size29),
             const ShimmerContainer(
               shimmerHeight: Dimens.size20,
               shimmerWidth: Dimens.size200,
             ),
-            const SizedBox(
-              height: Dimens.size40
-            ),
+            const SizedBox(height: Dimens.size40),
             Padding(
               padding: const EdgeInsets.only(
                 left: Dimens.size18,
@@ -67,9 +59,7 @@ class DetailsShimmer extends StatelessWidget {
                     shimmerHeight: Dimens.size36,
                     shimmerWidth: width,
                   ),
-                  const SizedBox(
-                    height: Dimens.size35
-                  ),
+                  const SizedBox(height: Dimens.size35),
                   const Align(
                     alignment: Alignment.bottomLeft,
                     child: ShimmerContainer(
