@@ -7,7 +7,7 @@ abstract class TraktRepository {
 
   Future<GetDataResponse> getDataAnticipated({int? itemCount});
 
-  Future<PeopleResponse> getCast({String? movieId});
+  Future<PeopleResponse> getCast({required String movieId});
 
-  Future<List<Comments>> getComments({String? movieId});
+  Future<List<Comments>> getComments({required String movieId});
 }

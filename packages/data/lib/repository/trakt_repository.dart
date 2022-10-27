@@ -47,7 +47,7 @@ class TraktRepositoryImpl implements TraktRepository {
 
   @override
   Future<PeopleResponse> getCast({String? movieId}) async {
-    final castUrl = UrlConstants.constantUrlCast(movieId: movieId);
+    final castUrl = UrlConstants.getUrlCast(movieId: movieId);
     final response = await apiService.get(
       castUrl,
       queryParameters: {
@@ -59,7 +59,7 @@ class TraktRepositoryImpl implements TraktRepository {
 
   @override
   Future<List<Comments>> getComments({String? movieId}) async {
-    final commentUrl = UrlConstants.constantURlComments(movieId: movieId);
+    final commentUrl = UrlConstants.getURlComments(movieId: movieId);
     final response = await apiService.get(commentUrl, queryParameters: {
       QueryParametersConstants.extended: QueryParametersConstants.full,
     });

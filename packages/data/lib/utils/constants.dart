@@ -39,15 +39,15 @@ abstract class UrlConstants {
 
   static const pagination = 'x-pagination-page-count';
 
-  static String constantUrlCast({required String? movieId}) {
+  static String getUrlCast({required String? movieId}) {
     return '$movieUrl$movieId$peopleUrl';
   }
 
-  static String constantUrlImageOfPeople({required int? tMDBId}) {
+  static String getUrlImageOfPeople({required int? tMDBId}) {
     return '$personUrl/$tMDBId$imagesUrl';
   }
 
-  static String constantURlComments({required String? movieId}) {
+  static String getURlComments({required String? movieId}) {
     return '$movieUrl$movieId$commentsUrl';
   }
 }

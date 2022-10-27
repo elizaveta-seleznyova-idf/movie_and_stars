@@ -19,8 +19,8 @@ class Comments {
       user: json['user'] == null
           ? null
           : User.fromJson(
-        json['user'] as Map<String, dynamic>,
-      ),
+              json['user'] as Map<String, dynamic>,
+            ),
     );
   }
 
@@ -52,7 +52,8 @@ class User {
       userImage: json['images'] == null
           ? null
           : Images.fromJson(
-        json['images'] as Map<String, dynamic>,),
+              json['images'] as Map<String, dynamic>,
+            ),
     );
   }
 
@@ -79,7 +80,8 @@ class Images {
       avatar: json['avatar'] == null
           ? null
           : Avatar.fromJson(
-        json['avatar'] as Map<String, dynamic>,),
+              json['avatar'] as Map<String, dynamic>,
+            ),
     );
   }
 
@@ -93,9 +95,7 @@ class Images {
 }
 
 class Avatar {
-  const Avatar({
-    this.full
-  });
+  const Avatar({this.full});
 
   final String? full;
 
@@ -110,5 +110,4 @@ class Avatar {
     data['full'] = full;
     return data;
   }
-
 }

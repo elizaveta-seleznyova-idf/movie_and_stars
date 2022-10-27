@@ -8,7 +8,7 @@ import 'package:domain/use_case/use_case.dart';
 import 'package:domain/utils/const.dart';
 
 class GetPeopleUseCase
-    extends UseCaseParams<String?, Future<List<PeopleAndImagesModel>>> {
+    extends UseCaseParams<String, Future<List<PeopleAndImagesModel>>> {
   GetPeopleUseCase(
     this._traktRepository,
     this._tmdbRepository,
@@ -18,7 +18,7 @@ class GetPeopleUseCase
   final TmdbRepository _tmdbRepository;
 
   @override
-  Future<List<PeopleAndImagesModel>> call(String? params) async {
+  Future<List<PeopleAndImagesModel>> call(String params) async {
     final PeopleResponse response =
         await _traktRepository.getCast(movieId: params);
     final List<Cast>? responseCast = response.cast;
