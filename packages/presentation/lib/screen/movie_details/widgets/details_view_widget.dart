@@ -31,11 +31,6 @@ class DetailsViewWidget extends StatefulWidget {
 }
 
 class _DetailsViewWidgetState extends State<DetailsViewWidget> {
-  @override
-  void initState() {
-    super.initState();
-    widget.bloc.changeTabState(widget.tabState);
-  }
 
   @override
   Widget build(BuildContext context) {

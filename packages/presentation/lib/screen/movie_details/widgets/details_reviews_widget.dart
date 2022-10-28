@@ -33,7 +33,7 @@ class _DetailsReviewsWidgetState extends State<DetailsReviewsWidget> {
   @override
   void initState() {
     super.initState();
-    widget.bloc.changeTabState(widget.tabState);
+    widget.bloc.getCommentsInformation();
   }
 
   @override
