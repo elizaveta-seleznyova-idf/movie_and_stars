@@ -38,7 +38,7 @@ class PreferencesLocalRepositoryImpl implements PreferencesLocalRepository {
       if (convertedDateResponse.isAfter(convertedSavedData)) {
         ///ADD UPDATE METHOD
         final stringDate = convertedDateResponse.toString();
-        print('$stringDate');
+
         await sharedPreferences.setString(_dateKey, stringDate);
         print('PREFERENCE DATE AFTER');
       }
@@ -52,4 +52,6 @@ class PreferencesLocalRepositoryImpl implements PreferencesLocalRepository {
     //DateTime convertedData = DateTime.parse(parseDate);
     return parseDate;
   }
+
+
 }

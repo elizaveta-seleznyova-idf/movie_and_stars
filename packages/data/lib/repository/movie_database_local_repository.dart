@@ -49,24 +49,58 @@ class MovieDBLocalRepositoryImpl implements MovieDBLocalRepository {
       );
     });
   }
-  //
-  // Future<void> deleteMovies(
-  //   List<MovieDBModel> movieDBModelList,
-  //   MovieType movieType,
-  // ) async {
-  //   for (MovieDBModel movieModel in movieDBModelList) {
-  //     final idOfMovies = await db.query(
-  //       DataBaseProvider.movieTableName,
-  //       where: 'movieIdTmdb = ?',
-  //       whereArgs: [movieModel.movieIdTmdb],
-  //     );
-  //     if (idOfMovies.isEmpty) {
-  //       await db.delete(
-  //         DataBaseProvider.movieTableName,
-  //         where: 'movieIdTmdb = ?',
-  //         whereArgs: idOfMovies,
-  //       );
-  //     }
-  //   }
-  // }
+
+  Future<List<int>> getMoviesIdsFromCache(MovieType movieType) async {
+    var tmdbFromDB = await db.rawQuery('SELECT movieIdTmdb FROM Movies');
+    return List<int>.from(tmdbFromDB.map((i) => i["movieIdTmdb"]).toList())
+        .toList();
+  }
+
+  Future<void> deleteByIds(
+    List ids,
+    MovieType movieType,
+  ) async {
+    Batch batch = db.batch();
+    List<dynamic> args = [];
+    if (ids.isNotEmpty) {
+      args.addAll(ids);
+      args.add(movieType.name);
+      batch.delete(
+        DataBaseProvider.movieTableName,
+        where: '''
+        "movieIdTmdb" in (${List.filled(ids.length - 1, '?').join(',')}) 
+      and "movieType" = ?''',
+        whereArgs: args,
+      );
+      await batch.commit();
+    }
+  }
+
+  Future<void> updateMovieDB(
+    List<MovieDBModel> movieDBModelList,
+    MovieType movieType,
+  ) async {
+    final List<int> movieIdList = [];
+    movieIdList.addAll(await getMoviesIdsFromCache(movieType));
+    final List<int> moviesIdToDelete = movieIdList
+        .where(
+            (id) => movieDBModelList.where((e) => e.movieIdTmdb == id).isEmpty)
+        .toList();
+    if (moviesIdToDelete.isNotEmpty) {
+      await deleteByIds(
+        moviesIdToDelete,
+        movieType,
+      );
+    }
+    final List<MovieDBModel> moviesToAddToDB = movieDBModelList
+        .where((movie) =>
+            movieIdList.where((id) => movie.movieIdTmdb == id).isEmpty)
+        .toList();
+    if (moviesToAddToDB.isNotEmpty) {
+      await saveMovieDB(
+        moviesToAddToDB,
+        movieType,
+      );
+    }
+  }
 }
