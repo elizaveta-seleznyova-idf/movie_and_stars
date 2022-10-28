@@ -76,6 +76,7 @@ class MovieDBLocalRepositoryImpl implements MovieDBLocalRepository {
     }
   }
 
+  @override
   Future<void> updateMovieDB(
     List<MovieDBModel> movieDBModelList,
     MovieType movieType,

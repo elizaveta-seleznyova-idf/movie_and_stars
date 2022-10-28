@@ -8,4 +8,9 @@ abstract class MovieDBLocalRepository {
   );
 
   Future<List<MovieDBModel>> getMovieFromCache(MovieType movieType);
+
+  Future<void> updateMovieDB(
+    List<MovieDBModel> movieDBModelList,
+    MovieType movieType,
+  );
 }

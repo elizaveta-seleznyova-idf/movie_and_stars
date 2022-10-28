@@ -25,7 +25,7 @@ class GetMoviesUseCase
     final List<MovieResponse> jsonMovies = [];
     final List<MovieDBModel> cachedMovies =
         await _localRepository.getMovieFromCache(type);
-    final response = type == MovieType.trending
+    final GetDataResponse response = type == MovieType.trending
         ? await _traktRepository.getDataTrending()
         : await _traktRepository.getDataAnticipated();
 
@@ -38,10 +38,7 @@ class GetMoviesUseCase
     final paginationCheck =
         int.parse(response.headers[UrlConstantsDomain.pagination][0]);
 
-    final  dateResponse = response.headers['date'][0];
-
-    print('DATA!!!!! $dateResponse');
-    print('DATA!!!!! ${dateResponse.runtimeType}');
+    final String dateResponse = response.headers['date'][0];
     await _preferences.saveDate(dateResponse);
 
     if (paginationCheck >= 5) {
