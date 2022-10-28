@@ -1,0 +1,70 @@
+import 'package:domain/model/cast_db_model.dart';
+import 'package:domain/model/movie_db_model.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+
+class DataBaseProvider {
+  static final DataBaseProvider instanse = DataBaseProvider._init();
+
+  static const String dbName = 'movie_list.db';
+  static const String movieTableName = 'Movies';
+  static const String castTableName = 'Cast';
+  static const int dbVersion = 1;
+  static Database? _database;
+
+  DataBaseProvider._init();
+
+  Future<Database> get database async {
+    if (_database != null) return _database!;
+
+    _database = await _initDB(dbName);
+    return _database!;
+  }
+
+  Future<Database> _initDB(String filePath) async {
+    final dbPath = await getDatabasesPath();
+    final String path = join(
+      dbPath,
+      filePath,
+    );
+    return await openDatabase(
+      path,
+      version: dbVersion,
+      onCreate: onCreateDB,
+    );
+  }
+
+  Future<void> onCreateDB(
+    Database db,
+    int version,
+  ) async {
+    const textType = 'TEXT';
+    const doubleType = 'DOUBLE';
+    const intType = 'INTEGER';
+
+    await db.execute('''
+      CREATE TABLE $movieTableName (
+       ${MovieDBModelField.movieType} $textType,
+       ${MovieDBModelField.title} $textType,
+       ${MovieDBModelField.movieIdImg} $textType,
+       ${MovieDBModelField.movieIdSlug} $textType,
+       ${MovieDBModelField.movieIdTmdb} $intType,
+       ${MovieDBModelField.overview} $intType,
+       ${MovieDBModelField.runtime} $intType,
+       ${MovieDBModelField.rating} $doubleType,
+       ${MovieDBModelField.genres} $textType,
+       ${MovieDBModelField.certification} $textType
+      )
+      ''');
+
+    await db.execute('''
+      CREATE TABLE $castTableName (
+       ${CastDBModelField.movieId} $textType,
+       ${CastDBModelField.characters} $textType,
+       ${CastDBModelField.person} $textType,
+       ${CastDBModelField.image} $textType,
+       FOREIGN KEY (movieId) REFERENCES Movies(movieIdTmdb) ON DELETE CASCADE
+      )
+      ''');
+  }
+}
