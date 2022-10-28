@@ -2,6 +2,8 @@ import 'package:domain/mappers/movie_to_image.dart';
 import 'package:domain/mappers/validation_mapper.dart';
 import 'package:domain/model/validation.dart';
 import 'package:domain/repository/auth_repository.dart';
+import 'package:domain/repository/cast_database_local_repository.dart';
+import 'package:domain/repository/movie_database_local_repository.dart';
 import 'package:domain/repository/preference_local_repository.dart';
 import 'package:domain/repository/tmdb_repository.dart';
 import 'package:domain/repository/trakt_repository.dart';
@@ -30,12 +32,14 @@ void _initUseCaseModule() {
   GetIt.I.registerFactory<GetMoviesUseCase>(
     () => GetMoviesUseCase(
       GetIt.I.get<TraktRepository>(),
+      GetIt.I.get<MovieDBLocalRepository>(),
     ),
   );
   GetIt.I.registerFactory<GetPeopleUseCase>(
     () => GetPeopleUseCase(
       GetIt.I.get<TraktRepository>(),
       GetIt.I.get<TmdbRepository>(),
+      GetIt.I.get<CastDBLocalRepository>(),
     ),
   );
   GetIt.I.registerFactory<LoginFaceBookUseCase>(

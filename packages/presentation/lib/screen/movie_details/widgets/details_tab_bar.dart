@@ -1,4 +1,4 @@
-import 'package:domain/model/movie.dart';
+import 'package:domain/model/movie_db_model.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';
@@ -19,7 +19,7 @@ class DetailsTabBar extends StatefulWidget {
   });
 
   final BlocData<DetailsData?> data;
-  final Movie? movie;
+  final MovieDBModel? movie;
   final DetailsData blocData;
   final DetailsBloc bloc;
 

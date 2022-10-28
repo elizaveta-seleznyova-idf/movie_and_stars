@@ -1,22 +1,30 @@
 import 'package:domain/enum/movie_type.dart';
 import 'package:domain/model/data_model.dart';
+import 'package:domain/model/movie_db_model.dart';
 import 'package:domain/model/movie_response.dart';
+import 'package:domain/repository/movie_database_local_repository.dart';
 import 'package:domain/repository/trakt_repository.dart';
 import 'package:domain/use_case/use_case.dart';
 import 'package:domain/utils/const.dart';
 
 class GetMoviesUseCase
-    implements UseCaseParams<MovieType, Future<List<MovieResponse>>> {
-  const GetMoviesUseCase(this._repository);
+    implements UseCaseParams<MovieType, Future<List<MovieDBModel>>> {
+  const GetMoviesUseCase(
+    this._traktRepository,
+    this._localRepository,
+  );
 
-  final TraktRepository _repository;
+  final TraktRepository _traktRepository;
+  final MovieDBLocalRepository _localRepository;
 
   @override
-  Future<List<MovieResponse>> call(MovieType type) async {
+  Future<List<MovieDBModel>> call(MovieType type) async {
     final List<MovieResponse> jsonMovies = [];
+    final List<MovieDBModel> cachedMovies =
+        await _localRepository.getMovieFromCache(type);
     final response = type == MovieType.trending
-        ? await _repository.getDataTrending()
-        : await _repository.getDataAnticipated();
+        ? await _traktRepository.getDataTrending()
+        : await _traktRepository.getDataAnticipated();
 
     void addToList(GetDataResponse responseWithItem) {
       jsonMovies.addAll(
@@ -26,16 +34,20 @@ class GetMoviesUseCase
 
     final paginationCheck =
         int.parse(response.headers[UrlConstantsDomain.pagination][0]);
+
+    final dateResponse = response.headers['date'];
+    print('DATA!!!!! $dateResponse');
+
     if (paginationCheck >= 5) {
       int itemCount = 50;
 
       if (type == MovieType.trending) {
-        final responseWithItem = await _repository.getDataTrending(
+        final responseWithItem = await _traktRepository.getDataTrending(
           itemCount: itemCount,
         );
         addToList(responseWithItem);
       } else if (type == MovieType.anticipated) {
-        final responseWithItem = await _repository.getDataAnticipated(
+        final responseWithItem = await _traktRepository.getDataAnticipated(
           itemCount: itemCount,
         );
         addToList(responseWithItem);
@@ -44,18 +56,24 @@ class GetMoviesUseCase
       final itemCount = paginationCheck;
 
       if (type == MovieType.trending) {
-        final responseWithItem = await _repository.getDataTrending(
+        final responseWithItem = await _traktRepository.getDataTrending(
           itemCount: itemCount,
         );
         addToList(responseWithItem);
       } else if (type == MovieType.anticipated) {
-        final responseWithItem = await _repository.getDataAnticipated(
+        final responseWithItem = await _traktRepository.getDataAnticipated(
           itemCount: itemCount,
         );
         addToList(responseWithItem);
       }
     }
-
-    return jsonMovies;
+    jsonMovies.forEach((element) {
+      cachedMovies.add(MovieDBModel.fromResponse(element));
+    });
+    _localRepository.saveMovieDB(
+      cachedMovies,
+      type,
+    );
+    return cachedMovies;
   }
 }

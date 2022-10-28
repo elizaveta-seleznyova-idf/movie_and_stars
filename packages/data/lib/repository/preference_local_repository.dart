@@ -9,6 +9,7 @@ class PreferencesLocalRepositoryImpl implements PreferencesLocalRepository {
 
   static const _loginKey = 'loggedUserEmail';
   static const _passwordKey = 'loggedUserPassword';
+  static const _dateKey = 'dateKey';
 
   @override
   Future<void> saveLoggedUser(UserEmailPass user) async {
@@ -16,5 +17,10 @@ class PreferencesLocalRepositoryImpl implements PreferencesLocalRepository {
       sharedPreferences.setString(_loginKey, user.login),
       sharedPreferences.setString(_passwordKey, user.password)
     ]);
+  }
+
+  @override
+  Future<void> saveDate(int date) async {
+    await sharedPreferences.setInt(_dateKey, date);
   }
 }

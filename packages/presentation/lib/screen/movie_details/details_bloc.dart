@@ -55,7 +55,7 @@ class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
     _updateData(
       isLoading: true,
     );
-    final movieId = arguments.movieInfo.ids?.slug;
+    final movieId = arguments.movieInfo.movieIdSlug;
     if (movieId != null) {
       final listPerson = await _blocGetCast(movieId);
       final movieInformation = _detailsMapper.detailsAboutMovies(

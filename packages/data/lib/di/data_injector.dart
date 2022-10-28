@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:data/database/database_provider.dart';
 import 'package:data/dio/dio_builder.dart';
 import 'package:data/interceptor/interceptor.dart';
 import 'package:data/repository/auth_repository.dart';
+import 'package:data/repository/cast_database_local_repository.dart';
+import 'package:data/repository/movie_database_local_repository.dart';
 import 'package:data/repository/preference_local_repository.dart';
 import 'package:data/repository/tmdb_repository.dart';
 import 'package:data/repository/trakt_repository.dart';
@@ -13,6 +16,8 @@ import 'package:data/utils/secrets/secret_loader.dart';
 import 'package:data/utils/secrets/secret_store.dart';
 import 'package:dio/dio.dart';
 import 'package:domain/repository/auth_repository.dart';
+import 'package:domain/repository/cast_database_local_repository.dart';
+import 'package:domain/repository/movie_database_local_repository.dart';
 import 'package:domain/repository/preference_local_repository.dart';
 import 'package:domain/repository/tmdb_repository.dart';
 import 'package:domain/repository/trakt_repository.dart';
@@ -23,11 +28,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sqflite/sqflite.dart';
 
 Future<void> initDataInjector() async {
   _initApiKeyStore(await keys());
   _initApiModule();
   _initRepositoryModule();
+  await _initDataBaseModule();
   await _initLocalModule();
 }
 
@@ -133,9 +140,29 @@ void _initRepositoryModule() {
   );
 }
 
+Future<void> _initDataBaseModule() async {
+  GetIt.I.registerSingleton<DataBaseProvider>(
+    DataBaseProvider.instanse,
+  );
+  GetIt.I.registerSingleton<Database>(
+    await openDatabase(
+      DataBaseProvider.dbName,
+      onCreate: (db, version) =>
+          GetIt.I.get<DataBaseProvider>().onCreateDB(db, version),
+      version: DataBaseProvider.dbVersion,
+    ),
+  );
+}
+
 Future<void> _initLocalModule() async {
   GetIt.I.registerSingleton(await SharedPreferences.getInstance());
   GetIt.I.registerLazySingleton<PreferencesLocalRepository>(
     () => PreferencesLocalRepositoryImpl(sharedPreferences: GetIt.I.get()),
+  );
+  GetIt.I.registerLazySingleton<MovieDBLocalRepository>(
+    () => MovieDBLocalRepositoryImpl(db: GetIt.I.get<Database>()),
+  );
+  GetIt.I.registerLazySingleton<CastDBLocalRepository>(
+    () => CastDBLocalRepositoryImpl(db: GetIt.I.get<Database>()),
   );
 }

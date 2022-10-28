@@ -1,4 +1,4 @@
-import 'package:domain/model/movie.dart';
+import 'package:domain/model/movie_db_model.dart';
 import 'package:domain/model/people_and_images_model.dart';
 import 'package:presentation/screen/movie_details/model/delails_model.dart';
 
@@ -9,7 +9,7 @@ class DetailsData {
     required this.detailsAboutPeople,
   });
 
-  final Movie? detailsAboutMovie;
+  final MovieDBModel? detailsAboutMovie;
   final DetailsModel? aboutMovie;
   final List<PeopleAndImagesModel>? detailsAboutPeople;
 
@@ -20,7 +20,7 @@ class DetailsData {
       );
 
   DetailsData copyWith({
-    Movie? detailsAboutMovie,
+    MovieDBModel? detailsAboutMovie,
     DetailsModel? aboutMovie,
     List<PeopleAndImagesModel>? detailsAboutPeople,
   }) =>

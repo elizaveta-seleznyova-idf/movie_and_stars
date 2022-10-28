@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:collection/collection.dart';
 import 'package:domain/enum/movie_type.dart';
-import 'package:domain/model/movie_response.dart';
+import 'package:domain/model/movie_db_model.dart';
 import 'package:domain/use_case/get_movies_use_case.dart';
 import 'package:presentation/base/bloc.dart';
 import 'package:presentation/enum/tab_state.dart';
@@ -32,15 +32,15 @@ abstract class HomeBloc extends Bloc<HomeScreenArguments, HomeData> {
 class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
     implements HomeBloc {
   HomeBlocImpl(
-    this._blocGetTrendingMoviesUseCase,
+    this._getMoviesUseCase,
     this._mapper,
   );
 
-  final GetMoviesUseCase _blocGetTrendingMoviesUseCase;
+  final GetMoviesUseCase _getMoviesUseCase;
   final MapperMovie _mapper;
 
   HomeData _stateData = HomeData.init();
-  List<MovieResponse>? _movies;
+  List<MovieDBModel>? _movies;
 
   @override
   void initState() async {
@@ -72,8 +72,7 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
   void navigateToDetailsPage(String movieId) async {
     await logAnalyticsEventUseCase(
         AnalyticsEventConstants.eventHomePushToDetails);
-    final movie =
-        _movies?.firstWhereOrNull((e) => e.movie.ids?.slug == movieId)?.movie;
+    final movie = _movies?.firstWhereOrNull((e) => e.movieIdSlug == movieId);
     if (movie != null) {
       appNavigator.push(
         DetailsScreen.page(
@@ -112,8 +111,7 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
     _stateData.copyWith(
       tabState: TabState.now,
     );
-    final listTrendingMovies =
-        await _blocGetTrendingMoviesUseCase(MovieType.trending);
+    final listTrendingMovies = await _getMoviesUseCase(MovieType.trending);
     _movies = listTrendingMovies;
     _stateData = _mapper.mapGetListTrendingResponse(
       listTrendingMovies,
@@ -138,7 +136,7 @@ class HomeBlocImpl extends BlocImpl<HomeScreenArguments, HomeData>
       tabState: TabState.soon,
     );
     final listAnticipatedMovies =
-        await _blocGetTrendingMoviesUseCase(MovieType.anticipated);
+        await _getMoviesUseCase(MovieType.anticipated);
     _movies = listAnticipatedMovies;
     _stateData = _mapper.mapGetListAnticipatedResponse(
       listAnticipatedMovies,

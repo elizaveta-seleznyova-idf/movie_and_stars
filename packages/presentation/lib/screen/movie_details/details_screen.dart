@@ -1,4 +1,4 @@
-import 'package:domain/model/movie.dart';
+import 'package:domain/model/movie_db_model.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
@@ -20,7 +20,7 @@ class DetailsScreenArguments extends BaseArguments {
     super.result,
   });
 
-  final Movie movieInfo;
+  final MovieDBModel movieInfo;
 }
 
 class DetailsScreen extends StatefulWidget {
@@ -68,7 +68,7 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                             actions: <Widget>[
                               GestureDetector(
                                 onTap: () {
-                                  final movieIdTmdb = movie?.ids?.tmdb ?? 0;
+                                  final movieIdTmdb = movie?.movieIdTmdb ?? 0;
                                   bloc.shareMovieMessage(
                                     movieId: movieIdTmdb,
                                   );
