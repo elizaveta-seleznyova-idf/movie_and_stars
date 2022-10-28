@@ -3,6 +3,7 @@ import 'package:domain/model/data_model.dart';
 import 'package:domain/model/movie_db_model.dart';
 import 'package:domain/model/movie_response.dart';
 import 'package:domain/repository/movie_database_local_repository.dart';
+import 'package:domain/repository/preference_local_repository.dart';
 import 'package:domain/repository/trakt_repository.dart';
 import 'package:domain/use_case/use_case.dart';
 import 'package:domain/utils/const.dart';
@@ -12,10 +13,12 @@ class GetMoviesUseCase
   const GetMoviesUseCase(
     this._traktRepository,
     this._localRepository,
+      this._preferences,
   );
 
   final TraktRepository _traktRepository;
   final MovieDBLocalRepository _localRepository;
+  final PreferencesLocalRepository _preferences;
 
   @override
   Future<List<MovieDBModel>> call(MovieType type) async {
@@ -35,8 +38,11 @@ class GetMoviesUseCase
     final paginationCheck =
         int.parse(response.headers[UrlConstantsDomain.pagination][0]);
 
-    final dateResponse = response.headers['date'];
+    final  dateResponse = response.headers['date'][0];
+
     print('DATA!!!!! $dateResponse');
+    print('DATA!!!!! ${dateResponse.runtimeType}');
+    await _preferences.saveDate(dateResponse);
 
     if (paginationCheck >= 5) {
       int itemCount = 50;

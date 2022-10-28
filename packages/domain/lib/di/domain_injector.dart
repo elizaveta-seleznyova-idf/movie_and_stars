@@ -33,6 +33,7 @@ void _initUseCaseModule() {
     () => GetMoviesUseCase(
       GetIt.I.get<TraktRepository>(),
       GetIt.I.get<MovieDBLocalRepository>(),
+      GetIt.I.get<PreferencesLocalRepository>(),
     ),
   );
   GetIt.I.registerFactory<GetPeopleUseCase>(

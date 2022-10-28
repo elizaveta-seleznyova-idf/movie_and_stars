@@ -43,7 +43,7 @@ class DataBaseProvider {
     const intType = 'INTEGER';
 
     await db.execute('''
-      CREATE TABLE $movieTableName (
+      CREATE TABLE IF NOT EXISTS $movieTableName (
        ${MovieDBModelField.movieType} $textType,
        ${MovieDBModelField.title} $textType,
        ${MovieDBModelField.movieIdImg} $textType,
@@ -58,7 +58,7 @@ class DataBaseProvider {
       ''');
 
     await db.execute('''
-      CREATE TABLE $castTableName (
+      CREATE TABLE IF NOT EXISTS $castTableName (
        ${CastDBModelField.movieId} $textType,
        ${CastDBModelField.characters} $textType,
        ${CastDBModelField.person} $textType,

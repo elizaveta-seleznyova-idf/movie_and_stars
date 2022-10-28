@@ -25,7 +25,7 @@ class GetPeopleUseCase
   Future<List<PeopleAndImagesModel>> call(String? params) async {
     final PeopleResponse response =
         await _traktRepository.getCast(movieId: params);
-    final List<CastDBModel>? cachedCast =
+    final List<CastDBModel> cachedCast =
         await _localRepository.getCastFromCache(params!);
     final List<Cast>? responseCast = response.cast;
 
@@ -50,18 +50,16 @@ class GetPeopleUseCase
     final List<PeopleAndImagesModel> peopleAndImagesList =
         await Future.wait(castAndImagesFutureList ?? []);
 
-    if (params != null) {
-      peopleAndImagesList.forEach((element) {
-        cachedCast?.add(CastDBModel.fromResponse(
-          element,
-          params,
-        ));
-      });
-      _localRepository.saveCastDB(
-        cachedCast!,
+    peopleAndImagesList.forEach((element) {
+      cachedCast.add(CastDBModel.fromResponse(
+        element,
         params,
-      );
-    }
+      ));
+    });
+    _localRepository.saveCastDB(
+      cachedCast,
+      params,
+    );
 
     return peopleAndImagesList;
   }

@@ -49,4 +49,24 @@ class MovieDBLocalRepositoryImpl implements MovieDBLocalRepository {
       );
     });
   }
+  //
+  // Future<void> deleteMovies(
+  //   List<MovieDBModel> movieDBModelList,
+  //   MovieType movieType,
+  // ) async {
+  //   for (MovieDBModel movieModel in movieDBModelList) {
+  //     final idOfMovies = await db.query(
+  //       DataBaseProvider.movieTableName,
+  //       where: 'movieIdTmdb = ?',
+  //       whereArgs: [movieModel.movieIdTmdb],
+  //     );
+  //     if (idOfMovies.isEmpty) {
+  //       await db.delete(
+  //         DataBaseProvider.movieTableName,
+  //         where: 'movieIdTmdb = ?',
+  //         whereArgs: idOfMovies,
+  //       );
+  //     }
+  //   }
+  // }
 }

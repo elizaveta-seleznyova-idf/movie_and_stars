@@ -141,9 +141,7 @@ void _initRepositoryModule() {
 }
 
 Future<void> _initDataBaseModule() async {
-  GetIt.I.registerSingleton<DataBaseProvider>(
-    DataBaseProvider.instanse,
-  );
+  GetIt.I.registerSingleton<DataBaseProvider>(DataBaseProvider.instanse);
   GetIt.I.registerSingleton<Database>(
     await openDatabase(
       DataBaseProvider.dbName,
@@ -155,9 +153,12 @@ Future<void> _initDataBaseModule() async {
 }
 
 Future<void> _initLocalModule() async {
-  GetIt.I.registerSingleton(await SharedPreferences.getInstance());
+  GetIt.I.registerSingleton<SharedPreferences>(await SharedPreferences.getInstance());
   GetIt.I.registerLazySingleton<PreferencesLocalRepository>(
-    () => PreferencesLocalRepositoryImpl(sharedPreferences: GetIt.I.get()),
+    () => PreferencesLocalRepositoryImpl(
+      movieDBLocalRepository: GetIt.I.get<MovieDBLocalRepository>(),
+      sharedPreferences: GetIt.I.get<SharedPreferences>(),
+    ),
   );
   GetIt.I.registerLazySingleton<MovieDBLocalRepository>(
     () => MovieDBLocalRepositoryImpl(db: GetIt.I.get<Database>()),
