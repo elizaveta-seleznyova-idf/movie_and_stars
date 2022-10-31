@@ -22,6 +22,7 @@ class GetMoviesUseCase
 
   @override
   Future<List<MovieDBModel>> call(MovieType type) async {
+
     final List<MovieResponse> jsonMovies = [];
     final List<MovieDBModel> cachedMovies =
         await _localRepository.getMovieFromCache(type);

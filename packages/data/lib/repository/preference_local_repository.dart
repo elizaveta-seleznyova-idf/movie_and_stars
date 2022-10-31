@@ -32,7 +32,6 @@ class PreferencesLocalRepositoryImpl implements PreferencesLocalRepository {
     if (savedDate == null) {
       await sharedPreferences.setString(
           _dateKey, convertedDateResponse.toString());
-      print('PREFERENCE DATE FIRST');
     } else {
       final convertedSavedData = convertStringToDate(savedDate);
       if (convertedDateResponse.isAfter(convertedSavedData)) {
@@ -40,7 +39,6 @@ class PreferencesLocalRepositoryImpl implements PreferencesLocalRepository {
         final stringDate = convertedDateResponse.toString();
 
         await sharedPreferences.setString(_dateKey, stringDate);
-        print('PREFERENCE DATE AFTER');
       }
     }
   }
