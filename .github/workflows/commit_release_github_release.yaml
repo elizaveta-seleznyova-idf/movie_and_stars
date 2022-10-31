@@ -54,4 +54,4 @@ jobs:
         with:
           artifacts: build/app/outputs/flutter-apk/app-release.apk
             tag: Release
-            token: ${{ secrets.GITHUB_TOKEN }}
+            token: ${{ secrets.GTHB_TOKEN }}
