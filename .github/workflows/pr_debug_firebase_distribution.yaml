@@ -26,14 +26,7 @@ jobs:
       - name: AppKeys
         run: |
           touch secrets.json
-          echo "{" >> secrets.json
-          echo "  ${{ secrets.API_KEY_TRAKT }}" >> secrets.json
-          echo "  ${{ secrets.API_KEY_OMDB }}" >> secrets.json
-          echo "  ${{ secrets.API_KEY_TMDB }}" >> secrets.json
-          echo "  ${{ secrets.FACEBOOK_APP_ID }}" >> secrets.json
-          echo "  ${{ secrets.FACEBOOK_CLIENT_TOKEN }}" >> secrets.json
-          echo "  ${{ secrets.FB_LOGIN_PROTOCOL_SCHEME }}" >> secrets.json
-          echo "}" >> secrets.json
+          echo "  ${{ secrets.JSON_ALL_SECRETS }}" >> secrets.json
           cat secrets.json
       - name: PresentationDependencies
         run: |
