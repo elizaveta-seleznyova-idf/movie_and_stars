@@ -26,7 +26,7 @@ jobs:
       - name: AppKeys
         run: |
           touch secrets.json
-          echo "  ${{ secrets.JSON_ALL_SECRETS }}" >> secrets.json
+          echo "${{ secrets.JSON_ALL_SECRETS }}" >> secrets.json
           cat secrets.json
       - name: PresentationDependencies
         run: |
