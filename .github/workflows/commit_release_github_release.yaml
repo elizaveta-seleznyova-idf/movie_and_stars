@@ -54,6 +54,6 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: build/app/outputs/flutter-apk/app-release.apk
-          tag_name: ${{ github.ref }}
+           tag_name: ${{ github.ref }}
           token: ${{ secrets.GTHB_TOKEN }}
           release_name: Release ${{ github.ref }}
