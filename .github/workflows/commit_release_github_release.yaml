@@ -2,6 +2,7 @@ name: build_commit_debug_f_d
 
 on:
   push:
+    types: [ opened, reopened ]
     branches:
       - mmaster
 
