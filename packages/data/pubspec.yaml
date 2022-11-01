@@ -13,8 +13,8 @@ dependencies:
   domain:
     path: '../domain'
   dio: ^4.0.4
-  firebase_auth: ^3.4.0
-  cloud_firestore: ^3.2.0
+  firebase_auth: ^4.1.0
+  cloud_firestore: ^4.0.3
   google_sign_in: ^5.4.2
   flutter_facebook_auth: ^4.4.1+1
   shared_preferences: ^2.0.15
