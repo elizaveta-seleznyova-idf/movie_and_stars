@@ -37,7 +37,7 @@ jobs:
       - name: PresentationDependencies
         run: |
           flutter pub get
-          flutter gen-l10n
+          flutter pub run intl_utils:generate
         working-directory: packages/presentation
       - name: DataDependencies
         run: |
