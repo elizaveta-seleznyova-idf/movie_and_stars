@@ -21,6 +21,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^1.24.0
   firebase_crashlytics: ^2.9.0
+  intl_utils: ^2.7.0
 
 dev_dependencies:
   flutter_test:
@@ -45,3 +46,10 @@ flutter:
           weight: 700
 
   generate: true
+flutter_intl:
+  enabled: true
+  class_name: SM
+  main_locale: en
+  arb_dir: packages/presentation/lib/l10n
+  output_dir:  packages/presentation/lib/generated_localization
+  use_deferred_loading: false
