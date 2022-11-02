@@ -30,7 +30,7 @@ class MovieListActors extends StatelessWidget {
             children: [
               (currentCast?.image == null)
                   ? SvgPicture.asset(
-                      ImagesPath.noUserImage,
+                      ImagesPath.noPeopleImage,
                       fit: BoxFit.fill,
                     )
                   : CircleAvatar(
