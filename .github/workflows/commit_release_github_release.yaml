@@ -1,4 +1,4 @@
-name: build_commit_debug_f_d
+name: build_release_g_r
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '11'
-      - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v2.8.0
         with:
           flutter-version: '3.0.5'
           channel: 'stable'
