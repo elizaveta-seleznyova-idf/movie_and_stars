@@ -28,10 +28,15 @@ class MovieListActors extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: Dimens.size8),
           child: Row(
             children: [
-              CircleAvatar(
-                backgroundImage: NetworkImage('${currentCast?.image}'),
-                radius: Dimens.size24,
-              ),
+              (currentCast?.image == null)
+                  ? SvgPicture.asset(
+                      ImagesPath.noUserImage,
+                      fit: BoxFit.fill,
+                    )
+                  : CircleAvatar(
+                      backgroundImage: NetworkImage('${currentCast?.image}'),
+                      radius: Dimens.size24,
+                    ),
               const SizedBox(
                 width: Dimens.size12,
               ),
