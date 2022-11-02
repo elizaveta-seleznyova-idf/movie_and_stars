@@ -18,8 +18,10 @@ class Dimens {
   static const double size16 = 16;
   static const double size17 = 17;
   static const double size18 = 18;
+  static const double size19 = 19;
   static const double size20 = 20;
   static const double size22 = 22;
+  static const double size23 = 23;
   static const double size24 = 24;
   static const double size25 = 26;
   static const double size26 = 26;

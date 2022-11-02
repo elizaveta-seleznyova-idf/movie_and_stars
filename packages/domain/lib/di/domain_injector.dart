@@ -7,6 +7,7 @@ import 'package:domain/repository/tmdb_repository.dart';
 import 'package:domain/repository/trakt_repository.dart';
 import 'package:domain/services/analytics_service.dart';
 import 'package:domain/use_case/delay_use_case.dart';
+import 'package:domain/use_case/get_comments_use_case.dart';
 import 'package:domain/use_case/get_movies_use_case.dart';
 import 'package:domain/use_case/get_people_use_case.dart';
 import 'package:domain/use_case/log_analytics_event_use_case.dart';
@@ -36,6 +37,11 @@ void _initUseCaseModule() {
     () => GetPeopleUseCase(
       GetIt.I.get<TraktRepository>(),
       GetIt.I.get<TmdbRepository>(),
+    ),
+  );
+  GetIt.I.registerFactory<GetCommentsUseCase>(
+    () => GetCommentsUseCase(
+      GetIt.I.get<TraktRepository>(),
     ),
   );
   GetIt.I.registerFactory<LoginFaceBookUseCase>(

@@ -11,7 +11,7 @@ import 'package:presentation/screen/movie_details/details_data.dart';
 import 'package:presentation/screen/movie_details/widgets/details_background_image.dart';
 import 'package:presentation/screen/movie_details/widgets/details_body.dart';
 import 'package:presentation/screen/movie_details/widgets/details_movie_image.dart';
-import 'package:presentation/screen/movie_details/widgets/details_shimmer.dart';
+import 'package:presentation/screen/movie_details/widgets/details_screen_shimmer.dart';
 import 'package:presentation/screen/movie_details/widgets/details_tab_bar.dart';
 
 class DetailsScreenArguments extends BaseArguments {
@@ -53,7 +53,7 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
         final details = blocData?.aboutMovie;
         if (data != null && blocData != null) {
           return data.isLoading
-              ? const DetailsShimmer()
+              ? const DetailsScreenShimmer()
               : Scaffold(
                   body: Stack(
                     children: [
