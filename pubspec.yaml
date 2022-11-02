@@ -49,6 +49,7 @@ flutter:
           weight: 700
 
   generate: true
+
 flutter_intl:
   enabled: true
   class_name: SM

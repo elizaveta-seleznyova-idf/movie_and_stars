@@ -12,7 +12,7 @@ class TmdbRepositoryImpl implements TmdbRepository {
   @override
   Future<TmdbResponse> getCastImage({required int? tMDBId}) async {
     final tmbdResponseUrl =
-        UrlConstants.constantUrlImageOfPeople(tMDBId: tMDBId);
+        UrlConstants.getUrlImageOfPeople(tMDBId: tMDBId);
     final response = await _apiService.get(
       tmbdResponseUrl,
     );

@@ -1,4 +1,4 @@
-import 'package:presentation/enum/tab_state.dart';
+import 'package:presentation/enum/home_tab_state.dart';
 import 'package:presentation/screen/home/model/movie_model.dart';
 
 class HomeData {
@@ -8,14 +8,14 @@ class HomeData {
     required this.anticipatedMovies,
   });
 
-  final TabState? tabState;
+  final HomeTabState? tabState;
   final List<MovieModel> trendingMovies;
   final List<MovieModel> anticipatedMovies;
 
   factory HomeData.init() => const HomeData(
         trendingMovies: [],
         anticipatedMovies: [],
-        tabState: TabState.now,
+        tabState: HomeTabState.now,
       );
 
   HomeData copy() => HomeData(
@@ -27,7 +27,7 @@ class HomeData {
   HomeData copyWith({
     List<MovieModel>? trendingMovies,
     List<MovieModel>? anticipatedMovies,
-    TabState? tabState,
+    HomeTabState? tabState,
   }) =>
       HomeData(
         trendingMovies: trendingMovies ?? this.trendingMovies,

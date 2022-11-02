@@ -11,24 +11,32 @@ class MovieListActors extends StatelessWidget {
     required this.blocData,
     super.key,
   });
+
   final DetailsData blocData;
+  static const int _listLength = 4;
 
   @override
   Widget build(BuildContext context) {
     final cast = blocData.detailsAboutPeople;
     return ListView.builder(
+      padding: const EdgeInsets.only(top: Dimens.size23),
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: cast?.length,
+      itemCount: _listLength,
       itemBuilder: (BuildContext context, int index) {
         final currentCast = cast?[index];
         return Padding(
           padding: const EdgeInsets.only(bottom: Dimens.size8),
           child: Row(
             children: [
-              CircleAvatar(
-                backgroundImage: NetworkImage('${currentCast?.image}'),
-                radius: Dimens.size24,
-              ),
+              (currentCast?.image == null)
+                  ? SvgPicture.asset(
+                      ImagesPath.noPeopleImage,
+                      fit: BoxFit.fill,
+                    )
+                  : CircleAvatar(
+                      backgroundImage: NetworkImage('${currentCast?.image}'),
+                      radius: Dimens.size24,
+                    ),
               const SizedBox(
                 width: Dimens.size12,
               ),

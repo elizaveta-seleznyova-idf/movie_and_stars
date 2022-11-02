@@ -11,4 +11,6 @@ abstract class ImagesPath {
   static const googleImage = 'assets/images/google.svg';
   static const profileImage = 'assets/images/profile.svg';
   static const lockImage = 'assets/images/lock.svg';
+  static const noUserImage = 'assets/images/no_user_found.svg';
+  static const noPeopleImage = 'assets/images/no_people_available.svg';
 }
