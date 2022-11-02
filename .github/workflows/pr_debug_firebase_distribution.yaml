@@ -34,7 +34,6 @@ jobs:
           echo " \"fb_login_protocol_scheme\": \"${{secrets.FACEBOOK_CLIENT_TOKEN}}\"," >> secrets.json
           echo " \"facebook_client_token\": \"${{secrets.FB_LOGIN_PROTOCOL_SCHEME}}\" " >> secrets.json
           echo "}" >> secrets.json
-          cat secrets.json
       - name: PresentationDependencies
         run: |
           flutter pub get
