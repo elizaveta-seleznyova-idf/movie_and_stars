@@ -8,5 +8,5 @@ class MovieToImage extends Mapper<String, String> {
 
   @override
   String call(String params) =>
-      '${UrlConstantsDomain.oMDBImageUrl}$apiKey=$params&i';
+      '${UrlConstantsDomain.oMDBImageUrl}$apiKey&i=$params';
 }
