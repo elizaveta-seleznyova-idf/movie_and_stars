@@ -2,6 +2,7 @@ import 'package:domain/use_case/get_comments_use_case.dart';
 import 'package:domain/use_case/get_people_use_case.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:presentation/base/bloc.dart';
+import 'package:presentation/enum/details_tab_state.dart';
 import 'package:presentation/generated_localization/l10n.dart';
 import 'package:presentation/screen/movie_details/details_data.dart';
 import 'package:presentation/screen/movie_details/details_screen.dart';
@@ -22,7 +23,9 @@ abstract class DetailsBloc extends Bloc<DetailsScreenArguments, DetailsData> {
 
   ScrollController get scrollController;
 
-  void getCommentsInformation();
+  GlobalKey get detailsScreenFormKey;
+
+  void onItemTapped(int index);
 
   void shareMovieMessage({required int movieId});
 }
@@ -40,9 +43,14 @@ class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
   final MapperDetails _detailsMapper;
   DetailsData _stateData = DetailsData.init();
   final ScrollController _scrollController = ScrollController();
+  int _selectedIndex = 0;
+  final GlobalKey<FormState> _detailsScreenFormKey = GlobalKey<FormState>();
 
   @override
   ScrollController get scrollController => _scrollController;
+
+  @override
+  GlobalKey get detailsScreenFormKey => _detailsScreenFormKey;
 
   void _updateData({
     bool? isLoading,
@@ -56,16 +64,43 @@ class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
 
   @override
   void initArgs(DetailsScreenArguments arguments) {
-    super.initArgs(arguments);
-    _updateData(isLoading: true);
     _stateData = _stateData.copyWith(detailsScreenArguments: arguments);
-    getCastInformation();
+    _getCastInformation();
+    _updateData(data: _stateData);
   }
 
-  void getCastInformation() async {
+  @override
+  void onItemTapped(int index) {
+    _selectedIndex = index;
+    _stateData.currentTabIndex = _selectedIndex;
+    _updateData(
+      isLoading: false,
+      data: _stateData,
+    );
+    final indexValue = DetailsTabState.values[index];
+
+    switch (indexValue) {
+      case DetailsTabState.reviews:
+        _getCommentsInformation();
+        break;
+    }
+  }
+
+  @override
+  void tabBarRequest(DetailsTabState tabState) {
+    if (tabState == DetailsTabState.details) {
+      _stateData = _stateData.copyWith(tabState: tabState);
+    } else if (tabState == DetailsTabState.reviews) {
+      _stateData = _stateData.copyWith(tabState: tabState);
+      _getCommentsInformation();
+    }
+  }
+
+  void _getCastInformation() async {
     final stateDataArguments = _stateData.detailsScreenArguments;
     final movieId = _stateData.detailsScreenArguments?.movieInfo.ids?.slug;
     if (stateDataArguments != null && movieId != null) {
+      _updateData(isLoading: true);
       final listPerson = await _getCastUseCase(movieId);
 
       final movieInformation = _detailsMapper.detailsAboutMovies(
@@ -84,11 +119,12 @@ class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
     );
   }
 
-  @override
-  void getCommentsInformation() async {
+  void _getCommentsInformation() async {
     final movieId = _stateData.detailsScreenArguments?.movieInfo.ids?.slug;
     final stateDataArguments = _stateData.detailsScreenArguments;
     if (stateDataArguments != null && movieId != null) {
+      _stateData = _stateData.copyWith(isContentLoading: true);
+      _updateData(data: _stateData);
       final listComments = await _getCommentsUseCase(movieId);
       final commentsInformation = _detailsMapper.commentsAboutMovie(
         listComments,
@@ -98,7 +134,10 @@ class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
         detailsAboutMovie: stateDataArguments.movieInfo,
         movieComments: commentsInformation.movieComments,
       );
-      _updateData(data: _stateData);
+      _stateData = _stateData.copyWith(isContentLoading: false);
+      _updateData(
+        data: _stateData,
+      );
     }
   }
 

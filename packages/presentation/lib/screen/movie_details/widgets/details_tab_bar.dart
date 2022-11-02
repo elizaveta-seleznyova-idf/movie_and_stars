@@ -32,23 +32,19 @@ class DetailsTabBar extends StatefulWidget {
 class _DetailsTabBarState extends State<DetailsTabBar>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
-  int _currentIndex = 0;
   static const int _tabControllerLength = 3;
 
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: _tabControllerLength, vsync: this);
-
-    tabController.addListener(() {
-      setState(() {
-        _currentIndex = tabController.index;
-      });
-    });
+    tabController = TabController(
+      length: _tabControllerLength,
+      vsync: this,
+    );
   }
 
   Widget buildContent() {
-    switch (_currentIndex) {
+    switch (widget.blocData.currentTabIndex) {
       case 0:
         return DetailsViewWidget(
           data: widget.data,
@@ -112,6 +108,7 @@ class _DetailsTabBarState extends State<DetailsTabBar>
               color: AppColorsDark.primaryColor,
               borderRadius: BorderRadius.circular(Dimens.size16),
             ),
+            onTap: (index) => widget.bloc.onItemTapped(index),
             tabs: <Widget>[
               Tab(
                 child: Row(

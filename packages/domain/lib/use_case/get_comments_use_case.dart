@@ -7,8 +7,13 @@ class GetCommentsUseCase
   const GetCommentsUseCase(this._traktRepository);
 
   final TraktRepository _traktRepository;
+  static const _delaySeconds = 5;
 
   @override
-  Future<List<Comments>> call(String params) =>
-      _traktRepository.getComments(movieId: params);
+  Future<List<Comments>> call(String params) async {
+    await Future.delayed(
+      const Duration(seconds: _delaySeconds),
+    );
+    return _traktRepository.getComments(movieId: params);
+  }
 }
