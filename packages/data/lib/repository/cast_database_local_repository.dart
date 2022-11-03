@@ -1,5 +1,5 @@
 import 'package:data/database/database_provider.dart';
-import 'package:domain/model/cast_db_model.dart';
+import 'package:domain/model/people_and_images_model.dart';
 import 'package:domain/repository/cast_database_local_repository.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -10,10 +10,10 @@ class CastDBLocalRepositoryImpl implements CastDBLocalRepository {
 
   @override
   Future<void> saveCastDB(
-    List<CastDBModel> castDBModelList,
+    List<PeopleAndImagesModel> castDBModelList,
     String id,
   ) async {
-    for (CastDBModel castModel in castDBModelList) {
+    for (PeopleAndImagesModel castModel in castDBModelList) {
       final storedCast = await db.query(
         DataBaseProvider.castTableName,
         where: 'person = ?',
@@ -31,12 +31,13 @@ class CastDBLocalRepositoryImpl implements CastDBLocalRepository {
     }
   }
 
-  Future<List<CastDBModel>> getCastFromCache(String id) async {
-    final List<Map<String, dynamic>> maps = await db.query(
-        '${DataBaseProvider.castTableName} WHERE movieId = "$id"');
+  @override
+  Future<List<PeopleAndImagesModel>?> getCastFromCache(String id) async {
+    final List<Map<String, dynamic>> maps = await db
+        .query('${DataBaseProvider.castTableName} WHERE movieId = "$id"');
 
     return List.generate(maps.length, (i) {
-      return CastDBModel(
+      return PeopleAndImagesModel(
         movieId: maps[i]['movieId'],
         characters: maps[i]['characters'],
         person: maps[i]['person'],
@@ -46,7 +47,7 @@ class CastDBLocalRepositoryImpl implements CastDBLocalRepository {
   }
 
   Future<int> deleteCast(
-    List<CastDBModel> castDBModelList,
+    List<PeopleAndImagesModel> castDBModelList,
     String id,
   ) async {
     return await db.delete(

@@ -25,6 +25,7 @@ class GetMoviesUseCase
     final List<MovieResponse> jsonMovies = [];
     final List<MovieDBModel> cachedMovies =
         await _localRepository.getMovieFromCache(type);
+
     final GetDataResponse response = type == MovieType.trending
         ? await _traktRepository.getDataTrending()
         : await _traktRepository.getDataAnticipated();
@@ -40,43 +41,45 @@ class GetMoviesUseCase
 
     final String dateResponse = response.headers['date'][0];
     final checkData = await _preferences.saveDate(dateResponse);
+    if (checkData == true){
+      if (paginationCheck >= 5) {
+        int itemCount = 50;
 
-    if (paginationCheck >= 5) {
-      int itemCount = 50;
+        if (type == MovieType.trending) {
+          final responseWithItem = await _traktRepository.getDataTrending(
+            itemCount: itemCount,
+          );
+          addToList(responseWithItem);
+        } else if (type == MovieType.anticipated) {
+          final responseWithItem = await _traktRepository.getDataAnticipated(
+            itemCount: itemCount,
+          );
+          addToList(responseWithItem);
+        }
+      } else {
+        final itemCount = paginationCheck;
 
-      if (type == MovieType.trending) {
-        final responseWithItem = await _traktRepository.getDataTrending(
-          itemCount: itemCount,
-        );
-        addToList(responseWithItem);
-      } else if (type == MovieType.anticipated) {
-        final responseWithItem = await _traktRepository.getDataAnticipated(
-          itemCount: itemCount,
-        );
-        addToList(responseWithItem);
+        if (type == MovieType.trending) {
+          final responseWithItem = await _traktRepository.getDataTrending(
+            itemCount: itemCount,
+          );
+          addToList(responseWithItem);
+        } else if (type == MovieType.anticipated) {
+          final responseWithItem = await _traktRepository.getDataAnticipated(
+            itemCount: itemCount,
+          );
+          addToList(responseWithItem);
+        }
       }
-    } else {
-      final itemCount = paginationCheck;
 
-      if (type == MovieType.trending) {
-        final responseWithItem = await _traktRepository.getDataTrending(
-          itemCount: itemCount,
-        );
-        addToList(responseWithItem);
-      } else if (type == MovieType.anticipated) {
-        final responseWithItem = await _traktRepository.getDataAnticipated(
-          itemCount: itemCount,
-        );
-        addToList(responseWithItem);
-      }
+      jsonMovies.forEach((element) {
+        cachedMovies.add(MovieDBModel.fromResponse(element));
+      });
+      _localRepository.saveMovieDB(
+        cachedMovies,
+        type,
+      );
     }
-    jsonMovies.forEach((element) {
-      cachedMovies.add(MovieDBModel.fromResponse(element));
-    });
-    _localRepository.saveMovieDB(
-      cachedMovies,
-      type,
-    );
     return cachedMovies;
   }
 }

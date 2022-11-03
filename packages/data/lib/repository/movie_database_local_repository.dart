@@ -32,6 +32,7 @@ class MovieDBLocalRepositoryImpl implements MovieDBLocalRepository {
     }
   }
 
+  @override
   Future<List<MovieDBModel>> getMovieFromCache(MovieType movieType) async {
     final List<Map<String, dynamic>> maps = await db.query(
         '${DataBaseProvider.movieTableName} WHERE movieType = "${movieType.name}"');

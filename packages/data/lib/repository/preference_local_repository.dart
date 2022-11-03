@@ -26,21 +26,22 @@ class PreferencesLocalRepositoryImpl implements PreferencesLocalRepository {
   }
 
   @override
-  Future<void> saveDate(String date) async {
+  Future<bool> saveDate(String date) async {
     final convertedDateResponse = convertStringToDate(date);
-    print('DATE!!!! $convertedDateResponse');
     final savedDate = sharedPreferences.getString(_dateKey);
     if (savedDate == null) {
       await sharedPreferences.setString(
           _dateKey, convertedDateResponse.toString());
+      return true;
     } else {
       final convertedSavedData = convertSavedDateToDate(savedDate);
-      print('DATE SHARED PREFERENCE $savedDate CONVERT TO $convertedSavedData');
       if (convertedDateResponse.isAfter(convertedSavedData)) {
-        ///ADD UPDATE METHOD
         final stringDate = convertedDateResponse.toString();
 
         await sharedPreferences.setString(_dateKey, stringDate);
+        return false;
+      } else {
+        return true;
       }
     }
   }

@@ -1,5 +1,5 @@
-import 'package:domain/model/cast_db_model.dart';
 import 'package:domain/model/movie_db_model.dart';
+import 'package:domain/model/people_and_images_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 

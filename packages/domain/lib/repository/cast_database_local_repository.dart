@@ -1,10 +1,10 @@
-import 'package:domain/model/cast_db_model.dart';
+import 'package:domain/model/people_and_images_model.dart';
 
 abstract class CastDBLocalRepository {
   Future<void> saveCastDB(
-    List<CastDBModel> castDBModelList,
+    List<PeopleAndImagesModel> castDBModelList,
     String id,
   );
 
-  Future<List<CastDBModel>> getCastFromCache(String id);
+  Future<List<PeopleAndImagesModel>?> getCastFromCache(String id);
 }
