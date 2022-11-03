@@ -35,6 +35,7 @@ migrate_working_dir/
 /build/
 /packages/presentation/lib/generated/
 /packages/presentation/lib/generated_localization/
+*firebase_options.dart
 
 
 # Web related

@@ -1,0 +1,58 @@
+name: build_release_g_r
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_release_send_to_github_release:
+    name: ReleaseAPKtoGR
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+      - uses: subosito/flutter-action@v2.8.0
+        with:
+          flutter-version: '3.0.5'
+          channel: 'stable'
+      - run: flutter --version
+      - name: Flutter upgrade
+        run: flutter upgrade
+      - name: AppKeys
+        run: |
+          touch secrets.json
+          echo "{" >> secrets.json
+          echo " \"apiKeyTRAKT\": \"${{secrets.API_KEY_TRAKT}}\"," >> secrets.json
+          echo " \"apiKeyOMDB\": \"${{secrets.API_KEY_OMDB}}\"," >> secrets.json
+          echo " \"apiKeyTMDB\": \"${{secrets.API_KEY_TMDB}}\"," >> secrets.json
+          echo " \"facebook_app_id\": \"${{secrets.FACEBOOK_APP_ID}}\"," >> secrets.json
+          echo " \"fb_login_protocol_scheme\": \"${{secrets.FACEBOOK_CLIENT_TOKEN}}\"," >> secrets.json
+          echo " \"facebook_client_token\": \"${{secrets.FB_LOGIN_PROTOCOL_SCHEME}}\" " >> secrets.json
+          echo "}" >> secrets.json
+      - name: PresentationDependencies
+        run: |
+          flutter pub get
+          flutter pub run intl_utils:generate
+        working-directory: packages/presentation
+      - name: DataDependencies
+        run: |
+          flutter pub get
+        working-directory: packages/data
+      - name: DomainDependencies
+        run: |
+          flutter pub get
+        working-directory: packages/domain
+      - name: Build APK
+        run: flutter build apk --release
+      - name: Release version push to Github release
+        uses: ncipollo/release-action@v1.11.1
+        with:
+          artifacts: build/app/outputs/flutter-apk/app-release.apk
+          tag: v1.0.${{ github.run_number }}
+          tag_name: ${{ github.ref }}
+          token: ${{ secrets.GTHB_TOKEN }}
+          release_name: Release ${{ github.ref }}
