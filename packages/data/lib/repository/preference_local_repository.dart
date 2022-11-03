@@ -28,12 +28,14 @@ class PreferencesLocalRepositoryImpl implements PreferencesLocalRepository {
   @override
   Future<void> saveDate(String date) async {
     final convertedDateResponse = convertStringToDate(date);
+    print('DATE!!!! $convertedDateResponse');
     final savedDate = sharedPreferences.getString(_dateKey);
     if (savedDate == null) {
       await sharedPreferences.setString(
           _dateKey, convertedDateResponse.toString());
     } else {
-      final convertedSavedData = convertStringToDate(savedDate);
+      final convertedSavedData = convertSavedDateToDate(savedDate);
+      print('DATE SHARED PREFERENCE $savedDate CONVERT TO $convertedSavedData');
       if (convertedDateResponse.isAfter(convertedSavedData)) {
         ///ADD UPDATE METHOD
         final stringDate = convertedDateResponse.toString();
@@ -44,12 +46,13 @@ class PreferencesLocalRepositoryImpl implements PreferencesLocalRepository {
   }
 
   DateTime convertStringToDate(String date) {
-    //date: Fri, 28 Oct 2022 08:29:58 GMT
     DateTime parseDate =
         DateFormat("EEE, d MMM yyyy HH:mm:ss", 'en').parse(date);
-    //DateTime convertedData = DateTime.parse(parseDate);
     return parseDate;
   }
 
-
+  DateTime convertSavedDateToDate(String date) {
+    DateTime convertedDate = DateTime.parse(date);
+    return convertedDate;
+  }
 }
