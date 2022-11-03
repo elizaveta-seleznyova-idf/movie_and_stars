@@ -19,14 +19,17 @@ dependencies:
     path: packages/share_plugin
 
   cupertino_icons: ^1.0.2
-  firebase_core: ^1.24.0
-  firebase_crashlytics: ^2.9.0
+  firebase_core: 1.24.0
+  firebase_crashlytics: 2.9.0
   intl_utils: ^2.7.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+
+dependency_overrides:
+  firebase_core_platform_interface: 4.5.1
 
 
 flutter:
@@ -47,7 +50,7 @@ flutter:
 
   generate: true
 
-futter_intl:
+flutter_intl:
   enabled: true
   class_name: SM
   main_locale: en
