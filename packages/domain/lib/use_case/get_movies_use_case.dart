@@ -13,7 +13,7 @@ class GetMoviesUseCase
   const GetMoviesUseCase(
     this._traktRepository,
     this._localRepository,
-      this._preferences,
+    this._preferences,
   );
 
   final TraktRepository _traktRepository;
@@ -22,7 +22,6 @@ class GetMoviesUseCase
 
   @override
   Future<List<MovieDBModel>> call(MovieType type) async {
-
     final List<MovieResponse> jsonMovies = [];
     final List<MovieDBModel> cachedMovies =
         await _localRepository.getMovieFromCache(type);
@@ -40,7 +39,7 @@ class GetMoviesUseCase
         int.parse(response.headers[UrlConstantsDomain.pagination][0]);
 
     final String dateResponse = response.headers['date'][0];
-    await _preferences.saveDate(dateResponse);
+    final checkData = await _preferences.saveDate(dateResponse);
 
     if (paginationCheck >= 5) {
       int itemCount = 50;

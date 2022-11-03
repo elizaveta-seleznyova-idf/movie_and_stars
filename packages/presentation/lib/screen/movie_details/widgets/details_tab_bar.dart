@@ -4,9 +4,11 @@ import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/text_style/text_style.dart';
 import 'package:presentation/config/theme/app_colors.dart';
+import 'package:presentation/enum/details_tab_state.dart';
 import 'package:presentation/generated_localization/l10n.dart';
 import 'package:presentation/screen/movie_details/details_bloc.dart';
 import 'package:presentation/screen/movie_details/details_data.dart';
+import 'package:presentation/screen/movie_details/widgets/details_reviews_widget.dart';
 import 'package:presentation/screen/movie_details/widgets/details_view_widget.dart';
 
 class DetailsTabBar extends StatefulWidget {
@@ -30,40 +32,34 @@ class DetailsTabBar extends StatefulWidget {
 class _DetailsTabBarState extends State<DetailsTabBar>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
-  int _currentIndex = 0;
   static const int _tabControllerLength = 3;
 
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: _tabControllerLength, vsync: this);
-
-    tabController.addListener(() {
-      setState(() {
-        _currentIndex = tabController.index;
-      });
-    });
+    tabController = TabController(
+      length: _tabControllerLength,
+      vsync: this,
+    );
   }
 
   Widget buildContent() {
-    switch (_currentIndex) {
+    switch (widget.blocData.currentTabIndex) {
       case 0:
         return DetailsViewWidget(
           data: widget.data,
           movie: widget.movie,
           bloc: widget.bloc,
           blocData: widget.blocData,
+          tabState: DetailsTabState.details,
         );
       case 1:
-        return Container(
-          height: Dimens.size250,
-          color: AppColorsDark.selectedItem,
-          child: Column(
-            children: <Widget>[
-              Center(
-                child: Text(SM.current.reviews),
-              )
-            ],
+        return SizedBox(
+          child: DetailsReviewsWidget(
+            data: widget.data,
+            bloc: widget.bloc,
+            blocData: widget.blocData,
+            tabState: DetailsTabState.reviews,
           ),
         );
       case 2:
@@ -96,7 +92,6 @@ class _DetailsTabBarState extends State<DetailsTabBar>
             top: Dimens.size40,
             right: Dimens.size18,
             left: Dimens.size17,
-            bottom: Dimens.size32,
           ),
           padding: const EdgeInsets.all(Dimens.size3),
           decoration: BoxDecoration(
@@ -113,6 +108,7 @@ class _DetailsTabBarState extends State<DetailsTabBar>
               color: AppColorsDark.primaryColor,
               borderRadius: BorderRadius.circular(Dimens.size16),
             ),
+            onTap: (index) => widget.bloc.onItemTapped(index),
             tabs: <Widget>[
               Tab(
                 child: Row(

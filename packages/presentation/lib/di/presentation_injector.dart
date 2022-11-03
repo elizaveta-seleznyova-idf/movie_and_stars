@@ -1,5 +1,6 @@
 import 'package:domain/mappers/movie_to_image.dart';
 import 'package:domain/use_case/delay_use_case.dart';
+import 'package:domain/use_case/get_comments_use_case.dart';
 import 'package:domain/use_case/get_movies_use_case.dart';
 import 'package:domain/use_case/get_people_use_case.dart';
 import 'package:domain/use_case/log_analytics_event_use_case.dart';
@@ -51,6 +52,7 @@ void _initBlocModule() {
   GetIt.I.registerFactory<DetailsBloc>(
     () => DetailsBloc(
       GetIt.I.get<GetPeopleUseCase>(),
+      GetIt.I.get<GetCommentsUseCase>(),
       GetIt.I.get<MapperDetails>(),
     ),
   );
