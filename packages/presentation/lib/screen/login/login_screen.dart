@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
 import 'package:presentation/config/dimens/dimens.dart';
+import 'package:presentation/config/responsive/responsive.dart';
 import 'package:presentation/config/text_style/text_style.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/generated_localization/l10n.dart';
@@ -73,7 +74,6 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       SM.current.userName,
@@ -112,7 +112,9 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                     ),
                     const SizedBox(height: Dimens.size32),
                     SizedBox(
-                      width: width,
+                      width: Responsive.isDesktop(context)
+                          ? Dimens.size400
+                          : width,
                       height: Dimens.size48,
                       child: ElevatedButton(
                         onPressed: bloc.login,

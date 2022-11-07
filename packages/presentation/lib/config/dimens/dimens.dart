@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Dimens {
   Dimens._();
 
@@ -49,8 +51,19 @@ class Dimens {
   static const double size167 = 167;
   static const double size180 = 180;
   static const double size200 = 200;
-  static const double size262 = 262;
   static const double size250 = 250;
+  static const double size262 = 262;
   static const double size280 = 280;
   static const double size320 = 320;
+  static const double size350 = 350;
+  static const double size380 = 380;
+  static const double size400 = 400;
+  static const double size500 = 500;
+  static const double size600 = 600;
+  static const double size800 = 800;
+
+  static const Size minDesktopSize = Size(
+    size800,
+    size600,
+  );
 }

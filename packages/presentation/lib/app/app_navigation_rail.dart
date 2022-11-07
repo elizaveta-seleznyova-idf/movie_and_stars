@@ -6,8 +6,8 @@ import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/utils/image_path.dart';
 
-class AppBottomNavigationBar extends StatefulWidget {
-  const AppBottomNavigationBar({
+class AppNavigationRail extends StatefulWidget {
+  const AppNavigationRail({
     required this.bloc,
     required this.blocData,
     super.key,
@@ -17,71 +17,70 @@ class AppBottomNavigationBar extends StatefulWidget {
   final AppData blocData;
 
   @override
-  State<AppBottomNavigationBar> createState() => _AppBottomNavigationBarState();
+  State<AppNavigationRail> createState() => _AppNavigationRailState();
 }
 
-class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
+class _AppNavigationRailState extends State<AppNavigationRail> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: Dimens.size100,
       decoration: const BoxDecoration(
         border: Border(
-          top: BorderSide(
+          right: BorderSide(
             color: AppColorsDark.borderTabBar,
             width: Dimens.size1,
           ),
         ),
       ),
-      child: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        currentIndex: widget.blocData.currentPageIndex,
-        onTap: widget.bloc.onItemTapped,
-        items: [
-          BottomNavigationBarItem(
+      child: NavigationRail(
+        backgroundColor: AppColorsDark.primaryColorDark,
+        selectedIndex: widget.blocData.currentPageIndex,
+        onDestinationSelected: widget.bloc.onItemTapped,
+        destinations: [
+          NavigationRailDestination(
             icon: SvgPicture.asset(
               ImagesPath.homeScreen,
               color: AppColorsDark.unselectedColor,
             ),
-            activeIcon: SvgPicture.asset(
+            selectedIcon: SvgPicture.asset(
               ImagesPath.homeScreen,
               color: AppColorsDark.selectedItem,
             ),
-            label: 'HomePage',
+            label: const Text('HomePage'),
           ),
-          BottomNavigationBarItem(
+          NavigationRailDestination(
             icon: SvgPicture.asset(
               ImagesPath.ticketScreen,
               color: AppColorsDark.unselectedColor,
             ),
-            activeIcon: SvgPicture.asset(
+            selectedIcon: SvgPicture.asset(
               ImagesPath.ticketScreen,
               color: AppColorsDark.selectedItem,
             ),
-            label: 'TicketsPage',
+            label: const Text('TicketsPage'),
           ),
-          BottomNavigationBarItem(
+          NavigationRailDestination(
             icon: SvgPicture.asset(
               ImagesPath.notificationScreen,
               color: AppColorsDark.unselectedColor,
             ),
-            activeIcon: SvgPicture.asset(
+            selectedIcon: SvgPicture.asset(
               ImagesPath.notificationScreen,
               color: AppColorsDark.selectedItem,
             ),
-            label: 'NotificationPage',
+            label: const Text('NotificationPage'),
           ),
-          BottomNavigationBarItem(
+          NavigationRailDestination(
             icon: SvgPicture.asset(
               ImagesPath.profileScreen,
               color: AppColorsDark.unselectedColor,
             ),
-            activeIcon: SvgPicture.asset(
+            selectedIcon: SvgPicture.asset(
               ImagesPath.profileScreen,
               color: AppColorsDark.selectedItem,
             ),
-            label: 'ProfilePage',
+            label: const Text('ProfilePage'),
           ),
         ],
       ),

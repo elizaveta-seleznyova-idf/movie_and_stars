@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/text_style/text_style.dart';
@@ -25,14 +26,14 @@ class MovieContent extends StatelessWidget {
           movieGenre,
           style: AppTextStyles.sfProMediumUnselected12px,
         ),
-        const SizedBox(width: Dimens.size4),
+        SizedBox(width: Dimens.size4.w),
         SvgPicture.asset(
           ImagesPath.ellipseImage,
-          height: Dimens.size4,
-          width: Dimens.size4,
+          height: Dimens.size4.h,
+          width: Dimens.size4.w,
           color: AppColorsDark.unselectedColor,
         ),
-        const SizedBox(width: Dimens.size4),
+        SizedBox(width: Dimens.size4.w),
         Text(
           '$movieTime | $certification',
           style: AppTextStyles.sfProMediumUnselected12px,

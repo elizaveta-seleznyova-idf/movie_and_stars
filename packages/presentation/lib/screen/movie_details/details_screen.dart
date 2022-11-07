@@ -1,5 +1,6 @@
 import 'package:domain/model/movie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
 import 'package:presentation/config/dimens/dimens.dart';
@@ -78,7 +79,7 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                                   size: Dimens.size36,
                                 ),
                               ),
-                              const SizedBox(width: Dimens.size18)
+                              SizedBox(width: Dimens.size18.w)
                             ],
                             expandedHeight: Dimens.size262,
                             flexibleSpace: FlexibleSpaceBar(
