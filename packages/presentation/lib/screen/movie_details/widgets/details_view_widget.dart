@@ -2,6 +2,7 @@ import 'package:domain/model/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';
+import 'package:presentation/config/responsive/responsive.dart';
 import 'package:presentation/config/text_style/text_style.dart';
 import 'package:presentation/enum/details_tab_state.dart';
 import 'package:presentation/generated_localization/l10n.dart';
@@ -31,7 +32,6 @@ class DetailsViewWidget extends StatefulWidget {
 }
 
 class _DetailsViewWidgetState extends State<DetailsViewWidget> {
-
   @override
   Widget build(BuildContext context) {
     final synopsis = widget.movie?.overview;
@@ -59,26 +59,30 @@ class _DetailsViewWidgetState extends State<DetailsViewWidget> {
             ),
           ),
           const SizedBox(height: Dimens.size20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                SM.current.castAndCrew,
-                textAlign: TextAlign.left,
-                style: AppTextStyles.sfProMedium18px,
-              ),
-              Text(
-                SM.current.viewAll,
-                style: AppTextStyles.sfProRegularSelected14px,
-              ),
-            ],
-          ),
-          SizedBox(
-            height: Dimens.size280,
-            child: MovieListActors(
-              blocData: widget.blocData,
-            ),
-          ),
+          Responsive.isMobile(context)
+              ? Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          SM.current.castAndCrew,
+                          textAlign: TextAlign.left,
+                          style: AppTextStyles.sfProMedium18px,
+                        ),
+                        Text(
+                          SM.current.viewAll,
+                          style: AppTextStyles.sfProRegularSelected14px,
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: Dimens.size280,
+                      child: MovieListActors(blocData: widget.blocData),
+                    ),
+                  ],
+                )
+              : const SizedBox.shrink(),
         ],
       ),
     );

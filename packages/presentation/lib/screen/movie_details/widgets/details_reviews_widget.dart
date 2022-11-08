@@ -52,12 +52,14 @@ class _DetailsReviewsWidgetState extends State<DetailsReviewsWidget> {
                   : Column(
                       children: [
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             DetailsReviewsList(
                               rowLength: dividedLength,
                               comments: comments,
                               commentsListIndex: 0,
                             ),
+                            SizedBox(width: Dimens.size15.w),
                             DetailsReviewsList(
                               rowLength: secondRowComments,
                               comments: comments,
