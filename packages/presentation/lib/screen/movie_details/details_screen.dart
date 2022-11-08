@@ -79,7 +79,7 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                                   size: Dimens.size36,
                                 ),
                               ),
-                              SizedBox(width: Dimens.size18.w)
+                              SizedBox(width: Dimens.size18.w),
                             ],
                             expandedHeight: Dimens.size262,
                             flexibleSpace: FlexibleSpaceBar(
