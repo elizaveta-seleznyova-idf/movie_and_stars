@@ -1,5 +1,6 @@
 import 'package:domain/model/movie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/responsive/responsive.dart';
@@ -34,6 +35,7 @@ class DetailsViewWidget extends StatefulWidget {
 class _DetailsViewWidgetState extends State<DetailsViewWidget> {
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     final synopsis = widget.movie?.overview;
     const int trimLinesCount = 4;
     return Padding(
@@ -41,50 +43,101 @@ class _DetailsViewWidgetState extends State<DetailsViewWidget> {
         left: Dimens.size18,
         right: Dimens.size17,
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const SizedBox(height: Dimens.size32),
-          Text(
-            SM.current.synopsis,
-            style: AppTextStyles.sfProMedium18px,
-          ),
-          const SizedBox(height: Dimens.size16),
-          SizedBox(
-            height: Dimens.size115,
-            child: MovieDescriptionText(
-              text: '$synopsis',
-              trimLines: trimLinesCount,
-            ),
-          ),
-          const SizedBox(height: Dimens.size20),
-          Responsive.isMobile(context)
-              ? Column(
+      child: Responsive.isMobile(context)
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const SizedBox(height: Dimens.size32),
+                Text(
+                  SM.current.synopsis,
+                  style: AppTextStyles.sfProMedium18px,
+                ),
+                const SizedBox(height: Dimens.size16),
+                SizedBox(
+                  height: Dimens.size115,
+                  child: MovieDescriptionText(
+                    text: '$synopsis',
+                    trimLines: trimLinesCount,
+                  ),
+                ),
+                const SizedBox(height: Dimens.size20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          SM.current.castAndCrew,
-                          textAlign: TextAlign.left,
-                          style: AppTextStyles.sfProMedium18px,
-                        ),
-                        Text(
-                          SM.current.viewAll,
-                          style: AppTextStyles.sfProRegularSelected14px,
-                        ),
-                      ],
+                    Text(
+                      SM.current.castAndCrew,
+                      textAlign: TextAlign.left,
+                      style: AppTextStyles.sfProMedium18px,
                     ),
-                    SizedBox(
-                      height: Dimens.size280,
-                      child: MovieListActors(blocData: widget.blocData),
+                    Text(
+                      SM.current.viewAll,
+                      style: AppTextStyles.sfProRegularSelected14px,
                     ),
                   ],
-                )
-              : const SizedBox.shrink(),
-        ],
-      ),
+                ),
+                SizedBox(
+                  height: Dimens.size280,
+                  child: MovieListActors(blocData: widget.blocData),
+                ),
+              ],
+            )
+          : Column(
+              children: [
+                SizedBox(height: Dimens.size32.h),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: width / 3,
+                      child: Column(
+                        children: [
+                          const SizedBox(height: Dimens.size32),
+                          Text(
+                            SM.current.synopsis,
+                            style: AppTextStyles.sfProMedium18px,
+                          ),
+                          const SizedBox(height: Dimens.size16),
+                          SizedBox(
+                            height: Dimens.size115,
+                            child: MovieDescriptionText(
+                              text: '$synopsis',
+                              trimLines: trimLinesCount,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: Dimens.size10.w),
+                    SizedBox(
+                      width: width / 2.2,
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                SM.current.castAndCrew,
+                                textAlign: TextAlign.left,
+                                style: AppTextStyles.sfProMedium18px,
+                              ),
+                              Text(
+                                SM.current.viewAll,
+                                style: AppTextStyles.sfProRegularSelected14px,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: Dimens.size280.h,
+                            child: MovieListActors(blocData: widget.blocData),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
     );
   }
 }

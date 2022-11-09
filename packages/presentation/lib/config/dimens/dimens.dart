@@ -61,6 +61,8 @@ class Dimens {
   static const double size500 = 500;
   static const double size600 = 600;
   static const double size800 = 800;
+  static const double size1000 = 1000;
+  static const double size1200 = 1200;
 
   static const Size minDesktopSize = Size(
     size800,

@@ -43,10 +43,6 @@ class _HomeGridViewState extends State<HomeGridView> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final width = size.width;
-    final height = size.height;
-    int crossAxisCountSize = Responsive.isDesktop(context) ? 4 : 2;
     return RefreshIndicator(
       key: _refreshIndicatorKey,
       onRefresh: () {
@@ -59,7 +55,7 @@ class _HomeGridViewState extends State<HomeGridView> {
               itemCount: widget.movieData.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 childAspectRatio: Dimens.size167.w / Dimens.size320.h,
-                crossAxisCount: crossAxisCountSize,
+                crossAxisCount: Responsive.crossAxisCountSize(context),
                 crossAxisSpacing: Dimens.size2.w,
                 mainAxisExtent: Responsive.isDesktop(context)
                     ? Dimens.size380.h

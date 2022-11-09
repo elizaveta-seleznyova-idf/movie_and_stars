@@ -9,7 +9,7 @@ import 'package:shimmer/shimmer.dart';
 class HomeShimmer extends StatelessWidget {
   const HomeShimmer({super.key});
 
-  static const int itemCountLength = 6;
+  static const int itemCountLength = 10;
 
   static const int flexSize = 2;
 
@@ -17,7 +17,6 @@ class HomeShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final width = size.width;
-    int crossAxisCountSize = Responsive.isDesktop(context) ? 4 : 2;
     return Shimmer.fromColors(
       baseColor: AppColorsDark.primaryColor,
       highlightColor: AppColorsDark.primaryGradientEnd,
@@ -29,7 +28,7 @@ class HomeShimmer extends StatelessWidget {
               itemCount: itemCountLength,
               gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
                 childAspectRatio: Dimens.size167.w / Dimens.size320.h,
-                crossAxisCount: crossAxisCountSize,
+                crossAxisCount: Responsive.crossAxisCountSize(context),
                 crossAxisSpacing: Dimens.size2.w,
                 mainAxisExtent: Responsive.isDesktop(context)
                     ? Dimens.size380.h
