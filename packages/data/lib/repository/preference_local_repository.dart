@@ -35,13 +35,16 @@ class PreferencesLocalRepositoryImpl implements PreferencesLocalRepository {
       return true;
     } else {
       final convertedSavedData = convertSavedDateToDate(savedDate);
-      if (convertedDateResponse.isAfter(convertedSavedData)) {
+      final differenceBetweenDates =
+          (convertedDateResponse.difference(convertedSavedData)).inDays;
+
+      if (differenceBetweenDates != 0 && differenceBetweenDates > 0) {
         final stringDate = convertedDateResponse.toString();
 
         await sharedPreferences.setString(_dateKey, stringDate);
-        return false;
-      } else {
         return true;
+      } else {
+        return false;
       }
     }
   }

@@ -1,4 +1,6 @@
 class CastDBModelField {
+  CastDBModelField._();
+
   static const String movieId = 'movieId';
   static const String characters = 'characters';
   static const String person = 'person';

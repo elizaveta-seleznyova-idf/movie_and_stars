@@ -2,6 +2,8 @@ import 'package:domain/enum/movie_type.dart';
 import 'package:domain/model/movie_response.dart';
 
 class MovieDBModelField {
+  MovieDBModelField._();
+
   static const String movieType = 'movieType';
   static const String title = 'title';
   static const String movieIdSlug = 'movieIdSlug';

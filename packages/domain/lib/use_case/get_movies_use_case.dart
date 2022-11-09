@@ -43,7 +43,7 @@ class GetMoviesUseCase
     final checkData = await _preferences.saveDate(dateResponse);
     if (checkData == true){
       if (paginationCheck >= 5) {
-        int itemCount = 50;
+        const int itemCount = 50;
 
         if (type == MovieType.trending) {
           final responseWithItem = await _traktRepository.getDataTrending(
