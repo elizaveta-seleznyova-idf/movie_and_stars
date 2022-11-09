@@ -49,9 +49,8 @@ class DetailsReviewsList extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: Dimens.size12.w),
-                Container(
+                SizedBox(
                   height: Dimens.size40.h,
-                 // alignment: Alignment.centerLeft,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,7 +72,7 @@ class DetailsReviewsList extends StatelessWidget {
             ),
             const SizedBox(height: Dimens.size25),
             Container(
-              width: Responsive.isMobile(context) ?width :width/3,
+              width: Responsive.isMobile(context) ? width : width / 3,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimens.size4.r),
                 color: AppColorsDark.secondaryColor,

@@ -1,5 +1,6 @@
 import 'package:domain/model/movie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/responsive/responsive.dart';
@@ -87,7 +88,7 @@ class _DetailsTabBarState extends State<DetailsTabBar>
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return SizedBox(
-      width: Responsive.isDesktop(context) ? 400 : width,
+      width: Responsive.isDesktop(context) ? Dimens.size400.w : width,
       child: Column(
         children: [
           Container(

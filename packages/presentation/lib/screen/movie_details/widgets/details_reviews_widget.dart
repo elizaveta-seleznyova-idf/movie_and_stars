@@ -28,10 +28,9 @@ class DetailsReviewsWidget extends StatefulWidget {
 }
 
 class _DetailsReviewsWidgetState extends State<DetailsReviewsWidget> {
-  final countRowOfComments = 2;
-
   @override
   Widget build(BuildContext context) {
+    const countRowOfComments = 2;
     final comments = widget.blocData.movieComments;
     final int dividedLength = comments.length ~/ countRowOfComments;
     final int secondRowComments = comments.length - dividedLength;
