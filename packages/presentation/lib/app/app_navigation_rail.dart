@@ -4,6 +4,7 @@ import 'package:presentation/app/app_bloc.dart';
 import 'package:presentation/app/app_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/theme/app_colors.dart';
+import 'package:presentation/generated_localization/l10n.dart';
 import 'package:presentation/utils/image_path.dart';
 
 class AppNavigationRail extends StatefulWidget {
@@ -47,7 +48,7 @@ class _AppNavigationRailState extends State<AppNavigationRail> {
               ImagesPath.homeScreen,
               color: AppColorsDark.selectedItem,
             ),
-            label: const Text('HomePage'),
+            label: Text(SM.current.homePageNavRail),
           ),
           NavigationRailDestination(
             icon: SvgPicture.asset(
@@ -58,7 +59,7 @@ class _AppNavigationRailState extends State<AppNavigationRail> {
               ImagesPath.ticketScreen,
               color: AppColorsDark.selectedItem,
             ),
-            label: const Text('TicketsPage'),
+            label: Text(SM.current.ticketsPageNavRail),
           ),
           NavigationRailDestination(
             icon: SvgPicture.asset(
@@ -69,7 +70,7 @@ class _AppNavigationRailState extends State<AppNavigationRail> {
               ImagesPath.notificationScreen,
               color: AppColorsDark.selectedItem,
             ),
-            label: const Text('NotificationPage'),
+            label: Text(SM.current.notificationPageNavRail),
           ),
           NavigationRailDestination(
             icon: SvgPicture.asset(
@@ -80,7 +81,7 @@ class _AppNavigationRailState extends State<AppNavigationRail> {
               ImagesPath.profileScreen,
               color: AppColorsDark.selectedItem,
             ),
-            label: const Text('ProfilePage'),
+            label: Text(SM.current.profilePageNavRail),
           ),
         ],
       ),

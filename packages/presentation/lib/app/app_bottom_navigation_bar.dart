@@ -4,6 +4,7 @@ import 'package:presentation/app/app_bloc.dart';
 import 'package:presentation/app/app_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/theme/app_colors.dart';
+import 'package:presentation/generated_localization/l10n.dart';
 import 'package:presentation/utils/image_path.dart';
 
 class AppBottomNavigationBar extends StatefulWidget {
@@ -48,7 +49,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
               ImagesPath.homeScreen,
               color: AppColorsDark.selectedItem,
             ),
-            label: 'HomePage',
+            label: SM.current.homePageNavRail,
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
@@ -59,7 +60,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
               ImagesPath.ticketScreen,
               color: AppColorsDark.selectedItem,
             ),
-            label: 'TicketsPage',
+            label: SM.current.ticketsPageNavRail,
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
@@ -70,7 +71,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
               ImagesPath.notificationScreen,
               color: AppColorsDark.selectedItem,
             ),
-            label: 'NotificationPage',
+            label: SM.current.notificationPageNavRail,
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
@@ -81,7 +82,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
               ImagesPath.profileScreen,
               color: AppColorsDark.selectedItem,
             ),
-            label: 'ProfilePage',
+            label: SM.current.profilePageNavRail,
           ),
         ],
       ),
