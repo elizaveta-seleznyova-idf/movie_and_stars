@@ -4,25 +4,24 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/text_style/text_style.dart';
 import 'package:presentation/config/theme/app_colors.dart';
-import 'package:presentation/screen/movie_details/details_data.dart';
 import 'package:presentation/utils/image_path.dart';
 
 class MovieListActors extends StatelessWidget {
   const MovieListActors({
-    required this.blocData,
+    required this.cast,
+    required this.listLength,
     super.key,
   });
 
-  final DetailsData blocData;
-  static const int _listLength = 4;
+  final cast;
+  final int listLength;
 
   @override
   Widget build(BuildContext context) {
-    final cast = blocData.detailsAboutPeople;
     return ListView.builder(
       padding: const EdgeInsets.only(top: Dimens.size23),
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: _listLength,
+      itemCount: listLength,
       itemBuilder: (BuildContext context, int index) {
         final currentCast = cast?[index];
         return Padding(

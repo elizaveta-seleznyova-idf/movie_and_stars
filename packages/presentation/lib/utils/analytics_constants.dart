@@ -10,6 +10,7 @@ class AnalyticsEventConstants {
   static const String eventLoginLogFacebook = 'login_log_facebook';
   static const String eventDetailsShare = 'details_share';
   static const String eventHomePushToDetails = 'home_push_to_details';
+  static const String eventDetailsPushToCastCrew = 'details_push_to_cast_crew';
 }
 
 class AnalyticsScreenConstants{
