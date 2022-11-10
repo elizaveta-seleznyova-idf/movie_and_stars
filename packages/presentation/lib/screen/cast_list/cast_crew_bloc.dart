@@ -26,7 +26,8 @@ class CastCrewBlocImpl extends BlocImpl<CastCrewScreenArguments, CastCrewData>
   @override
   void initArgs(CastCrewScreenArguments arguments) {
     _updateData(isLoading: true);
-    _stateData = _stateData.copyWith(castCrewScreenArguments: arguments);
+    final details = arguments.detailsAboutPeople;
+    _stateData = _stateData.copyWith(detailsAboutPeople: details);
     _updateData(isLoading: false, data: _stateData);
   }
 }

@@ -74,11 +74,20 @@ class _CastCrewScreenState
                         ),
                       ),
                     ),
-                    body: Center(
+                    body: Scrollbar(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: Dimens.size10,
+                          right: Dimens.size18,
+                          left: Dimens.size17,
+                        ),
                         child: MovieListActors(
-                      cast: blocData.detailsAboutPeople,
-                      listLength: details!.length,
-                    )),
+                          cast: blocData.detailsAboutPeople,
+                          listLength: details!.length,
+                          isScrollable: true,
+                        ),
+                      ),
+                    ),
                   );
           } else {
             return const Center(child: Text('Check your network'));

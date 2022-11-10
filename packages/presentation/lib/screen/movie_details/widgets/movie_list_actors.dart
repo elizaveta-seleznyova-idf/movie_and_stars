@@ -1,3 +1,4 @@
+import 'package:domain/model/people_and_images_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,17 +11,21 @@ class MovieListActors extends StatelessWidget {
   const MovieListActors({
     required this.cast,
     required this.listLength,
+    required this.isScrollable,
     super.key,
   });
 
-  final cast;
+  final List<PeopleAndImagesModel>? cast;
   final int listLength;
+  final bool isScrollable;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       padding: const EdgeInsets.only(top: Dimens.size23),
-      physics: const NeverScrollableScrollPhysics(),
+      physics: isScrollable
+          ? const ScrollPhysics()
+          : const NeverScrollableScrollPhysics(),
       itemCount: listLength,
       itemBuilder: (BuildContext context, int index) {
         final currentCast = cast?[index];
@@ -32,6 +37,8 @@ class MovieListActors extends StatelessWidget {
                   ? SvgPicture.asset(
                       ImagesPath.noPeopleImage,
                       fit: BoxFit.fill,
+                      width: Dimens.size40.w,
+                      height: Dimens.size40.h,
                     )
                   : CircleAvatar(
                       backgroundImage: NetworkImage('${currentCast?.image}'),
