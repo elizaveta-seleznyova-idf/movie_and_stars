@@ -129,9 +129,12 @@ class _DetailsViewWidgetState extends State<DetailsViewWidget> {
                                 textAlign: TextAlign.left,
                                 style: AppTextStyles.sfProMedium18px,
                               ),
-                              Text(
-                                SM.current.viewAll,
-                                style: AppTextStyles.sfProRegularSelected14px,
+                              TextButton(
+                                onPressed: widget.bloc.pushToViewAllCastCrew,
+                                child: Text(
+                                  SM.current.viewAll,
+                                  style: AppTextStyles.sfProRegularSelected14px,
+                                ),
                               ),
                             ],
                           ),

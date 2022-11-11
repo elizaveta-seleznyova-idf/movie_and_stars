@@ -93,27 +93,34 @@ class _CastCrewScreenState
                               isScrollable: true,
                               additionalIndex: 0,
                             )
-                          : Row(
-                              children: [
-                                SizedBox(
-                                  width: width / 2,
-                                  child: MovieListActors(
-                                    cast: blocData.detailsAboutPeople,
-                                    listLength: halfCastLength,
-                                    isScrollable: true,
-                                    additionalIndex: halfCastLength,
-                                  ),
+                          : ScrollConfiguration(
+                              behavior: ScrollConfiguration.of(context)
+                                  .copyWith(scrollbars: false),
+                              child: SingleChildScrollView(
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: width / 2.2,
+                                      child: MovieListActors(
+                                        cast: blocData.detailsAboutPeople,
+                                        listLength: halfCastLength,
+                                        isScrollable: false,
+                                        additionalIndex: 0,
+                                      ),
+                                    ),
+                                    const SizedBox(width: Dimens.size10),
+                                    SizedBox(
+                                      width: width / 2.2,
+                                      child: MovieListActors(
+                                        cast: blocData.detailsAboutPeople,
+                                        listLength: halfCastLength,
+                                        isScrollable: false,
+                                        additionalIndex: halfCastLength,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                SizedBox(
-                                  width: width / 2,
-                                  child: MovieListActors(
-                                    cast: blocData.detailsAboutPeople,
-                                    listLength: halfCastLength,
-                                    isScrollable: true,
-                                    additionalIndex: halfCastLength,
-                                  ),
-                                ),
-                              ],
+                              ),
                             )),
                 ),
               );

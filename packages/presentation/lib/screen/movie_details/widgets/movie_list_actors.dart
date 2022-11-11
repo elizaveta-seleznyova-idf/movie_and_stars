@@ -24,6 +24,8 @@ class MovieListActors extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
       padding: const EdgeInsets.only(top: Dimens.size23),
       physics: isScrollable
           ? const ScrollPhysics()
