@@ -4,6 +4,7 @@ class Dimens {
   Dimens._();
 
   ///size
+  static const Size figmaScreenSize =  Size(375,812);
   static const double size0 = 0;
   static const double size1 = 1;
   static const double size2 = 2;
@@ -51,12 +52,13 @@ class Dimens {
   static const double size167 = 167;
   static const double size180 = 180;
   static const double size200 = 200;
+  static const double size220 = 220;
   static const double size250 = 250;
   static const double size262 = 262;
   static const double size280 = 280;
   static const double size320 = 320;
-  static const double size350 = 350;
-  static const double size380 = 380;
+  static const double size355 = 355;
+  static const double size390 = 390;
   static const double size400 = 400;
   static const double size500 = 500;
   static const double size600 = 600;

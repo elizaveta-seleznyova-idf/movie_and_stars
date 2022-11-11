@@ -26,13 +26,12 @@ class HomeShimmer extends StatelessWidget {
             child: GridView.builder(
               padding: const EdgeInsets.symmetric(horizontal: Dimens.size18),
               itemCount: itemCountLength,
-              gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: Dimens.size167.w / Dimens.size320.h,
-                crossAxisCount: Responsive.crossAxisCountSize(context),
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: Dimens.size220,
                 crossAxisSpacing: Dimens.size2.w,
                 mainAxisExtent: Responsive.isDesktop(context)
-                    ? Dimens.size380.h
-                    : Dimens.size350.h,
+                    ? Dimens.size390.h
+                    : Dimens.size355.h,
               ),
               itemBuilder: (BuildContext context, int index) {
                 return Column(
