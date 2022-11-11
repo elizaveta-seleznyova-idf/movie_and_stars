@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
 import 'package:presentation/config/dimens/dimens.dart';
+import 'package:presentation/config/responsive/responsive.dart';
 import 'package:presentation/config/text_style/text_style.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/generated_localization/l10n.dart';
@@ -44,51 +45,79 @@ class _CastCrewScreenState
     extends BlocScreenState<CastCrewScreen, CastCrewBloc> {
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return StreamBuilder<BlocData<CastCrewData?>>(
         stream: bloc.dataStream,
         builder: (context, snapshot) {
           final data = snapshot.data;
           final CastCrewData? blocData = data?.data;
           final details = blocData?.detailsAboutPeople;
+          final castLength = details?.length;
           if (data != null && blocData != null) {
-            return data.isLoading
-                ? const DetailsReviewsShimmer()
-                : Scaffold(
-                    appBar: AppBar(
-                      backgroundColor: AppColorsDark.primaryColorDark,
-                      bottom: PreferredSize(
-                        preferredSize: const Size.fromHeight(Dimens.size1),
-                        child: Container(
-                          color: AppColorsDark.borderTabBar,
-                          height: Dimens.size1,
-                        ),
-                      ),
-                      elevation: Dimens.size0,
-                      title: Padding(
-                        padding: const EdgeInsets.only(
-                          left: Dimens.size12,
-                        ),
-                        child: Text(
-                          SM.current.castAndCrew,
-                          style: AppTextStyles.sfProSemiBold24px,
-                        ),
-                      ),
+            if (data.isLoading && castLength == null) {
+              return const DetailsReviewsShimmer();
+            } else {
+              final halfCastLength = (details!.length) ~/ 2;
+              return Scaffold(
+                appBar: AppBar(
+                  backgroundColor: AppColorsDark.primaryColorDark,
+                  bottom: PreferredSize(
+                    preferredSize: const Size.fromHeight(Dimens.size1),
+                    child: Container(
+                      color: AppColorsDark.borderTabBar,
+                      height: Dimens.size1,
                     ),
-                    body: Scrollbar(
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          top: Dimens.size10,
-                          right: Dimens.size18,
-                          left: Dimens.size17,
-                        ),
-                        child: MovieListActors(
-                          cast: blocData.detailsAboutPeople,
-                          listLength: details!.length,
-                          isScrollable: true,
-                        ),
-                      ),
+                  ),
+                  elevation: Dimens.size0,
+                  title: Padding(
+                    padding: const EdgeInsets.only(
+                      left: Dimens.size12,
                     ),
-                  );
+                    child: Text(
+                      SM.current.castAndCrew,
+                      style: AppTextStyles.sfProSemiBold24px,
+                    ),
+                  ),
+                ),
+                body: Scrollbar(
+                  child: Padding(
+                      padding: const EdgeInsets.only(
+                        top: Dimens.size10,
+                        right: Dimens.size18,
+                        left: Dimens.size17,
+                      ),
+                      child: Responsive.isMobile(context)
+                          ? MovieListActors(
+                              cast: blocData.detailsAboutPeople,
+                              listLength: castLength!,
+                              isScrollable: true,
+                              additionalIndex: 0,
+                            )
+                          : Row(
+                              children: [
+                                SizedBox(
+                                  width: width / 2,
+                                  child: MovieListActors(
+                                    cast: blocData.detailsAboutPeople,
+                                    listLength: halfCastLength,
+                                    isScrollable: true,
+                                    additionalIndex: halfCastLength,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: width / 2,
+                                  child: MovieListActors(
+                                    cast: blocData.detailsAboutPeople,
+                                    listLength: halfCastLength,
+                                    isScrollable: true,
+                                    additionalIndex: halfCastLength,
+                                  ),
+                                ),
+                              ],
+                            )),
+                ),
+              );
+            }
           } else {
             return const Center(child: Text('Check your network'));
           }

@@ -12,12 +12,14 @@ class MovieListActors extends StatelessWidget {
     required this.cast,
     required this.listLength,
     required this.isScrollable,
+    required this.additionalIndex,
     super.key,
   });
 
   final List<PeopleAndImagesModel>? cast;
   final int listLength;
   final bool isScrollable;
+  final int additionalIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class MovieListActors extends StatelessWidget {
           : const NeverScrollableScrollPhysics(),
       itemCount: listLength,
       itemBuilder: (BuildContext context, int index) {
-        final currentCast = cast?[index];
+        final currentCast = cast?[index + additionalIndex];
         return Padding(
           padding: EdgeInsets.only(bottom: Dimens.size8.h),
           child: Row(
