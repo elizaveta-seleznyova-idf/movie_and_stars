@@ -53,13 +53,12 @@ class _HomeGridViewState extends State<HomeGridView> {
           : GridView.builder(
               padding: const EdgeInsets.symmetric(horizontal: Dimens.size18),
               itemCount: widget.movieData.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: Dimens.size167.w / Dimens.size320.h,
-                crossAxisCount: Responsive.crossAxisCountSize(context),
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: Dimens.size220,
                 crossAxisSpacing: Dimens.size2.w,
                 mainAxisExtent: Responsive.isDesktop(context)
-                    ? Dimens.size380.h
-                    : Dimens.size350.h,
+                    ? Dimens.size390.h
+                    : Dimens.size355.h,
               ),
               itemBuilder: (BuildContext context, int index) {
                 final currentMovie = widget.movieData[index];

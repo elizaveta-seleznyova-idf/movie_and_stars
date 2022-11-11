@@ -7,6 +7,7 @@ import 'package:presentation/app/app_data.dart';
 import 'package:presentation/app/app_navigation_rail.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
+import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/responsive/responsive.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/generated_localization/l10n.dart';
@@ -22,7 +23,7 @@ class _StarMovieAppState extends BlocScreenState<StatefulWidget, AppBloc> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: ScreenUtil.defaultSize,
+      designSize: Dimens.figmaScreenSize,
       useInheritedMediaQuery: true,
       builder: (context, child) {
         return MaterialApp(

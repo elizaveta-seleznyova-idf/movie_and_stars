@@ -29,13 +29,15 @@ class DetailsReviewsList extends StatelessWidget {
       children: List.generate(rowLength, (index) {
         final currentComment = comments[index + commentsListIndex];
         return Column(
+         crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: Dimens.size20.h),
+            const SizedBox(height: Dimens.size20),
             Row(
               children: [
+                const SizedBox(width: Dimens.size12),
                 SizedBox(
-                  width: Dimens.size40.w,
-                  height: Dimens.size40.h,
+                  width: Dimens.size40,
+                  height: Dimens.size40,
                   child: ClipOval(
                     child: Image.network(
                       currentComment.userImage,
@@ -50,7 +52,7 @@ class DetailsReviewsList extends StatelessWidget {
                 ),
                 SizedBox(width: Dimens.size12.w),
                 SizedBox(
-                  height: Dimens.size40.h,
+                  height: Dimens.size40,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,11 +79,11 @@ class DetailsReviewsList extends StatelessWidget {
                 borderRadius: BorderRadius.circular(Dimens.size4.r),
                 color: AppColorsDark.secondaryColor,
               ),
-              padding: EdgeInsets.only(
-                top: Dimens.size16.h,
-                left: Dimens.size16.w,
-                right: Dimens.size16.w,
-                bottom: Dimens.size19.h,
+              padding: const EdgeInsets.only(
+                top: Dimens.size16,
+                left: Dimens.size16,
+                right: Dimens.size16,
+                bottom: Dimens.size19,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
