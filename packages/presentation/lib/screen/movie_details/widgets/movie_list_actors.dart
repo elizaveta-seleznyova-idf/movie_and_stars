@@ -25,7 +25,7 @@ class MovieListActors extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         final currentCast = cast?[index];
         return Padding(
-          padding: const EdgeInsets.only(bottom: Dimens.size8),
+          padding: EdgeInsets.only(bottom: Dimens.size8H),
           child: Row(
             children: [
               (currentCast?.image == null)
@@ -35,11 +35,9 @@ class MovieListActors extends StatelessWidget {
                     )
                   : CircleAvatar(
                       backgroundImage: NetworkImage('${currentCast?.image}'),
-                      radius: Dimens.size24,
+                      radius: Dimens.size24R,
                     ),
-              const SizedBox(
-                width: Dimens.size12,
-              ),
+              SizedBox(width: Dimens.size12W),
               Expanded(
                 flex: 2,
                 child: Text(

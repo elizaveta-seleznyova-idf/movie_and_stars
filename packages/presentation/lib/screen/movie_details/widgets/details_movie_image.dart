@@ -42,8 +42,8 @@ class _DetailsMovieImageState extends State<DetailsMovieImage> {
         child: Image.network(
           '${widget.image}',
           fit: BoxFit.fill,
-          width: Dimens.size167,
-          height: Dimens.size250,
+          width: Dimens.size167W,
+          height: Dimens.size250H,
           errorBuilder: (
             context,
             exception,
@@ -51,8 +51,8 @@ class _DetailsMovieImageState extends State<DetailsMovieImage> {
           ) =>
               SvgPicture.asset(
             ImagesPath.noImage,
-            width: Dimens.size167,
-            height: Dimens.size250,
+            width: Dimens.size167W,
+            height: Dimens.size250H,
             fit: BoxFit.fill,
             color: AppColorsDark.unselectedColor,
           ),

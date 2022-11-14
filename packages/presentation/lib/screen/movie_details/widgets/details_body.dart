@@ -24,22 +24,22 @@ class DetailsBody extends StatelessWidget {
     } else {
       return Column(
         children: [
-          const SizedBox(height: Dimens.size150),
+          SizedBox(height: Dimens.size150H),
           Text(
             movieInformation.title,
             style: AppTextStyles.sfProSemiBold24px,
           ),
-          const SizedBox(height: Dimens.size16),
+          SizedBox(height: Dimens.size16H),
           Text(
             movieInformation.runTime,
             style: AppTextStyles.sfProRegularUnselected16px,
           ),
-          const SizedBox(height: Dimens.size9),
+          SizedBox(height: Dimens.size9H),
           Text(
             movieInformation.genres,
             style: AppTextStyles.sfProRegularUnselected16px,
           ),
-          const SizedBox(height: Dimens.size29),
+          SizedBox(height: Dimens.size29H),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -47,10 +47,10 @@ class DetailsBody extends StatelessWidget {
                 '${movieInformation.rating} / $maxRating',
                 style: AppTextStyles.sfProRegular30px,
               ),
-              const SizedBox(width: Dimens.size8),
+              SizedBox(width: Dimens.size8W),
               MovieRating(
                 rating: movieInformation.rating,
-                starsSize: Dimens.size26,
+                starsSize: Dimens.size26R,
               ),
             ],
           ),

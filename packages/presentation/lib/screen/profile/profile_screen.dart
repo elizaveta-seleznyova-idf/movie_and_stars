@@ -42,14 +42,12 @@ class _ProfileScreenState extends BlocScreenState<ProfileScreen, ProfileBloc> {
           preferredSize: const Size.fromHeight(Dimens.size1),
           child: Container(
             color: AppColorsDark.borderTabBar,
-            height: Dimens.size1,
+            height: Dimens.size1H,
           ),
         ),
         elevation: Dimens.size0,
         title: Padding(
-          padding: const EdgeInsets.only(
-            left: Dimens.size12,
-          ),
+          padding: EdgeInsets.only(left: Dimens.size12W),
           child: Text(
             SM.current.profile,
             style: AppTextStyles.sfProSemiBold24px,

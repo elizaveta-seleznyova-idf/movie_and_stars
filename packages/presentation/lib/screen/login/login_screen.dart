@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
 import 'package:presentation/config/dimens/dimens.dart';
+import 'package:presentation/config/responsive/responsive.dart';
 import 'package:presentation/config/text_style/text_style.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/generated_localization/l10n.dart';
@@ -73,13 +74,12 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       SM.current.userName,
                       style: AppTextStyles.sfProMediumUnselected12px,
                     ),
-                    const SizedBox(height: Dimens.size8),
+                    SizedBox(height: Dimens.size8H),
                     LoginTextField(
                       controller: bloc.textLoginController,
                       onChanged: bloc.onChangedLogin,
@@ -92,12 +92,12 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                       ),
                       isSuffixIcon: false,
                     ),
-                    const SizedBox(height: Dimens.size16),
+                    SizedBox(height: Dimens.size16H),
                     Text(
                       SM.current.password,
                       style: AppTextStyles.sfProMediumUnselected12px,
                     ),
-                    const SizedBox(height: Dimens.size8),
+                    SizedBox(height: Dimens.size8H),
                     LoginTextField(
                       controller: bloc.textPasswordController,
                       onChanged: bloc.onChangedPassword,
@@ -110,9 +110,11 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                       ),
                       isSuffixIcon: true,
                     ),
-                    const SizedBox(height: Dimens.size32),
+                    SizedBox(height: Dimens.size32H),
                     SizedBox(
-                      width: width,
+                      width: Responsive.isDesktop(context)
+                          ? Dimens.size400
+                          : width,
                       height: Dimens.size48,
                       child: ElevatedButton(
                         onPressed: bloc.login,
