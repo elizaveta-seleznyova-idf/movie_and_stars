@@ -57,7 +57,7 @@ class _HomeTabBarState extends State<HomeTabBar> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                !isIconActive ? const Icon(Icons.play_circle) : const SizedBox(),
+                if (!isIconActive) const Icon(Icons.play_circle),
                 const SizedBox(width: Dimens.size6),
                 Text(
                   SM.current.nowShowing,

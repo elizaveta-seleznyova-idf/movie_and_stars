@@ -118,8 +118,7 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                           : width,
                       height: Dimens.size48,
                       child: ElevatedButton(
-                        onPressed:
-                            Responsive.isMobile(context) ? bloc.login : null,
+                        onPressed: bloc.login,
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
                             AppColorsDark.primaryColor,
@@ -136,17 +135,13 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         LoginRegistrationButton(
-                          onPressed: Responsive.isMobile(context)
-                              ? bloc.logFacebook
-                              : null,
+                          onPressed: bloc.logFacebook,
                           buttonImage: ImagesPath.facebookImage,
                           buttonColor: AppColorsDark.facebookColor,
                         ),
                         const SizedBox(width: Dimens.size24),
                         LoginRegistrationButton(
-                          onPressed: Responsive.isMobile(context)
-                              ? bloc.logGoogle
-                              : null,
+                          onPressed: bloc.logGoogle,
                           buttonImage: ImagesPath.googleImage,
                           buttonColor: AppColorsDark.googleColor,
                         ),

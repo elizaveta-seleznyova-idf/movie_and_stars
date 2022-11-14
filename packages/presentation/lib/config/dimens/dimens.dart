@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Dimens {
   Dimens._();
 
   ///size
-  static const Size figmaScreenSize =  Size(375,812);
+  static const Size figmaScreenSize = Size(375, 812);
   static const double size0 = 0;
   static const double size1 = 1;
   static const double size2 = 2;
@@ -65,6 +66,24 @@ class Dimens {
   static const double size800 = 800;
   static const double size1000 = 1000;
   static const double size1200 = 1200;
+
+  ///responsiveSize
+  static final double size1H = size1.h;
+  static final double size4H = size4.h;
+  static final double size8H = size8.h;
+  static final double size10H = size10.h;
+  static final double size15H = size15.h;
+  static final double size20H = size20.h;
+  static final double size355H = size355.h;
+  static final double size390H = size390.h;
+  static final double size250H = size250.h;
+
+  static final double size2W = size2.w;
+  static final double size3W = size3.w;
+  static final double size4W = size4.w;
+  static final double size12W = size12.w;
+  static final double size120W = size120.w;
+  static final double size167W = size167.w;
 
   static const Size minDesktopSize = Size(
     size800,
