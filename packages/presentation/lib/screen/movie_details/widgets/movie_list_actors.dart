@@ -10,14 +10,12 @@ class MovieListActors extends StatelessWidget {
   const MovieListActors({
     required this.cast,
     required this.listLength,
-    required this.isScrollable,
     required this.additionalIndex,
     super.key,
   });
 
   final List<PeopleAndImagesModel>? cast;
   final int listLength;
-  final bool isScrollable;
   final int additionalIndex;
 
   @override

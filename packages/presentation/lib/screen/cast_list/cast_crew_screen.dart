@@ -91,7 +91,6 @@ class _CastCrewScreenState
                             child: MovieListActors(
                                 cast: blocData.detailsAboutPeople,
                                 listLength: castLength!,
-                                isScrollable: true,
                                 additionalIndex: 0,
                               ),
                           )
@@ -106,7 +105,6 @@ class _CastCrewScreenState
                                       child: MovieListActors(
                                         cast: blocData.detailsAboutPeople,
                                         listLength: halfCastLength,
-                                        isScrollable: false,
                                         additionalIndex: 0,
                                       ),
                                     ),
@@ -116,7 +114,6 @@ class _CastCrewScreenState
                                       child: MovieListActors(
                                         cast: blocData.detailsAboutPeople,
                                         listLength: halfCastLength,
-                                        isScrollable: false,
                                         additionalIndex: halfCastLength,
                                       ),
                                     ),

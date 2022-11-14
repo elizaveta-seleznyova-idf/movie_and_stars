@@ -84,7 +84,6 @@ class _DetailsViewWidgetState extends State<DetailsViewWidget> {
                   child: MovieListActors(
                     cast: widget.blocData.detailsAboutPeople,
                     listLength: 4,
-                    isScrollable: false,
                     additionalIndex: 0,
                   ),
                 ),
@@ -143,7 +142,6 @@ class _DetailsViewWidgetState extends State<DetailsViewWidget> {
                             child: MovieListActors(
                               cast: widget.blocData.detailsAboutPeople,
                               listLength: 4,
-                              isScrollable: false,
                               additionalIndex: 0,
                             ),
                           ),
