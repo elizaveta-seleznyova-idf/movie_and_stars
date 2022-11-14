@@ -22,60 +22,58 @@ class MovieListActors extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      padding: const EdgeInsets.only(top: Dimens.size23),
-      physics: isScrollable
-          ? const ScrollPhysics()
-          : const NeverScrollableScrollPhysics(),
-      itemCount: listLength,
-      itemBuilder: (BuildContext context, int index) {
-        final currentCast = cast?[index + additionalIndex];
-        return Padding(
-          padding: EdgeInsets.only(bottom: Dimens.size8H),
-          child: Row(
+    return Column(
+      children: List.generate(
+        listLength,
+        (index) {
+          final currentCast = cast?[index + additionalIndex];
+          return Column(
             children: [
-              (currentCast?.image == null)
-                  ? SvgPicture.asset(
-                      ImagesPath.noPeopleImage,
-                      fit: BoxFit.fill,
-                      width: Dimens.size40W,
-                      height: Dimens.size40H,
-                    )
-                  : CircleAvatar(
-                      backgroundImage: NetworkImage('${currentCast?.image}'),
-                      radius: Dimens.size24R,
+              Row(
+                children: [
+                  (currentCast?.image == null)
+                      ? SvgPicture.asset(
+                          ImagesPath.noPeopleImage,
+                          fit: BoxFit.fill,
+                          width: Dimens.size40W,
+                          height: Dimens.size40H,
+                        )
+                      : CircleAvatar(
+                          backgroundImage: NetworkImage('${currentCast?.image}'),
+                          radius: Dimens.size24R,
+                        ),
+                  SizedBox(width: Dimens.size12W),
+                  Expanded(
+                    flex: 2,
+                    child: Text(
+                      '${currentCast?.person}',
+                      textAlign: TextAlign.left,
+                      style: AppTextStyles.sfProMedium14px,
                     ),
-              SizedBox(width: Dimens.size12W),
-              Expanded(
-                flex: 2,
-                child: Text(
-                  '${currentCast?.person}',
-                  textAlign: TextAlign.left,
-                  style: AppTextStyles.sfProMedium14px,
-                ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      // TODO made logic
+                    },
+                    icon: SvgPicture.asset(
+                      ImagesPath.treeDotsImage,
+                      color: AppColorsDark.unselectedColor,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Text(
+                      '${currentCast?.characters?.toUpperCase()}',
+                      style: AppTextStyles.sfProMediumUnselected12px,
+                    ),
+                  ),
+                ],
               ),
-              IconButton(
-                onPressed: () {
-                  // TODO made logic
-                },
-                icon: SvgPicture.asset(
-                  ImagesPath.treeDotsImage,
-                  color: AppColorsDark.unselectedColor,
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Text(
-                  '${currentCast?.characters?.toUpperCase()}',
-                  style: AppTextStyles.sfProMediumUnselected12px,
-                ),
-              ),
+              SizedBox(height: Dimens.size19H,),
             ],
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

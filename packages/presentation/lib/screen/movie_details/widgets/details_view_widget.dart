@@ -78,8 +78,9 @@ class _DetailsViewWidgetState extends State<DetailsViewWidget> {
                     ),
                   ],
                 ),
+                const SizedBox(height: Dimens.size10),
                 SizedBox(
-                  height: Dimens.size280,
+                  height: Dimens.size300,
                   child: MovieListActors(
                     cast: widget.blocData.detailsAboutPeople,
                     listLength: 4,
@@ -138,7 +139,7 @@ class _DetailsViewWidgetState extends State<DetailsViewWidget> {
                             ],
                           ),
                           SizedBox(
-                            height: Dimens.size280H,
+                            height: Dimens.size280,
                             child: MovieListActors(
                               cast: widget.blocData.detailsAboutPeople,
                               listLength: 4,

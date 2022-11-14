@@ -87,12 +87,14 @@ class _CastCrewScreenState
                         left: Dimens.size17,
                       ),
                       child: Responsive.isMobile(context)
-                          ? MovieListActors(
-                              cast: blocData.detailsAboutPeople,
-                              listLength: castLength!,
-                              isScrollable: true,
-                              additionalIndex: 0,
-                            )
+                          ? SingleChildScrollView(
+                            child: MovieListActors(
+                                cast: blocData.detailsAboutPeople,
+                                listLength: castLength!,
+                                isScrollable: true,
+                                additionalIndex: 0,
+                              ),
+                          )
                           : ScrollConfiguration(
                               behavior: ScrollConfiguration.of(context)
                                   .copyWith(scrollbars: false),

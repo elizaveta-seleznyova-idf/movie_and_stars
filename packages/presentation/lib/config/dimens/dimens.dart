@@ -76,6 +76,7 @@ class Dimens {
   static final double size10H = size10.h;
   static final double size15H = size15.h;
   static final double size16H = size16.h;
+  static final double size19H = size19.h;
   static final double size20H = size20.h;
   static final double size25H = size25.h;
   static final double size29H = size29.h;
