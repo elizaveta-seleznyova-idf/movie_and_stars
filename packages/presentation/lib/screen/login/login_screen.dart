@@ -60,7 +60,7 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                 left: Dimens.size12,
               ),
               child: Text(
-                SM.current.profile,
+                SM.current.profileTitle,
                 style: AppTextStyles.sfProSemiBold24px,
               ),
             ),

@@ -2,6 +2,7 @@ class AnalyticsEventConstants {
   const AnalyticsEventConstants._();
 
   static const String eventHomeNavBar = 'home_nav_bar';
+  static const String eventTicketsNavBar = 'tickets_nav_bar';
   static const String eventProfileNavBar = 'profile_nav_bar';
   static const String eventHomeTabBarTrending = 'home_tab_bar_trending';
   static const String eventHomeTabBarAnticipated = 'home_tab_bar_anticipated';

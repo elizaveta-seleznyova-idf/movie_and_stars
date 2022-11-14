@@ -51,7 +51,7 @@ class _ProfileScreenState extends BlocScreenState<ProfileScreen, ProfileBloc> {
             left: Dimens.size12,
           ),
           child: Text(
-            SM.current.profile,
+            SM.current.profileTitle,
             style: AppTextStyles.sfProSemiBold24px,
           ),
         ),
