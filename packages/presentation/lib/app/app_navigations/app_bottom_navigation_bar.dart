@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:presentation/app/app_bloc.dart';
 import 'package:presentation/app/app_data.dart';
+import 'package:presentation/app/app_navigations/app_navigation_items.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/generated_localization/l10n.dart';
@@ -40,48 +40,20 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
         currentIndex: widget.blocData.currentPageIndex,
         onTap: widget.bloc.onItemTapped,
         items: [
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              ImagesPath.homeScreen,
-              color: AppColorsDark.unselectedColor,
-            ),
-            activeIcon: SvgPicture.asset(
-              ImagesPath.homeScreen,
-              color: AppColorsDark.selectedItem,
-            ),
+          AppBottomNavItem(
+            image: ImagesPath.homeScreen,
             label: SM.current.homePageNavRail,
           ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              ImagesPath.ticketScreen,
-              color: AppColorsDark.unselectedColor,
-            ),
-            activeIcon: SvgPicture.asset(
-              ImagesPath.ticketScreen,
-              color: AppColorsDark.selectedItem,
-            ),
+          AppBottomNavItem(
+            image: ImagesPath.ticketScreen,
             label: SM.current.ticketsPageNavRail,
           ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              ImagesPath.notificationScreen,
-              color: AppColorsDark.unselectedColor,
-            ),
-            activeIcon: SvgPicture.asset(
-              ImagesPath.notificationScreen,
-              color: AppColorsDark.selectedItem,
-            ),
+          AppBottomNavItem(
+            image: ImagesPath.notificationScreen,
             label: SM.current.notificationPageNavRail,
           ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              ImagesPath.profileScreen,
-              color: AppColorsDark.unselectedColor,
-            ),
-            activeIcon: SvgPicture.asset(
-              ImagesPath.profileScreen,
-              color: AppColorsDark.selectedItem,
-            ),
+          AppBottomNavItem(
+            image: ImagesPath.profileScreen,
             label: SM.current.profilePageNavRail,
           ),
         ],

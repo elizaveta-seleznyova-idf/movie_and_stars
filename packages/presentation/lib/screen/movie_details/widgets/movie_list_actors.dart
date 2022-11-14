@@ -1,6 +1,5 @@
 import 'package:domain/model/people_and_images_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/text_style/text_style.dart';
@@ -34,21 +33,21 @@ class MovieListActors extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         final currentCast = cast?[index + additionalIndex];
         return Padding(
-          padding: EdgeInsets.only(bottom: Dimens.size8.h),
+          padding: EdgeInsets.only(bottom: Dimens.size8H),
           child: Row(
             children: [
               (currentCast?.image == null)
                   ? SvgPicture.asset(
                       ImagesPath.noPeopleImage,
                       fit: BoxFit.fill,
-                      width: Dimens.size40.w,
-                      height: Dimens.size40.h,
+                      width: Dimens.size40W,
+                      height: Dimens.size40H,
                     )
                   : CircleAvatar(
                       backgroundImage: NetworkImage('${currentCast?.image}'),
-                      radius: Dimens.size24.r,
+                      radius: Dimens.size24R,
                     ),
-              SizedBox(width: Dimens.size12.w),
+              SizedBox(width: Dimens.size12W),
               Expanded(
                 flex: 2,
                 child: Text(

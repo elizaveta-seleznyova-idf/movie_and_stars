@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/responsive/responsive.dart';
@@ -55,15 +54,15 @@ class _HomeGridViewState extends State<HomeGridView> {
               itemCount: widget.movieData.length,
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: Dimens.size220,
-                crossAxisSpacing: Dimens.size2.w,
+                crossAxisSpacing: Dimens.size2W,
                 mainAxisExtent: Responsive.isDesktop(context)
-                    ? Dimens.size390.h
-                    : Dimens.size355.h,
+                    ? Dimens.size300
+                    : Dimens.size355H,
               ),
               itemBuilder: (BuildContext context, int index) {
                 final currentMovie = widget.movieData[index];
                 return Padding(
-                  padding: EdgeInsets.only(bottom: Dimens.size20.h),
+                  padding: EdgeInsets.only(bottom: Dimens.size20H),
                   child: InkWell(
                     onTap: () {
                       widget.bloc.navigateToDetailsPage(currentMovie.movieId);
@@ -72,16 +71,16 @@ class _HomeGridViewState extends State<HomeGridView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         MovieImage(image: currentMovie.images),
-                        SizedBox(height: Dimens.size10.h),
+                        SizedBox(height: Dimens.size10H),
                         MovieRating(
                           rating: currentMovie.rating,
                           starsSize: Dimens.size17,
                         ),
-                        SizedBox(height: Dimens.size8.h),
+                        SizedBox(height: Dimens.size8H),
                         MovieTitle(
                           movieTitleText: currentMovie.titles,
                         ),
-                        SizedBox(height: Dimens.size4.h),
+                        SizedBox(height: Dimens.size4H),
                         MovieContent(
                           movieGenre: currentMovie.genres,
                           movieTime: currentMovie.time,

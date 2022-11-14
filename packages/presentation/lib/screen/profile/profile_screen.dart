@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:presentation/base/bloc_screen.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/text_style/text_style.dart';
@@ -43,14 +42,12 @@ class _ProfileScreenState extends BlocScreenState<ProfileScreen, ProfileBloc> {
           preferredSize: const Size.fromHeight(Dimens.size1),
           child: Container(
             color: AppColorsDark.borderTabBar,
-            height: Dimens.size1.h,
+            height: Dimens.size1H,
           ),
         ),
         elevation: Dimens.size0,
         title: Padding(
-          padding:  EdgeInsets.only(
-            left: Dimens.size12.w,
-          ),
+          padding: EdgeInsets.only(left: Dimens.size12W),
           child: Text(
             SM.current.profile,
             style: AppTextStyles.sfProSemiBold24px,

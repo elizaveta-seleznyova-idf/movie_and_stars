@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/responsive/responsive.dart';
@@ -39,8 +38,8 @@ class _DetailsReviewsWidgetState extends State<DetailsReviewsWidget> {
           ? const DetailsReviewsShimmer()
           : Padding(
               padding: EdgeInsets.only(
-                left: Dimens.size18.w,
-                right: Dimens.size17.w,
+                left: Dimens.size18W,
+                right: Dimens.size17W,
               ),
               child: Responsive.isMobile(context)
                   ? DetailsReviewsList(
@@ -58,7 +57,7 @@ class _DetailsReviewsWidgetState extends State<DetailsReviewsWidget> {
                               comments: comments,
                               commentsListIndex: 0,
                             ),
-                            SizedBox(width: Dimens.size15.w),
+                            SizedBox(width: Dimens.size15W),
                             DetailsReviewsList(
                               rowLength: secondRowComments,
                               comments: comments,

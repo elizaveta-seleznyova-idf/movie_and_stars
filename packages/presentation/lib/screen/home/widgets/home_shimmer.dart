@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/responsive/responsive.dart';
 import 'package:presentation/config/theme/app_colors.dart';
@@ -28,33 +27,33 @@ class HomeShimmer extends StatelessWidget {
               itemCount: itemCountLength,
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: Dimens.size220,
-                crossAxisSpacing: Dimens.size2.w,
+                crossAxisSpacing: Dimens.size2W,
                 mainAxisExtent: Responsive.isDesktop(context)
-                    ? Dimens.size390.h
-                    : Dimens.size355.h,
+                    ? Dimens.size390H
+                    : Dimens.size355H,
               ),
               itemBuilder: (BuildContext context, int index) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ShimmerContainer(
-                      shimmerHeight: Dimens.size250.h,
-                      shimmerWidth: Dimens.size167.w,
+                      shimmerHeight: Dimens.size250H,
+                      shimmerWidth: Dimens.size167W,
                     ),
-                    SizedBox(height: Dimens.size10.h),
+                    SizedBox(height: Dimens.size10H),
                     ShimmerContainer(
-                      shimmerHeight: Dimens.size20.h,
-                      shimmerWidth: Dimens.size120.w,
+                      shimmerHeight: Dimens.size20H,
+                      shimmerWidth: Dimens.size120W,
                     ),
-                    SizedBox(height: Dimens.size8.h),
+                    SizedBox(height: Dimens.size8H),
                     ShimmerContainer(
-                      shimmerHeight: Dimens.size15.h,
-                      shimmerWidth: width / Dimens.size3.w,
+                      shimmerHeight: Dimens.size15H,
+                      shimmerWidth: width / Dimens.size3W,
                     ),
-                    SizedBox(height: Dimens.size4.h),
+                    SizedBox(height: Dimens.size4H),
                     ShimmerContainer(
-                      shimmerHeight: Dimens.size10.h,
-                      shimmerWidth: width / Dimens.size2.w,
+                      shimmerHeight: Dimens.size10H,
+                      shimmerWidth: width / Dimens.size2W,
                     ),
                   ],
                 );

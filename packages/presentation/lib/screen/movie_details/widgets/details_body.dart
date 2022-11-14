@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/text_style/text_style.dart';
 import 'package:presentation/screen/home/widgets/movie_rating.dart';
@@ -25,22 +24,22 @@ class DetailsBody extends StatelessWidget {
     } else {
       return Column(
         children: [
-          SizedBox(height: Dimens.size150.h),
+          SizedBox(height: Dimens.size150H),
           Text(
             movieInformation.title,
             style: AppTextStyles.sfProSemiBold24px,
           ),
-          SizedBox(height: Dimens.size16.h),
+          SizedBox(height: Dimens.size16H),
           Text(
             movieInformation.runTime,
             style: AppTextStyles.sfProRegularUnselected16px,
           ),
-          SizedBox(height: Dimens.size9.h),
+          SizedBox(height: Dimens.size9H),
           Text(
             movieInformation.genres,
             style: AppTextStyles.sfProRegularUnselected16px,
           ),
-          SizedBox(height: Dimens.size29.h),
+          SizedBox(height: Dimens.size29H),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -48,10 +47,10 @@ class DetailsBody extends StatelessWidget {
                 '${movieInformation.rating} / $maxRating',
                 style: AppTextStyles.sfProRegular30px,
               ),
-              SizedBox(width: Dimens.size8.w),
+              SizedBox(width: Dimens.size8W),
               MovieRating(
                 rating: movieInformation.rating,
-                starsSize: Dimens.size26.r,
+                starsSize: Dimens.size26R,
               ),
             ],
           ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/responsive/responsive.dart';
@@ -29,7 +28,7 @@ class DetailsReviewsList extends StatelessWidget {
       children: List.generate(rowLength, (index) {
         final currentComment = comments[index + commentsListIndex];
         return Column(
-         crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: Dimens.size20),
             Row(
@@ -50,7 +49,7 @@ class DetailsReviewsList extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: Dimens.size12.w),
+                SizedBox(width: Dimens.size12W),
                 SizedBox(
                   height: Dimens.size40,
                   child: Column(
@@ -76,7 +75,7 @@ class DetailsReviewsList extends StatelessWidget {
             Container(
               width: Responsive.isMobile(context) ? width : width / 3,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimens.size4.r),
+                borderRadius: BorderRadius.circular(Dimens.size4R),
                 color: AppColorsDark.secondaryColor,
               ),
               padding: const EdgeInsets.only(
@@ -91,9 +90,9 @@ class DetailsReviewsList extends StatelessWidget {
                 children: [
                   MovieRating(
                     rating: currentComment.rating,
-                    starsSize: Dimens.size20.r,
+                    starsSize: Dimens.size20R,
                   ),
-                  SizedBox(height: Dimens.size9.h),
+                  SizedBox(height: Dimens.size9H),
                   Text(currentComment.comment),
                 ],
               ),

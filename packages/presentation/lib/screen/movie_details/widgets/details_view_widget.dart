@@ -1,6 +1,5 @@
 import 'package:domain/model/movie.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/responsive/responsive.dart';
@@ -92,7 +91,7 @@ class _DetailsViewWidgetState extends State<DetailsViewWidget> {
             )
           : Column(
               children: [
-                SizedBox(height: Dimens.size32.h),
+                SizedBox(height: Dimens.size32H),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -116,7 +115,7 @@ class _DetailsViewWidgetState extends State<DetailsViewWidget> {
                         ],
                       ),
                     ),
-                    SizedBox(width: Dimens.size10.w),
+                    SizedBox(width: Dimens.size10W),
                     SizedBox(
                       width: width / 2.2,
                       child: Column(
@@ -139,7 +138,7 @@ class _DetailsViewWidgetState extends State<DetailsViewWidget> {
                             ],
                           ),
                           SizedBox(
-                            height: Dimens.size280.h,
+                            height: Dimens.size280H,
                             child: MovieListActors(
                               cast: widget.blocData.detailsAboutPeople,
                               listLength: 4,
