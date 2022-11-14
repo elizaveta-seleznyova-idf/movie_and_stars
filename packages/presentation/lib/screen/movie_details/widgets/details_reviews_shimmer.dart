@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:presentation/config/dimens/dimens.dart';
 import 'package:presentation/config/responsive/responsive.dart';
 import 'package:presentation/config/theme/app_colors.dart';
@@ -51,49 +50,49 @@ class DetailsReviewsShimmer extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      SizedBox(height: Dimens.size20.h),
+                      SizedBox(height: Dimens.size20H),
                       ShimmerContainer(
-                        shimmerHeight: Dimens.size40.h,
+                        shimmerHeight: Dimens.size40H,
                         shimmerWidth: Dimens.size320,
                       ),
-                      SizedBox(height: Dimens.size25.h),
+                      SizedBox(height: Dimens.size25H),
                       ShimmerContainer(
-                        shimmerHeight: Dimens.size167.h,
+                        shimmerHeight: Dimens.size167H,
                         shimmerWidth: Dimens.size320,
                       ),
-                      SizedBox(height: Dimens.size20.h),
+                      SizedBox(height: Dimens.size20H),
                       ShimmerContainer(
-                        shimmerHeight: Dimens.size40.h,
+                        shimmerHeight: Dimens.size40H,
                         shimmerWidth: Dimens.size320,
                       ),
-                      SizedBox(height: Dimens.size25.h),
+                      SizedBox(height: Dimens.size25H),
                       ShimmerContainer(
-                        shimmerHeight: Dimens.size167.h,
+                        shimmerHeight: Dimens.size167H,
                         shimmerWidth: Dimens.size320,
                       ),
                     ],
                   ),
-                  SizedBox(width: Dimens.size20.h),
+                  SizedBox(width: Dimens.size20H),
                   Column(
                     children: [
-                      SizedBox(height: Dimens.size20.h),
+                      SizedBox(height: Dimens.size20H),
                       ShimmerContainer(
-                        shimmerHeight: Dimens.size40.h,
+                        shimmerHeight: Dimens.size40H,
                         shimmerWidth: Dimens.size320,
                       ),
-                      SizedBox(height: Dimens.size25.h),
+                      SizedBox(height: Dimens.size25H),
                       ShimmerContainer(
-                        shimmerHeight: Dimens.size167.h,
+                        shimmerHeight: Dimens.size167H,
                         shimmerWidth: Dimens.size320,
                       ),
-                      SizedBox(height: Dimens.size20.h),
+                      SizedBox(height: Dimens.size20H),
                       ShimmerContainer(
-                        shimmerHeight: Dimens.size40.h,
+                        shimmerHeight: Dimens.size40H,
                         shimmerWidth: Dimens.size320,
                       ),
-                      SizedBox(height: Dimens.size25.h),
+                      SizedBox(height: Dimens.size25H),
                       ShimmerContainer(
-                        shimmerHeight: Dimens.size167.h,
+                        shimmerHeight: Dimens.size167H,
                         shimmerWidth: Dimens.size320,
                       ),
                     ],

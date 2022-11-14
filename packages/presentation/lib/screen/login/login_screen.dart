@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
@@ -80,7 +79,7 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                       SM.current.userName,
                       style: AppTextStyles.sfProMediumUnselected12px,
                     ),
-                    SizedBox(height: Dimens.size8.h),
+                    SizedBox(height: Dimens.size8H),
                     LoginTextField(
                       controller: bloc.textLoginController,
                       onChanged: bloc.onChangedLogin,
@@ -93,12 +92,12 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                       ),
                       isSuffixIcon: false,
                     ),
-                    SizedBox(height: Dimens.size16.h),
+                    SizedBox(height: Dimens.size16H),
                     Text(
                       SM.current.password,
                       style: AppTextStyles.sfProMediumUnselected12px,
                     ),
-                    SizedBox(height: Dimens.size8.h),
+                    SizedBox(height: Dimens.size8H),
                     LoginTextField(
                       controller: bloc.textPasswordController,
                       onChanged: bloc.onChangedPassword,
@@ -111,7 +110,7 @@ class _LoginScreenState extends BlocScreenState<LoginScreen, LoginBloc> {
                       ),
                       isSuffixIcon: true,
                     ),
-                    SizedBox(height: Dimens.size32.h),
+                    SizedBox(height: Dimens.size32H),
                     SizedBox(
                       width: Responsive.isDesktop(context)
                           ? Dimens.size400
