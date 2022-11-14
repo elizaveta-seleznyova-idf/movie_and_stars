@@ -56,7 +56,7 @@ class _HomeGridViewState extends State<HomeGridView> {
                 maxCrossAxisExtent: Dimens.size220,
                 crossAxisSpacing: Dimens.size2W,
                 mainAxisExtent: Responsive.isDesktop(context)
-                    ? Dimens.size280
+                    ? Dimens.size300
                     : Dimens.size355H,
               ),
               itemBuilder: (BuildContext context, int index) {
