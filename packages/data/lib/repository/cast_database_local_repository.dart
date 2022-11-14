@@ -4,7 +4,7 @@ import 'package:domain/repository/cast_database_local_repository.dart';
 import 'package:sqflite/sqflite.dart';
 
 class CastDBLocalRepositoryImpl implements CastDBLocalRepository {
-  CastDBLocalRepositoryImpl({required this.db});
+  const CastDBLocalRepositoryImpl({required this.db});
 
   final Database db;
 
