@@ -116,9 +116,7 @@ class _DetailsScreenState extends BlocScreenState<DetailsScreen, DetailsBloc> {
                   ),
                 );
         } else {
-          return Center(
-            child: Text(SM.current.checkYourInternet),
-          );
+          return Center(child: Text(SM.current.checkYourInternet));
         }
       },
     );

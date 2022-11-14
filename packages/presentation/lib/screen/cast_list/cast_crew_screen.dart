@@ -11,7 +11,6 @@ import 'package:presentation/navigation/base_arguments.dart';
 import 'package:presentation/navigation/base_page.dart';
 import 'package:presentation/screen/cast_list/cast_crew_bloc.dart';
 import 'package:presentation/screen/cast_list/cast_crew_data.dart';
-import 'package:presentation/screen/movie_details/widgets/details_reviews_shimmer.dart';
 import 'package:presentation/screen/movie_details/widgets/movie_list_actors.dart';
 
 class CastCrewScreenArguments extends BaseArguments {
@@ -49,13 +48,14 @@ class _CastCrewScreenState
     return StreamBuilder<BlocData<CastCrewData?>>(
         stream: bloc.dataStream,
         builder: (context, snapshot) {
-          final data = snapshot.data;
+          final BlocData<CastCrewData?>? data = snapshot.data;
           final CastCrewData? blocData = data?.data;
-          final details = blocData?.detailsAboutPeople;
-          final castLength = details?.length;
+          final List<PeopleAndImagesModel>? details =
+              blocData?.detailsAboutPeople;
+          final int? castLength = details?.length;
           if (data != null && blocData != null) {
             if (data.isLoading && castLength == null) {
-              return const DetailsReviewsShimmer();
+              return Center(child: Text(SM.current.checkYourInternet));
             } else {
               final halfCastLength = (details!.length) ~/ 2;
               return Scaffold(
@@ -126,7 +126,7 @@ class _CastCrewScreenState
               );
             }
           } else {
-            return const Center(child: Text('Check your network'));
+            return Center(child: Text(SM.current.checkYourInternet));
           }
         });
   }
