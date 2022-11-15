@@ -19,6 +19,7 @@ import 'package:presentation/screen/movie_details/details_bloc.dart';
 import 'package:presentation/screen/movie_details/mapper/details_mapper.dart';
 import 'package:presentation/screen/profile/profile_bloc.dart';
 import 'package:presentation/screen/splash/splash_bloc.dart';
+import 'package:presentation/screen/tickets/tickets_bloc.dart';
 
 void initPresentationInjector() {
   _initAppModule();
@@ -28,14 +29,10 @@ void initPresentationInjector() {
 
 void _initViewMapperModule() {
   GetIt.I.registerFactory<MapperMovie>(
-    () => MapperMovie(
-      GetIt.I.get<MovieToImage>(),
-    ),
+    () => MapperMovie(GetIt.I.get<MovieToImage>()),
   );
   GetIt.I.registerFactory<MapperDetails>(
-    () => MapperDetails(
-      GetIt.I.get<MovieToImage>(),
-    ),
+    () => MapperDetails(GetIt.I.get<MovieToImage>()),
   );
 }
 
@@ -56,6 +53,7 @@ void _initBlocModule() {
       GetIt.I.get<MapperDetails>(),
     ),
   );
+  GetIt.I.registerFactory<TicketsBloc>(() => TicketsBloc());
   GetIt.I.registerFactory<LoginBloc>(
     () => LoginBloc(
       GetIt.I.get<LoginEmailAndPassUseCase>(),
@@ -64,9 +62,7 @@ void _initBlocModule() {
       GetIt.I.get<ValidationUseCase>(),
     ),
   );
-  GetIt.I.registerFactory<ProfileBloc>(
-    () => ProfileBloc(),
-  );
+  GetIt.I.registerFactory<ProfileBloc>(() => ProfileBloc());
 }
 
 void _initAppModule() {
