@@ -21,6 +21,18 @@ class Cast {
     );
   }
 
+  factory Cast.fromJsonCrew(Map<String, dynamic> json) {
+    return Cast(
+      character: json['job'],
+      characters: json['jobs'].cast<String>(),
+      person: json['person'] == null
+          ? null
+          : Person.fromJson(
+        json['person'] as Map<String, dynamic>,
+      ),
+    );
+  }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['character'] = character;

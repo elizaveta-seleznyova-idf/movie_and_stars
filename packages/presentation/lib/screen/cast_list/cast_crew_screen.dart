@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/base/bloc_screen.dart';
 import 'package:presentation/config/dimens/dimens.dart';
-import 'package:presentation/config/responsive/responsive.dart';
 import 'package:presentation/config/text_style/text_style.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/generated_localization/l10n.dart';
@@ -44,7 +43,6 @@ class _CastCrewScreenState
     extends BlocScreenState<CastCrewScreen, CastCrewBloc> {
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
     return StreamBuilder<BlocData<CastCrewData?>>(
         stream: bloc.dataStream,
         builder: (context, snapshot) {
@@ -57,7 +55,6 @@ class _CastCrewScreenState
             if (data.isLoading && castLength == null) {
               return Center(child: Text(SM.current.checkYourInternet));
             } else {
-              final halfCastLength = (details!.length) ~/ 2;
               return Scaffold(
                 appBar: AppBar(
                   backgroundColor: AppColorsDark.primaryColorDark,
@@ -81,46 +78,21 @@ class _CastCrewScreenState
                 ),
                 body: Scrollbar(
                   child: Padding(
-                      padding: const EdgeInsets.only(
-                        top: Dimens.size10,
-                        right: Dimens.size18,
-                        left: Dimens.size17,
+                    padding: const EdgeInsets.only(
+                      top: Dimens.size10,
+                      right: Dimens.size18,
+                      left: Dimens.size17,
+                    ),
+                    child: ScrollConfiguration(
+                      behavior: ScrollConfiguration.of(context)
+                          .copyWith(scrollbars: false),
+                      child: MovieListActors(
+                        cast: blocData.detailsAboutPeople,
+                        listLength: castLength!,
+                        isScrollable: true,
                       ),
-                      child: Responsive.isMobile(context)
-                          ? SingleChildScrollView(
-                            child: MovieListActors(
-                                cast: blocData.detailsAboutPeople,
-                                listLength: castLength!,
-                                additionalIndex: 0,
-                              ),
-                          )
-                          : ScrollConfiguration(
-                              behavior: ScrollConfiguration.of(context)
-                                  .copyWith(scrollbars: false),
-                              child: SingleChildScrollView(
-                                child: Row(
-                                  children: [
-                                    SizedBox(
-                                      width: width / 2.2,
-                                      child: MovieListActors(
-                                        cast: blocData.detailsAboutPeople,
-                                        listLength: halfCastLength,
-                                        additionalIndex: 0,
-                                      ),
-                                    ),
-                                    const SizedBox(width: Dimens.size10),
-                                    SizedBox(
-                                      width: width / 2.2,
-                                      child: MovieListActors(
-                                        cast: blocData.detailsAboutPeople,
-                                        listLength: halfCastLength,
-                                        additionalIndex: halfCastLength,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )),
+                    ),
+                  ),
                 ),
               );
             }

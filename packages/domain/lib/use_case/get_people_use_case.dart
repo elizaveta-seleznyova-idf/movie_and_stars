@@ -1,4 +1,4 @@
-import 'package:domain/model/cast.dart';
+import 'package:domain/model/cast_and_crew.dart';
 import 'package:domain/model/people_and_images_model.dart';
 import 'package:domain/model/people_response.dart';
 import 'package:domain/model/tmdb_response.dart';
