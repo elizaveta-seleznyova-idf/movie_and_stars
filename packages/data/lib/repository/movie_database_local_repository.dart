@@ -29,9 +29,9 @@ class MovieDBLocalRepositoryImpl implements MovieDBLocalRepository {
             movieType,
           ),
         );
-        await batch.commit();
       }
     }
+    await batch.commit();
   }
 
   @override

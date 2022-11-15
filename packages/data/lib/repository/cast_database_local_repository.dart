@@ -21,16 +21,16 @@ class CastDBLocalRepositoryImpl implements CastDBLocalRepository {
         whereArgs: [castModel.person],
       );
       if (storedCast.isEmpty) {
-       batch.insert(
+        batch.insert(
           DataBaseProvider.castTableName,
           castModel.toJson(
             castModel,
             id,
           ),
         );
-        await batch.commit();
       }
     }
+    await batch.commit();
   }
 
   @override
