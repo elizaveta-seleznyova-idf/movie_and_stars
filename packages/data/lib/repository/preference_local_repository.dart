@@ -1,17 +1,21 @@
+import 'package:data/mapper/convert_date_mappers.dart';
 import 'package:domain/model/user_email_pass.dart';
 import 'package:domain/repository/movie_database_local_repository.dart';
 import 'package:domain/repository/preference_local_repository.dart';
-import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferencesLocalRepositoryImpl implements PreferencesLocalRepository {
   const PreferencesLocalRepositoryImpl({
     required this.sharedPreferences,
     required this.movieDBLocalRepository,
+    required this.convertStringToDate,
+    required this.convertSavedDateToDate,
   });
 
   final SharedPreferences sharedPreferences;
   final MovieDBLocalRepository movieDBLocalRepository;
+  final ConvertStringToDate convertStringToDate;
+  final ConvertSavedDateToDate convertSavedDateToDate;
 
   static const _loginKey = 'loggedUserEmail';
   static const _passwordKey = 'loggedUserPassword';
@@ -47,16 +51,5 @@ class PreferencesLocalRepositoryImpl implements PreferencesLocalRepository {
         return false;
       }
     }
-  }
-
-  DateTime convertStringToDate(String date) {
-    DateTime parseDate =
-        DateFormat("EEE, d MMM yyyy HH:mm:ss", 'en').parse(date);
-    return parseDate;
-  }
-
-  DateTime convertSavedDateToDate(String date) {
-    DateTime convertedDate = DateTime.parse(date);
-    return convertedDate;
   }
 }

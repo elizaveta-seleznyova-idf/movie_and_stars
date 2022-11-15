@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data/database/database_provider.dart';
 import 'package:data/dio/dio_builder.dart';
 import 'package:data/interceptor/interceptor.dart';
+import 'package:data/mapper/convert_date_mappers.dart';
 import 'package:data/repository/auth_repository.dart';
 import 'package:data/repository/cast_database_local_repository.dart';
 import 'package:data/repository/movie_database_local_repository.dart';
@@ -58,14 +59,10 @@ void _initApiModule() {
   GetIt.I.registerSingleton<FirebaseAuth>(FirebaseAuth.instance);
   GetIt.I.registerSingleton<FacebookAuth>(FacebookAuth.instance);
   GetIt.I.registerFactory<TraktRequestInterceptor>(
-    () => TraktRequestInterceptor(
-      apiKeyStore: GetIt.I.get(),
-    ),
+    () => TraktRequestInterceptor(apiKeyStore: GetIt.I.get()),
   );
   GetIt.I.registerFactory<TmdbRequestInterceptor>(
-    () => TmdbRequestInterceptor(
-      apiKeyStore: GetIt.I.get(),
-    ),
+    () => TmdbRequestInterceptor(apiKeyStore: GetIt.I.get()),
   );
   GetIt.I.registerSingleton<LogInterceptor>(
     LogInterceptor(
@@ -94,41 +91,29 @@ void _initApiModule() {
     instanceName: DioConstants.tmdbDio,
   );
   GetIt.I.registerSingleton<ApiService<DioServicePayload>>(
-    ApiServiceImpl(
-      GetIt.I.get(instanceName: DioConstants.traktDio),
-    ),
+    ApiServiceImpl(GetIt.I.get(instanceName: DioConstants.traktDio)),
     instanceName: DioConstants.traktSetvice,
   );
 
   GetIt.I.registerSingleton<ApiService<DioServicePayload>>(
-    ApiServiceImpl(
-      GetIt.I.get(instanceName: DioConstants.tmdbDio),
-    ),
+    ApiServiceImpl(GetIt.I.get(instanceName: DioConstants.tmdbDio)),
     instanceName: DioConstants.tmdbSetvice,
   );
 }
 
 void _initRepositoryModule() {
   GetIt.I.registerLazySingleton<AnalyticsService>(
-    () => AnalyticsServiceImpl(
-      GetIt.I.get<FirebaseAnalytics>(),
-    ),
+    () => AnalyticsServiceImpl(GetIt.I.get<FirebaseAnalytics>()),
   );
 
   GetIt.I.registerLazySingleton<TraktRepository>(
-    () => TraktRepositoryImpl(
-      GetIt.I.get<ApiService<DioServicePayload>>(
-        instanceName: DioConstants.traktSetvice,
-      ),
-    ),
+    () => TraktRepositoryImpl(GetIt.I.get<ApiService<DioServicePayload>>(
+        instanceName: DioConstants.traktSetvice)),
   );
 
   GetIt.I.registerLazySingleton<TmdbRepository>(
-    () => TmdbRepositoryImpl(
-      GetIt.I.get<ApiService<DioServicePayload>>(
-        instanceName: DioConstants.tmdbSetvice,
-      ),
-    ),
+    () => TmdbRepositoryImpl(GetIt.I.get<ApiService<DioServicePayload>>(
+        instanceName: DioConstants.tmdbSetvice)),
   );
 
   GetIt.I.registerLazySingleton<AuthRepository>(
@@ -153,11 +138,17 @@ Future<void> _initDataBaseModule() async {
 }
 
 Future<void> _initLocalModule() async {
-  GetIt.I.registerSingleton<SharedPreferences>(await SharedPreferences.getInstance());
+  GetIt.I.registerSingleton<SharedPreferences>(
+      await SharedPreferences.getInstance());
+
+  GetIt.I.registerFactory<ConvertStringToDate>(() => ConvertStringToDate());
+  GetIt.I.registerFactory<ConvertSavedDateToDate>(() => ConvertSavedDateToDate());
   GetIt.I.registerLazySingleton<PreferencesLocalRepository>(
     () => PreferencesLocalRepositoryImpl(
       movieDBLocalRepository: GetIt.I.get<MovieDBLocalRepository>(),
       sharedPreferences: GetIt.I.get<SharedPreferences>(),
+      convertStringToDate: GetIt.I.get<ConvertStringToDate>(),
+      convertSavedDateToDate: GetIt.I.get<ConvertSavedDateToDate>(),
     ),
   );
   GetIt.I.registerLazySingleton<MovieDBLocalRepository>(

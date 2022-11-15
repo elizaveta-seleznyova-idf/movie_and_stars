@@ -13,6 +13,7 @@ class CastDBLocalRepositoryImpl implements CastDBLocalRepository {
     List<PeopleAndImagesModel> castDBModelList,
     String id,
   ) async {
+    Batch batch = db.batch();
     for (PeopleAndImagesModel castModel in castDBModelList) {
       final storedCast = await db.query(
         DataBaseProvider.castTableName,
@@ -20,13 +21,14 @@ class CastDBLocalRepositoryImpl implements CastDBLocalRepository {
         whereArgs: [castModel.person],
       );
       if (storedCast.isEmpty) {
-        await db.insert(
+       batch.insert(
           DataBaseProvider.castTableName,
           castModel.toJson(
             castModel,
             id,
           ),
         );
+        await batch.commit();
       }
     }
   }

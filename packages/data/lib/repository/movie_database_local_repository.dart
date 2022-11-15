@@ -14,6 +14,7 @@ class MovieDBLocalRepositoryImpl implements MovieDBLocalRepository {
     List<MovieDBModel> movieDBModelList,
     MovieType movieType,
   ) async {
+    Batch batch = db.batch();
     for (MovieDBModel movieModel in movieDBModelList) {
       final storedMovies = await db.query(
         DataBaseProvider.movieTableName,
@@ -21,13 +22,14 @@ class MovieDBLocalRepositoryImpl implements MovieDBLocalRepository {
         whereArgs: [movieModel.movieIdTmdb],
       );
       if (storedMovies.isEmpty) {
-        await db.insert(
+        batch.insert(
           DataBaseProvider.movieTableName,
           movieModel.toJson(
             movieModel,
             movieType,
           ),
         );
+        await batch.commit();
       }
     }
   }
