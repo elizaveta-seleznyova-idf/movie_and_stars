@@ -122,7 +122,8 @@ class _TicketsScreenState extends BlocScreenState<TicketsScreen, TicketsBloc> {
                                   horizontal: Dimens.size10,
                                 ),
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(Dimens.size4),
+                                  borderRadius:
+                                      BorderRadius.circular(Dimens.size4),
                                   borderSide: const BorderSide(
                                     width: Dimens.size0,
                                     style: BorderStyle.none,
@@ -158,7 +159,8 @@ class _TicketsScreenState extends BlocScreenState<TicketsScreen, TicketsBloc> {
                                   horizontal: Dimens.size10,
                                 ),
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(Dimens.size4),
+                                  borderRadius:
+                                      BorderRadius.circular(Dimens.size4),
                                   borderSide: const BorderSide(
                                     width: Dimens.size0,
                                     style: BorderStyle.none,
@@ -169,11 +171,8 @@ class _TicketsScreenState extends BlocScreenState<TicketsScreen, TicketsBloc> {
                           ),
                         ],
                       ),
-
-
                     ],
                   ),
-
                 ],
               ),
             ),
