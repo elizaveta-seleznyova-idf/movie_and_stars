@@ -15,7 +15,7 @@ class PeopleResponse {
     });
 
     final cast = (json['cast'] as List<dynamic>?)
-        ?.map((e) => CastAndCrew.fromJson(e as Map<String, dynamic>))
+        ?.map((e) => CastAndCrew.fromJsonCast(e as Map<String, dynamic>))
         .toList();
     cast?.addAll(crewList ?? []);
     return PeopleResponse(cast: cast);

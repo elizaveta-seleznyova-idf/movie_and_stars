@@ -9,7 +9,7 @@ class CastAndCrew {
   final List<String>? characters;
   final Person? person;
 
-  factory CastAndCrew.fromJson(Map<String, dynamic> json) {
+  factory CastAndCrew.fromJsonCast(Map<String, dynamic> json) {
     return CastAndCrew(
       character: json['character'],
       characters: json['characters'].cast<String>(),
