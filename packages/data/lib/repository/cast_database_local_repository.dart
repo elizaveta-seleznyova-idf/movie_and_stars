@@ -45,15 +45,4 @@ class CastDBLocalRepositoryImpl implements CastDBLocalRepository {
 
     return peopleMapper.call(maps);
   }
-
-  Future<int> deleteCast(
-    List<PeopleAndImagesModel> castDBModelList,
-    String id,
-  ) async {
-    return await db.delete(
-      DataBaseProvider.castTableName,
-      where: 'movieId = ?',
-      whereArgs: [id],
-    );
-  }
 }
