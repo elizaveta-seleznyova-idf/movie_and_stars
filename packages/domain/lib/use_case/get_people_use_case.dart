@@ -21,7 +21,7 @@ class GetPeopleUseCase
   Future<List<PeopleAndImagesModel>> call(String params) async {
     final PeopleResponse response =
         await _traktRepository.getCast(movieId: params);
-    final List<Cast>? responseCast = response.cast;
+    final List<CastAndCrew>? responseCast = response.cast;
 
     final List<Future<PeopleAndImagesModel>>? castAndImagesFutureList =
         responseCast?.map((e) async {
