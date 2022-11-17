@@ -1,18 +1,18 @@
-import 'package:domain/enum/error_type.dart';
+import 'package:domain/enum/login_error_type.dart';
 import 'package:domain/mappers/base_mapper.dart';
 import 'package:domain/model/validation.dart';
 
-class ValidationMapper extends Mapper<Validation?, ValidationErrorType?> {
+class ValidationMapper extends Mapper<Validation?, ValidationLoginErrorType?> {
   @override
-  ValidationErrorType? call(Validation? params) {
+  ValidationLoginErrorType? call(Validation? params) {
     if (params is RequiredFieldValidation) {
-      return ValidationErrorType.requiredErrorType;
+      return ValidationLoginErrorType.requiredErrorType;
     }
     if (params is MinLengthValidation) {
-      return ValidationErrorType.minLengthErrorType;
+      return ValidationLoginErrorType.minLengthErrorType;
     }
     if (params is RegexValidation) {
-      return ValidationErrorType.regexErrorType;
+      return ValidationLoginErrorType.regexErrorType;
     }
     return null;
   }

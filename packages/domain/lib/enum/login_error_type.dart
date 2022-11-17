@@ -1,4 +1,4 @@
-enum ValidationErrorType {
+enum ValidationLoginErrorType {
   requiredErrorType,
   minLengthErrorType,
   regexErrorType,

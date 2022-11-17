@@ -17,9 +17,9 @@ import 'package:presentation/screen/home/mapper/movie_mapper.dart';
 import 'package:presentation/screen/login/login_bloc.dart';
 import 'package:presentation/screen/movie_details/details_bloc.dart';
 import 'package:presentation/screen/movie_details/mapper/details_mapper.dart';
+import 'package:presentation/screen/payment/payment_bloc.dart';
 import 'package:presentation/screen/profile/profile_bloc.dart';
 import 'package:presentation/screen/splash/splash_bloc.dart';
-import 'package:presentation/screen/tickets/tickets_bloc.dart';
 
 void initPresentationInjector() {
   _initAppModule();
@@ -53,7 +53,7 @@ void _initBlocModule() {
       GetIt.I.get<MapperDetails>(),
     ),
   );
-  GetIt.I.registerFactory<TicketsBloc>(() => TicketsBloc());
+  GetIt.I.registerFactory<PaymentBloc>(() => PaymentBloc());
   GetIt.I.registerFactory<LoginBloc>(
     () => LoginBloc(
       GetIt.I.get<LoginEmailAndPassUseCase>(),

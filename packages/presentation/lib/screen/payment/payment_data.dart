@@ -1,5 +1,5 @@
-class TicketsData{
-  TicketsData({
+class PaymentData{
+  PaymentData({
     this.validateNumber,
     this.validateDateExpire,
     this.validateCVV,
@@ -15,12 +15,12 @@ class TicketsData{
   String dateExpireText = '';
   String cVVText = '';
 
-  TicketsData copyWith({
+  PaymentData copyWith({
     String cardNumberText = '',
     String dateExpireText = '',
     String cVVText = '',
   }) {
-    return TicketsData(
+    return PaymentData(
       validateNumber: validateNumber ?? this.validateNumber,
       validateDateExpire: validateDateExpire ?? this.validateDateExpire,
       validateCVV: validateCVV ?? this.validateCVV,
@@ -30,7 +30,7 @@ class TicketsData{
     );
   }
 
-  factory TicketsData.init() => TicketsData(
+  factory PaymentData.init() => PaymentData(
     cardNumberText: '',
     dateExpireText: '',
     cVVText: '',

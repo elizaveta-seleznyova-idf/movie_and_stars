@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:domain/enum/error_type.dart';
+import 'package:domain/enum/login_error_type.dart';
 import 'package:domain/mappers/validation_mapper.dart';
 import 'package:domain/model/login_and_password_errors.dart';
 import 'package:domain/model/user_email_pass.dart';
@@ -26,10 +26,10 @@ class ValidationUseCase extends UseCaseParams<UserEmailPass, void> {
       (element) => !element.isValid(params.password),
     );
 
-    final ValidationErrorType? loginInvalidType =
+    final ValidationLoginErrorType? loginInvalidType =
         validationMapper.call(loginFailed);
 
-    final ValidationErrorType? passwordInvalidType =
+    final ValidationLoginErrorType? passwordInvalidType =
         validationMapper.call(passwordFailed);
 
     if (loginInvalidType != null && passwordInvalidType != null) {

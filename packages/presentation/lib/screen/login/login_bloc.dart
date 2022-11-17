@@ -1,4 +1,4 @@
-import 'package:domain/enum/error_type.dart';
+import 'package:domain/enum/login_error_type.dart';
 import 'package:domain/model/login_and_password_errors_model.dart';
 import 'package:domain/model/user_email_pass.dart';
 import 'package:domain/use_case/login_email_and_password_use_case.dart';
@@ -78,8 +78,8 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
   @override
   GlobalKey get loginScreenFormKey => _loginScreenFormKey;
 
-  ValidationErrorType? _loginValidation;
-  ValidationErrorType? _passwordValidation;
+  ValidationLoginErrorType? _loginValidation;
+  ValidationLoginErrorType? _passwordValidation;
 
   @override
   void initState() async {
@@ -99,11 +99,11 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
 
   @override
   String? validateLogin(String? textLogin) {
-    if (_loginValidation == ValidationErrorType.requiredErrorType) {
+    if (_loginValidation == ValidationLoginErrorType.requiredErrorType) {
       return SM.current.loginFieldRequired;
-    } else if (_loginValidation == ValidationErrorType.minLengthErrorType) {
+    } else if (_loginValidation == ValidationLoginErrorType.minLengthErrorType) {
       return SM.current.loginFieldInvalid;
-    } else if (_loginValidation == ValidationErrorType.userNotExist) {
+    } else if (_loginValidation == ValidationLoginErrorType.userNotExist) {
       return SM.current.loginFieldRequired;
     } else {
       return null;
@@ -112,11 +112,11 @@ class _LoginBloc extends BlocImpl<BaseArguments, LoginData>
 
   @override
   String? validatePassword(String? textPassword) {
-    if (_passwordValidation == ValidationErrorType.requiredErrorType) {
+    if (_passwordValidation == ValidationLoginErrorType.requiredErrorType) {
       return SM.current.passwordFieldRequired;
-    } else if (_passwordValidation == ValidationErrorType.regexErrorType) {
+    } else if (_passwordValidation == ValidationLoginErrorType.regexErrorType) {
       return SM.current.passwordFieldInvalid;
-    } else if (_passwordValidation == ValidationErrorType.userNotExist) {
+    } else if (_passwordValidation == ValidationLoginErrorType.userNotExist) {
       return SM.current.loginFieldRequired;
     } else {
       return null;

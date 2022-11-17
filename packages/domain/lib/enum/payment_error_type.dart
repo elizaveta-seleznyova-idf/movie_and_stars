@@ -1,0 +1,4 @@
+enum ValidationPaymentErrorType{
+  requiredErrorType,
+  wrongDateErrorType,
+}

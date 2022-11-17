@@ -1,4 +1,4 @@
-import 'package:domain/enum/error_type.dart';
+import 'package:domain/enum/login_error_type.dart';
 import 'package:domain/exeptions/base_exception.dart';
 
 class LoginAndPasswordErrors extends BaseException {
@@ -7,6 +7,6 @@ class LoginAndPasswordErrors extends BaseException {
     required this.passwordError,
   });
 
-  ValidationErrorType? loginError;
-  ValidationErrorType? passwordError;
+  ValidationLoginErrorType? loginError;
+  ValidationLoginErrorType? passwordError;
 }

@@ -1,4 +1,4 @@
-import 'package:domain/enum/error_type.dart';
+import 'package:domain/enum/login_error_type.dart';
 import 'package:domain/model/login_and_password_errors.dart';
 import 'package:domain/model/user_email_pass.dart';
 import 'package:domain/repository/auth_repository.dart';
@@ -22,8 +22,8 @@ class LoginEmailAndPassUseCase
       await _preferences.saveLoggedUser(user);
     } else {
       throw LoginAndPasswordErrors(
-        loginError: ValidationErrorType.userNotExist,
-        passwordError: ValidationErrorType.userNotExist,
+        loginError: ValidationLoginErrorType.userNotExist,
+        passwordError: ValidationLoginErrorType.userNotExist,
       );
     }
   }

@@ -8,7 +8,7 @@ import 'package:presentation/enum/bottom_navigation_page_type.dart';
 import 'package:presentation/navigation/base_page.dart';
 import 'package:presentation/screen/home/home_screen.dart';
 import 'package:presentation/screen/login/login_screen.dart';
-import 'package:presentation/screen/tickets/tickets_screen.dart';
+import 'package:presentation/screen/payment/payment_screen.dart';
 import 'package:presentation/utils/analytics_constants.dart';
 
 abstract class AppBloc extends Bloc {
@@ -142,7 +142,7 @@ class _AppBloc extends BlocImpl implements AppBloc {
         break;
       case BottomNavigationPageType.ticket:
         _logAnalyticsEvent(AnalyticsEventConstants.eventTicketsNavBar);
-        _popAllAndPush(TicketsScreen.page(TicketsScreenArguments()));
+        _popAllAndPush(PaymentScreen.page(PaymentScreenArguments()));
         break;
       case BottomNavigationPageType.profile:
         _logAnalyticsEvent(AnalyticsEventConstants.eventProfileNavBar);

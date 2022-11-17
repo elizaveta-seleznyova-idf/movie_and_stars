@@ -1,4 +1,4 @@
-import 'package:domain/enum/error_type.dart';
+import 'package:domain/enum/login_error_type.dart';
 
 class LoginAndPasswordErrors {
   LoginAndPasswordErrors({
@@ -6,6 +6,6 @@ class LoginAndPasswordErrors {
     required this.passwordError,
   });
 
-  ValidationErrorType? loginError;
-  ValidationErrorType? passwordError;
+  ValidationLoginErrorType? loginError;
+  ValidationLoginErrorType? passwordError;
 }
