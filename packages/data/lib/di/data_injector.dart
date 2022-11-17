@@ -3,6 +3,8 @@ import 'package:data/database/database_provider.dart';
 import 'package:data/dio/dio_builder.dart';
 import 'package:data/interceptor/interceptor.dart';
 import 'package:data/mapper/convert_date_mappers.dart';
+import 'package:data/mapper/movie_mapper.dart';
+import 'package:data/mapper/people_mapper.dart';
 import 'package:data/repository/auth_repository.dart';
 import 'package:data/repository/cast_database_local_repository.dart';
 import 'package:data/repository/movie_database_local_repository.dart';
@@ -126,7 +128,7 @@ void _initRepositoryModule() {
 }
 
 Future<void> _initDataBaseModule() async {
-  GetIt.I.registerSingleton<DataBaseProvider>(DataBaseProvider.instanse);
+  GetIt.I.registerSingleton<DataBaseProvider>(DataBaseProvider.instance);
   GetIt.I.registerSingleton<Database>(
     await openDatabase(
       DataBaseProvider.dbName,
@@ -142,7 +144,8 @@ Future<void> _initLocalModule() async {
       await SharedPreferences.getInstance());
 
   GetIt.I.registerFactory<ConvertStringToDate>(() => ConvertStringToDate());
-  GetIt.I.registerFactory<ConvertSavedDateToDate>(() => ConvertSavedDateToDate());
+  GetIt.I
+      .registerFactory<ConvertSavedDateToDate>(() => ConvertSavedDateToDate());
   GetIt.I.registerLazySingleton<PreferencesLocalRepository>(
     () => PreferencesLocalRepositoryImpl(
       movieDBLocalRepository: GetIt.I.get<MovieDBLocalRepository>(),
@@ -151,10 +154,18 @@ Future<void> _initLocalModule() async {
       convertSavedDateToDate: GetIt.I.get<ConvertSavedDateToDate>(),
     ),
   );
+  GetIt.I.registerFactory<MovieMapper>(() => MovieMapper());
   GetIt.I.registerLazySingleton<MovieDBLocalRepository>(
-    () => MovieDBLocalRepositoryImpl(db: GetIt.I.get<Database>()),
+    () => MovieDBLocalRepositoryImpl(
+      db: GetIt.I.get<Database>(),
+      movieMapper: GetIt.I.get<MovieMapper>(),
+    ),
   );
+  GetIt.I.registerFactory<PeopleMapper>(() => PeopleMapper());
   GetIt.I.registerLazySingleton<CastDBLocalRepository>(
-    () => CastDBLocalRepositoryImpl(db: GetIt.I.get<Database>()),
+    () => CastDBLocalRepositoryImpl(
+      db: GetIt.I.get<Database>(),
+      peopleMapper: GetIt.I.get<PeopleMapper>(),
+    ),
   );
 }

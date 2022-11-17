@@ -4,7 +4,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DataBaseProvider {
-  static final DataBaseProvider instanse = DataBaseProvider._init();
+  static final DataBaseProvider instance = DataBaseProvider._init();
 
   static const String dbName = 'movie_list.db';
   static const String movieTableName = 'Movies';
@@ -15,9 +15,8 @@ class DataBaseProvider {
   DataBaseProvider._init();
 
   Future<Database> get database async {
-    if (_database != null) return _database!;
+    if (_database != null) _database = await _initDB(dbName);
 
-    _database = await _initDB(dbName);
     return _database!;
   }
 
@@ -48,7 +47,7 @@ class DataBaseProvider {
        ${MovieDBModelField.title} $textType,
        ${MovieDBModelField.movieIdImg} $textType,
        ${MovieDBModelField.movieIdSlug} $textType,
-       ${MovieDBModelField.movieIdTmdb} $intType,
+       ${MovieDBModelField.movieIdTmdb} $intType PRIMARY KEY,
        ${MovieDBModelField.overview} $intType,
        ${MovieDBModelField.runtime} $intType,
        ${MovieDBModelField.rating} $doubleType,

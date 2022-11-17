@@ -1,13 +1,18 @@
 import 'package:data/database/database_provider.dart';
+import 'package:data/mapper/movie_mapper.dart';
 import 'package:domain/enum/movie_type.dart';
 import 'package:domain/model/movie_db_model.dart';
 import 'package:domain/repository/movie_database_local_repository.dart';
 import 'package:sqflite/sqflite.dart';
 
 class MovieDBLocalRepositoryImpl implements MovieDBLocalRepository {
-  const MovieDBLocalRepositoryImpl({required this.db});
+  const MovieDBLocalRepositoryImpl({
+    required this.db,
+    required this.movieMapper,
+  });
 
   final Database db;
+  final MovieMapper movieMapper;
 
   @override
   Future<void> saveMovieDB(
@@ -38,19 +43,7 @@ class MovieDBLocalRepositoryImpl implements MovieDBLocalRepository {
   Future<List<MovieDBModel>> getMovieFromCache(MovieType movieType) async {
     final List<Map<String, dynamic>> maps = await db.query(
         '${DataBaseProvider.movieTableName} WHERE movieType = "${movieType.name}"');
-    return List.generate(maps.length, (i) {
-      return MovieDBModel(
-        title: maps[i]['title'],
-        movieIdSlug: maps[i]['movieIdSlug'],
-        movieIdImdb: maps[i]['movieIdImdb'],
-        movieIdTmdb: maps[i]['movieIdTmdb'],
-        overview: maps[i]['overview'],
-        runtime: maps[i]['runtime'],
-        rating: maps[i]['rating'],
-        genres: maps[i]['genres'].split(','),
-        certification: maps[i]['certification'],
-      );
-    });
+    return movieMapper.call(maps);
   }
 
   Future<List<int>> getMoviesIdsFromCache(MovieType movieType) async {
