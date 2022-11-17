@@ -76,7 +76,6 @@ class DetailsReviewsList extends StatelessWidget {
               ),
               const SizedBox(height: Dimens.size25),
               Container(
-               // width: Responsive.isMobile(context) ? width : width / 3,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimens.size4R),
                   color: AppColorsDark.secondaryColor,
