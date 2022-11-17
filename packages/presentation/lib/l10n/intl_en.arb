@@ -33,5 +33,9 @@
     "placeholders": {
       "movieId": {}
     }
-  }
+  },
+  "homePageNavRail" : "HomePage",
+  "ticketsPageNavRail" : "TicketsPage",
+  "notificationPageNavRail" : "NotificationPage",
+  "profilePageNavRail" : "ProfilePage"
 }

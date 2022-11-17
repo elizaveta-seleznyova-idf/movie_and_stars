@@ -2,6 +2,7 @@ import 'package:domain/model/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';
+import 'package:presentation/config/responsive/responsive.dart';
 import 'package:presentation/config/text_style/text_style.dart';
 import 'package:presentation/config/theme/app_colors.dart';
 import 'package:presentation/enum/details_tab_state.dart';
@@ -84,70 +85,74 @@ class _DetailsTabBarState extends State<DetailsTabBar>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: Dimens.size36,
-          margin: const EdgeInsets.only(
-            top: Dimens.size40,
-            right: Dimens.size18,
-            left: Dimens.size17,
-          ),
-          padding: const EdgeInsets.all(Dimens.size3),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: AppColorsDark.borderTabBar,
-              width: Dimens.size1,
+    final width = MediaQuery.of(context).size.width;
+    return SizedBox(
+      width: Responsive.isDesktop(context) ? Dimens.size400W : width,
+      child: Column(
+        children: [
+          Container(
+            height: Dimens.size36,
+            margin: const EdgeInsets.only(
+              top: Dimens.size40,
+              right: Dimens.size18,
+              left: Dimens.size17,
             ),
-            borderRadius: BorderRadius.circular(Dimens.size20),
-          ),
-          child: TabBar(
-            controller: tabController,
-            splashBorderRadius: BorderRadius.circular(Dimens.size16),
-            indicator: BoxDecoration(
-              color: AppColorsDark.primaryColor,
-              borderRadius: BorderRadius.circular(Dimens.size16),
+            padding: const EdgeInsets.all(Dimens.size3),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: AppColorsDark.borderTabBar,
+                width: Dimens.size1,
+              ),
+              borderRadius: BorderRadius.circular(Dimens.size20),
             ),
-            onTap: (index) => widget.bloc.onItemTapped(index),
-            tabs: <Widget>[
-              Tab(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      SM.current.details,
-                      style: AppTextStyles.sfProMedium14px,
-                    ),
-                  ],
-                ),
+            child: TabBar(
+              controller: tabController,
+              splashBorderRadius: BorderRadius.circular(Dimens.size16),
+              indicator: BoxDecoration(
+                color: AppColorsDark.primaryColor,
+                borderRadius: BorderRadius.circular(Dimens.size16),
               ),
-              Tab(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      SM.current.reviews,
-                      style: AppTextStyles.sfProMedium14px,
-                    ),
-                  ],
+              onTap: (index) => widget.bloc.onItemTapped(index),
+              tabs: <Widget>[
+                Tab(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        SM.current.details,
+                        style: AppTextStyles.sfProMedium14px,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Tab(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      SM.current.showtime,
-                      style: AppTextStyles.sfProMedium14px,
-                    ),
-                  ],
+                Tab(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        SM.current.reviews,
+                        style: AppTextStyles.sfProMedium14px,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                Tab(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        SM.current.showtime,
+                        style: AppTextStyles.sfProMedium14px,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        buildContent(),
-      ],
+          buildContent(),
+        ],
+      ),
     );
   }
 }

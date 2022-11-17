@@ -33,5 +33,9 @@
     "placeholders": {
       "movieId": {}
     }
-  }
+  },
+  "homePageNavRail" : "ГалоўнаяСтаронка",
+  "ticketsPageNavRail" : "СтаронкаКвіткоў",
+  "notificationPageNavRail" : "СтаронкаАпавяшчэнняў",
+  "profilePageNavRail" : "СтаронкаПрофілю"
 }

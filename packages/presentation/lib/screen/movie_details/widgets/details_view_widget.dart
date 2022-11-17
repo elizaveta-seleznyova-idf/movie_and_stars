@@ -2,6 +2,7 @@ import 'package:domain/model/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/base/bloc_data.dart';
 import 'package:presentation/config/dimens/dimens.dart';
+import 'package:presentation/config/responsive/responsive.dart';
 import 'package:presentation/config/text_style/text_style.dart';
 import 'package:presentation/enum/details_tab_state.dart';
 import 'package:presentation/generated_localization/l10n.dart';
@@ -31,9 +32,9 @@ class DetailsViewWidget extends StatefulWidget {
 }
 
 class _DetailsViewWidgetState extends State<DetailsViewWidget> {
-
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     final synopsis = widget.movie?.overview;
     const int trimLinesCount = 4;
     return Padding(
@@ -41,46 +42,101 @@ class _DetailsViewWidgetState extends State<DetailsViewWidget> {
         left: Dimens.size18,
         right: Dimens.size17,
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const SizedBox(height: Dimens.size32),
-          Text(
-            SM.current.synopsis,
-            style: AppTextStyles.sfProMedium18px,
-          ),
-          const SizedBox(height: Dimens.size16),
-          SizedBox(
-            height: Dimens.size115,
-            child: MovieDescriptionText(
-              text: '$synopsis',
-              trimLines: trimLinesCount,
+      child: Responsive.isMobile(context)
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const SizedBox(height: Dimens.size32),
+                Text(
+                  SM.current.synopsis,
+                  style: AppTextStyles.sfProMedium18px,
+                ),
+                const SizedBox(height: Dimens.size16),
+                SizedBox(
+                  height: Dimens.size115,
+                  child: MovieDescriptionText(
+                    text: '$synopsis',
+                    trimLines: trimLinesCount,
+                  ),
+                ),
+                const SizedBox(height: Dimens.size20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      SM.current.castAndCrew,
+                      textAlign: TextAlign.left,
+                      style: AppTextStyles.sfProMedium18px,
+                    ),
+                    Text(
+                      SM.current.viewAll,
+                      style: AppTextStyles.sfProRegularSelected14px,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: Dimens.size280,
+                  child: MovieListActors(blocData: widget.blocData),
+                ),
+              ],
+            )
+          : Column(
+              children: [
+                SizedBox(height: Dimens.size32H),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: width / 3,
+                      child: Column(
+                        children: [
+                          const SizedBox(height: Dimens.size32),
+                          Text(
+                            SM.current.synopsis,
+                            style: AppTextStyles.sfProMedium18px,
+                          ),
+                          const SizedBox(height: Dimens.size16),
+                          SizedBox(
+                            height: Dimens.size115,
+                            child: MovieDescriptionText(
+                              text: '$synopsis',
+                              trimLines: trimLinesCount,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: Dimens.size10W),
+                    SizedBox(
+                      width: width / 2.2,
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                SM.current.castAndCrew,
+                                textAlign: TextAlign.left,
+                                style: AppTextStyles.sfProMedium18px,
+                              ),
+                              Text(
+                                SM.current.viewAll,
+                                style: AppTextStyles.sfProRegularSelected14px,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: Dimens.size280H,
+                            child: MovieListActors(blocData: widget.blocData),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ],
             ),
-          ),
-          const SizedBox(height: Dimens.size20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                SM.current.castAndCrew,
-                textAlign: TextAlign.left,
-                style: AppTextStyles.sfProMedium18px,
-              ),
-              Text(
-                SM.current.viewAll,
-                style: AppTextStyles.sfProRegularSelected14px,
-              ),
-            ],
-          ),
-          SizedBox(
-            height: Dimens.size280,
-            child: MovieListActors(
-              blocData: widget.blocData,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

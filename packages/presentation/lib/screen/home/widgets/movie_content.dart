@@ -25,14 +25,14 @@ class MovieContent extends StatelessWidget {
           movieGenre,
           style: AppTextStyles.sfProMediumUnselected12px,
         ),
-        const SizedBox(width: Dimens.size4),
+        SizedBox(width: Dimens.size4W),
         SvgPicture.asset(
           ImagesPath.ellipseImage,
-          height: Dimens.size4,
-          width: Dimens.size4,
+          height: Dimens.size4H,
+          width: Dimens.size4W,
           color: AppColorsDark.unselectedColor,
         ),
-        const SizedBox(width: Dimens.size4),
+        SizedBox(width: Dimens.size4W),
         Text(
           '$movieTime | $certification',
           style: AppTextStyles.sfProMediumUnselected12px,
