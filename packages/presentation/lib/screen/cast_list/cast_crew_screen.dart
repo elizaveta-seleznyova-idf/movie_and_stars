@@ -52,8 +52,8 @@ class _CastCrewScreenState
               blocData?.detailsAboutPeople;
           final int? castLength = details?.length;
           if (data != null && blocData != null) {
-            if (data.isLoading && castLength == null) {
-              return Center(child: Text(SM.current.checkYourInternet));
+            if (castLength == null) {
+              return Center(child: Text(SM.current.error));
             } else {
               return Scaffold(
                 appBar: AppBar(
@@ -88,7 +88,7 @@ class _CastCrewScreenState
                           .copyWith(scrollbars: false),
                       child: MovieListActors(
                         cast: blocData.detailsAboutPeople,
-                        listLength: castLength!,
+                        listLength: castLength,
                         isScrollable: true,
                       ),
                     ),
@@ -97,7 +97,7 @@ class _CastCrewScreenState
               );
             }
           } else {
-            return Center(child: Text(SM.current.checkYourInternet));
+            return Center(child: Text(SM.current.error));
           }
         });
   }
