@@ -1,7 +1,8 @@
 import 'package:domain/mappers/base_mapper.dart';
 import 'package:domain/model/movie_db_model.dart';
 
-class MovieMapper extends Mapper<List<Map<String, dynamic>>, List<MovieDBModel>>{
+class MovieMapper
+    extends Mapper<List<Map<String, dynamic>>, List<MovieDBModel>> {
   @override
   List<MovieDBModel> call(List<Map<String, dynamic>> params) {
     return List.generate(params.length, (i) {
@@ -18,7 +19,4 @@ class MovieMapper extends Mapper<List<Map<String, dynamic>>, List<MovieDBModel>>
       );
     });
   }
-
-
-
 }

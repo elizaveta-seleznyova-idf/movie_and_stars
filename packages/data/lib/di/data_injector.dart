@@ -148,7 +148,6 @@ Future<void> _initLocalModule() async {
       .registerFactory<ConvertSavedDateToDate>(() => ConvertSavedDateToDate());
   GetIt.I.registerLazySingleton<PreferencesLocalRepository>(
     () => PreferencesLocalRepositoryImpl(
-      movieDBLocalRepository: GetIt.I.get<MovieDBLocalRepository>(),
       sharedPreferences: GetIt.I.get<SharedPreferences>(),
       convertStringToDate: GetIt.I.get<ConvertStringToDate>(),
       convertSavedDateToDate: GetIt.I.get<ConvertSavedDateToDate>(),

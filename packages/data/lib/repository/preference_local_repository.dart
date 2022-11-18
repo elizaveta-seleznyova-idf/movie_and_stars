@@ -7,13 +7,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 class PreferencesLocalRepositoryImpl implements PreferencesLocalRepository {
   const PreferencesLocalRepositoryImpl({
     required this.sharedPreferences,
-    required this.movieDBLocalRepository,
     required this.convertStringToDate,
     required this.convertSavedDateToDate,
   });
 
   final SharedPreferences sharedPreferences;
-  final MovieDBLocalRepository movieDBLocalRepository;
   final ConvertStringToDate convertStringToDate;
   final ConvertSavedDateToDate convertSavedDateToDate;
 

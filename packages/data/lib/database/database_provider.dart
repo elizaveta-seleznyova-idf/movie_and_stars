@@ -1,5 +1,6 @@
 import 'package:domain/model/movie_db_model.dart';
 import 'package:domain/model/people_and_images_model.dart';
+import 'package:domain/model/time_db_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -9,6 +10,7 @@ class DataBaseProvider {
   static const String dbName = 'movie_list.db';
   static const String movieTableName = 'Movies';
   static const String castTableName = 'Cast';
+  static const String dateTimeTableName = 'DateTime';
   static const int dbVersion = 1;
   static Database? _database;
 
@@ -58,12 +60,18 @@ class DataBaseProvider {
 
     await db.execute('''
       CREATE TABLE IF NOT EXISTS $castTableName (
-       ${CastDBModelField.movieId} $textType,
+       ${CastDBModelField.movieId} $textType PRIMARY KEY,
        ${CastDBModelField.characters} $textType,
        ${CastDBModelField.person} $textType,
        ${CastDBModelField.image} $textType,
        FOREIGN KEY (movieId) REFERENCES Movies(movieIdTmdb) ON DELETE CASCADE
       )
       ''');
+
+    await db.execute('''
+       CREATE TABLE IF NOT EXISTS $dateTimeTableName (
+       ${TimeDBModelField.movieType} $textType,
+       ${TimeDBModelField.dateTime} $intType,
+       )''');
   }
 }

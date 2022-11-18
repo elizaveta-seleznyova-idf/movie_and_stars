@@ -26,12 +26,21 @@ class CastDBLocalRepositoryImpl implements CastDBLocalRepository {
         whereArgs: [castModel.person],
       );
       if (storedCast.isEmpty) {
-        batch.insert(
-          DataBaseProvider.castTableName,
-          castModel.toJson(
-            castModel,
-            id,
-          ),
+        // batch.insert(
+        //   DataBaseProvider.castTableName,
+        //   castModel.toJson(
+        //     castModel,
+        //     id,
+        //   ),
+        // );
+        batch.rawInsert(
+          'INSERT IGNORE INTO ${DataBaseProvider.castTableName} VALUES(?, ?, ?, ?)',
+          [
+            castModel.movieId,
+            castModel.characters,
+            castModel.person,
+            castModel.image,
+          ],
         );
       }
     }
