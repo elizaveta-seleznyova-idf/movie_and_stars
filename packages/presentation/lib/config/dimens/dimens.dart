@@ -76,6 +76,7 @@ class Dimens {
   static final double size10H = size10.h;
   static final double size15H = size15.h;
   static final double size16H = size16.h;
+  static final double size19H = size19.h;
   static final double size20H = size20.h;
   static final double size25H = size25.h;
   static final double size29H = size29.h;
@@ -97,6 +98,7 @@ class Dimens {
   static final double size15W = size15.w;
   static final double size17W = size17.w;
   static final double size18W = size18.w;
+  static final double size40W = size40.w;
   static final double size120W = size120.w;
   static final double size167W = size167.w;
   static final double size400W = size400.w;

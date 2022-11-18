@@ -4,9 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:presentation/base/bloc.dart';
 import 'package:presentation/enum/details_tab_state.dart';
 import 'package:presentation/generated_localization/l10n.dart';
+import 'package:presentation/screen/cast_list/cast_crew_screen.dart';
 import 'package:presentation/screen/movie_details/details_data.dart';
 import 'package:presentation/screen/movie_details/details_screen.dart';
 import 'package:presentation/screen/movie_details/mapper/details_mapper.dart';
+import 'package:presentation/utils/analytics_constants.dart';
 import 'package:share_plugin/share_plugin.dart';
 
 abstract class DetailsBloc extends Bloc<DetailsScreenArguments, DetailsData> {
@@ -28,6 +30,8 @@ abstract class DetailsBloc extends Bloc<DetailsScreenArguments, DetailsData> {
   void onItemTapped(int index);
 
   void shareMovieMessage({required int movieId});
+
+  void pushToViewAllCastCrew();
 }
 
 class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
@@ -86,7 +90,6 @@ class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
     }
   }
 
-  @override
   void tabBarRequest(DetailsTabState tabState) {
     if (tabState == DetailsTabState.details) {
       _stateData = _stateData.copyWith(tabState: tabState);
@@ -139,6 +142,18 @@ class DetailsBlocImpl extends BlocImpl<DetailsScreenArguments, DetailsData>
         data: _stateData,
       );
     }
+  }
+
+  @override
+  void pushToViewAllCastCrew() async {
+    await logAnalyticsEventUseCase(
+        AnalyticsEventConstants.eventDetailsPushToCastCrew);
+    appNavigator.push(
+      CastCrewScreen.page(
+        CastCrewScreenArguments(
+            detailsAboutPeople: _stateData.detailsAboutPeople),
+      ),
+    );
   }
 
   @override

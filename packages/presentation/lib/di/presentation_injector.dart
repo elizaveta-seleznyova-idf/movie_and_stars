@@ -12,6 +12,7 @@ import 'package:domain/use_case/validation_use_case.dart';
 import 'package:get_it/get_it.dart';
 import 'package:presentation/app/app_bloc.dart';
 import 'package:presentation/navigation/app_navigation.dart';
+import 'package:presentation/screen/cast_list/cast_crew_bloc.dart';
 import 'package:presentation/screen/home/home_bloc.dart';
 import 'package:presentation/screen/home/mapper/movie_mapper.dart';
 import 'package:presentation/screen/login/login_bloc.dart';
@@ -55,6 +56,9 @@ void _initBlocModule() {
       GetIt.I.get<GetCommentsUseCase>(),
       GetIt.I.get<MapperDetails>(),
     ),
+  );
+  GetIt.I.registerFactory<CastCrewBloc>(
+    () => CastCrewBloc(),
   );
   GetIt.I.registerFactory<LoginBloc>(
     () => LoginBloc(

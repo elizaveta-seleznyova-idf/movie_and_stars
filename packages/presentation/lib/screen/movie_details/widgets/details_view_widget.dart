@@ -69,15 +69,23 @@ class _DetailsViewWidgetState extends State<DetailsViewWidget> {
                       textAlign: TextAlign.left,
                       style: AppTextStyles.sfProMedium18px,
                     ),
-                    Text(
-                      SM.current.viewAll,
-                      style: AppTextStyles.sfProRegularSelected14px,
+                    TextButton(
+                      onPressed: widget.bloc.pushToViewAllCastCrew,
+                      child: Text(
+                        SM.current.viewAll,
+                        style: AppTextStyles.sfProRegularSelected14px,
+                      ),
                     ),
                   ],
                 ),
+                const SizedBox(height: Dimens.size10),
                 SizedBox(
-                  height: Dimens.size280,
-                  child: MovieListActors(blocData: widget.blocData),
+                  height: Dimens.size300,
+                  child: MovieListActors(
+                    cast: widget.blocData.detailsAboutPeople,
+                    listLength: 4,
+                    isScrollable: false,
+                  ),
                 ),
               ],
             )
@@ -120,15 +128,22 @@ class _DetailsViewWidgetState extends State<DetailsViewWidget> {
                                 textAlign: TextAlign.left,
                                 style: AppTextStyles.sfProMedium18px,
                               ),
-                              Text(
-                                SM.current.viewAll,
-                                style: AppTextStyles.sfProRegularSelected14px,
+                              TextButton(
+                                onPressed: widget.bloc.pushToViewAllCastCrew,
+                                child: Text(
+                                  SM.current.viewAll,
+                                  style: AppTextStyles.sfProRegularSelected14px,
+                                ),
                               ),
                             ],
                           ),
                           SizedBox(
-                            height: Dimens.size280H,
-                            child: MovieListActors(blocData: widget.blocData),
+                            height: Dimens.size280,
+                            child: MovieListActors(
+                              cast: widget.blocData.detailsAboutPeople,
+                              listLength: 4,
+                              isScrollable: false,
+                            ),
                           ),
                         ],
                       ),

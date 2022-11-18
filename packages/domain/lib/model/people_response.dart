@@ -1,16 +1,24 @@
-import 'package:domain/model/cast.dart';
+import 'package:domain/model/cast_and_crew.dart';
 
 class PeopleResponse {
-  const PeopleResponse(this.cast);
+  const PeopleResponse({this.cast});
 
-  final List<Cast>? cast;
+  final List<CastAndCrew>? cast;
 
   factory PeopleResponse.fromJson(Map<String, dynamic> json) {
-    return PeopleResponse(
-      (json['cast'] as List<dynamic>?)
-          ?.map((e) => Cast.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
+    final crew = (json['crew'] as Map<String, dynamic>?);
+    final List<CastAndCrew>? crewList = [];
+    crew?.forEach((key, value) {
+      final valueList = (value as List<dynamic>)
+          .map((eValue) => CastAndCrew.fromJsonCrew(eValue as Map<String, dynamic>)).toList();
+      crewList?.addAll(valueList);
+    });
+
+    final cast = (json['cast'] as List<dynamic>?)
+        ?.map((e) => CastAndCrew.fromJsonCast(e as Map<String, dynamic>))
+        .toList();
+    cast?.addAll(crewList ?? []);
+    return PeopleResponse(cast: cast);
   }
 
   Map<String, dynamic> toJson(PeopleResponse instance) => <String, dynamic>{

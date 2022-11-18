@@ -1,5 +1,5 @@
-class Cast {
-  const Cast({
+class CastAndCrew {
+  const CastAndCrew({
     this.character,
     this.characters,
     this.person,
@@ -9,8 +9,8 @@ class Cast {
   final List<String>? characters;
   final Person? person;
 
-  factory Cast.fromJson(Map<String, dynamic> json) {
-    return Cast(
+  factory CastAndCrew.fromJsonCast(Map<String, dynamic> json) {
+    return CastAndCrew(
       character: json['character'],
       characters: json['characters'].cast<String>(),
       person: json['person'] == null
@@ -18,6 +18,18 @@ class Cast {
           : Person.fromJson(
               json['person'] as Map<String, dynamic>,
             ),
+    );
+  }
+
+  factory CastAndCrew.fromJsonCrew(Map<String, dynamic> json) {
+    return CastAndCrew(
+      character: json['job'],
+      characters: json['jobs'].cast<String>(),
+      person: json['person'] == null
+          ? null
+          : Person.fromJson(
+        json['person'] as Map<String, dynamic>,
+      ),
     );
   }
 
